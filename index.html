@@ -360,6 +360,37 @@
     .btn-dark-outline:hover { border-color: var(--ink-soft); }
 
     /* ================================================
+       PRICING  (credits)
+       ================================================ */
+    .pricing-section { background: var(--paper); padding: 100px 48px; border-top: 1px solid var(--border); }
+    .pricing-inner { max-width: 1280px; margin: 0 auto; }
+    .pricing-header { max-width: 600px; margin-bottom: 56px; }
+    .pricing-eyebrow { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold-deep); margin-bottom: 16px; }
+    .pricing-header h2 { font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.04em; color: var(--ink); margin-bottom: 14px; }
+    .pricing-header p { font-size: 1rem; color: rgba(10,10,10,0.5); line-height: 1.7; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 40px; }
+    .price-card { background: var(--canvas); border: 1px solid var(--border); border-radius: 16px; padding: 28px 24px; position: relative; display: flex; flex-direction: column; }
+    .price-card.featured { background: var(--ink-soft); border-color: var(--ink-soft); }
+    .price-badge { position: absolute; top: -12px; left: 24px; background: var(--gold); color: var(--ink-soft); font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 10px; border-radius: 20px; }
+    .price-card-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 16px; }
+    .price-card.featured .price-card-label { color: rgba(255,255,255,0.4); }
+    .price-amount { font-size: 2.6rem; font-weight: 800; letter-spacing: -0.04em; color: var(--ink); line-height: 1; margin-bottom: 4px; }
+    .price-card.featured .price-amount { color: var(--gold); }
+    .price-card.contact-card .price-amount { font-size: 1.9rem; }
+    .price-credits { font-size: 0.82rem; font-weight: 600; color: var(--muted); margin-bottom: 16px; }
+    .price-card.featured .price-credits { color: rgba(255,255,255,0.4); }
+    .price-per { font-size: 0.75rem; font-weight: 700; color: var(--ink); background: rgba(10,10,10,0.07); border-radius: 6px; padding: 4px 8px; display: inline-block; margin-bottom: 20px; }
+    .price-card.featured .price-per { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.75); }
+    .price-divider { height: 1px; background: var(--border); margin-bottom: 16px; }
+    .price-card.featured .price-divider { background: rgba(255,255,255,0.1); }
+    .price-include { font-size: 0.78rem; color: rgba(10,10,10,0.45); line-height: 1.6; flex: 1; }
+    .price-card.featured .price-include { color: rgba(255,255,255,0.4); }
+    .price-cta { display: inline-block; margin-top: 16px; font-size: 0.78rem; font-weight: 700; color: var(--gold-deep); text-decoration: underline; text-underline-offset: 3px; }
+    .pricing-footer { display: flex; gap: 24px; flex-wrap: wrap; padding-top: 32px; border-top: 1px solid var(--border); }
+    .pricing-note { font-size: 0.8rem; color: rgba(10,10,10,0.45); line-height: 1.65; flex: 1; min-width: 200px; }
+    .pricing-note strong { color: var(--ink); font-weight: 700; }
+
+    /* ================================================
        TIERS  (canvas, scoring + subjects)
        ================================================ */
     .tiers-section { background: var(--canvas); padding: 120px 48px; }
@@ -785,6 +816,7 @@
       .features-grid { grid-template-columns: repeat(2, 1fr); }
       .bubbles-grid { grid-template-columns: 1fr 1fr; }
       .offerings-grid { grid-template-columns: 1fr; }
+      .pricing-grid { grid-template-columns: 1fr 1fr; }
       .tiers-inner { grid-template-columns: 1fr; gap: 60px; }
       .big-cta-inner { grid-template-columns: 1fr; gap: 40px; }
       .inquiry-inner { grid-template-columns: 1fr; gap: 48px; }
@@ -795,7 +827,9 @@
       .nav-links { display: none; }
       .hero { padding: 100px 24px 60px; }
       .promise { padding: 80px 24px; }
-      .csa-big-section, .features, .bubbles-section, .offerings, .tiers-section, .big-cta, .inquiry { padding: 80px 24px; }
+      .csa-big-section, .features, .bubbles-section, .offerings, .pricing-section, .tiers-section, .big-cta, .inquiry { padding: 80px 24px; }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .pricing-footer { flex-direction: column; gap: 16px; }
       footer { padding: 60px 24px 40px; }
       .features-grid { grid-template-columns: 1fr; }
       .bubbles-grid { grid-template-columns: 1fr; }
@@ -827,6 +861,7 @@
         <li><a href="#features">Platform</a></li>
         <li><a href="#demo">Demo</a></li>
         <li><a href="#offerings">Offerings</a></li>
+        <li><a href="#pricing">Pricing</a></li>
         <li><a href="#institutions">Institutions</a></li>
       </ul>
       <a class="nav-btn" href="#cta">Request a Build</a>
@@ -1282,7 +1317,7 @@
         <div class="offering reveal">
           <div class="offering-flag">Option A</div>
           <div class="offering-title">System Integration</div>
-          <p class="offering-body">Connect SkillGap to your existing LMS or institutional platforms via API. Keep your current workflows — add three-factor skill gap intelligence on top.</p>
+          <p class="offering-body">Connect SkillGap to your existing LMS or institutional platform via API. We audit your system, build the adapter layer, and slot in — your workflows stay exactly as they are.</p>
           <div class="offering-list">
             <div class="offering-item">
               <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -1290,7 +1325,7 @@
             </div>
             <div class="offering-item">
               <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              Moodle, Canvas, Blackboard compatible
+              Moodle, Canvas, Blackboard, or any custom LMS
             </div>
             <div class="offering-item">
               <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -1298,7 +1333,15 @@
             </div>
             <div class="offering-item">
               <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              Scores pushed back to your gradebook
+              We adapt to your question bank and scoring — no rip-and-replace
+            </div>
+            <div class="offering-item">
+              <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              AI feedback on your assessments — scores returned to your gradebook
+            </div>
+            <div class="offering-item">
+              <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              100 starter credits included at onboarding
             </div>
           </div>
           <a class="btn-dark-outline" href="integration.html">Inquire About Integration</a>
@@ -1307,7 +1350,7 @@
         <div class="offering reveal d1">
           <div class="offering-flag">Option B · Recommended</div>
           <div class="offering-title">Custom Build</div>
-          <p class="offering-body">We build a version of SkillGap tailored entirely to your institution — your subject, your question bank, your branding, your infrastructure. End to end.</p>
+          <p class="offering-body">We build a version of SkillGap tailored entirely to your institution — your subject, your question bank, your branding. Scoped and priced before a single line of code is written.</p>
           <div class="offering-list">
             <div class="offering-item">
               <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -1319,15 +1362,71 @@
             </div>
             <div class="offering-item">
               <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              Full white-label — your brand, not ours
+              Full white-label — your brand, deployed to your infrastructure or ours
             </div>
             <div class="offering-item">
               <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              Onboarding, training, and post-launch support
+              Onboarding, training, and post-launch support included
+            </div>
+            <div class="offering-item">
+              <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              1,000 credits included at go-live
             </div>
           </div>
           <a class="btn-dark" href="custom-build.html">Request a Custom Build</a>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ PRICING ════════════════════════════════ -->
+  <section class="pricing-section" id="pricing">
+    <div class="pricing-inner">
+      <div class="pricing-header">
+        <div class="pricing-eyebrow reveal">PRICING · CREDITS</div>
+        <h2 class="reveal d1">Pay for what you use.<br>Stop when you don't.</h2>
+        <p class="reveal d2">Credits are consumed only when the AI delivers feedback. Prepay a bundle, top up anytime — no subscriptions, no invoices to chase.</p>
+      </div>
+      <div class="pricing-grid">
+        <div class="price-card reveal">
+          <div class="price-card-label">Starter</div>
+          <div class="price-amount">$22</div>
+          <div class="price-credits">100 credits</div>
+          <div class="price-per">$0.22 / credit</div>
+          <div class="price-divider"></div>
+          <div class="price-include">Included at onboarding for all Option A integrations. Right-sized for pilots and small cohorts.</div>
+        </div>
+        <div class="price-card reveal d1">
+          <div class="price-card-label">Standard</div>
+          <div class="price-amount">$95</div>
+          <div class="price-credits">500 credits</div>
+          <div class="price-per">$0.19 / credit</div>
+          <div class="price-divider"></div>
+          <div class="price-include">Right-sized for institutions running one cohort per semester across several subjects.</div>
+        </div>
+        <div class="price-card featured reveal d2">
+          <div class="price-badge">Best value</div>
+          <div class="price-card-label">Volume</div>
+          <div class="price-amount">$160</div>
+          <div class="price-credits">1,000 credits</div>
+          <div class="price-per">$0.16 / credit</div>
+          <div class="price-divider"></div>
+          <div class="price-include">Included at go-live for all Option B custom builds. Covers a full academic year for most mid-size institutions.</div>
+        </div>
+        <div class="price-card contact-card reveal d3">
+          <div class="price-card-label">Institution</div>
+          <div class="price-amount">Custom</div>
+          <div class="price-credits">5,000+ credits</div>
+          <div class="price-per">from $0.14 / credit</div>
+          <div class="price-divider"></div>
+          <div class="price-include">Negotiated annually. For large universities and multi-department deployments.</div>
+          <a class="price-cta" href="#inquiry">Contact us →</a>
+        </div>
+      </div>
+      <div class="pricing-footer">
+        <p class="pricing-note reveal"><strong>Setup &amp; development fees</strong> are quoted separately based on your existing system and integration scope. Small institutions start from as little as $0 for self-serve setups. Custom builds are scoped and priced before any work begins.</p>
+        <p class="pricing-note reveal d1"><strong>Premium credits (GPT-4o)</strong> are available for institutions where flagship AI matters for accreditation or faculty reporting. Priced on request.</p>
+        <p class="pricing-note reveal d2"><strong>Credits expire 12 months</strong> from purchase. Auto top-up available. Zero credits — AI pauses, assessments still run.</p>
       </div>
     </div>
   </section>
@@ -1551,7 +1650,7 @@
 
       // Determine if we're over a light section
       let isLight = false;
-      document.querySelectorAll('section, .promise, .features, .tiers-section').forEach(sec => {
+      document.querySelectorAll('section, .promise, .features, .pricing-section, .tiers-section').forEach(sec => {
         const rect = sec.getBoundingClientRect();
         if (rect.top <= 68 && rect.bottom > 68) {
           const bg = getComputedStyle(sec).backgroundColor;
