@@ -1,0 +1,1696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillGap — Adaptive Assessment Platform</title>
+  <meta name="description" content="SkillGap is a configurable AI-powered assessment platform that identifies student skill gaps with three-factor precision — across any subject, at any institution.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <style>
+    /* ================================================
+       TOKENS
+       ================================================ */
+    :root {
+      --ink:        #0a0a0a;
+      --ink-soft:   #1a1814;
+      --paper:      #ffffff;
+      --canvas:     #f5f1ea;
+      --mid:        #ede8df;
+      --muted:      #9a9690;
+      --border:     #e4e0d8;
+      --gold:       #c9a96e;
+      --gold-deep:  #8a6c35;
+      --gold-pale:  rgba(201,169,110,0.12);
+      --success:    #1a7a4a;
+      --warning:    #d97706;
+      --error:      #b91c1c;
+      --success-bg: #edf7f1;
+      --warning-bg: #fef9ec;
+      --error-bg:   #fef2f2;
+      --blue:       #2563eb;
+
+      --serif:  'DM Serif Display', Georgia, serif;
+      --sans:   'Manrope', system-ui, -apple-system, sans-serif;
+
+      --ease:       cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-back:  cubic-bezier(0.34, 1.56, 0.64, 1);
+      --t-fast:  150ms ease;
+      --t-base:  250ms ease;
+      --t-slow:  500ms var(--ease);
+    }
+
+    /* ================================================
+       RESET
+       ================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: var(--sans); background: var(--paper); color: var(--ink); overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+    /* ================================================
+       SCROLL REVEAL
+       ================================================ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    }
+    .reveal.in { opacity: 1; transform: none; }
+    .d1 { transition-delay: 0.08s; }
+    .d2 { transition-delay: 0.16s; }
+    .d3 { transition-delay: 0.24s; }
+    .d4 { transition-delay: 0.32s; }
+    .d5 { transition-delay: 0.40s; }
+    .d6 { transition-delay: 0.48s; }
+
+    /* ================================================
+       NAV
+       ================================================ */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 68px;
+      display: flex; align-items: center;
+      padding: 0 48px;
+      transition: background var(--t-base), border-color var(--t-base), box-shadow var(--t-base);
+    }
+    .nav.scrolled {
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav.light.scrolled {
+      background: rgba(255,255,255,0.92);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner { max-width: 1280px; width: 100%; margin: 0 auto; display: flex; align-items: center; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; margin-right: auto; }
+    .nav-logomark { width: 36px; height: 36px; border-radius: 8px; overflow: hidden; flex-shrink: 0; }
+    .nav-logomark img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .nav-wordmark { font-family: var(--serif); font-size: 1.25rem; color: var(--paper); letter-spacing: -0.02em; }
+    .nav.light .nav-wordmark { color: var(--ink); }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; margin-right: 40px; }
+    .nav-links a { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em; color: rgba(255,255,255,0.65); transition: color var(--t-fast); }
+    .nav.light .nav-links a { color: rgba(10,10,10,0.55); }
+    .nav-links a:hover { color: var(--paper); }
+    .nav.light .nav-links a:hover { color: var(--ink); }
+    .nav-btn { padding: 10px 22px; background: var(--gold); color: var(--ink-soft); border-radius: 999px; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; transition: all var(--t-fast); }
+    .nav-btn:hover { background: #d4b47a; transform: translateY(-1px); }
+
+    /* ================================================
+       HERO
+       ================================================ */
+    .hero {
+      min-height: 100vh;
+      background: var(--ink-soft);
+      display: flex; align-items: center;
+      padding: 120px 48px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 80% 20%, rgba(201,169,110,0.14) 0%, transparent 55%),
+        radial-gradient(ellipse at 10% 90%, rgba(201,169,110,0.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    /* Subtle dot grid */
+    .hero::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1280px; width: 100%; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+      position: relative; z-index: 1;
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 6px 14px;
+      background: rgba(201,169,110,0.12);
+      border: 1px solid rgba(201,169,110,0.22);
+      border-radius: 999px;
+      font-size: 0.7rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--gold); margin-bottom: 28px;
+    }
+    .hero-eyebrow-pulse { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; animation: pulse 2s ease infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+
+    .hero-title {
+      font-family: var(--sans);
+      font-size: clamp(3rem, 5.5vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.04em;
+      color: var(--paper);
+      margin-bottom: 28px;
+    }
+    .hero-title .line { display: block; }
+    .hero-title .strike-line {
+      color: rgba(255,255,255,0.28);
+      display: inline;
+      white-space: nowrap;
+      background-image: linear-gradient(var(--gold), var(--gold));
+      background-repeat: no-repeat;
+      background-size: 100% 3px;
+      background-position: 0 52%;
+    }
+    .hero-title .clear-line { color: var(--paper); }
+
+    .hero-body { font-size: 1.05rem; line-height: 1.7; color: rgba(255,255,255,0.55); max-width: 420px; margin-bottom: 40px; font-weight: 400; }
+    .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+
+    .btn-solid { padding: 14px 30px; background: var(--gold); color: var(--ink-soft); border-radius: 999px; font-size: 0.82rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; transition: all var(--t-fast); box-shadow: 0 4px 20px rgba(201,169,110,0.3); }
+    .btn-solid:hover { background: #d4b47a; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,169,110,0.42); }
+
+    .btn-outline { padding: 14px 24px; border: 1px solid rgba(255,255,255,0.18); border-radius: 999px; font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.65); display: flex; align-items: center; gap: 6px; transition: all var(--t-fast); }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.4); color: var(--paper); }
+
+    /* Hero mockup */
+    .hero-visual { display: flex; justify-content: center; align-items: center; }
+    .mockup {
+      width: 100%; max-width: 460px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 8px 24px rgba(0,0,0,0.3);
+      transform: perspective(1000px) rotateY(-4deg) rotateX(2deg);
+      transition: transform 0.6s var(--ease);
+    }
+    .mockup:hover { transform: perspective(1000px) rotateY(-1deg) rotateX(0deg); }
+    .mockup-bar { height: 40px; background: rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; padding: 0 16px; gap: 6px; }
+    .mock-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .mock-dot.r{background:#ff5f57} .mock-dot.y{background:#ffbd2e} .mock-dot.g{background:#28c840}
+    .mock-url { margin: 0 auto; padding: 3px 14px; background: rgba(255,255,255,0.06); border-radius: 999px; font-size: 11px; color: rgba(255,255,255,0.3); }
+    .mockup-body { padding: 20px; background: #111; display: flex; flex-direction: column; gap: 16px; }
+
+    /* Score card */
+    .mc-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; }
+    .mc-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px; }
+    .mc-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.3); margin-bottom: 4px; }
+    .mc-num { font-family: var(--serif); font-size: 3.5rem; line-height: 1; letter-spacing: -0.04em; color: var(--paper); }
+    .mc-badge { padding: 5px 12px; border-radius: 999px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; background: rgba(26,122,74,0.2); color: #4ade80; }
+    .mc-dims { display: flex; flex-direction: column; gap: 10px; }
+    .mc-dim { display: flex; align-items: center; gap: 10px; }
+    .mc-dim-name { font-size: 0.72rem; font-weight: 700; color: rgba(255,255,255,0.5); width: 68px; flex-shrink: 0; }
+    .mc-track { flex: 1; height: 5px; background: rgba(255,255,255,0.08); border-radius: 999px; overflow: hidden; }
+    .mc-fill { height: 100%; border-radius: 999px; }
+    .mc-fill.a { background: #4ade80; }
+    .mc-fill.s { background: #60a5fa; }
+    .mc-fill.st { background: var(--gold); }
+    .mc-wt { font-size: 0.65rem; color: rgba(255,255,255,0.25); width: 32px; text-align: right; }
+    .mc-score { font-size: 0.72rem; font-weight: 700; color: var(--paper); width: 22px; text-align: right; }
+
+    /* AI feedback card */
+    .mc-ai { background: rgba(201,169,110,0.08); border: 1px solid rgba(201,169,110,0.18); border-radius: 12px; padding: 16px; }
+    .mc-ai-head { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
+    .mc-ai-icon { width: 20px; height: 20px; background: rgba(201,169,110,0.2); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 11px; }
+    .mc-ai-label { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); }
+    .mc-ai-text { font-size: 0.75rem; line-height: 1.6; color: rgba(255,255,255,0.55); }
+
+    /* ================================================
+       PROMISE  (white, centered editorial)
+       ================================================ */
+    .promise { background: var(--paper); padding: 120px 48px; text-align: center; }
+    .promise-inner { max-width: 760px; margin: 0 auto; }
+    .promise-copy {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 3vw, 2.6rem);
+      font-style: italic;
+      line-height: 1.35;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+    .promise-copy strong { font-style: normal; font-family: var(--sans); font-weight: 800; color: var(--ink); }
+
+    /* ================================================
+       CSA BIG  (dark, large numeral)
+       ================================================ */
+    .csa-big-section { background: var(--ink); padding: 120px 48px; position: relative; overflow: hidden; }
+    .csa-big-section::before { content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 800px; height: 500px; background: radial-gradient(ellipse, rgba(201,169,110,0.1) 0%, transparent 65%); pointer-events: none; }
+    .csa-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+    .csa-left {}
+    .csa-eyebrow { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold); margin-bottom: 24px; }
+    .csa-numeral { font-family: var(--sans); font-size: clamp(6rem, 14vw, 14rem); font-weight: 800; line-height: 0.9; letter-spacing: -0.06em; color: var(--paper); margin-bottom: 24px; }
+    .csa-numeral span { color: var(--gold); }
+    .csa-title { font-size: clamp(1.4rem, 2.5vw, 2.2rem); font-weight: 800; color: var(--paper); line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 20px; }
+    .csa-desc { font-size: 1rem; color: rgba(255,255,255,0.45); line-height: 1.7; max-width: 380px; }
+
+    .csa-dims { display: flex; flex-direction: column; gap: 0; }
+    .csa-dim {
+      padding: 28px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 24px;
+      align-items: center;
+    }
+    .csa-dim:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
+    .csa-dim-num { font-family: var(--sans); font-size: 2.25rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+    .csa-dim-num.a { color: #4ade80; }
+    .csa-dim-num.s { color: #60a5fa; }
+    .csa-dim-num.st { color: var(--gold); }
+    .csa-dim-info {}
+    .csa-dim-name { font-size: 1rem; font-weight: 800; color: var(--paper); margin-bottom: 4px; letter-spacing: -0.01em; }
+    .csa-dim-desc { font-size: 0.82rem; color: rgba(255,255,255,0.38); line-height: 1.5; }
+    .csa-dim-wt { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.25); }
+
+    /* ================================================
+       FEATURES  (white, 4-col)
+       ================================================ */
+    .features { background: var(--paper); padding: 120px 48px; }
+    .features-inner { max-width: 1280px; margin: 0 auto; }
+    .features-header { margin-bottom: 72px; }
+    .features-header h2 { font-size: clamp(2rem, 4.5vw, 4rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; color: var(--ink); }
+    .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
+    .feat {
+      background: var(--paper);
+      padding: 40px 32px;
+      transition: background var(--t-base);
+    }
+    .feat:hover { background: var(--canvas); }
+    .feat-icon { width: 44px; height: 44px; margin-bottom: 24px; }
+    .feat-icon svg { width: 100%; height: 100%; }
+    .feat-name { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 10px; }
+    .feat-body { font-size: 0.85rem; color: rgba(10,10,10,0.5); line-height: 1.6; }
+
+    /* ================================================
+       BUBBLES  (dark, floating feedback cards)
+       ================================================ */
+    .bubbles-section { background: var(--ink-soft); padding: 120px 48px; position: relative; overflow: hidden; }
+    .bubbles-header { max-width: 1280px; margin: 0 auto 80px; }
+    .bubbles-header h2 { font-size: clamp(2rem, 4.5vw, 4rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; color: var(--paper); max-width: 600px; }
+    .bubbles-header p { font-size: 1rem; color: rgba(255,255,255,0.4); margin-top: 16px; max-width: 440px; }
+
+    .bubbles-grid {
+      max-width: 1280px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .bubble-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 28px;
+      transition: background var(--t-base), border-color var(--t-base), transform var(--t-slow);
+    }
+    .bubble-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.14); transform: translateY(-4px); }
+    .bubble-card.offset { margin-top: 32px; }
+    .bubble-card.offset2 { margin-top: -20px; }
+    .bubble-top { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .bubble-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex-shrink: 0; }
+    .bubble-avatar.g { background: rgba(26,122,74,0.25); color: #4ade80; }
+    .bubble-avatar.w { background: rgba(217,119,6,0.25); color: #fbbf24; }
+    .bubble-avatar.e { background: rgba(37,99,235,0.25); color: #60a5fa; }
+    .bubble-avatar.ai { background: rgba(201,169,110,0.2); color: var(--gold); font-size: 14px; }
+    .bubble-meta { }
+    .bubble-name { font-size: 0.78rem; font-weight: 700; color: var(--paper); }
+    .bubble-role { font-size: 0.7rem; color: rgba(255,255,255,0.3); }
+    .bubble-text { font-size: 0.88rem; line-height: 1.65; color: rgba(255,255,255,0.55); }
+    .bubble-score { margin-top: 16px; display: flex; align-items: center; gap: 8px; }
+    .bubble-score-num { font-family: var(--sans); font-size: 1.4rem; font-weight: 800; letter-spacing: -0.04em; }
+    .bubble-score-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.3); }
+    .bubble-tag { display: inline-flex; padding: 3px 10px; border-radius: 999px; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 14px; }
+    .bubble-tag.p { background: rgba(26,122,74,0.15); color: #4ade80; }
+    .bubble-tag.d { background: rgba(217,119,6,0.15); color: #fbbf24; }
+    .bubble-tag.gap { background: rgba(185,28,28,0.15); color: #f87171; }
+    .bubble-ai-label { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 8px; }
+
+    /* ================================================
+       OFFERINGS  (gold block)
+       ================================================ */
+    .offerings { background: var(--gold); padding: 100px 48px; }
+    .offerings-inner { max-width: 1280px; margin: 0 auto; }
+    .offerings-top { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 64px; gap: 40px; }
+    .offerings-top h2 { font-size: clamp(2rem, 4.5vw, 4rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; color: var(--ink-soft); max-width: 480px; }
+    .offerings-top p { font-size: 1rem; color: rgba(26,24,20,0.6); max-width: 320px; line-height: 1.65; }
+    .offerings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .offering {
+      background: rgba(255,255,255,0.18);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 20px;
+      padding: 48px 40px;
+      transition: background var(--t-base);
+    }
+    .offering:hover { background: rgba(255,255,255,0.25); }
+    .offering-flag { display: inline-flex; padding: 4px 12px; border-radius: 999px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; background: rgba(26,24,20,0.12); color: var(--ink-soft); margin-bottom: 28px; }
+    .offering-icon { font-size: 2.5rem; margin-bottom: 20px; }
+    .offering-title { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.03em; color: var(--ink-soft); margin-bottom: 12px; }
+    .offering-body { font-size: 0.9rem; color: rgba(26,24,20,0.6); line-height: 1.65; margin-bottom: 28px; }
+    .offering-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
+    .offering-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: rgba(26,24,20,0.7); line-height: 1.5; }
+    .offering-check { width: 18px; height: 18px; background: rgba(26,24,20,0.12); border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .btn-dark { padding: 13px 26px; background: var(--ink-soft); color: var(--paper); border-radius: 999px; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; display: inline-block; transition: all var(--t-fast); }
+    .btn-dark:hover { background: #111; transform: translateY(-1px); }
+    .btn-dark-outline { padding: 13px 26px; border: 2px solid rgba(26,24,20,0.25); color: var(--ink-soft); border-radius: 999px; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; display: inline-block; transition: all var(--t-fast); }
+    .btn-dark-outline:hover { border-color: var(--ink-soft); }
+
+    /* ================================================
+       TIERS  (canvas, scoring + subjects)
+       ================================================ */
+    .tiers-section { background: var(--canvas); padding: 120px 48px; }
+    .tiers-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+    .tiers-left h2 { font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.04em; color: var(--ink); margin-bottom: 20px; }
+    .tiers-left p { font-size: 1rem; color: rgba(10,10,10,0.5); line-height: 1.7; margin-bottom: 40px; }
+
+    .tier-list { display: flex; flex-direction: column; gap: 12px; }
+    .tier-row {
+      background: var(--paper);
+      border-radius: 14px;
+      padding: 20px 24px;
+      display: flex; align-items: center; gap: 20px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+      transition: box-shadow var(--t-base), transform var(--t-base);
+    }
+    .tier-row:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.1); transform: translateY(-2px); }
+    .tier-pip { width: 10px; height: 48px; border-radius: 999px; flex-shrink: 0; }
+    .tier-pip.h { background: var(--success); }
+    .tier-pip.m { background: var(--warning); }
+    .tier-pip.l { background: var(--error); }
+    .tier-info { flex: 1; }
+    .tier-name { font-size: 0.95rem; font-weight: 800; color: var(--ink); margin-bottom: 2px; }
+    .tier-range { font-size: 0.78rem; color: rgba(10,10,10,0.45); }
+    .tier-badge { padding: 4px 12px; border-radius: 999px; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; }
+    .tier-badge.h { background: var(--success-bg); color: var(--success); }
+    .tier-badge.m { background: var(--warning-bg); color: #92400e; }
+    .tier-badge.l { background: var(--error-bg); color: var(--error); }
+
+    .tiers-right {}
+    .subjects-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(10,10,10,0.35); margin-bottom: 20px; }
+    .subjects-wrap { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 48px; }
+    .subject-tag {
+      padding: 8px 18px;
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.82rem; font-weight: 600; color: rgba(10,10,10,0.55);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+      transition: all var(--t-fast);
+    }
+    .subject-tag:hover { border-color: var(--gold); color: var(--ink); transform: translateY(-1px); }
+    .subject-tag.active { background: var(--ink-soft); color: var(--gold); border-color: transparent; font-weight: 700; }
+    .config-box { background: var(--ink-soft); border-radius: 16px; padding: 32px; }
+    .config-title { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.3); margin-bottom: 20px; }
+    .config-rows { display: flex; flex-direction: column; gap: 14px; }
+    .config-row { display: flex; align-items: center; justify-content: space-between; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .config-row:last-child { border: none; padding: 0; }
+    .config-key { font-size: 0.82rem; color: rgba(255,255,255,0.35); }
+    .config-val { font-size: 0.82rem; font-weight: 700; color: var(--paper); }
+    .config-val.gold { color: var(--gold); }
+
+    /* ================================================
+       BOLD CTA  (dark, massive type)
+       ================================================ */
+    .big-cta { background: var(--ink); padding: 140px 48px; position: relative; overflow: hidden; }
+    .big-cta::before { content: ''; position: absolute; bottom: -200px; left: 50%; transform: translateX(-50%); width: 900px; height: 500px; background: radial-gradient(ellipse, rgba(201,169,110,0.12) 0%, transparent 65%); pointer-events: none; }
+    .big-cta-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 80px; align-items: center; position: relative; z-index: 1; }
+    .big-cta h2 {
+      font-size: clamp(3rem, 7vw, 7rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      color: var(--paper);
+    }
+    .big-cta h2 em { font-style: italic; font-family: var(--serif); color: var(--gold); font-weight: 400; }
+    .big-cta-right { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; min-width: 260px; }
+    .big-cta p { font-size: 1rem; color: rgba(255,255,255,0.4); line-height: 1.65; margin-bottom: 8px; }
+
+    /* ================================================
+       FOOTER
+       ================================================ */
+    footer {
+      background: var(--ink);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 80px 48px 48px;
+    }
+    .footer-inner { max-width: 1280px; margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 60px; margin-bottom: 80px; }
+    .footer-brand {}
+    .footer-brand-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .footer-logomark { width: 36px; height: 36px; border-radius: 8px; overflow: hidden; flex-shrink: 0; }
+    .footer-logomark img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .footer-brand-name { font-family: var(--serif); font-size: 1.2rem; color: var(--paper); }
+    .footer-tagline { font-size: 0.85rem; color: rgba(255,255,255,0.3); line-height: 1.65; max-width: 260px; }
+    .footer-col-title { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.25); margin-bottom: 20px; }
+    .footer-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-list a { font-size: 0.88rem; color: rgba(255,255,255,0.45); transition: color var(--t-fast); }
+    .footer-list a:hover { color: var(--paper); }
+    .footer-bottom { display: flex; align-items: flex-end; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 40px; }
+    .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.2); }
+
+    /* Wordmark */
+    .footer-wordmark {
+      font-family: var(--sans);
+      font-size: clamp(4rem, 10vw, 9rem);
+      font-weight: 800;
+      letter-spacing: -0.06em;
+      color: rgba(255,255,255,0.06);
+      line-height: 1;
+      user-select: none;
+    }
+    .footer-wordmark span { color: var(--gold); opacity: 0.5; }
+
+    /* ================================================
+       INQUIRY FORM
+       ================================================ */
+    .inquiry { background: var(--canvas); padding: 120px 48px; }
+    .inquiry-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
+    .inquiry-eyebrow { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold-deep); margin-bottom: 20px; }
+    .inquiry-left h2 { font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.04em; color: var(--ink); margin-bottom: 16px; }
+    .inquiry-left p { font-size: 1rem; color: rgba(10,10,10,0.5); line-height: 1.7; margin-bottom: 32px; }
+    .inquiry-note { display: flex; align-items: flex-start; gap: 12px; padding: 16px 20px; background: rgba(201,169,110,0.1); border: 1px solid rgba(201,169,110,0.2); border-radius: 12px; }
+    .inquiry-note-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+    .inquiry-note-text { font-size: 0.82rem; color: var(--gold-deep); line-height: 1.55; }
+    .inquiry-note-text strong { font-weight: 700; }
+    .inquiry-note-text a { text-decoration: underline; text-underline-offset: 3px; }
+    .inquiry-note-text a:hover { opacity: 0.75; }
+
+    .inquiry-card { background: var(--ink-soft); border-radius: 20px; padding: 40px; box-shadow: 0 16px 48px rgba(0,0,0,0.18); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
+    .form-group:last-child { margin-bottom: 0; }
+    .form-label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.35); }
+    .form-input, .form-textarea {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 13px 16px;
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      color: var(--paper);
+      outline: none;
+      transition: border-color var(--t-fast), background var(--t-fast);
+      width: 100%;
+    }
+    .form-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,0.2); }
+    .form-input:focus, .form-textarea:focus { border-color: var(--gold); background: rgba(255,255,255,0.09); }
+    .form-textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
+    .form-submit {
+      width: 100%;
+      margin-top: 8px;
+      padding: 15px;
+      background: var(--gold);
+      color: var(--ink-soft);
+      border-radius: 10px;
+      font-family: var(--sans);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all var(--t-fast);
+      border: none;
+    }
+    .form-submit:hover { background: #d4b47a; transform: translateY(-1px); }
+    .form-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .form-success { text-align: center; padding: 48px 0; }
+    .form-success-icon { width: 52px; height: 52px; background: rgba(26,122,74,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 1.4rem; color: #4ade80; }
+    .form-success-title { font-size: 1.1rem; font-weight: 800; color: var(--paper); margin-bottom: 8px; }
+    .form-success-body { font-size: 0.88rem; color: rgba(255,255,255,0.4); line-height: 1.6; }
+    .form-error-msg { font-size: 0.78rem; color: #f87171; margin-top: 12px; text-align: center; display: none; }
+
+    /* ================================================
+       DEMO SHOWCASE
+       ================================================ */
+    .demo-section { background: var(--ink); padding: 120px 48px; }
+    .demo-inner { max-width: 900px; margin: 0 auto; }
+    .demo-header { text-align: center; margin-bottom: 48px; }
+    .demo-eyebrow {
+      display: inline-block;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold); border: 1px solid rgba(201,169,110,0.35);
+      border-radius: 999px; padding: 5px 14px; margin-bottom: 20px;
+    }
+    .demo-header h2 {
+      font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem);
+      color: #fff; line-height: 1.1; margin-bottom: 14px;
+    }
+    .demo-header p { font-size: 0.95rem; color: rgba(255,255,255,0.45); max-width: 480px; margin: 0 auto; line-height: 1.65; }
+
+    /* Tabs */
+    .demo-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 36px; }
+    .demo-tab {
+      font-family: var(--font-body); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em;
+      padding: 9px 22px; border-radius: 999px; cursor: pointer; border: 1px solid rgba(255,255,255,0.12);
+      background: transparent; color: rgba(255,255,255,0.45); transition: all 200ms ease;
+    }
+    .demo-tab.active { background: var(--gold); color: var(--ink-soft); border-color: var(--gold); }
+    .demo-tab:hover:not(.active) { border-color: rgba(255,255,255,0.28); color: rgba(255,255,255,0.75); }
+
+    /* Mockup shell */
+    .demo-mockup {
+      width: 100%; max-width: 720px; margin: 0 auto;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,0.55), 0 8px 24px rgba(0,0,0,0.3);
+    }
+    .demo-bar {
+      height: 40px; background: rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      display: flex; align-items: center; padding: 0 16px; gap: 6px;
+    }
+    .demo-bar .mock-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .demo-bar .mock-url {
+      margin: 0 auto; padding: 3px 14px;
+      background: rgba(255,255,255,0.06); border-radius: 999px;
+      font-size: 11px; color: rgba(255,255,255,0.3);
+    }
+
+    /* Screen container */
+    .demo-screens-wrap { position: relative; background: #111; min-height: 340px; }
+    .demo-screen {
+      position: absolute; inset: 0; padding: 28px;
+      opacity: 0; transform: translateY(10px);
+      transition: opacity 380ms ease, transform 380ms ease;
+      pointer-events: none;
+    }
+    .demo-screen.active {
+      opacity: 1; transform: translateY(0); pointer-events: auto;
+      position: relative;
+    }
+
+    /* Screen: assessment question */
+    .ds-prog-bar-wrap { margin-bottom: 20px; }
+    .ds-prog-meta { display: flex; justify-content: space-between; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 8px; }
+    .ds-prog-track { height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; }
+    .ds-prog-fill { height: 3px; background: var(--gold); border-radius: 2px; }
+    .ds-question { font-family: var(--font-display); font-size: 1.05rem; color: #fff; line-height: 1.45; margin-bottom: 22px; }
+    .ds-options { display: flex; flex-direction: column; gap: 9px; margin-bottom: 22px; }
+    .ds-option {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px; border-radius: 8px;
+      border: 1px solid rgba(255,255,255,0.09);
+      font-size: 0.82rem; color: rgba(255,255,255,0.65); cursor: default;
+    }
+    .ds-option.selected { border-color: var(--gold); background: rgba(201,169,110,0.08); color: #fff; }
+    .ds-opt-key { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; color: rgba(255,255,255,0.3); width: 16px; flex-shrink: 0; }
+    .ds-option.selected .ds-opt-key { color: var(--gold); }
+    .ds-next-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font-body); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em;
+      background: var(--gold); color: var(--ink); padding: 9px 20px; border-radius: 999px; border: none; cursor: default;
+    }
+
+    /* Screen: skill index results */
+    .ds-result-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; }
+    .ds-result-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 4px; }
+    .ds-result-num { font-family: var(--font-display); font-size: 3rem; color: #fff; line-height: 1; }
+    .ds-result-badge { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 12px; border-radius: 999px; background: rgba(217,119,6,0.15); color: #d97706; border: 1px solid rgba(217,119,6,0.3); margin-top: 4px; }
+    .ds-dims { display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px; }
+    .ds-dim { display: flex; align-items: center; gap: 12px; }
+    .ds-dim-name { font-size: 0.78rem; color: rgba(255,255,255,0.45); width: 64px; flex-shrink: 0; }
+    .ds-dim-track { flex: 1; height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; }
+    .ds-dim-fill { height: 4px; border-radius: 2px; }
+    .ds-dim-fill.a { background: #22c55e; }
+    .ds-dim-fill.s { background: #3b82f6; }
+    .ds-dim-fill.st { background: var(--gold); }
+    .ds-dim-score { font-size: 0.82rem; font-weight: 700; color: #fff; font-variant-numeric: tabular-nums; width: 24px; text-align: right; }
+    .ds-dim-wt { font-size: 10px; color: rgba(255,255,255,0.25); width: 36px; font-variant-numeric: tabular-nums; }
+    .ds-result-note { font-size: 0.78rem; color: rgba(255,255,255,0.35); line-height: 1.55; font-style: italic; }
+
+    /* Screen: AI feedback */
+    .ds-ai-head { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+    .ds-ai-icon { width: 26px; height: 26px; background: rgba(201,169,110,0.15); border: 1px solid rgba(201,169,110,0.3); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--gold); }
+    .ds-ai-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
+    .ds-ai-body { font-family: var(--font-display); font-size: 0.9rem; color: rgba(255,255,255,0.8); line-height: 1.65; margin-bottom: 22px; font-style: italic; }
+    .ds-ai-body em { font-style: normal; color: var(--gold); }
+    .ds-cursor::after { content: '|'; animation: blink 1s step-end infinite; color: var(--gold); margin-left: 2px; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+    .ds-roadmap-label { font-size: 10px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 10px; }
+    .ds-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .ds-chip { font-size: 0.75rem; font-weight: 600; padding: 5px 12px; border-radius: 999px; background: rgba(185,28,28,0.15); color: #fca5a5; border: 1px solid rgba(185,28,28,0.3); }
+
+    /* Screen: class dashboard */
+    .ds-dash-head { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 18px; }
+    .ds-stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 20px; }
+    .ds-stat { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 14px 16px; }
+    .ds-stat-val { font-family: var(--font-display); font-size: 1.9rem; color: #fff; line-height: 1; margin-bottom: 4px; font-variant-numeric: tabular-nums; }
+    .ds-stat-val.g { color: #4ade80; }
+    .ds-stat-val.w { color: #fbbf24; }
+    .ds-stat-val.r { color: #f87171; }
+    .ds-stat-name { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
+    .ds-stat-pct { font-size: 0.75rem; color: rgba(255,255,255,0.25); margin-top: 2px; font-variant-numeric: tabular-nums; }
+    .ds-avg { display: flex; align-items: center; justify-content: space-between; background: rgba(201,169,110,0.07); border: 1px solid rgba(201,169,110,0.15); border-radius: 8px; padding: 12px 16px; }
+    .ds-avg-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+    .ds-avg-val { font-family: var(--font-display); font-size: 1.5rem; color: var(--gold); font-variant-numeric: tabular-nums; }
+
+    /* Screen: heatmap */
+    .ds-heatmap-label { font-size: 10px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 18px; }
+    .ds-heat-rows { display: flex; flex-direction: column; gap: 13px; }
+    .ds-heat-row { display: flex; align-items: center; gap: 12px; }
+    .ds-heat-name { font-size: 0.78rem; color: rgba(255,255,255,0.55); width: 160px; flex-shrink: 0; }
+    .ds-heat-track { flex: 1; height: 6px; background: rgba(255,255,255,0.07); border-radius: 3px; }
+    .ds-heat-fill { height: 6px; border-radius: 3px; }
+    .ds-heat-pct { font-size: 0.78rem; font-weight: 700; color: #fff; width: 34px; text-align: right; font-variant-numeric: tabular-nums; }
+
+    /* Screen: roster */
+    .ds-roster-label { font-size: 10px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 14px; }
+    .ds-table { width: 100%; border-collapse: collapse; }
+    .ds-table th { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.25); text-align: left; padding: 0 0 10px; }
+    .ds-table td { font-size: 0.8rem; color: rgba(255,255,255,0.65); padding: 9px 0; border-top: 1px solid rgba(255,255,255,0.05); font-variant-numeric: tabular-nums; }
+    .ds-table td:first-child { color: #fff; font-weight: 600; }
+    .ds-tier { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.07em; padding: 2px 8px; border-radius: 999px; }
+    .ds-tier.p { background: rgba(26,122,74,0.2); color: #4ade80; border: 1px solid rgba(26,122,74,0.3); }
+    .ds-tier.d { background: rgba(217,119,6,0.15); color: #fbbf24; border: 1px solid rgba(217,119,6,0.3); }
+    .ds-tier.g { background: rgba(185,28,28,0.15); color: #f87171; border: 1px solid rgba(185,28,28,0.3); }
+
+    /* Dots */
+    .demo-dots { display: flex; justify-content: center; gap: 7px; margin-top: 20px; }
+    .demo-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.15); transition: background 250ms ease, transform 250ms ease; cursor: pointer; }
+    .demo-dot.active { background: var(--gold); transform: scale(1.2); }
+
+    /* Demo CTA */
+    .demo-cta { text-align: center; margin-top: 40px; }
+    .demo-cta a { font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 150ms ease; }
+    .demo-cta a:hover { color: var(--gold); }
+    .demo-cta a::after { content: ' →'; }
+
+    /* ================================================
+       RESPONSIVE
+       ================================================ */
+    /* ── Founder card ─────────────────────────────────────────── */
+    .founder-section {
+      background: var(--ink);
+      padding: 72px 40px;
+      display: flex;
+      justify-content: center;
+    }
+    .founder-card {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      background: var(--ink-soft);
+      border: 1px solid rgba(201,169,110,0.18);
+      border-radius: 18px;
+      padding: 36px 48px;
+      max-width: 660px;
+      width: 100%;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.18), 0 1px 4px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    .founder-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%; transform: translateX(-50%);
+      width: 50%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,169,110,0.6), transparent);
+    }
+    .founder-logo-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .founder-logo-col img {
+      width: 68px;
+      height: 68px;
+      border-radius: 14px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    }
+    .founder-logo-label {
+      font-size: 8.5px;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(232,227,218,0.35);
+    }
+    .founder-divider {
+      width: 1px;
+      height: 88px;
+      background: linear-gradient(to bottom, transparent, rgba(201,169,110,0.25), transparent);
+      flex-shrink: 0;
+    }
+    .founder-info { display: flex; flex-direction: column; gap: 0; }
+    .founder-name {
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: #e8e3da;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+    .founder-role {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      background: rgba(201,169,110,0.1);
+      border: 1px solid rgba(201,169,110,0.22);
+      border-radius: 999px;
+      padding: 3px 11px;
+      width: fit-content;
+      margin-bottom: 14px;
+    }
+    .founder-bio {
+      font-size: 0.82rem;
+      color: rgba(154,150,144,0.9);
+      line-height: 1.55;
+      margin-bottom: 14px;
+    }
+    .founder-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--gold);
+      text-decoration: none;
+      transition: opacity 150ms ease;
+    }
+    .founder-link:hover { opacity: 0.7; }
+    .founder-link svg { flex-shrink: 0; }
+
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-visual { display: none; }
+      .csa-inner { grid-template-columns: 1fr; gap: 60px; }
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .bubbles-grid { grid-template-columns: 1fr 1fr; }
+      .offerings-grid { grid-template-columns: 1fr; }
+      .tiers-inner { grid-template-columns: 1fr; gap: 60px; }
+      .big-cta-inner { grid-template-columns: 1fr; gap: 40px; }
+      .inquiry-inner { grid-template-columns: 1fr; gap: 48px; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 24px 60px; }
+      .promise { padding: 80px 24px; }
+      .csa-big-section, .features, .bubbles-section, .offerings, .tiers-section, .big-cta, .inquiry { padding: 80px 24px; }
+      footer { padding: 60px 24px 40px; }
+      .features-grid { grid-template-columns: 1fr; }
+      .bubbles-grid { grid-template-columns: 1fr; }
+      .bubble-card.offset, .bubble-card.offset2 { margin-top: 0; }
+      .offerings-top { flex-direction: column; }
+      .big-cta-inner { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      .inquiry-card { padding: 28px 20px; }
+      .footer-top { grid-template-columns: 1fr; }
+      .founder-card { flex-direction: column; text-align: center; padding: 32px 24px; gap: 24px; }
+      .founder-divider { width: 80px; height: 1px; }
+      .founder-role { margin: 0 auto; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════ NAV ══════════════════════════════════ -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a class="nav-logo" href="#">
+        <div class="nav-logomark">
+          <img src="logo.png" alt="SkillGap logo">
+        </div>
+        <span class="nav-wordmark">SkillGap</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#scoring">CSA Model</a></li>
+        <li><a href="#features">Platform</a></li>
+        <li><a href="#demo">Demo</a></li>
+        <li><a href="#offerings">Offerings</a></li>
+        <li><a href="#institutions">Institutions</a></li>
+      </ul>
+      <a class="nav-btn" href="#cta">Request a Build</a>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════ HERO ═════════════════════════════════ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <span class="hero-eyebrow-pulse"></span>
+          Adaptive Assessment Platform · Built for HEIs
+        </div>
+        <h1 class="hero-title">
+          <span class="line strike-line">Blind Spots.</span>
+          <span class="line strike-line">Generic Grades.</span>
+          <span class="line clear-line">Just Real Skill Data.</span>
+        </h1>
+        <p class="hero-body">SkillGap is an AI-powered assessment platform that tells students and institutions exactly where learning breaks down — across any subject, at any scale.</p>
+        <div class="hero-actions">
+          <a class="btn-solid" href="#cta">Request a Build</a>
+          <a class="btn-outline" href="#scoring">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.1"/><polygon points="5.5,4.5 10,7 5.5,9.5" fill="currentColor"/></svg>
+            See the CSA Model
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="mockup">
+          <div class="mockup-bar">
+            <span class="mock-dot r"></span>
+            <span class="mock-dot y"></span>
+            <span class="mock-dot g"></span>
+            <span class="mock-url">skillgap.app · Assessment Complete</span>
+          </div>
+          <div class="mockup-body">
+            <div class="mc-card">
+              <div class="mc-head">
+                <div>
+                  <div class="mc-label">Skill Index</div>
+                  <div class="mc-num">78</div>
+                </div>
+                <span class="mc-badge">✓ Proficient</span>
+              </div>
+              <div class="mc-dims">
+                <div class="mc-dim">
+                  <span class="mc-dim-name">Accuracy</span>
+                  <div class="mc-track"><div class="mc-fill a" style="width:83%"></div></div>
+                  <span class="mc-score">83</span>
+                  <span class="mc-wt">×0.60</span>
+                </div>
+                <div class="mc-dim">
+                  <span class="mc-dim-name">Speed</span>
+                  <div class="mc-track"><div class="mc-fill s" style="width:68%"></div></div>
+                  <span class="mc-score">68</span>
+                  <span class="mc-wt">×0.20</span>
+                </div>
+                <div class="mc-dim">
+                  <span class="mc-dim-name">Stability</span>
+                  <div class="mc-track"><div class="mc-fill st" style="width:74%"></div></div>
+                  <span class="mc-score">74</span>
+                  <span class="mc-wt">×0.20</span>
+                </div>
+              </div>
+            </div>
+            <div class="mc-ai">
+              <div class="mc-ai-head">
+                <div class="mc-ai-icon">✦</div>
+                <span class="mc-ai-label">AI Feedback</span>
+              </div>
+              <p class="mc-ai-text">Strong and consistent early performance — stability is solid. Collections Framework is your main gap. Prioritize Stream API and Map operations before your next review.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ PROMISE ══════════════════════════════ -->
+  <section class="promise">
+    <div class="promise-inner reveal">
+      <p class="promise-copy">
+        Your students deserve more than a number on a page. SkillGap gives institutions the <strong>clarity to see what's actually breaking down</strong> — and the precision to act on it before it becomes a failed semester.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ CSA BIG ══════════════════════════════ -->
+  <section class="csa-big-section" id="scoring">
+    <div class="csa-inner">
+      <div class="csa-left">
+        <div class="csa-eyebrow reveal">Behind the Score</div>
+        <div class="csa-numeral reveal d1">3<span>.</span></div>
+        <h2 class="csa-title reveal d2">Signals that give<br>AI something<br>to work with.</h2>
+        <p class="csa-desc reveal d3">A grade tells you what happened. SkillGap reads three independent signals so the AI can tell you <em style="color:var(--gold);font-style:normal">why</em> — and exactly what to do next. No formula to memorize. Just insight your students can actually act on.</p>
+      </div>
+      <div class="csa-dims">
+        <div class="csa-dim reveal">
+          <div class="csa-dim-num a">01</div>
+          <div class="csa-dim-info">
+            <div class="csa-dim-name">Accuracy</div>
+            <div class="csa-dim-desc">Did they understand the material? Goes beyond right or wrong — harder questions carry more weight, so the score reflects genuine depth of knowledge, not guessing patterns.</div>
+          </div>
+          <div class="csa-dim-wt">Knowledge</div>
+        </div>
+        <div class="csa-dim reveal d1">
+          <div class="csa-dim-num s">02</div>
+          <div class="csa-dim-info">
+            <div class="csa-dim-name">Speed</div>
+            <div class="csa-dim-desc">Can they apply it under pressure? Internalized knowledge is fast knowledge. Speed signals whether a student truly owns a concept or is still working through it consciously.</div>
+          </div>
+          <div class="csa-dim-wt">Application</div>
+        </div>
+        <div class="csa-dim reveal d2">
+          <div class="csa-dim-num st">03</div>
+          <div class="csa-dim-info">
+            <div class="csa-dim-name">Stability</div>
+            <div class="csa-dim-desc">Does it hold up start to finish? Consistent performance across the full assessment means reliable knowledge. A dip in the final third often signals conceptual gaps — and the AI knows the difference.</div>
+          </div>
+          <div class="csa-dim-wt">Reliability</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ FEATURES ═════════════════════════════ -->
+  <section class="features" id="features">
+    <div class="features-inner">
+      <div class="features-header">
+        <h2 class="reveal">Like a Normal Assessment,<br>But Smarter.</h2>
+      </div>
+      <div class="features-grid">
+        <div class="feat reveal">
+          <div class="feat-icon">
+            <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="44" height="44" rx="10" fill="#f5f1ea"/>
+              <path d="M14 22l6 6 10-12" stroke="#1a1814" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="feat-name">Composite Scoring</div>
+          <div class="feat-body">Three dimensions — accuracy, speed, and stability — combined into a single Skill Index that reflects real-world competency.</div>
+        </div>
+        <div class="feat reveal d1">
+          <div class="feat-icon">
+            <svg viewBox="0 0 44 44" fill="none">
+              <rect width="44" height="44" rx="10" fill="#f5f1ea"/>
+              <circle cx="22" cy="22" r="7" stroke="#1a1814" stroke-width="2.2"/>
+              <path d="M22 11v3M22 30v3M11 22h3M30 22h3" stroke="#1a1814" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="feat-name">AI Feedback</div>
+          <div class="feat-body">Every submission generates instant, personalized, topic-level guidance. Students know exactly what to study next — not just what they got wrong.</div>
+        </div>
+        <div class="feat reveal d2">
+          <div class="feat-icon">
+            <svg viewBox="0 0 44 44" fill="none">
+              <rect width="44" height="44" rx="10" fill="#f5f1ea"/>
+              <rect x="12" y="24" width="4" height="8" rx="1.5" fill="#1a1814"/>
+              <rect x="20" y="18" width="4" height="14" rx="1.5" fill="#1a1814" opacity="0.6"/>
+              <rect x="28" y="12" width="4" height="20" rx="1.5" fill="#1a1814" opacity="0.35"/>
+            </svg>
+          </div>
+          <div class="feat-name">Cohort Analytics</div>
+          <div class="feat-body">Real-time dashboards showing score distributions, at-risk flags, and topic-level gaps across your entire class — without any manual analysis.</div>
+        </div>
+        <div class="feat reveal d3">
+          <div class="feat-icon">
+            <svg viewBox="0 0 44 44" fill="none">
+              <rect width="44" height="44" rx="10" fill="#f5f1ea"/>
+              <rect x="12" y="12" width="8" height="8" rx="2" fill="#1a1814"/>
+              <rect x="24" y="12" width="8" height="8" rx="2" fill="#1a1814" opacity="0.5"/>
+              <rect x="12" y="24" width="8" height="8" rx="2" fill="#1a1814" opacity="0.3"/>
+              <rect x="24" y="24" width="8" height="8" rx="2" fill="#1a1814" opacity="0.7"/>
+            </svg>
+          </div>
+          <div class="feat-name">Any Subject</div>
+          <div class="feat-body">The CSA engine and AI feedback layer are fully configurable. Question bank, topics, difficulty weights, and time limits all tailored to your discipline.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ DEMO SHOWCASE ════════════════════════ -->
+  <section class="demo-section" id="demo">
+    <div class="demo-inner">
+      <div class="demo-header">
+        <div class="demo-eyebrow reveal">Sample Subject · Java Programming</div>
+        <h2 class="reveal d1">See what your students<br>and faculty actually get.</h2>
+        <p class="reveal d2">Java Programming is one example of how SkillGap's AI feedback layer works — the same model applies to any subject, any discipline, any learning module. This is what traditional assessments have been missing.</p>
+      </div>
+
+      <div class="demo-tabs reveal d2">
+        <button class="demo-tab active" data-tab="student">Student View</button>
+        <button class="demo-tab" data-tab="teacher">Teacher View</button>
+      </div>
+
+      <div class="demo-mockup reveal d3">
+        <div class="demo-bar">
+          <span class="mock-dot r"></span>
+          <span class="mock-dot y"></span>
+          <span class="mock-dot g"></span>
+          <span class="mock-url" id="demo-url">sgsys.space · Assessment in Progress</span>
+        </div>
+        <div class="demo-screens-wrap">
+
+          <!-- ── STUDENT SCREENS ── -->
+          <div class="demo-screen active" data-tab="student" data-screen="0">
+            <div class="ds-prog-bar-wrap">
+              <div class="ds-prog-meta">
+                <span>Java Programming Assessment &nbsp;·&nbsp; Q8 of 20</span>
+                <span>24:32 remaining</span>
+              </div>
+              <div class="ds-prog-track"><div class="ds-prog-fill" style="width:40%"></div></div>
+            </div>
+            <div class="ds-question">Which Java collection guarantees insertion order while allowing duplicate elements?</div>
+            <div class="ds-options">
+              <div class="ds-option"><span class="ds-opt-key">A</span> HashSet</div>
+              <div class="ds-option"><span class="ds-opt-key">B</span> TreeSet</div>
+              <div class="ds-option selected"><span class="ds-opt-key">C</span> ArrayList</div>
+              <div class="ds-option"><span class="ds-opt-key">D</span> LinkedHashMap</div>
+            </div>
+            <button class="ds-next-btn">Next Question →</button>
+          </div>
+
+          <div class="demo-screen" data-tab="student" data-screen="1">
+            <div class="ds-result-head">
+              <div>
+                <div class="ds-result-label">Skill Index</div>
+                <div class="ds-result-num">72</div>
+              </div>
+              <span class="ds-result-badge">Developing</span>
+            </div>
+            <div class="ds-dims">
+              <div class="ds-dim">
+                <span class="ds-dim-name">Accuracy</span>
+                <div class="ds-dim-track"><div class="ds-dim-fill a" style="width:68%"></div></div>
+                <span class="ds-dim-score">68</span>
+                <span class="ds-dim-wt">×0.60</span>
+              </div>
+              <div class="ds-dim">
+                <span class="ds-dim-name">Speed</span>
+                <div class="ds-dim-track"><div class="ds-dim-fill s" style="width:81%"></div></div>
+                <span class="ds-dim-score">81</span>
+                <span class="ds-dim-wt">×0.20</span>
+              </div>
+              <div class="ds-dim">
+                <span class="ds-dim-name">Stability</span>
+                <div class="ds-dim-track"><div class="ds-dim-fill st" style="width:77%"></div></div>
+                <span class="ds-dim-score">77</span>
+                <span class="ds-dim-wt">×0.20</span>
+              </div>
+            </div>
+            <div class="ds-result-note">Your consistency improved — speed is your strongest dimension. Focus on accuracy to move to Proficient.</div>
+          </div>
+
+          <div class="demo-screen" data-tab="student" data-screen="2">
+            <div class="ds-ai-head">
+              <div class="ds-ai-icon">✦</div>
+              <span class="ds-ai-label">AI Feedback</span>
+            </div>
+            <div class="ds-ai-body ds-cursor">Your performance dipped in the final third — likely fatigue or topic difficulty. Core OOP is solid. Priority gaps: <em>Collections Framework</em>, <em>Stream API</em>, <em>Exception Handling</em>.</div>
+            <div class="ds-roadmap-label">Study Roadmap</div>
+            <div class="ds-chips">
+              <span class="ds-chip">Collections Framework</span>
+              <span class="ds-chip">Stream API</span>
+              <span class="ds-chip">Exception Handling</span>
+            </div>
+          </div>
+
+          <!-- ── TEACHER SCREENS ── -->
+          <div class="demo-screen" data-tab="teacher" data-screen="0">
+            <div class="ds-dash-head">Java Programming &nbsp;·&nbsp; Batch 2026 &nbsp;·&nbsp; 34 Students</div>
+            <div class="ds-stat-row">
+              <div class="ds-stat">
+                <div class="ds-stat-val g">12</div>
+                <div class="ds-stat-name">Proficient</div>
+                <div class="ds-stat-pct">35% of class</div>
+              </div>
+              <div class="ds-stat">
+                <div class="ds-stat-val w">15</div>
+                <div class="ds-stat-name">Developing</div>
+                <div class="ds-stat-pct">44% of class</div>
+              </div>
+              <div class="ds-stat">
+                <div class="ds-stat-val r">7</div>
+                <div class="ds-stat-name">Skill Gap</div>
+                <div class="ds-stat-pct">21% of class</div>
+              </div>
+            </div>
+            <div class="ds-avg">
+              <span class="ds-avg-label">Class Avg · Skill Index</span>
+              <span class="ds-avg-val">61</span>
+            </div>
+          </div>
+
+          <div class="demo-screen" data-tab="teacher" data-screen="1">
+            <div class="ds-heatmap-label">Skill Gap Heatmap · Class Performance by Topic</div>
+            <div class="ds-heat-rows">
+              <div class="ds-heat-row">
+                <span class="ds-heat-name">OOP Principles</span>
+                <div class="ds-heat-track"><div class="ds-heat-fill" style="width:72%;background:#4ade80"></div></div>
+                <span class="ds-heat-pct">72%</span>
+              </div>
+              <div class="ds-heat-row">
+                <span class="ds-heat-name">Exception Handling</span>
+                <div class="ds-heat-track"><div class="ds-heat-fill" style="width:58%;background:#fbbf24"></div></div>
+                <span class="ds-heat-pct">58%</span>
+              </div>
+              <div class="ds-heat-row">
+                <span class="ds-heat-name">Collections Framework</span>
+                <div class="ds-heat-track"><div class="ds-heat-fill" style="width:45%;background:#f87171"></div></div>
+                <span class="ds-heat-pct">45%</span>
+              </div>
+              <div class="ds-heat-row">
+                <span class="ds-heat-name">Stream API</span>
+                <div class="ds-heat-track"><div class="ds-heat-fill" style="width:41%;background:#f87171"></div></div>
+                <span class="ds-heat-pct">41%</span>
+              </div>
+              <div class="ds-heat-row">
+                <span class="ds-heat-name">Concurrency</span>
+                <div class="ds-heat-track"><div class="ds-heat-fill" style="width:38%;background:#f87171"></div></div>
+                <span class="ds-heat-pct">38%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="demo-screen" data-tab="teacher" data-screen="2">
+            <div class="ds-roster-label">Student Roster</div>
+            <table class="ds-table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Skill Index</th>
+                  <th>Tier</th>
+                  <th>Top Gap</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>A. Reyes</td><td>84</td><td><span class="ds-tier p">Proficient</span></td><td>Concurrency</td></tr>
+                <tr><td>B. Santos</td><td>71</td><td><span class="ds-tier d">Developing</span></td><td>Stream API</td></tr>
+                <tr><td>C. Lim</td><td>63</td><td><span class="ds-tier d">Developing</span></td><td>Collections</td></tr>
+                <tr><td>D. Cruz</td><td>47</td><td><span class="ds-tier g">Skill Gap</span></td><td>Collections</td></tr>
+                <tr><td>E. Torres</td><td>91</td><td><span class="ds-tier p">Proficient</span></td><td>Concurrency</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div><!-- end demo-screens-wrap -->
+      </div><!-- end demo-mockup -->
+
+      <div class="demo-dots reveal d3" id="demo-dots">
+        <span class="demo-dot active"></span>
+        <span class="demo-dot"></span>
+        <span class="demo-dot"></span>
+      </div>
+
+      <div class="demo-cta reveal d3">
+        <a href="https://sgsys.space" target="_blank" rel="noopener">Explore the full platform</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ BUBBLES ══════════════════════════════ -->
+  <section class="bubbles-section" id="institutions">
+    <div class="bubbles-header">
+      <h2 class="reveal">What clarity<br>actually looks like.</h2>
+      <p class="reveal d1">This is what SkillGap puts in front of your students and faculty the moment an assessment closes — specific, actionable, and generated without any manual effort from your team.</p>
+    </div>
+    <div class="bubbles-grid">
+      <!-- Card 1 -->
+      <div class="bubble-card reveal">
+        <div class="bubble-top">
+          <div class="bubble-avatar g">CJ</div>
+          <div class="bubble-meta">
+            <div class="bubble-name">Christian J.</div>
+            <div class="bubble-role">Student · Java Assessment</div>
+          </div>
+        </div>
+        <div class="bubble-score">
+          <div class="bubble-score-num" style="color:#4ade80">82</div>
+          <div class="bubble-score-label">Skill Index</div>
+        </div>
+        <span class="bubble-tag p">Proficient</span>
+      </div>
+
+      <!-- Card 2: AI feedback -->
+      <div class="bubble-card offset reveal d1">
+        <div class="bubble-ai-label">✦ AI Feedback · Java Programming</div>
+        <p class="bubble-text">"You held steady throughout — consistency isn't your issue. The gap is in how you're applying Stream API. Your instinct is to loop; try thinking in pipelines. One concept shift fixes most of your wrong answers."</p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bubble-card offset2 reveal d2">
+        <div class="bubble-top">
+          <div class="bubble-avatar w">JL</div>
+          <div class="bubble-meta">
+            <div class="bubble-name">Juan L.</div>
+            <div class="bubble-role">Student · Data Structures</div>
+          </div>
+        </div>
+        <div class="bubble-score">
+          <div class="bubble-score-num" style="color:#f87171">44</div>
+          <div class="bubble-score-label">Skill Index</div>
+        </div>
+        <span class="bubble-tag gap">Skill Gap Detected</span>
+      </div>
+
+      <!-- Card 4: AI feedback for gap student -->
+      <div class="bubble-card reveal d1">
+        <div class="bubble-ai-label">✦ AI Feedback · Priority Focus</div>
+        <p class="bubble-text">"This isn't a time-pressure issue — your speed was fine. The gaps are conceptual and they're stacked. Build the foundation before the structure: linked list traversal before trees, not the other way around."</p>
+      </div>
+
+      <!-- Card 5: Admin view -->
+      <div class="bubble-card offset reveal d2">
+        <div class="bubble-top">
+          <div class="bubble-meta">
+            <div class="bubble-name">Faculty Dashboard</div>
+            <div class="bubble-role">Cohort overview · 42 students</div>
+          </div>
+        </div>
+        <p class="bubble-text" style="margin-top:12px">6 students flagged in Skill Gap tier. Collections Framework is a weak point across <strong style="color:var(--paper)">68%</strong> of the class — not a student problem, a teaching gap worth addressing before the next module.</p>
+      </div>
+
+      <!-- Card 6 -->
+      <div class="bubble-card offset2 reveal d3">
+        <div class="bubble-top">
+          <div class="bubble-avatar e">SR</div>
+          <div class="bubble-meta">
+            <div class="bubble-name">Sofia R.</div>
+            <div class="bubble-role">Student · Algorithms</div>
+          </div>
+        </div>
+        <div class="bubble-score">
+          <div class="bubble-score-num" style="color:#4ade80">91</div>
+          <div class="bubble-score-label">Skill Index</div>
+        </div>
+        <span class="bubble-tag p">Proficient</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ OFFERINGS ════════════════════════════ -->
+  <section class="offerings" id="offerings">
+    <div class="offerings-inner">
+      <div class="offerings-top">
+        <h2 class="reveal">Two paths.<br>One platform.</h2>
+        <p class="reveal d1">Whether you want to plug SkillGap into your existing infrastructure or get a fully custom-built deployment — we have an engagement model for you.</p>
+      </div>
+      <div class="offerings-grid">
+        <div class="offering reveal">
+          <div class="offering-flag">Option A</div>
+          <div class="offering-title">System Integration</div>
+          <p class="offering-body">Connect SkillGap to your existing LMS or institutional platforms via API. Keep your current workflows — add three-factor skill gap intelligence on top.</p>
+          <div class="offering-list">
+            <div class="offering-item">
+              <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              REST API with full documentation and sandbox
+            </div>
+            <div class="offering-item">
+              <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              Moodle, Canvas, Blackboard compatible
+            </div>
+            <div class="offering-item">
+              <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              SSO — students use existing credentials
+            </div>
+            <div class="offering-item">
+              <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              Scores pushed back to your gradebook
+            </div>
+          </div>
+          <a class="btn-dark-outline" href="integration.html">Inquire About Integration</a>
+        </div>
+
+        <div class="offering reveal d1">
+          <div class="offering-flag">Option B · Recommended</div>
+          <div class="offering-title">Custom Build</div>
+          <p class="offering-body">We build a version of SkillGap tailored entirely to your institution — your subject, your question bank, your branding, your infrastructure. End to end.</p>
+          <div class="offering-list">
+            <div class="offering-item">
+              <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              Subject taxonomy + question bank co-developed with your faculty
+            </div>
+            <div class="offering-item">
+              <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              CSA weights calibrated to your academic rubric
+            </div>
+            <div class="offering-item">
+              <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              Full white-label — your brand, not ours
+            </div>
+            <div class="offering-item">
+              <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+              Onboarding, training, and post-launch support
+            </div>
+          </div>
+          <a class="btn-dark" href="custom-build.html">Request a Custom Build</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ TIERS + SUBJECTS ══════════════════════ -->
+  <section class="tiers-section">
+    <div class="tiers-inner">
+      <div class="tiers-left">
+        <h2 class="reveal">Three tiers.<br>Clear direction.</h2>
+        <p class="reveal d1">The Skill Index maps to three performance tiers — each one triggering a different depth of AI feedback and study recommendation.</p>
+        <div class="tier-list">
+          <div class="tier-row reveal d1">
+            <div class="tier-pip h"></div>
+            <div class="tier-info">
+              <div class="tier-name">Proficient</div>
+              <div class="tier-range">Skill Index ≥ 75 · Solid command</div>
+            </div>
+            <span class="tier-badge h">Proficient</span>
+          </div>
+          <div class="tier-row reveal d2">
+            <div class="tier-pip m"></div>
+            <div class="tier-info">
+              <div class="tier-name">Developing</div>
+              <div class="tier-range">Skill Index 50–74 · Needs reinforcement</div>
+            </div>
+            <span class="tier-badge m">Developing</span>
+          </div>
+          <div class="tier-row reveal d3">
+            <div class="tier-pip l"></div>
+            <div class="tier-info">
+              <div class="tier-name">Skill Gap Detected</div>
+              <div class="tier-range">Skill Index &lt; 50 · Needs intervention</div>
+            </div>
+            <span class="tier-badge l">Skill Gap</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tiers-right">
+        <div class="subjects-label reveal">Deploy for any subject</div>
+        <div class="subjects-wrap reveal d1">
+          <span class="subject-tag active">Java Programming</span>
+          <span class="subject-tag">Nursing Fundamentals</span>
+          <span class="subject-tag">Engineering Mechanics</span>
+          <span class="subject-tag">Accounting Principles</span>
+          <span class="subject-tag">Business Law</span>
+          <span class="subject-tag">Medical Terminology</span>
+          <span class="subject-tag">Data Science</span>
+          <span class="subject-tag">Architecture Theory</span>
+          <span class="subject-tag">+ Your Subject</span>
+        </div>
+        <div class="config-box reveal d2">
+          <div class="config-title">What gets configured per deployment</div>
+          <div class="config-rows">
+            <div class="config-row">
+              <span class="config-key">Subject / Domain</span>
+              <span class="config-val gold">Any field of study</span>
+            </div>
+            <div class="config-row">
+              <span class="config-key">Topic taxonomy</span>
+              <span class="config-val">Defined per deployment</span>
+            </div>
+            <div class="config-row">
+              <span class="config-key">Question bank</span>
+              <span class="config-val">Provided or co-built</span>
+            </div>
+            <div class="config-row">
+              <span class="config-key">CSA weights</span>
+              <span class="config-val">60/20/20 (adjustable)</span>
+            </div>
+            <div class="config-row">
+              <span class="config-key">Proficiency thresholds</span>
+              <span class="config-val gold">Calibrated to your rubric</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ BIG CTA ══════════════════════════════ -->
+  <section class="big-cta" id="cta">
+    <div class="big-cta-inner">
+      <h2 class="reveal">
+        Ditch<br>
+        The <em>Quiz.</em><br>
+        Own The Gap.
+      </h2>
+      <div class="big-cta-right reveal d2">
+        <p>Whether you want to integrate SkillGap into your existing systems or commission a custom build for your program — reach out and let's scope it together.</p>
+        <a class="btn-solid" href="custom-build.html">Request a Custom Build</a>
+        <a class="btn-outline" href="integration.html">Inquire About Integration</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ INQUIRY FORM ════════════════════════ -->
+  <section class="inquiry" id="inquiry">
+    <div class="inquiry-inner">
+      <div class="inquiry-left">
+        <div class="inquiry-eyebrow reveal">Send an Inquiry</div>
+        <h2 class="reveal d1">Got questions?<br>Let's talk.</h2>
+        <p class="reveal d2">Fill in the form and we'll get back to you within 48 hours. We're happy to answer questions about integration, subject coverage, timelines, or pricing.</p>
+        <div class="inquiry-note reveal d3">
+          <span class="inquiry-note-text">
+            <strong>Requesting a custom build?</strong> Email us directly at
+            <a href="mailto:takaradazettai31@gmail.com?subject=SkillGap%20Custom%20Build%20Request">takaradazettai31@gmail.com</a> with your subject area, cohort size, and any requirements so we can scope it properly.
+          </span>
+        </div>
+      </div>
+
+      <div class="inquiry-card reveal d1">
+        <form id="inquiry-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="inq-name">Full Name</label>
+              <input class="form-input" type="text" id="inq-name" name="from_name" placeholder="Your full name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="inq-inst">Institution</label>
+              <input class="form-input" type="text" id="inq-inst" name="from_institution" placeholder="e.g. University of Manila">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="inq-email">Email Address</label>
+            <input class="form-input" type="email" id="inq-email" name="from_email" placeholder="you@institution.edu" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="inq-msg">Message</label>
+            <textarea class="form-textarea" id="inq-msg" name="message" placeholder="Tell us about your use case, subject area, or any questions you have…" required></textarea>
+          </div>
+          <button class="form-submit" type="submit" id="form-btn">Send Inquiry</button>
+          <div class="form-error-msg" id="form-error">Something went wrong. Please try again or email us directly.</div>
+        </form>
+        <div id="form-success" style="display:none">
+          <div class="form-success">
+            <div class="form-success-icon">✓</div>
+            <div class="form-success-title">Message sent.</div>
+            <div class="form-success-body">We'll get back to you within 48 hours.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex; justify-content:center; padding: 56px 48px 0;">
+      <div class="founder-card reveal">
+        <div class="founder-logo-col">
+          <img src="logo.png" alt="SkillGap">
+          <span class="founder-logo-label">SkillGap</span>
+        </div>
+        <div class="founder-divider"></div>
+        <div class="founder-info">
+          <div class="founder-name">Christian Jay Baquilid</div>
+          <div class="founder-role">Founder</div>
+          <div class="founder-bio">Software Engineer · AI Researcher · Entrepreneur</div>
+          <a class="founder-link" href="https://stablestudio.org" target="_blank" rel="noopener">
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M5 2H2a1 1 0 00-1 1v7a1 1 0 001 1h7a1 1 0 001-1V7M7.5 1H11m0 0v3.5M11 1L5.5 6.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            stablestudio.org
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ FOOTER ═══════════════════════════════ -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-brand-logo">
+            <div class="footer-logomark">
+              <img src="logo.png" alt="SkillGap logo">
+            </div>
+            <span class="footer-brand-name">SkillGap</span>
+          </div>
+          <p class="footer-tagline">A configurable, AI-enhanced assessment platform for higher education institutions. Know where your students actually stand.</p>
+        </div>
+        <div>
+          <div class="footer-col-title">Platform</div>
+          <ul class="footer-list">
+            <li><a href="#scoring">CSA Model</a></li>
+            <li><a href="#features">Platform Features</a></li>
+            <li><a href="#offerings">Two Offerings</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Work With Us</div>
+          <ul class="footer-list">
+            <li><a href="mailto:takaradazettai31@gmail.com?subject=SkillGap%20Custom%20Build%20Request">Request a Custom Build</a></li>
+            <li><a href="mailto:takaradazettai31@gmail.com?subject=SkillGap%20Integration%20Inquiry">Integration Inquiry</a></li>
+            <li><a href="mailto:takaradazettai31@gmail.com">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span class="footer-copy">© 2026 SkillGap · Stable Studio · Christian Jay Baquilid</span>
+        <div class="footer-wordmark">Skill<span>Gap</span></div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Scroll reveal ──────────────────────────────────────────
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // ── Nav state on scroll ────────────────────────────────────
+    const nav = document.getElementById('nav');
+    let lastSection = 'dark';
+    const lightSections = ['features', 'tiers-section'];
+
+    function updateNav() {
+      const scrolled = window.scrollY > 40;
+      nav.classList.toggle('scrolled', scrolled);
+
+      // Determine if we're over a light section
+      let isLight = false;
+      document.querySelectorAll('section, .promise, .features, .tiers-section').forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top <= 68 && rect.bottom > 68) {
+          const bg = getComputedStyle(sec).backgroundColor;
+          // Light sections have high luminance
+          if (bg.includes('255, 255, 255') || bg.includes('245, 241') || bg.includes('237, 232')) {
+            isLight = true;
+          }
+        }
+      });
+      nav.classList.toggle('light', isLight);
+    }
+
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
+
+    // ── Counter animation ──────────────────────────────────────
+    function animateCount(el, target, duration = 1200) {
+      let start = null;
+      const step = (timestamp) => {
+        if (!start) start = timestamp;
+        const progress = Math.min((timestamp - start) / duration, 1);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        el.textContent = Math.round(eased * target);
+        if (progress < 1) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+    }
+
+    // Animate the CSA numeral when it comes into view
+    const csaNum = document.querySelector('.csa-numeral');
+    if (csaNum) {
+      const numObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            csaNum.innerHTML = '<span id="count">0</span><span style="color:var(--gold)">.</span>';
+            animateCount(document.getElementById('count'), 3, 800);
+            numObs.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      numObs.observe(csaNum);
+    }
+
+    // ── Smooth parallax on hero bg ─────────────────────────────
+    const hero = document.querySelector('.hero');
+    if (hero) {
+      window.addEventListener('scroll', () => {
+        const y = window.scrollY;
+        if (y < window.innerHeight) {
+          hero.style.backgroundPositionY = `${y * 0.3}px`;
+        }
+      }, { passive: true });
+    }
+
+    // ── Demo showcase tab + auto-cycle ────────────────────────────
+    (function () {
+      let currentTab = 'student';
+      let currentIndex = 0;
+      let timer = null;
+      const INTERVAL = 3500;
+
+      const urlLabels = {
+        student: ['sgsys.space · Assessment in Progress', 'sgsys.space · Skill Index Results', 'sgsys.space · AI Feedback'],
+        teacher:  ['sgsys.space · Class Dashboard', 'sgsys.space · Skill Gap Heatmap', 'sgsys.space · Student Roster'],
+      };
+
+      function getScreens(tab) {
+        return Array.from(document.querySelectorAll(`.demo-screen[data-tab="${tab}"]`));
+      }
+      function getDots() { return Array.from(document.querySelectorAll('.demo-dot')); }
+
+      function showScreen(tab, index) {
+        document.querySelectorAll('.demo-screen').forEach(s => s.classList.remove('active'));
+        const screens = getScreens(tab);
+        if (screens[index]) screens[index].classList.add('active');
+        getDots().forEach((d, i) => d.classList.toggle('active', i === index));
+        const urlEl = document.getElementById('demo-url');
+        if (urlEl && urlLabels[tab]) urlEl.textContent = urlLabels[tab][index] || '';
+      }
+
+      function startCycle(tab) {
+        clearInterval(timer);
+        currentIndex = 0;
+        showScreen(tab, currentIndex);
+        timer = setInterval(() => {
+          currentIndex = (currentIndex + 1) % 3;
+          showScreen(tab, currentIndex);
+        }, INTERVAL);
+      }
+
+      document.querySelectorAll('.demo-tab').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.demo-tab').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          currentTab = btn.dataset.tab;
+          startCycle(currentTab);
+        });
+      });
+
+      getDots().forEach((dot, i) => {
+        dot.addEventListener('click', () => {
+          clearInterval(timer);
+          currentIndex = i;
+          showScreen(currentTab, currentIndex);
+          timer = setInterval(() => {
+            currentIndex = (currentIndex + 1) % 3;
+            showScreen(currentTab, currentIndex);
+          }, INTERVAL);
+        });
+      });
+
+      startCycle('student');
+    })();
+
+    // ── Inquiry form (EmailJS) ──────────────────────────────────
+    emailjs.init('zJIe6r0YmDvFNk8Xt');
+
+    const inquiryForm = document.getElementById('inquiry-form');
+    if (inquiryForm) {
+      inquiryForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('form-btn');
+        const errEl = document.getElementById('form-error');
+        errEl.style.display = 'none';
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+        try {
+          // Uses the existing "request" service + template.
+          // If you create a dedicated inquiry template, swap the template ID here.
+          await emailjs.sendForm('service_cp5hmlp', 'template_4kh80u7', inquiryForm);
+          inquiryForm.style.display = 'none';
+          document.getElementById('form-success').style.display = 'block';
+        } catch (err) {
+          errEl.style.display = 'block';
+          btn.disabled = false;
+          btn.textContent = 'Send Inquiry';
+        }
+      });
+    }
+  </script>
+</body>
+</html>
