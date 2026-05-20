@@ -364,11 +364,25 @@
        ================================================ */
     .pricing-section { background: var(--paper); padding: 100px 48px; border-top: 1px solid var(--border); }
     .pricing-inner { max-width: 1280px; margin: 0 auto; }
-    .pricing-header { max-width: 600px; margin-bottom: 56px; }
+    .pricing-header { max-width: 600px; margin-bottom: 40px; }
     .pricing-eyebrow { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold-deep); margin-bottom: 16px; }
     .pricing-header h2 { font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.04em; color: var(--ink); margin-bottom: 14px; }
     .pricing-header p { font-size: 1rem; color: rgba(10,10,10,0.5); line-height: 1.7; }
-    .pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 40px; }
+
+    .model-selector { display: flex; gap: 8px; margin-bottom: 36px; flex-wrap: wrap; }
+    .model-tab { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 14px 20px; border-radius: 12px; border: 1px solid var(--border); background: var(--canvas); cursor: pointer; transition: all var(--t-fast); min-width: 140px; }
+    .model-tab:hover { border-color: rgba(10,10,10,0.2); }
+    .model-tab.active { background: var(--ink-soft); border-color: var(--ink-soft); }
+    .model-tab-top { display: flex; align-items: center; gap: 8px; }
+    .model-tab-tier { font-size: 0.82rem; font-weight: 800; color: var(--ink); }
+    .model-tab.active .model-tab-tier { color: var(--paper); }
+    .model-tab-rec { font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold-deep); background: rgba(201,169,110,0.15); padding: 2px 7px; border-radius: 4px; }
+    .model-tab.active .model-tab-rec { color: var(--gold); background: rgba(201,169,110,0.2); }
+    .model-tab-name { font-size: 0.68rem; color: var(--muted); font-weight: 500; }
+    .model-tab.active .model-tab-name { color: rgba(255,255,255,0.4); }
+
+    .pricing-panel { display: none; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 40px; }
+    .pricing-panel.active { display: grid; }
     .price-card { background: var(--canvas); border: 1px solid var(--border); border-radius: 16px; padding: 28px 24px; position: relative; display: flex; flex-direction: column; }
     .price-card.featured { background: var(--ink-soft); border-color: var(--ink-soft); }
     .price-badge { position: absolute; top: -12px; left: 24px; background: var(--gold); color: var(--ink-soft); font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 10px; border-radius: 20px; }
@@ -816,7 +830,8 @@
       .features-grid { grid-template-columns: repeat(2, 1fr); }
       .bubbles-grid { grid-template-columns: 1fr 1fr; }
       .offerings-grid { grid-template-columns: 1fr; }
-      .pricing-grid { grid-template-columns: 1fr 1fr; }
+      .pricing-panel { grid-template-columns: 1fr 1fr; }
+      .pricing-panel.active { grid-template-columns: 1fr 1fr; }
       .tiers-inner { grid-template-columns: 1fr; gap: 60px; }
       .big-cta-inner { grid-template-columns: 1fr; gap: 40px; }
       .inquiry-inner { grid-template-columns: 1fr; gap: 48px; }
@@ -828,8 +843,9 @@
       .hero { padding: 100px 24px 60px; }
       .promise { padding: 80px 24px; }
       .csa-big-section, .features, .bubbles-section, .offerings, .pricing-section, .tiers-section, .big-cta, .inquiry { padding: 80px 24px; }
-      .pricing-grid { grid-template-columns: 1fr; }
+      .pricing-panel.active { grid-template-columns: 1fr; }
       .pricing-footer { flex-direction: column; gap: 16px; }
+      .model-tab { min-width: unset; flex: 1; }
       footer { padding: 60px 24px 40px; }
       .features-grid { grid-template-columns: 1fr; }
       .bubbles-grid { grid-template-columns: 1fr; }
@@ -897,7 +913,7 @@
             <span class="mock-dot r"></span>
             <span class="mock-dot y"></span>
             <span class="mock-dot g"></span>
-            <span class="mock-url">skillgap.app · Assessment Complete</span>
+            <span class="mock-url">sgsys.space · Assessment Complete</span>
           </div>
           <div class="mockup-body">
             <div class="mc-card">
@@ -1385,10 +1401,66 @@
       <div class="pricing-header">
         <div class="pricing-eyebrow reveal">PRICING · CREDITS</div>
         <h2 class="reveal d1">Pay for what you use.<br>Stop when you don't.</h2>
-        <p class="reveal d2">Credits are consumed only when the AI delivers feedback. Prepay a bundle, top up anytime — no subscriptions, no invoices to chase.</p>
+        <p class="reveal d2">Credits are consumed only when the AI delivers feedback. Pick your model tier, prepay a bundle, top up anytime.</p>
       </div>
-      <div class="pricing-grid">
-        <div class="price-card reveal">
+
+      <!-- Model selector -->
+      <div class="model-selector reveal">
+        <button class="model-tab" data-panel="panel-budget">
+          <div class="model-tab-top"><span class="model-tab-tier">Budget</span></div>
+          <span class="model-tab-name">DeepSeek V4 Flash</span>
+        </button>
+        <button class="model-tab active" data-panel="panel-standard">
+          <div class="model-tab-top"><span class="model-tab-tier">Standard</span><span class="model-tab-rec">Recommended</span></div>
+          <span class="model-tab-name">GPT-5.4 Nano · OpenAI</span>
+        </button>
+        <button class="model-tab" data-panel="panel-premium">
+          <div class="model-tab-top"><span class="model-tab-tier">Premium</span></div>
+          <span class="model-tab-name">GPT-5.5 · OpenAI</span>
+        </button>
+      </div>
+
+      <!-- Budget panel -->
+      <div class="pricing-panel" id="panel-budget">
+        <div class="price-card">
+          <div class="price-card-label">Starter</div>
+          <div class="price-amount">$8</div>
+          <div class="price-credits">100 credits</div>
+          <div class="price-per">$0.08 / credit</div>
+          <div class="price-divider"></div>
+          <div class="price-include">Perfect for pilots and small classes. Included at onboarding for budget-tier Option A clients.</div>
+        </div>
+        <div class="price-card">
+          <div class="price-card-label">Standard</div>
+          <div class="price-amount">$32</div>
+          <div class="price-credits">500 credits</div>
+          <div class="price-per">$0.064 / credit</div>
+          <div class="price-divider"></div>
+          <div class="price-include">Covers a full semester for smaller institutions running weekly assessments.</div>
+        </div>
+        <div class="price-card featured">
+          <div class="price-badge">Best value</div>
+          <div class="price-card-label">Volume</div>
+          <div class="price-amount">$55</div>
+          <div class="price-credits">1,000 credits</div>
+          <div class="price-per">$0.055 / credit</div>
+          <div class="price-divider"></div>
+          <div class="price-include">A full academic year for budget-conscious schools — even with frequent assessments.</div>
+        </div>
+        <div class="price-card contact-card">
+          <div class="price-card-label">Institution</div>
+          <div class="price-amount">Custom</div>
+          <div class="price-credits">5,000+ credits</div>
+          <div class="price-per">from $0.04 / credit</div>
+          <div class="price-divider"></div>
+          <div class="price-include">Negotiated annually. Maximum volume at minimum cost.</div>
+          <a class="price-cta" href="#inquiry">Contact us →</a>
+        </div>
+      </div>
+
+      <!-- Standard panel -->
+      <div class="pricing-panel active" id="panel-standard">
+        <div class="price-card">
           <div class="price-card-label">Starter</div>
           <div class="price-amount">$22</div>
           <div class="price-credits">100 credits</div>
@@ -1396,7 +1468,7 @@
           <div class="price-divider"></div>
           <div class="price-include">Included at onboarding for all Option A integrations. Right-sized for pilots and small cohorts.</div>
         </div>
-        <div class="price-card reveal d1">
+        <div class="price-card">
           <div class="price-card-label">Standard</div>
           <div class="price-amount">$95</div>
           <div class="price-credits">500 credits</div>
@@ -1404,7 +1476,7 @@
           <div class="price-divider"></div>
           <div class="price-include">Right-sized for institutions running one cohort per semester across several subjects.</div>
         </div>
-        <div class="price-card featured reveal d2">
+        <div class="price-card featured">
           <div class="price-badge">Best value</div>
           <div class="price-card-label">Volume</div>
           <div class="price-amount">$160</div>
@@ -1413,7 +1485,7 @@
           <div class="price-divider"></div>
           <div class="price-include">Included at go-live for all Option B custom builds. Covers a full academic year for most mid-size institutions.</div>
         </div>
-        <div class="price-card contact-card reveal d3">
+        <div class="price-card contact-card">
           <div class="price-card-label">Institution</div>
           <div class="price-amount">Custom</div>
           <div class="price-credits">5,000+ credits</div>
@@ -1423,9 +1495,48 @@
           <a class="price-cta" href="#inquiry">Contact us →</a>
         </div>
       </div>
+
+      <!-- Premium panel -->
+      <div class="pricing-panel" id="panel-premium">
+        <div class="price-card">
+          <div class="price-card-label">Starter</div>
+          <div class="price-amount">$50</div>
+          <div class="price-credits">100 credits</div>
+          <div class="price-per">$0.50 / credit</div>
+          <div class="price-divider"></div>
+          <div class="price-include">For institutions trialling flagship AI with a small cohort before committing to volume.</div>
+        </div>
+        <div class="price-card">
+          <div class="price-card-label">Standard</div>
+          <div class="price-amount">$225</div>
+          <div class="price-credits">500 credits</div>
+          <div class="price-per">$0.45 / credit</div>
+          <div class="price-divider"></div>
+          <div class="price-include">Full semester coverage with GPT-5.5 quality feedback on every student assessment.</div>
+        </div>
+        <div class="price-card featured">
+          <div class="price-badge">Best value</div>
+          <div class="price-card-label">Volume</div>
+          <div class="price-amount">$420</div>
+          <div class="price-credits">1,000 credits</div>
+          <div class="price-per">$0.42 / credit</div>
+          <div class="price-divider"></div>
+          <div class="price-include">Full year, flagship model. For institutions where AI quality is a faculty or accreditation priority.</div>
+        </div>
+        <div class="price-card contact-card">
+          <div class="price-card-label">Institution</div>
+          <div class="price-amount">Custom</div>
+          <div class="price-credits">5,000+ credits</div>
+          <div class="price-per">from $0.38 / credit</div>
+          <div class="price-divider"></div>
+          <div class="price-include">Enterprise GPT-5.5 deployment. Negotiated annually with SLA.</div>
+          <a class="price-cta" href="#inquiry">Contact us →</a>
+        </div>
+      </div>
+
       <div class="pricing-footer">
-        <p class="pricing-note reveal"><strong>Setup &amp; development fees</strong> are quoted separately based on your existing system and integration scope. Small institutions start from as little as $0 for self-serve setups. Custom builds are scoped and priced before any work begins.</p>
-        <p class="pricing-note reveal d1"><strong>Premium credits (GPT-4o)</strong> are available for institutions where flagship AI matters for accreditation or faculty reporting. Priced on request.</p>
+        <p class="pricing-note reveal"><strong>Setup &amp; development fees</strong> are quoted separately. Small institutions start from $0 for self-serve integrations. Custom builds are scoped and fixed-price before work begins.</p>
+        <p class="pricing-note reveal d1"><strong>Bring your own API key (BYOK)</strong> — use your existing OpenAI, Azure, Anthropic, or DeepSeek contract and pay platform fees only at $0.05/credit. <a href="#inquiry" style="color:var(--gold-deep);text-underline-offset:3px;text-decoration:underline">Ask us about BYOK.</a></p>
         <p class="pricing-note reveal d2"><strong>Credits expire 12 months</strong> from purchase. Auto top-up available. Zero credits — AI pauses, assessments still run.</p>
       </div>
     </div>
@@ -1516,7 +1627,7 @@
         Own The Gap.
       </h2>
       <div class="big-cta-right reveal d2">
-        <p>Whether you want to integrate SkillGap into your existing systems or commission a custom build for your program — reach out and let's scope it together.</p>
+        <p>Whether you want us to audit and slot into your existing system or build you something entirely your own — reach out and let's scope it together.</p>
         <a class="btn-solid" href="custom-build.html">Request a Custom Build</a>
         <a class="btn-outline" href="integration.html">Inquire About Integration</a>
       </div>
@@ -1531,6 +1642,7 @@
         <h2 class="reveal d1">Got questions?<br>Let's talk.</h2>
         <p class="reveal d2">Fill in the form and we'll get back to you within 48 hours. We're happy to answer questions about integration, subject coverage, timelines, or pricing.</p>
         <div class="inquiry-note reveal d3">
+          <span class="inquiry-note-icon">✦</span>
           <span class="inquiry-note-text">
             <strong>Requesting a custom build?</strong> Email us directly at
             <a href="mailto:takaradazettai31@gmail.com?subject=SkillGap%20Custom%20Build%20Request">takaradazettai31@gmail.com</a> with your subject area, cohort size, and any requirements so we can scope it properly.
@@ -1604,14 +1716,16 @@
             </div>
             <span class="footer-brand-name">SkillGap</span>
           </div>
-          <p class="footer-tagline">A configurable, AI-enhanced assessment platform for higher education institutions. Know where your students actually stand.</p>
+          <p class="footer-tagline">A configurable, AI-enhanced assessment platform for HEIs and learning institutions. Know where your students actually stand.</p>
         </div>
         <div>
           <div class="footer-col-title">Platform</div>
           <ul class="footer-list">
             <li><a href="#scoring">CSA Model</a></li>
             <li><a href="#features">Platform Features</a></li>
-            <li><a href="#offerings">Two Offerings</a></li>
+            <li><a href="#demo">Demo</a></li>
+            <li><a href="#offerings">Offerings</a></li>
+            <li><a href="#pricing">Pricing</a></li>
           </ul>
         </div>
         <div>
@@ -1638,6 +1752,16 @@
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    // ── Pricing model tabs ─────────────────────────────────────
+    document.querySelectorAll('.model-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.model-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.pricing-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.panel).classList.add('active');
+      });
+    });
 
     // ── Nav state on scroll ────────────────────────────────────
     const nav = document.getElementById('nav');
