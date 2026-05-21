@@ -823,6 +823,22 @@
     .founder-link:hover { opacity: 0.7; }
     .founder-link svg { flex-shrink: 0; }
 
+    /* ================================================
+       ROI INVESTMENT SECTION
+       ================================================ */
+    .roi-section { background: var(--canvas); padding: 120px 48px; border-top: 1px solid var(--border); }
+    .roi-inner { max-width: 1100px; margin: 0 auto; }
+    .roi-eyebrow { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 16px; }
+    .roi-header { font-family: var(--serif); font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: 1.05; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 20px; max-width: 640px; }
+    .roi-subtext { font-size: 1.05rem; color: var(--ink); opacity: 0.7; line-height: 1.7; max-width: 600px; margin-bottom: 64px; }
+    .roi-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-bottom: 48px; }
+    .roi-stat { border-left: 2px solid var(--gold); padding-left: 24px; }
+    .roi-stat-num { font-family: var(--serif); font-size: clamp(2.8rem, 5vw, 4rem); color: var(--gold-deep); line-height: 1; margin-bottom: 10px; }
+    .roi-stat-label { font-size: 0.9rem; color: var(--ink); opacity: 0.65; line-height: 1.55; }
+    .roi-note { font-size: 0.98rem; color: var(--ink); opacity: 0.7; line-height: 1.75; max-width: 700px; border-top: 1px solid var(--border); padding-top: 32px; margin-bottom: 20px; }
+    .roi-cta-link { font-size: 0.9rem; font-weight: 700; color: var(--gold-deep); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: opacity var(--t-fast); }
+    .roi-cta-link:hover { opacity: 0.7; }
+
     @media (max-width: 1024px) {
       .hero-inner { grid-template-columns: 1fr; }
       .hero-visual { display: none; }
@@ -842,7 +858,8 @@
       .nav-links { display: none; }
       .hero { padding: 100px 24px 60px; }
       .promise { padding: 80px 24px; }
-      .csa-big-section, .features, .bubbles-section, .offerings, .pricing-section, .tiers-section, .big-cta, .inquiry { padding: 80px 24px; }
+      .csa-big-section, .features, .bubbles-section, .offerings, .pricing-section, .tiers-section, .big-cta, .inquiry, .roi-section { padding: 80px 24px; }
+      .roi-stats { grid-template-columns: 1fr; gap: 28px; }
       .pricing-panel.active { grid-template-columns: 1fr; }
       .pricing-footer { flex-direction: column; gap: 16px; }
       .model-tab { min-width: unset; flex: 1; }
@@ -962,7 +979,7 @@
   <section class="promise">
     <div class="promise-inner reveal">
       <p class="promise-copy">
-        Your students deserve more than a number on a page. SkillGap gives institutions the <strong>clarity to see what's actually breaking down</strong> — and the precision to act on it before it becomes a failed semester.
+        Your teachers are spending hundreds of hours a year writing feedback that students skim and forget. Your students are getting grades without knowing what to fix. SkillGap closes both gaps at once — every student gets a <strong>clear path forward</strong>, every teacher gets their time back, and for the first time, <strong>both sides have something real to talk about</strong>.
       </p>
     </div>
   </section>
@@ -1245,8 +1262,8 @@
   <!-- ══════════════════════════ BUBBLES ══════════════════════════════ -->
   <section class="bubbles-section" id="institutions">
     <div class="bubbles-header">
-      <h2 class="reveal">What clarity<br>actually looks like.</h2>
-      <p class="reveal d1">This is what SkillGap puts in front of your students and faculty the moment an assessment closes — specific, actionable, and generated without any manual effort from your team.</p>
+      <h2 class="reveal">When both sides<br>have something<br>to work with.</h2>
+      <p class="reveal d1">Students see exactly where they fell short before they leave the room. Teachers see which topics the whole class missed — not just who failed. That's the conversation that actually changes outcomes.</p>
     </div>
     <div class="bubbles-grid">
       <!-- Card 1 -->
@@ -1319,6 +1336,31 @@
         </div>
         <span class="bubble-tag p">Proficient</span>
       </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ ROI ════════════════════════════════════ -->
+  <section class="roi-section">
+    <div class="roi-inner">
+      <div class="roi-eyebrow reveal">Built for institutions that need to do more with less.</div>
+      <h2 class="roi-header reveal d1">A smarter investment<br>than it looks.</h2>
+      <p class="roi-subtext reveal d2">Budget-conscious schools aren't the wrong fit for SkillGap. They're the right ones. The tool pays for itself in faculty time alone — before you count what it costs to lose even one student.</p>
+      <div class="roi-stats">
+        <div class="roi-stat reveal">
+          <div class="roi-stat-num">~600 hrs</div>
+          <div class="roi-stat-label">of faculty feedback time freed per year for a 500-student school</div>
+        </div>
+        <div class="roi-stat reveal d1">
+          <div class="roi-stat-num">17¢</div>
+          <div class="roi-stat-label">on the dollar — what SkillGap costs vs. the value of manual feedback it replaces</div>
+        </div>
+        <div class="roi-stat reveal d2">
+          <div class="roi-stat-num">1 student</div>
+          <div class="roi-stat-label">retained covers years of SkillGap at any credit tier</div>
+        </div>
+      </div>
+      <p class="roi-note reveal d3">At selective use — AI feedback on exams and major assessments only — a 500-student school runs about $2,100 a year. That's not a technology budget. It's a student success budget. And it starts at $0 setup for institutions with an existing LMS.</p>
+      <a class="roi-cta-link reveal d4" href="#pricing">→ See how pricing works</a>
     </div>
   </section>
 
@@ -1627,7 +1669,7 @@
         Own The Gap.
       </h2>
       <div class="big-cta-right reveal d2">
-        <p>Whether you want us to audit and slot into your existing system or build you something entirely your own — reach out and let's scope it together.</p>
+        <p>Whether you want to plug in on top of your existing system or have something built from the ground up — both paths start with a conversation. No commitment, no pressure.</p>
         <a class="btn-solid" href="custom-build.html">Request a Custom Build</a>
         <a class="btn-outline" href="integration.html">Inquire About Integration</a>
       </div>
@@ -1716,7 +1758,7 @@
             </div>
             <span class="footer-brand-name">SkillGap</span>
           </div>
-          <p class="footer-tagline">A configurable, AI-enhanced assessment platform for HEIs and learning institutions. Know where your students actually stand.</p>
+          <p class="footer-tagline">Turns every exam into a conversation worth having — for students who need direction, and institutions that need results.</p>
         </div>
         <div>
           <div class="footer-col-title">Platform</div>
