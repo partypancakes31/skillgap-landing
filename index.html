@@ -324,9 +324,19 @@
       transition: background var(--t-base), border-color var(--t-base), transform var(--t-slow);
     }
     .bubble-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.14); transform: translateY(-4px); }
-    .bubble-card.offset { margin-top: 32px; }
-    .bubble-card.offset2 { margin-top: -20px; }
-    .bubble-top { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
+    .bubble-card { display: flex; flex-direction: column; }
+    .bubble-card.gold { background: linear-gradient(160deg, rgba(201,169,110,0.14), rgba(201,169,110,0.05)); border-color: rgba(201,169,110,0.28); }
+    .bubble-card.gold:hover { border-color: rgba(201,169,110,0.45); }
+    .bubble-eyebrow { font-size: 0.62rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.32); margin-bottom: 18px; }
+    .bubble-eyebrow.gold { color: var(--gold); }
+    .bubble-scoreline { display: flex; align-items: center; gap: 12px; margin: 4px 0 16px; }
+    .bubble-scoreline .bubble-score-num { font-size: 2rem; }
+    .bubble-scoreline .bubble-tag { margin-top: 0; }
+    .bubble-insight { font-size: 0.86rem; line-height: 1.62; color: rgba(255,255,255,0.6); margin-top: auto; }
+    .bubble-insight strong { color: var(--paper); font-weight: 700; }
+    .bubble-stat-big { font-family: var(--serif); font-size: 2.5rem; color: var(--gold); line-height: 1; margin: 2px 0 16px; }
+    .bubble-avatar.r { background: rgba(185,28,28,0.25); color: #f87171; }
+    .bubble-top { display: flex; align-items: center; gap: 10px; margin-bottom: 0; }
     .bubble-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex-shrink: 0; }
     .bubble-avatar.g { background: rgba(26,122,74,0.25); color: #4ade80; }
     .bubble-avatar.w { background: rgba(217,119,6,0.25); color: #fbbf24; }
@@ -1480,75 +1490,82 @@
       <p class="reveal d1">The moment a submission closes, every student has a personalized diagnostic breakdown and every faculty member has class-level gap intelligence. Generated automatically. No staff hours. No turnaround time.</p>
     </div>
     <div class="bubbles-grid">
-      <!-- Card 1 -->
+      <!-- Student diagnostic 1 -->
       <div class="bubble-card reveal">
+        <div class="bubble-eyebrow">Student diagnostic</div>
         <div class="bubble-top">
           <div class="bubble-avatar g">CJ</div>
           <div class="bubble-meta">
             <div class="bubble-name">Christian J.</div>
-            <div class="bubble-role">Student · Java Assessment</div>
+            <div class="bubble-role">Java Programming</div>
           </div>
         </div>
-        <div class="bubble-score">
-          <div class="bubble-score-num" style="color:#4ade80">82</div>
-          <div class="bubble-score-label">Skill Index</div>
+        <div class="bubble-scoreline">
+          <span class="bubble-score-num" style="color:#4ade80">82</span>
+          <span class="bubble-tag p">Proficient</span>
         </div>
-        <span class="bubble-tag p">Proficient</span>
+        <p class="bubble-insight">"Your fundamentals are solid. The one real gap is how you apply Stream API: you reach for loops where pipelines fit. Shift that one habit and most of your wrong answers disappear."</p>
       </div>
 
-      <!-- Card 2: AI feedback -->
-      <div class="bubble-card offset reveal d1">
-        <div class="bubble-ai-label">✦ AI Feedback · Java Programming</div>
-        <p class="bubble-text">"You held steady throughout, so consistency isn't your issue. The gap is in how you're applying Stream API. Your instinct is to loop; try thinking in pipelines. One concept shift fixes most of your wrong answers."</p>
-      </div>
-
-      <!-- Card 3 -->
-      <div class="bubble-card offset2 reveal d2">
+      <!-- Student diagnostic 2 -->
+      <div class="bubble-card reveal d1">
+        <div class="bubble-eyebrow">Student diagnostic</div>
         <div class="bubble-top">
-          <div class="bubble-avatar w">JL</div>
+          <div class="bubble-avatar r">JL</div>
           <div class="bubble-meta">
             <div class="bubble-name">Juan L.</div>
-            <div class="bubble-role">Student · Data Structures</div>
+            <div class="bubble-role">Data Structures</div>
           </div>
         </div>
-        <div class="bubble-score">
-          <div class="bubble-score-num" style="color:#f87171">44</div>
-          <div class="bubble-score-label">Skill Index</div>
+        <div class="bubble-scoreline">
+          <span class="bubble-score-num" style="color:#f87171">44</span>
+          <span class="bubble-tag gap">Skill Gap</span>
         </div>
-        <span class="bubble-tag gap">Skill Gap Detected</span>
+        <p class="bubble-insight">"This isn't about speed; your timing was fine. The gaps are conceptual and they stack. Rebuild from the foundation: linked-list traversal before trees, in that order."</p>
       </div>
 
-      <!-- Card 4: AI feedback for gap student -->
-      <div class="bubble-card reveal d1">
-        <div class="bubble-ai-label">✦ AI Feedback · Priority Focus</div>
-        <p class="bubble-text">"This isn't a time-pressure issue. Your speed was fine. The gaps are conceptual and they're stacked. Build the foundation before the structure: linked list traversal before trees, not the other way around."</p>
-      </div>
-
-      <!-- Card 5: Admin view -->
-      <div class="bubble-card offset reveal d2">
+      <!-- Faculty intelligence -->
+      <div class="bubble-card reveal d2">
+        <div class="bubble-eyebrow">Faculty intelligence</div>
         <div class="bubble-top">
+          <div class="bubble-avatar e">42</div>
           <div class="bubble-meta">
-            <div class="bubble-name">Faculty Dashboard</div>
-            <div class="bubble-role">Cohort overview · 42 students</div>
+            <div class="bubble-name">Java cohort</div>
+            <div class="bubble-role">42 students · live</div>
           </div>
         </div>
-        <p class="bubble-text" style="margin-top:12px">6 students flagged in Skill Gap tier. Collections Framework is a weak point across <strong style="color:var(--paper)">68%</strong> of the class. That's not a student problem, it's a teaching gap worth addressing before the next module.</p>
+        <p class="bubble-insight" style="margin-top:18px">Collections Framework is weak across <strong>68%</strong> of the class. That points to a teaching gap, not a student one, and it's worth a focused recap before the next module.</p>
       </div>
 
-      <!-- Card 6 -->
-      <div class="bubble-card offset2 reveal d3">
+      <!-- At scale: coverage -->
+      <div class="bubble-card gold reveal">
+        <div class="bubble-eyebrow gold">At scale</div>
+        <div class="bubble-stat-big">42 → 42 + 1</div>
+        <p class="bubble-insight">Forty-two submissions became forty-two personalized diagnostics and one cohort report, the instant the assessment closed.</p>
+      </div>
+
+      <!-- Student diagnostic 3 -->
+      <div class="bubble-card reveal d1">
+        <div class="bubble-eyebrow">Student diagnostic</div>
         <div class="bubble-top">
-          <div class="bubble-avatar e">SR</div>
+          <div class="bubble-avatar g">SR</div>
           <div class="bubble-meta">
             <div class="bubble-name">Sofia R.</div>
-            <div class="bubble-role">Student · Algorithms</div>
+            <div class="bubble-role">Algorithms</div>
           </div>
         </div>
-        <div class="bubble-score">
-          <div class="bubble-score-num" style="color:#4ade80">91</div>
-          <div class="bubble-score-label">Skill Index</div>
+        <div class="bubble-scoreline">
+          <span class="bubble-score-num" style="color:#4ade80">91</span>
+          <span class="bubble-tag p">Proficient</span>
         </div>
-        <span class="bubble-tag p">Proficient</span>
+        <p class="bubble-insight">"Top of the cohort, and ready for more. The core patterns are second nature now, so we've queued harder greedy and dynamic-programming problems to keep you stretched."</p>
+      </div>
+
+      <!-- No staff hours -->
+      <div class="bubble-card gold reveal d2">
+        <div class="bubble-eyebrow gold">No staff hours</div>
+        <div class="bubble-stat-big">0 hrs</div>
+        <p class="bubble-insight">No grading queue, no turnaround wait. Every student knew their next step before they left the room, and faculty got the full class picture for free.</p>
       </div>
     </div>
   </section>
