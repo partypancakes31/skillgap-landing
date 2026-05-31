@@ -8,7 +8,6 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
     /* ================================================
        TOKENS
@@ -839,6 +838,36 @@
     .roi-cta-link { font-size: 0.9rem; font-weight: 700; color: var(--gold-deep); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: opacity var(--t-fast); }
     .roi-cta-link:hover { opacity: 0.7; }
 
+    /* ================================================
+       DATA TRUST STRIP
+       ================================================ */
+    .trust-strip { background: var(--canvas); padding: 80px 48px; border-top: 1px solid var(--border); }
+    .trust-strip-inner { max-width: 1280px; margin: 0 auto; }
+    .trust-eyebrow { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); margin-bottom: 40px; text-align: center; }
+    .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+    .trust-item { display: flex; gap: 16px; align-items: flex-start; }
+    .trust-icon { width: 40px; height: 40px; background: var(--paper); border: 1px solid var(--border); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+    .trust-icon svg { width: 20px; height: 20px; }
+    .trust-item-body strong { display: block; font-size: 0.92rem; font-weight: 800; color: var(--ink); margin-bottom: 6px; letter-spacing: -0.01em; }
+    .trust-item-body p { font-size: 0.82rem; color: rgba(10,10,10,0.5); line-height: 1.65; }
+
+    /* ================================================
+       COMPLIANCE SECTION
+       ================================================ */
+    .compliance-section { background: var(--ink-soft); padding: 100px 48px; }
+    .compliance-inner { max-width: 1280px; margin: 0 auto; }
+    .compliance-header { margin-bottom: 48px; max-width: 640px; }
+    .compliance-eyebrow { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold); margin-bottom: 16px; }
+    .compliance-header h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 800; color: var(--paper); letter-spacing: -0.03em; line-height: 1.1; }
+    .compliance-header p { font-size: 0.95rem; color: rgba(255,255,255,0.4); line-height: 1.7; margin-top: 12px; }
+    .compliance-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .compliance-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 28px 32px; transition: background var(--t-base); }
+    .compliance-card:hover { background: rgba(255,255,255,0.07); }
+    .compliance-card-flag { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 10px; }
+    .compliance-card-title { font-size: 1rem; font-weight: 800; color: var(--paper); margin-bottom: 10px; letter-spacing: -0.02em; }
+    .compliance-card-body { font-size: 0.82rem; color: rgba(255,255,255,0.45); line-height: 1.7; }
+    .compliance-card-body strong { color: rgba(255,255,255,0.75); font-weight: 700; }
+
     @media (max-width: 1024px) {
       .hero-inner { grid-template-columns: 1fr; }
       .hero-visual { display: none; }
@@ -852,6 +881,8 @@
       .big-cta-inner { grid-template-columns: 1fr; gap: 40px; }
       .inquiry-inner { grid-template-columns: 1fr; gap: 48px; }
       .footer-top { grid-template-columns: 1fr 1fr; }
+      .trust-grid { grid-template-columns: 1fr; gap: 28px; }
+      .compliance-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 640px) {
       .nav { padding: 0 24px; }
@@ -859,6 +890,7 @@
       .hero { padding: 100px 24px 60px; }
       .promise { padding: 80px 24px; }
       .csa-big-section, .features, .bubbles-section, .offerings, .pricing-section, .tiers-section, .big-cta, .inquiry, .roi-section { padding: 80px 24px; }
+      .trust-strip, .compliance-section { padding: 60px 24px; }
       .roi-stats { grid-template-columns: 1fr; gap: 28px; }
       .pricing-panel.active { grid-template-columns: 1fr; }
       .pricing-footer { flex-direction: column; gap: 16px; }
@@ -1074,6 +1106,42 @@
           </div>
           <div class="feat-name">Any Subject</div>
           <div class="feat-body">The CSA engine and AI feedback layer are fully configurable. Question bank, topics, difficulty weights, and time limits all tailored to your discipline.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════ DATA TRUST ══════════════════════════════ -->
+  <section class="trust-strip">
+    <div class="trust-strip-inner">
+      <div class="trust-eyebrow reveal">Data & Compliance</div>
+      <div class="trust-grid">
+        <div class="trust-item reveal">
+          <div class="trust-icon">
+            <svg viewBox="0 0 20 20" fill="none"><path d="M10 2L4 5v5c0 3.5 2.5 6.7 6 7.4 3.5-.7 6-3.9 6-7.4V5L10 2z" stroke="#1a1814" stroke-width="1.6" stroke-linejoin="round"/><polyline points="7,10 9,12 13,8" stroke="#1a1814" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="trust-item-body">
+            <strong>Your data doesn't leave your hands</strong>
+            <p>Student data is used to generate feedback and that's it. We don't hold onto it, profile it, or move it anywhere it shouldn't go. What's yours stays yours.</p>
+          </div>
+        </div>
+        <div class="trust-item reveal d1">
+          <div class="trust-icon">
+            <svg viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="14" height="14" rx="3" stroke="#1a1814" stroke-width="1.6"/><path d="M7 10h6M7 7h4M7 13h3" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+          <div class="trust-item-body">
+            <strong>Compliance is handled where you are</strong>
+            <p>Data regulations differ by country — we work with whatever applies to your institution. Before anything is signed, we'll be upfront about what's relevant and flag anything worth a closer look.</p>
+          </div>
+        </div>
+        <div class="trust-item reveal d2">
+          <div class="trust-icon">
+            <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="#1a1814" stroke-width="1.6"/><path d="M10 6v4l3 2" stroke="#1a1814" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </div>
+          <div class="trust-item-body">
+            <strong>No lock-in, ever</strong>
+            <p>If you ever decide to leave, nothing is held hostage. Your system keeps running regardless of us. Everything that's yours is yours from day one — no exceptions.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -1694,6 +1762,7 @@
 
       <div class="inquiry-card reveal d1">
         <form id="inquiry-form">
+          <input type="text" name="_trap" id="_trap" value="" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" aria-hidden="true">
           <div class="form-row">
             <div class="form-group">
               <label class="form-label" for="inq-name">Full Name</label>
@@ -1776,6 +1845,7 @@
             <li><a href="mailto:takaradazettai31@gmail.com?subject=SkillGap%20Custom%20Build%20Request">Request a Custom Build</a></li>
             <li><a href="mailto:takaradazettai31@gmail.com?subject=SkillGap%20Integration%20Inquiry">Integration Inquiry</a></li>
             <li><a href="mailto:takaradazettai31@gmail.com">Contact Us</a></li>
+            <li><a href="compliance.html">Procurement &amp; Compliance</a></li>
           </ul>
         </div>
       </div>
@@ -1931,9 +2001,7 @@
       startCycle('student');
     })();
 
-    // ── Inquiry form (EmailJS) ──────────────────────────────────
-    emailjs.init('zJIe6r0YmDvFNk8Xt');
-
+    // ── Inquiry form ────────────────────────────────────────────
     const inquiryForm = document.getElementById('inquiry-form');
     if (inquiryForm) {
       inquiryForm.addEventListener('submit', async (e) => {
@@ -1944,12 +2012,21 @@
         btn.disabled = true;
         btn.textContent = 'Sending…';
         try {
-          // Uses the existing "request" service + template.
-          // If you create a dedicated inquiry template, swap the template ID here.
-          await emailjs.sendForm('service_cp5hmlp', 'template_4kh80u7', inquiryForm);
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              from_name:        document.getElementById('inq-name').value.trim(),
+              from_email:       document.getElementById('inq-email').value.trim(),
+              from_institution: document.getElementById('inq-inst').value.trim(),
+              message:          document.getElementById('inq-msg').value.trim(),
+              _trap:            document.getElementById('_trap').value,
+            }),
+          });
+          if (!res.ok) throw new Error();
           inquiryForm.style.display = 'none';
           document.getElementById('form-success').style.display = 'block';
-        } catch (err) {
+        } catch {
           errEl.style.display = 'block';
           btn.disabled = false;
           btn.textContent = 'Send Inquiry';
