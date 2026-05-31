@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Inquire About Integration — SkillGap</title>
+  <title>Inquire About Integration | SkillGap</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -232,7 +231,7 @@
   <div class="page-hero">
     <div class="page-eyebrow">System Integration</div>
     <h1 class="page-title">Inquire About<br>Integration</h1>
-    <p class="page-subtitle">Tell us about your institution and current setup — we'll scope a plan that fits right in.</p>
+    <p class="page-subtitle">Tell us about your institution and current setup, and we'll scope a plan that fits right in.</p>
   </div>
 
   <div class="form-wrap">
@@ -240,6 +239,7 @@
 
       <form id="integration-form">
         <input type="hidden" name="message" id="composed-message">
+        <input type="text" name="_trap" id="_trap" value="" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" aria-hidden="true">
 
         <div class="form-section-label">Your Details</div>
 
@@ -287,7 +287,7 @@
 
         <div class="form-group">
           <label class="form-label" for="subject_areas">Subject Areas or Departments</label>
-          <textarea class="form-textarea" id="subject_areas" placeholder="e.g. Computer Science, Nursing, Business Administration — list the programs you'd like to cover" style="min-height:88px;"></textarea>
+          <textarea class="form-textarea" id="subject_areas" placeholder="List the programs you'd like to cover. e.g. Computer Science, Nursing, Business Administration" style="min-height:88px;"></textarea>
         </div>
 
         <div class="form-row">
@@ -333,8 +333,6 @@
   </div>
 
   <script>
-    emailjs.init('zJIe6r0YmDvFNk8Xt');
-
     document.getElementById('integration-form').addEventListener('submit', async (e) => {
       e.preventDefault();
       const btn   = document.getElementById('form-btn');
@@ -351,20 +349,31 @@
       const timeline  = document.getElementById('timeline').value;
       const notes     = document.getElementById('notes').value.trim();
 
-      document.getElementById('composed-message').value = [
+      const message = [
         'Type of Inquiry: System Integration',
         '',
-        `Role / Title: ${role || '—'}`,
-        `Institution Type: ${instType || '—'}`,
-        `Current LMS / System: ${lms || '—'}`,
-        `Subject Areas / Departments:\n${subjects || '—'}`,
-        `Estimated No. of Students: ${students || '—'}`,
-        `Preferred Timeline: ${timeline || '—'}`,
+        `Role / Title: ${role || 'Not provided'}`,
+        `Institution Type: ${instType || 'Not provided'}`,
+        `Current LMS / System: ${lms || 'Not provided'}`,
+        `Subject Areas / Departments:\n${subjects || 'Not provided'}`,
+        `Estimated No. of Students: ${students || 'Not provided'}`,
+        `Preferred Timeline: ${timeline || 'Not provided'}`,
         notes ? `\nAdditional Notes:\n${notes}` : '',
-      ].filter(line => line !== undefined).join('\n');
+      ].filter(Boolean).join('\n');
 
       try {
-        await emailjs.sendForm('service_cp5hmlp', 'template_4kh80u7', e.target);
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            from_name:        document.getElementById('from_name').value.trim(),
+            from_email:       document.getElementById('from_email').value.trim(),
+            from_institution: document.getElementById('from_institution').value.trim(),
+            message,
+            _trap:            document.getElementById('_trap').value,
+          }),
+        });
+        if (!res.ok) throw new Error();
         document.getElementById('integration-form').style.display = 'none';
         document.getElementById('form-success').style.display = 'block';
       } catch {
