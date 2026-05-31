@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Procurement & Compliance — SkillGap</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:        #0a0a0a;
+      --ink-soft:   #1a1814;
+      --paper:      #ffffff;
+      --canvas:     #f5f1ea;
+      --border:     #e4e0d8;
+      --muted:      #9a9690;
+      --gold:       #c9a96e;
+      --gold-deep:  #8a6c35;
+      --gold-pale:  rgba(201,169,110,0.12);
+      --success:    #1a7a4a;
+      --success-bg: #edf7f1;
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body:    'Manrope', system-ui, sans-serif;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--canvas); color: var(--ink); }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Nav ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10,10,10,0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 64px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .nav-logo img { width: 30px; height: 30px; border-radius: 6px; }
+    .nav-logo-name { font-size: 15px; font-weight: 700; color: #fff; letter-spacing: -0.01em; font-family: var(--font-display); }
+    .nav-back { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.45); display: flex; align-items: center; gap: 6px; transition: color 150ms ease; }
+    .nav-back:hover { color: #fff; }
+
+    /* ── Page hero ── */
+    .page-hero {
+      background: var(--ink-soft);
+      padding: 140px 48px 80px;
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 70% 30%, rgba(201,169,110,0.1) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .page-hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+    .page-eyebrow {
+      display: inline-block;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold); border: 1px solid rgba(201,169,110,0.35);
+      border-radius: 999px; padding: 5px 14px; margin-bottom: 24px;
+    }
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      color: #fff; line-height: 1.05; letter-spacing: -0.02em;
+      margin-bottom: 20px;
+    }
+    .page-subtitle { font-size: 1rem; color: rgba(255,255,255,0.45); line-height: 1.7; max-width: 560px; }
+
+    /* ── Content wrapper ── */
+    .content { max-width: 860px; margin: 0 auto; padding: 0 48px 120px; }
+
+    /* ── Section block ── */
+    .block { padding: 64px 0; border-bottom: 1px solid var(--border); }
+    .block:last-child { border-bottom: none; }
+    .block-eyebrow { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold-deep); margin-bottom: 12px; }
+    .block-title { font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 800; color: var(--ink); letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 16px; }
+    .block-body { font-size: 0.95rem; color: rgba(10,10,10,0.6); line-height: 1.75; margin-bottom: 32px; }
+    .block-body strong { color: var(--ink); font-weight: 700; }
+    .block-body a { color: var(--gold-deep); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ── Cards grid ── */
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 28px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+    .card-flag { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 8px; }
+    .card-title { font-size: 0.95rem; font-weight: 800; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.01em; }
+    .card-body { font-size: 0.82rem; color: rgba(10,10,10,0.55); line-height: 1.7; }
+    .card-body strong { color: var(--ink); font-weight: 700; }
+
+    /* ── Doc checklist ── */
+    .doc-list { display: flex; flex-direction: column; gap: 12px; margin-top: 24px; }
+    .doc-item {
+      display: flex; align-items: flex-start; gap: 14px;
+      background: var(--paper); border: 1px solid var(--border);
+      border-radius: 10px; padding: 18px 20px;
+    }
+    .doc-check { width: 22px; height: 22px; background: var(--success-bg); border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .doc-check svg { width: 12px; height: 12px; }
+    .doc-text strong { display: block; font-size: 0.88rem; font-weight: 700; color: var(--ink); margin-bottom: 2px; }
+    .doc-text span { font-size: 0.8rem; color: rgba(10,10,10,0.5); line-height: 1.55; }
+
+    /* ── Table ── */
+    .comp-table { width: 100%; border-collapse: collapse; margin-top: 24px; font-size: 0.85rem; }
+    .comp-table th { text-align: left; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); padding: 0 16px 12px; border-bottom: 1px solid var(--border); }
+    .comp-table td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: rgba(10,10,10,0.65); vertical-align: top; line-height: 1.55; }
+    .comp-table td:first-child { font-weight: 700; color: var(--ink); white-space: nowrap; }
+    .comp-table tr:last-child td { border-bottom: none; }
+    .tag-low { display: inline-block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; padding: 2px 8px; border-radius: 999px; background: var(--success-bg); color: var(--success); }
+    .tag-med { display: inline-block; font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; padding: 2px 8px; border-radius: 999px; background: #fef9ec; color: #92400e; }
+
+    /* ── Callout box ── */
+    .callout {
+      background: var(--gold-pale);
+      border: 1px solid rgba(201,169,110,0.25);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-top: 24px;
+      font-size: 0.85rem;
+      color: var(--gold-deep);
+      line-height: 1.65;
+    }
+    .callout strong { font-weight: 700; }
+
+    /* ── Invoice block ── */
+    .invoice-box {
+      background: var(--ink-soft);
+      border-radius: 14px;
+      padding: 28px 32px;
+      margin-top: 24px;
+    }
+    .invoice-label { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.3); margin-bottom: 16px; }
+    .invoice-clause { font-size: 0.88rem; color: rgba(255,255,255,0.65); line-height: 1.7; font-style: italic; border-left: 2px solid var(--gold); padding-left: 16px; }
+
+    /* ── FAQ ── */
+    .faq-list { display: flex; flex-direction: column; gap: 0; margin-top: 8px; }
+    .faq-item { border-bottom: 1px solid var(--border); padding: 24px 0; }
+    .faq-item:first-child { border-top: 1px solid var(--border); }
+    .faq-q { font-size: 0.95rem; font-weight: 700; color: var(--ink); margin-bottom: 10px; letter-spacing: -0.01em; }
+    .faq-a { font-size: 0.88rem; color: rgba(10,10,10,0.55); line-height: 1.7; }
+    .faq-a strong { color: var(--ink); font-weight: 700; }
+
+    /* ── CTA ── */
+    .cta-block {
+      background: var(--ink-soft);
+      border-radius: 20px;
+      padding: 56px 48px;
+      margin-top: 64px;
+      display: flex; align-items: center; justify-content: space-between; gap: 40px;
+    }
+    .cta-block h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 800; color: #fff; letter-spacing: -0.03em; line-height: 1.15; }
+    .cta-block p { font-size: 0.88rem; color: rgba(255,255,255,0.4); margin-top: 8px; line-height: 1.6; }
+    .cta-actions { display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+    .btn-gold { padding: 13px 26px; background: var(--gold); color: var(--ink-soft); border-radius: 999px; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; transition: all 150ms ease; display: inline-block; }
+    .btn-gold:hover { background: #d4b47a; transform: translateY(-1px); }
+    .btn-ghost { padding: 13px 26px; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.55); border-radius: 999px; font-size: 0.78rem; font-weight: 600; white-space: nowrap; transition: all 150ms ease; display: inline-block; text-align: center; }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.35); color: #fff; }
+
+    /* ── Footer ── */
+    .page-footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.06); padding: 32px 48px; display: flex; align-items: center; justify-content: space-between; }
+    .page-footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.2); }
+    .page-footer-back { font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.4); display: flex; align-items: center; gap: 6px; transition: color 150ms ease; }
+    .page-footer-back:hover { color: var(--gold); }
+
+    @media (max-width: 768px) {
+      .nav { padding: 0 24px; }
+      .page-hero { padding: 120px 24px 60px; }
+      .content { padding: 0 24px 80px; }
+      .cards { grid-template-columns: 1fr; }
+      .cta-block { flex-direction: column; padding: 36px 28px; }
+      .page-footer { flex-direction: column; gap: 12px; text-align: center; padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <a class="nav-logo" href="index.html">
+      <img src="logo.png" alt="SkillGap">
+      <span class="nav-logo-name">SkillGap</span>
+    </a>
+    <a class="nav-back" href="index.html">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to main site
+    </a>
+  </nav>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-eyebrow">Legal & Procurement</div>
+      <h1 class="page-title">Procurement &<br>Compliance</h1>
+      <p class="page-subtitle">A plain-language overview of how data, billing, and paperwork work with SkillGap. The exact details depend on where your institution is based — and we'll walk your team through what applies to you before anything is signed.</p>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- Data & Privacy -->
+    <div class="block">
+      <div class="block-eyebrow">Data & Privacy</div>
+      <h2 class="block-title">Your data stays yours.</h2>
+      <p class="block-body">
+        SkillGap is built so we never hold onto your student data. We don't store, profile, or keep student records, grades, or personal information — the product simply doesn't work that way.
+        <br><br>
+        <strong>If we plug into your existing system,</strong> assessment data flows through your platform. We receive only what's needed to generate feedback — performance, topic, timing — and return the result. Nothing identifying stays with us.
+        <br><br>
+        <strong>If we build a system for you,</strong> the whole thing is handed over on delivery — it runs on your side, under your control.
+      </p>
+      <div class="cards">
+        <div class="card">
+          <div class="card-flag">What we can see</div>
+          <div class="card-title">Only what's needed for feedback</div>
+          <div class="card-body">We work with the performance data required to generate a result — and we don't keep it afterward. No student records, grades, or personal details live on our side.</div>
+        </div>
+        <div class="card">
+          <div class="card-flag">No lock-in, ever</div>
+          <div class="card-title">Your system keeps running without us</div>
+          <div class="card-body">If you ever decide to leave, nothing is held hostage. <strong>What's yours is yours from day one</strong> — your data and your system don't depend on us being around.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Compliance & Billing -->
+    <div class="block">
+      <div class="block-eyebrow">Compliance & Billing</div>
+      <h2 class="block-title">Paperwork handled, wherever you are.</h2>
+      <p class="block-body">
+        Tax and compliance rules differ from country to country. Wherever your institution is based, we take care of our side and give your finance team exactly the documentation they need — proper invoices, the right tax references, and any certificates your procurement process asks for.
+        <br><br>
+        Before anything is signed, we'll lay out clearly what applies to your institution. No guesswork, no surprises.
+      </p>
+      <div class="cards">
+        <div class="card">
+          <div class="card-flag">Simple on your end</div>
+          <div class="card-title">Tax is settled the standard way</div>
+          <div class="card-body">In most countries, business-to-business digital services are handled so any local tax is settled by your institution at the usual rate. Your invoice from us arrives clean, at the agreed amount — your accounting team handles the rest the way they already do.</div>
+        </div>
+        <div class="card">
+          <div class="card-flag">Public institutions</div>
+          <div class="card-title">Built for public procurement</div>
+          <div class="card-body">Public and state institutions often have strict purchasing rules. We provide the documentation your procurement office needs to move forward through the proper channels — and we'll point you to exactly what's required for your country.</div>
+        </div>
+      </div>
+      <div class="callout">
+        Need something specific for your finance or legal team — a particular invoice format, a tax certificate, or proof of registration? Just ask. We'll prepare whatever your institution's process requires.
+      </div>
+    </div>
+
+    <!-- Payment -->
+    <div class="block">
+      <div class="block-eyebrow">Payment</div>
+      <h2 class="block-title">Payment that fits your cycle.</h2>
+      <p class="block-body">
+        Payments are made by international bank transfer or Wise, and invoices can be issued in your preferred currency. For ongoing credit top-ups, there's an optional auto top-up so the service never pauses unexpectedly.
+        <br><br>
+        For institutions on fixed budget-release cycles, we're happy to work to a milestone-based payment schedule on custom builds — the scope and schedule are agreed in writing before any work begins, so everyone knows exactly what to expect.
+      </p>
+    </div>
+
+    <!-- FAQ -->
+    <div class="block">
+      <div class="block-eyebrow">FAQ</div>
+      <h2 class="block-title">Common questions.</h2>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-q">What happens to our data if we stop using SkillGap?</div>
+          <div class="faq-a">If we're plugged into your system, there's nothing to hand back — your data was never on our side. If we built a system for you, it's already fully yours. Either way, ending things has zero impact on your data or your students.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Who handles the tax on our payments?</div>
+          <div class="faq-a">It depends on your country, but in most B2B cases your institution settles any local tax in the normal way and pays us the agreed amount. We provide compliant invoices and the right references for your records, and we'll confirm exactly how it works for your jurisdiction before you sign.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Can a public or state institution buy without a full bidding process?</div>
+          <div class="faq-a">Often, yes. Many public institutions can purchase proprietary software directly when competitive sourcing isn't practical. We provide the supporting documentation your procurement office needs to take through the proper channels — we'll tell you what applies in your country.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">What documentation can you provide for our finance and legal teams?</div>
+          <div class="faq-a">Whatever your process requires — compliant invoices, tax references, proof of registration, and eligibility certificates for procurement. Tell us what your team needs and we'll have it ready before your first call.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-q">Are credits refundable?</div>
+          <div class="faq-a">Credits aren't refundable, but they're valid for 12 months from purchase. If you wind down an engagement before using them, remaining credits can roll into a future engagement or transfer to another department in your institution.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-block">
+      <div>
+        <h2>Ready to move forward?</h2>
+        <p>Send us an inquiry and we'll prepare the relevant documentation for your institution before the first call.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn-gold" href="index.html#inquiry">Send an Inquiry</a>
+        <a class="btn-ghost" href="index.html">Back to SkillGap</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="page-footer">
+    <span class="page-footer-copy">© 2026 SkillGap · Stable Studio · Christian Jay Baquilid</span>
+    <a class="page-footer-back" href="index.html">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to main site
+    </a>
+  </footer>
+
+</body>
+</html>
