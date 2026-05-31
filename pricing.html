@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing & Terms | SkillGap</title>
+  <meta name="description" content="Simple annual licensing priced per student, with a one-time setup that's free for founding partners. Here's exactly how SkillGap pricing works.">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="apple-touch-icon" href="/logo.png">
+  <meta name="theme-color" content="#1a1814">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="SkillGap">
+  <meta property="og:title" content="Pricing & Terms | SkillGap">
+  <meta property="og:description" content="Annual licensing priced per student, with setup free for founding partners. Exactly how SkillGap pricing works.">
+  <meta property="og:image" content="https://skillgap-landing.vercel.app/logo.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:        #0a0a0a;
+      --ink-soft:   #1a1814;
+      --paper:      #ffffff;
+      --canvas:     #f5f1ea;
+      --border:     #e4e0d8;
+      --muted:      #9a9690;
+      --gold:       #c9a96e;
+      --gold-deep:  #8a6c35;
+      --gold-pale:  rgba(201,169,110,0.12);
+      --success:    #1a7a4a;
+      --success-bg: #edf7f1;
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body:    'Manrope', system-ui, sans-serif;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--canvas); color: var(--ink); }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Nav ── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(10,10,10,0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 64px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; }
+    .nav-logo img { width: 30px; height: 30px; border-radius: 6px; }
+    .nav-logo-name { font-size: 15px; font-weight: 700; color: #fff; letter-spacing: -0.01em; font-family: var(--font-display); }
+    .nav-back { font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.45); display: flex; align-items: center; gap: 6px; transition: color 150ms ease; }
+    .nav-back:hover { color: #fff; }
+
+    /* ── Page hero ── */
+    .page-hero { background: var(--ink-soft); padding: 140px 48px 80px; position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 30%, rgba(201,169,110,0.1) 0%, transparent 55%); pointer-events: none; }
+    .page-hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
+    .page-eyebrow { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,169,110,0.35); border-radius: 999px; padding: 5px 14px; margin-bottom: 24px; }
+    .page-title { font-family: var(--font-display); font-size: clamp(2.4rem, 5vw, 4rem); color: #fff; line-height: 1.05; letter-spacing: -0.02em; margin-bottom: 20px; }
+    .page-subtitle { font-size: 1rem; color: rgba(255,255,255,0.45); line-height: 1.7; max-width: 560px; }
+
+    /* ── Content wrapper ── */
+    .content { max-width: 860px; margin: 0 auto; padding: 0 48px 120px; }
+
+    /* ── Section block ── */
+    .block { padding: 64px 0; border-bottom: 1px solid var(--border); }
+    .block:last-child { border-bottom: none; }
+    .block-eyebrow { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold-deep); margin-bottom: 12px; }
+    .block-title { font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 800; color: var(--ink); letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 16px; }
+    .block-body { font-size: 0.95rem; color: rgba(10,10,10,0.6); line-height: 1.75; margin-bottom: 8px; }
+    .block-body strong { color: var(--ink); font-weight: 700; }
+    .block-body a { color: var(--gold-deep); text-decoration: underline; text-underline-offset: 3px; }
+
+    /* ── Tier price cards ── */
+    .tier-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 30px; }
+    .tier-card { background: var(--paper); border: 1px solid var(--border); border-radius: 14px; padding: 26px 24px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .tier-card.feat { border-color: var(--gold); box-shadow: 0 6px 22px rgba(201,169,110,0.2); }
+    .tier-name { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 6px; }
+    .tier-card.feat .tier-name { color: var(--gold-deep); }
+    .tier-model { font-size: 0.78rem; color: var(--muted); margin-bottom: 16px; }
+    .tier-price { font-size: 2.1rem; font-weight: 800; color: var(--ink); letter-spacing: -0.03em; line-height: 1; }
+    .tier-card.feat .tier-price { color: var(--gold-deep); }
+    .tier-unit { font-size: 0.78rem; font-weight: 600; color: var(--muted); margin-left: 4px; }
+    .tier-card p { font-size: 0.8rem; color: rgba(10,10,10,0.55); line-height: 1.6; margin-top: 16px; }
+
+    /* ── Flow steps ── */
+    .flow-steps { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin: 26px 0; }
+    .flow-step { background: var(--gold-pale); color: var(--gold-deep); font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; padding: 8px 15px; border-radius: 999px; }
+    .flow-arrow { color: var(--muted); font-weight: 700; }
+
+    /* ── Cards grid ── */
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 32px; }
+    .card { background: var(--paper); border: 1px solid var(--border); border-radius: 14px; padding: 28px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .card-flag { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold-deep); margin-bottom: 8px; }
+    .card-title { font-size: 0.95rem; font-weight: 800; color: var(--ink); margin-bottom: 8px; letter-spacing: -0.01em; }
+    .card-body { font-size: 0.82rem; color: rgba(10,10,10,0.55); line-height: 1.7; }
+    .card-body strong { color: var(--ink); font-weight: 700; }
+
+    /* ── Callout box ── */
+    .callout { background: var(--gold-pale); border: 1px solid rgba(201,169,110,0.25); border-radius: 12px; padding: 22px 26px; margin-top: 28px; font-size: 0.9rem; color: var(--gold-deep); line-height: 1.7; }
+    .callout strong { font-weight: 800; color: var(--gold-deep); }
+
+    /* ── FAQ ── */
+    .faq-item { border-bottom: 1px solid var(--border); padding: 24px 0; }
+    .faq-item:first-child { border-top: 1px solid var(--border); margin-top: 8px; }
+    .faq-q { font-size: 0.95rem; font-weight: 700; color: var(--ink); margin-bottom: 10px; letter-spacing: -0.01em; }
+    .faq-a { font-size: 0.88rem; color: rgba(10,10,10,0.55); line-height: 1.7; }
+    .faq-a strong { color: var(--ink); font-weight: 700; }
+
+    /* ── CTA ── */
+    .cta-block { background: var(--ink-soft); border-radius: 20px; padding: 56px 48px; margin-top: 64px; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+    .cta-block h2 { font-size: clamp(1.4rem, 2.5vw, 2rem); font-weight: 800; color: #fff; letter-spacing: -0.03em; line-height: 1.15; }
+    .cta-block p { font-size: 0.88rem; color: rgba(255,255,255,0.4); margin-top: 8px; line-height: 1.6; }
+    .cta-actions { display: flex; flex-direction: column; gap: 12px; flex-shrink: 0; }
+    .btn-gold { padding: 13px 26px; background: var(--gold); color: var(--ink-soft); border-radius: 999px; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; white-space: nowrap; transition: all 150ms ease; display: inline-block; }
+    .btn-gold:hover { background: #d4b47a; transform: translateY(-1px); }
+    .btn-ghost { padding: 13px 26px; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.55); border-radius: 999px; font-size: 0.78rem; font-weight: 600; white-space: nowrap; transition: all 150ms ease; display: inline-block; text-align: center; }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.35); color: #fff; }
+
+    /* ── Footer ── */
+    .page-footer { background: var(--ink); border-top: 1px solid rgba(255,255,255,0.06); padding: 32px 48px; display: flex; align-items: center; justify-content: space-between; }
+    .page-footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.2); }
+    .page-footer-back { font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.4); display: flex; align-items: center; gap: 6px; transition: color 150ms ease; }
+    .page-footer-back:hover { color: var(--gold); }
+
+    @media (max-width: 768px) {
+      .nav { padding: 0 24px; }
+      .page-hero { padding: 120px 24px 60px; }
+      .content { padding: 0 24px 80px; }
+      .cards { grid-template-columns: 1fr; }
+      .tier-cards { grid-template-columns: 1fr; }
+      .cta-block { flex-direction: column; padding: 36px 28px; }
+      .page-footer { flex-direction: column; gap: 12px; text-align: center; padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <a class="nav-logo" href="index.html">
+      <img src="logo.png" alt="SkillGap">
+      <span class="nav-logo-name">SkillGap</span>
+    </a>
+    <a class="nav-back" href="index.html">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to main site
+    </a>
+  </nav>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="page-eyebrow">Pricing & Terms</div>
+      <h1 class="page-title">Pricing built<br>for institutions.</h1>
+      <p class="page-subtitle">Simple annual licensing, priced per student, with a one-time setup that's free for founding partners. Here's exactly how it works, in plain numbers.</p>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+
+    <!-- The model -->
+    <div class="block">
+      <div class="block-eyebrow">The model</div>
+      <h2 class="block-title">One price per enrolled student, per year.</h2>
+      <p class="block-body">
+        SkillGap is licensed annually and priced per enrolled student. It's all-inclusive: the feedback engine, the analytics dashboards, and support. Every student is covered for the year, with a generous feedback allowance built in, so there's nothing to meter and no surprise bills. Pick the AI tier that fits your priorities.
+      </p>
+      <div class="tier-cards">
+        <div class="tier-card">
+          <div class="tier-name">Budget</div>
+          <div class="tier-model">DeepSeek V4 Flash</div>
+          <div class="tier-price">$12<span class="tier-unit">/ student / yr</span></div>
+          <p>Cost-efficient AI that lets you cover every enrolled student affordably. Ideal for budget-conscious schools.</p>
+        </div>
+        <div class="tier-card feat">
+          <div class="tier-name">Standard · Recommended</div>
+          <div class="tier-model">GPT-5.4 Nano · OpenAI</div>
+          <div class="tier-price">$25<span class="tier-unit">/ student / yr</span></div>
+          <p>The sweet spot for most institutions: strong feedback quality at a fraction of what one retained student is worth.</p>
+        </div>
+        <div class="tier-card">
+          <div class="tier-name">Premium</div>
+          <div class="tier-model">GPT-5.5 · OpenAI</div>
+          <div class="tier-price">$45<span class="tier-unit">/ student / yr</span></div>
+          <p>The flagship model, for institutions where AI quality is a faculty or accreditation priority.</p>
+        </div>
+      </div>
+      <div class="callout">
+        <strong>Sense of scale:</strong> a 500-student school on the Standard tier runs about $12,500 a year. Set against the $12,000+ in tuition lost to a single dropout, retaining even one student covers the cost several times over. Volume discounts apply for larger enrolments, and there's a minimum annual engagement of about $1,500 so the smallest schools still have a clear floor.
+      </div>
+    </div>
+
+    <!-- Getting started -->
+    <div class="block">
+      <div class="block-eyebrow">Getting started</div>
+      <h2 class="block-title">From first call to live in one assessment cycle.</h2>
+      <div class="flow-steps">
+        <span class="flow-step">Explore · free</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="flow-step">Integration Assessment</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="flow-step">Build</span>
+        <span class="flow-arrow">&rarr;</span>
+        <span class="flow-step">Go live</span>
+      </div>
+      <p class="block-body">
+        <strong>Explore</strong> is free: a sandbox, docs, and a quick self-check so you can see whether your system fits, with no cost or commitment.
+        <br><br>
+        The <strong>Integration Assessment</strong> is the one-time setup step. We run a real feasibility audit of your system, deliver a Green / Yellow / Red report, and hand you a fixed build quote, scoped to your institution. It starts from $750 and is credited toward your build if you proceed, so you only ever pay for it if you decide not to go ahead.
+        <br><br>
+        The <strong>Build</strong> is fixed-price from that assessment. Then you <strong>go live</strong> on your annual per-student license.
+      </p>
+      <div class="callout">
+        <strong>Founding partners:</strong> the Integration Assessment is <strong>free</strong>, and your pilot runs at 50%. No obligation, you simply need to be among our first partner institutions. <a href="index.html#founding" style="color:var(--gold-deep);text-decoration:underline;text-underline-offset:3px;">See the founding offer.</a>
+      </div>
+    </div>
+
+    <!-- Terms -->
+    <div class="block">
+      <div class="block-eyebrow">Terms</div>
+      <h2 class="block-title">No surprises, no lock-in.</h2>
+      <div class="cards">
+        <div class="card">
+          <div class="card-flag">No lock-in</div>
+          <div class="card-title">Cancel anytime</div>
+          <div class="card-body">Annual licensing with no multi-year contract. Your data and your own system are always yours; leave whenever and take everything with you. Only the SkillGap feedback layer is the service you license.</div>
+        </div>
+        <div class="card">
+          <div class="card-flag">Generous allowance</div>
+          <div class="card-title">No token counting</div>
+          <div class="card-body">Each student's license covers well beyond a typical year of assessments. You never meter usage or watch a balance, and you never get a surprise overage bill.</div>
+        </div>
+        <div class="card">
+          <div class="card-flag">BYOK</div>
+          <div class="card-title">Bring your own AI key</div>
+          <div class="card-body">Already have an OpenAI, Azure, Anthropic, or DeepSeek contract? Run the engine on your own key and pay a reduced platform rate instead.</div>
+        </div>
+        <div class="card">
+          <div class="card-flag">Support included</div>
+          <div class="card-title">We stay with you</div>
+          <div class="card-body">Onboarding, training, and post-launch support are part of the license, not an add-on. Larger engagements include defined support hours and an SLA.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div class="block">
+      <div class="block-eyebrow">Common questions</div>
+      <h2 class="block-title">Pricing, answered.</h2>
+      <div class="faq-item">
+        <div class="faq-q">Why per student instead of per use?</div>
+        <div class="faq-a">Because it's predictable. Metered usage means a bill that swings with how many assessments you run, which is a forecasting headache for any institution. A flat per-student license is one clean annual number you can budget against, with the usage allowance generous enough that you never think about it.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What if our enrolment grows next year?</div>
+        <div class="faq-a">The license tracks enrolment, so it adjusts at renewal. There's no penalty and no renegotiation mid-year. As you grow into the larger bands, volume discounts bring the per-student rate down.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is the Integration Assessment really free for founding partners?</div>
+        <div class="faq-a">Yes. While we onboard our first partner institutions, the assessment is waived and pilots run at 50%. For everyone after that, it starts from $750 and is credited toward the build if you proceed, so it's effectively free the moment you move forward.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Can pricing fit our budget-release cycle?</div>
+        <div class="faq-a">Yes. Licensing is billed annually, and for custom builds with public budget cycles we can structure milestone-based payments. The scope and schedule are agreed in writing before any work begins.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Where are the exact figures for our institution?</div>
+        <div class="faq-a">The per-student rates above are firm. Your setup and any volume discount are scoped to your specific size and system, so the exact numbers come with your quote after a short conversation. No pressure, no obligation.</div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-block">
+      <div>
+        <h2>Want your institution's numbers?</h2>
+        <p>Tell us your size and current setup, and we'll come back with a clear, fixed quote.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn-gold" href="index.html#inquiry">Send an Inquiry</a>
+        <a class="btn-ghost" href="index.html">Back to SkillGap</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <footer class="page-footer">
+    <span class="page-footer-copy">© 2026 SkillGap · Stable Studio · Christian Jay Baquilid</span>
+    <a class="page-footer-back" href="index.html">
+      <svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M9 2L4 7l5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Back to main site
+    </a>
+  </footer>
+
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
