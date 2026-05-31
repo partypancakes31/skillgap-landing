@@ -428,6 +428,21 @@
     .pricing-footer { display: flex; gap: 24px; flex-wrap: wrap; padding-top: 32px; border-top: 1px solid var(--border); }
     .pricing-note { font-size: 0.8rem; color: rgba(10,10,10,0.45); line-height: 1.65; flex: 1; min-width: 200px; }
     .pricing-note strong { color: var(--ink); font-weight: 700; }
+    /* Per-student licensing layout */
+    .pricing-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: 980px; margin: 0 auto 36px; }
+    .pricing-cards .price-amount { margin-bottom: 18px; }
+    .price-model { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom: 18px; }
+    .price-card.featured .price-model { color: rgba(255,255,255,0.45); }
+    .price-unit { font-size: 0.85rem; font-weight: 600; color: var(--muted); margin-left: 5px; letter-spacing: 0; }
+    .price-card.featured .price-unit { color: rgba(255,255,255,0.5); }
+    .pricing-start { max-width: 760px; margin: 0 auto 40px; text-align: center; background: var(--canvas); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; }
+    .pricing-start-flow { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold-deep); margin-bottom: 16px; }
+    .pricing-start-flow span { background: rgba(201,169,110,0.12); padding: 5px 12px; border-radius: 20px; }
+    .pricing-start-note { font-size: 0.92rem; color: rgba(10,10,10,0.62); line-height: 1.7; }
+    .pricing-start-note s { color: var(--muted); }
+    .pricing-fulllink-wrap { text-align: center; margin-top: 32px; }
+    .pricing-fulllink { font-size: 0.85rem; font-weight: 800; color: var(--gold-deep); text-decoration: underline; text-underline-offset: 4px; }
+    .pricing-fulllink:hover { opacity: 0.75; }
 
     /* ================================================
        TIERS  (canvas, scoring + subjects)
@@ -1021,6 +1036,7 @@
       .assure-points, .founding-perks, .how-steps, .stake-grid { grid-template-columns: 1fr; }
       .roi-stats { grid-template-columns: 1fr; gap: 28px; }
       .pricing-panel.active { grid-template-columns: 1fr; }
+      .pricing-cards { grid-template-columns: 1fr; }
       .pricing-footer { flex-direction: column; gap: 16px; }
       .model-tab { min-width: unset; flex: 1; }
       footer { padding: 60px 24px 40px; }
@@ -1685,7 +1701,7 @@
             </div>
             <div class="offering-item">
               <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              100 starter credits included at onboarding
+              Per-student annual license, with a generous feedback allowance built in
             </div>
           </div>
           <a class="btn-dark-outline" href="integration.html">Inquire About Integration</a>
@@ -1714,7 +1730,7 @@
             </div>
             <div class="offering-item">
               <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              1,000 credits included at go-live
+              Per-student annual license included, ready to scale at go-live
             </div>
           </div>
           <a class="btn-dark" href="custom-build.html">Request a Custom Build</a>
@@ -1764,145 +1780,52 @@
   <section class="pricing-section" id="pricing">
     <div class="pricing-inner">
       <div class="pricing-header">
-        <div class="pricing-eyebrow reveal">PRICING · CREDITS</div>
-        <h2 class="reveal d1">Pay for what you use.<br>Stop when you don't.</h2>
-        <p class="reveal d2">Credits are consumed only when the AI delivers feedback. Pick your model tier, prepay a bundle, top up anytime.</p>
+        <div class="pricing-eyebrow reveal">PRICING</div>
+        <h2 class="reveal d1">One price per student,<br>per year. That's it.</h2>
+        <p class="reveal d2">No metering, no surprise bills. Pick the AI tier that fits, and every enrolled student is covered for the year with a generous feedback allowance built in.</p>
       </div>
 
-      <!-- Model selector -->
-      <div class="model-selector reveal">
-        <button class="model-tab" data-panel="panel-budget">
-          <div class="model-tab-top"><span class="model-tab-tier">Budget</span></div>
-          <span class="model-tab-name">DeepSeek V4 Flash</span>
-        </button>
-        <button class="model-tab active" data-panel="panel-standard">
-          <div class="model-tab-top"><span class="model-tab-tier">Standard</span><span class="model-tab-rec">Recommended</span></div>
-          <span class="model-tab-name">GPT-5.4 Nano · OpenAI</span>
-        </button>
-        <button class="model-tab" data-panel="panel-premium">
-          <div class="model-tab-top"><span class="model-tab-tier">Premium</span></div>
-          <span class="model-tab-name">GPT-5.5 · OpenAI</span>
-        </button>
-      </div>
-
-      <!-- Budget panel -->
-      <div class="pricing-panel" id="panel-budget">
+      <!-- Per-student licensing -->
+      <div class="pricing-cards reveal">
         <div class="price-card">
-          <div class="price-card-label">Starter</div>
-          <div class="price-amount">$8</div>
-          <div class="price-credits">100 credits</div>
-          <div class="price-per">$0.08 / credit</div>
+          <div class="price-card-label">Budget</div>
+          <div class="price-model">DeepSeek V4 Flash</div>
+          <div class="price-amount">$12<span class="price-unit">/ student / yr</span></div>
           <div class="price-divider"></div>
-          <div class="price-include">Perfect for pilots and small classes. Included at onboarding for budget-tier Option A clients.</div>
-        </div>
-        <div class="price-card">
-          <div class="price-card-label">Standard</div>
-          <div class="price-amount">$32</div>
-          <div class="price-credits">500 credits</div>
-          <div class="price-per">$0.064 / credit</div>
-          <div class="price-divider"></div>
-          <div class="price-include">Covers a full semester for smaller institutions running weekly assessments.</div>
+          <div class="price-include">Cost-efficient AI that lets you cover every enrolled student affordably. Great for budget-conscious schools.</div>
         </div>
         <div class="price-card featured">
-          <div class="price-badge">Best value</div>
-          <div class="price-card-label">Volume</div>
-          <div class="price-amount">$55</div>
-          <div class="price-credits">1,000 credits</div>
-          <div class="price-per">$0.055 / credit</div>
+          <div class="price-badge">Recommended</div>
+          <div class="price-card-label">Standard</div>
+          <div class="price-model">GPT-5.4 Nano · OpenAI</div>
+          <div class="price-amount">$25<span class="price-unit">/ student / yr</span></div>
           <div class="price-divider"></div>
-          <div class="price-include">A full academic year for budget-conscious schools, even with frequent assessments.</div>
+          <div class="price-include">The sweet spot for most institutions: strong feedback quality, at a fraction of what one retained student is worth.</div>
         </div>
-        <div class="price-card contact-card">
-          <div class="price-card-label">Institution</div>
-          <div class="price-amount">Custom</div>
-          <div class="price-credits">5,000+ credits</div>
-          <div class="price-per">from $0.04 / credit</div>
+        <div class="price-card">
+          <div class="price-card-label">Premium</div>
+          <div class="price-model">GPT-5.5 · OpenAI</div>
+          <div class="price-amount">$45<span class="price-unit">/ student / yr</span></div>
           <div class="price-divider"></div>
-          <div class="price-include">Negotiated annually. Maximum volume at minimum cost.</div>
-          <a class="price-cta" href="#inquiry">Contact us →</a>
+          <div class="price-include">Flagship model, for institutions where AI quality is a faculty or accreditation priority.</div>
         </div>
       </div>
 
-      <!-- Standard panel -->
-      <div class="pricing-panel active" id="panel-standard">
-        <div class="price-card">
-          <div class="price-card-label">Starter</div>
-          <div class="price-amount">$22</div>
-          <div class="price-credits">100 credits</div>
-          <div class="price-per">$0.22 / credit</div>
-          <div class="price-divider"></div>
-          <div class="price-include">Included at onboarding for all Option A integrations. Right-sized for pilots and small cohorts.</div>
+      <!-- Getting started: assessment + founding promo -->
+      <div class="pricing-start reveal">
+        <div class="pricing-start-flow">
+          <span>Explore · free</span> → <span>Assessment</span> → <span>Build</span> → <span>Go live</span>
         </div>
-        <div class="price-card">
-          <div class="price-card-label">Standard</div>
-          <div class="price-amount">$95</div>
-          <div class="price-credits">500 credits</div>
-          <div class="price-per">$0.19 / credit</div>
-          <div class="price-divider"></div>
-          <div class="price-include">Right-sized for institutions running one cohort per semester across several subjects.</div>
-        </div>
-        <div class="price-card featured">
-          <div class="price-badge">Best value</div>
-          <div class="price-card-label">Volume</div>
-          <div class="price-amount">$160</div>
-          <div class="price-credits">1,000 credits</div>
-          <div class="price-per">$0.16 / credit</div>
-          <div class="price-divider"></div>
-          <div class="price-include">Included at go-live for all Option B custom builds. Covers a full academic year for most mid-size institutions.</div>
-        </div>
-        <div class="price-card contact-card">
-          <div class="price-card-label">Institution</div>
-          <div class="price-amount">Custom</div>
-          <div class="price-credits">5,000+ credits</div>
-          <div class="price-per">from $0.14 / credit</div>
-          <div class="price-divider"></div>
-          <div class="price-include">Negotiated annually. For large universities and multi-department deployments.</div>
-          <a class="price-cta" href="#inquiry">Contact us →</a>
-        </div>
-      </div>
-
-      <!-- Premium panel -->
-      <div class="pricing-panel" id="panel-premium">
-        <div class="price-card">
-          <div class="price-card-label">Starter</div>
-          <div class="price-amount">$50</div>
-          <div class="price-credits">100 credits</div>
-          <div class="price-per">$0.50 / credit</div>
-          <div class="price-divider"></div>
-          <div class="price-include">For institutions trialling flagship AI with a small cohort before committing to volume.</div>
-        </div>
-        <div class="price-card">
-          <div class="price-card-label">Standard</div>
-          <div class="price-amount">$225</div>
-          <div class="price-credits">500 credits</div>
-          <div class="price-per">$0.45 / credit</div>
-          <div class="price-divider"></div>
-          <div class="price-include">Full semester coverage with GPT-5.5 quality feedback on every student assessment.</div>
-        </div>
-        <div class="price-card featured">
-          <div class="price-badge">Best value</div>
-          <div class="price-card-label">Volume</div>
-          <div class="price-amount">$420</div>
-          <div class="price-credits">1,000 credits</div>
-          <div class="price-per">$0.42 / credit</div>
-          <div class="price-divider"></div>
-          <div class="price-include">Full year, flagship model. For institutions where AI quality is a faculty or accreditation priority.</div>
-        </div>
-        <div class="price-card contact-card">
-          <div class="price-card-label">Institution</div>
-          <div class="price-amount">Custom</div>
-          <div class="price-credits">5,000+ credits</div>
-          <div class="price-per">from $0.38 / credit</div>
-          <div class="price-divider"></div>
-          <div class="price-include">Enterprise GPT-5.5 deployment. Negotiated annually with SLA.</div>
-          <a class="price-cta" href="#inquiry">Contact us →</a>
-        </div>
+        <p class="pricing-start-note">Getting started is a one-time <strong>Integration Assessment</strong> (a feasibility audit plus a fixed quote): <s>from $750</s>, <strong style="color:var(--gold-deep)">free for founding partners</strong> and credited toward your build if you proceed. No obligation.</p>
       </div>
 
       <div class="pricing-footer">
-        <p class="pricing-note reveal"><strong>Setup &amp; development fees</strong> are quoted separately. Small institutions start from $0 for self-serve integrations. Custom builds are scoped and fixed-price before work begins.</p>
-        <p class="pricing-note reveal d1"><strong>Bring your own API key (BYOK).</strong> Use your existing OpenAI, Azure, Anthropic, or DeepSeek contract and pay platform fees only at $0.05/credit. <a href="#inquiry" style="color:var(--gold-deep);text-underline-offset:3px;text-decoration:underline">Ask us about BYOK.</a></p>
-        <p class="pricing-note reveal d2"><strong>Credits expire 12 months</strong> from purchase. Auto top-up available. At zero credits, AI pauses but assessments still run.</p>
+        <p class="pricing-note reveal"><strong>No lock-in.</strong> Annual licensing with no multi-year contract; cancel anytime. Minimum engagement from about $1,500/year, and volume discounts apply for larger enrolments.</p>
+        <p class="pricing-note reveal d1"><strong>Bring your own API key (BYOK).</strong> Already have an OpenAI, Azure, Anthropic, or DeepSeek contract? Run the engine on your own key at a reduced platform rate. <a href="#inquiry" style="color:var(--gold-deep);text-underline-offset:3px;text-decoration:underline">Ask us about BYOK.</a></p>
+        <p class="pricing-note reveal d2"><strong>Generous allowance built in.</strong> Each student's license covers well beyond a typical year of assessments, so you never count tokens or hit a surprise bill.</p>
+      </div>
+      <div class="pricing-fulllink-wrap reveal">
+        <a class="pricing-fulllink" href="pricing.html">See full pricing &amp; terms →</a>
       </div>
     </div>
   </section>
@@ -2017,7 +1940,7 @@
         </div>
         <div class="faq-list-item reveal">
           <div class="faq-q">What does it cost?</div>
-          <div class="faq-a">You prepay for credits (one credit = one AI feedback generation), starting from budget-friendly tiers. Setup ranges from $0 for self-serve integrations up to scoped custom builds. <a href="#pricing" style="color:var(--gold-deep);text-decoration:underline;text-underline-offset:3px;">See pricing.</a></div>
+          <div class="faq-a">Simple annual licensing, priced per enrolled student (from $12/student/year), with a generous feedback allowance built in so there's nothing to meter. Getting started is a one-time Integration Assessment, which is free for founding partners and credited toward your build. <a href="#pricing" style="color:var(--gold-deep);text-decoration:underline;text-underline-offset:3px;">See pricing.</a></div>
         </div>
       </div>
     </div>
@@ -2172,6 +2095,7 @@
             <li><a href="mailto:takaradazettai31@gmail.com?subject=SkillGap%20Integration%20Inquiry">Integration Inquiry</a></li>
             <li><a href="mailto:takaradazettai31@gmail.com">Contact Us</a></li>
             <li><a href="/skillgap-overview.pdf" target="_blank" rel="noopener">Overview (PDF)</a></li>
+            <li><a href="pricing.html">Pricing &amp; Terms</a></li>
             <li><a href="compliance.html">Procurement &amp; Compliance</a></li>
           </ul>
         </div>
