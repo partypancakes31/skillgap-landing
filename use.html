@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillGap Platform | Join the Waitlist</title>
+  <meta name="description" content="SkillGap Platform is launching soon. Upload your class answer data, review results, and download per-student gap reports — no IT setup required.">
+  <link rel="canonical" href="https://skillgap-studio.space/use.html">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="apple-touch-icon" href="/logo.png">
+  <meta name="theme-color" content="#f5f1ea">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink:        #0a0a0a;
+      --ink-soft:   #1a1814;
+      --paper:      #ffffff;
+      --canvas:     #f5f1ea;
+      --mid:        #ede8df;
+      --muted:      #9a9690;
+      --border:     #e4e0d8;
+      --gold:       #c9a96e;
+      --gold-deep:  #8a6c35;
+      --success:    #1a7a4a;
+      --success-bg: #edf7f1;
+      --error:      #b91c1c;
+      --error-bg:   #fef2f2;
+      --serif:  'DM Serif Display', Georgia, serif;
+      --sans:   'Manrope', system-ui, -apple-system, sans-serif;
+      --ease:   cubic-bezier(0.22, 1, 0.36, 1);
+      --t-fast: 150ms ease;
+      --t-base: 250ms ease;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: var(--sans); background: var(--canvas); color: var(--ink); overflow-x: hidden; }
+    a { color: inherit; text-decoration: none; }
+    img { display: block; max-width: 100%; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+
+    /* ── Nav ─────────────────────────────────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 64px;
+      display: flex; align-items: center;
+      padding: 0 48px;
+      background: rgba(245,241,234,0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner { max-width: 1100px; width: 100%; margin: 0 auto; display: flex; align-items: center; }
+    .nav-back {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.78rem; font-weight: 600;
+      color: rgba(10,10,10,0.5);
+      transition: color var(--t-fast);
+      margin-right: auto;
+    }
+    .nav-back:hover { color: var(--ink); }
+    .nav-logo { display: flex; align-items: center; gap: 9px; position: absolute; left: 50%; transform: translateX(-50%); }
+    .nav-logomark { width: 32px; height: 32px; border-radius: 7px; overflow: hidden; flex-shrink: 0; }
+    .nav-logomark img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .nav-wordmark { font-family: var(--serif); font-size: 1.15rem; color: var(--ink-soft); letter-spacing: -0.02em; }
+    .nav-badge {
+      padding: 4px 10px; border-radius: 999px;
+      font-size: 0.62rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      background: rgba(201,169,110,0.15);
+      border: 1px solid rgba(201,169,110,0.3);
+      color: var(--gold-deep);
+    }
+
+    /* ── Hero ────────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 120px 48px 80px;
+    }
+    .hero-left {}
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 5px 14px;
+      background: rgba(201,169,110,0.12);
+      border: 1px solid rgba(201,169,110,0.25);
+      border-radius: 999px;
+      font-size: 0.68rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: var(--gold-deep); margin-bottom: 28px;
+    }
+    .hero-eyebrow-dot { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; animation: pulse 2s ease infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+
+    .hero-title {
+      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.0;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+    .hero-body {
+      font-size: 1.05rem;
+      line-height: 1.72;
+      color: rgba(10,10,10,0.62);
+      max-width: 420px;
+      margin-bottom: 40px;
+    }
+
+    /* Steps */
+    .steps { display: flex; flex-direction: column; gap: 0; margin-bottom: 48px; }
+    .step {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .step:first-child { border-top: 1px solid var(--border); }
+    .step-num {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--ink-soft);
+      color: var(--gold);
+      font-family: var(--serif);
+      font-size: 0.9rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .step-info {}
+    .step-title { font-size: 0.95rem; font-weight: 800; color: var(--ink); margin-bottom: 4px; }
+    .step-body { font-size: 0.82rem; color: rgba(10,10,10,0.58); line-height: 1.55; }
+
+    /* ── Waitlist card ───────────────────────────────────────── */
+    .waitlist-card {
+      background: var(--ink-soft);
+      border-radius: 24px;
+      padding: 48px 40px;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.22), 0 4px 16px rgba(0,0,0,0.12);
+      position: relative;
+      overflow: hidden;
+    }
+    .waitlist-card::before {
+      content: '';
+      position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201,169,110,0.6), transparent);
+    }
+    .waitlist-card::after {
+      content: '';
+      position: absolute;
+      top: -100px; right: -80px;
+      width: 300px; height: 300px;
+      background: radial-gradient(ellipse, rgba(201,169,110,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .card-eyebrow {
+      font-size: 0.68rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--gold); margin-bottom: 12px;
+    }
+    .card-title {
+      font-size: 1.6rem; font-weight: 800;
+      letter-spacing: -0.03em; color: var(--paper);
+      line-height: 1.15; margin-bottom: 8px;
+    }
+    .card-sub {
+      font-size: 0.85rem; color: rgba(255,255,255,0.4);
+      line-height: 1.6; margin-bottom: 28px;
+    }
+
+    /* Form */
+    .form-group { display: flex; flex-direction: column; gap: 7px; margin-bottom: 14px; }
+    .form-label {
+      font-size: 0.68rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.3);
+    }
+    .form-input {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      color: var(--paper);
+      outline: none;
+      width: 100%;
+      transition: border-color var(--t-fast), background var(--t-fast);
+    }
+    .form-input::placeholder { color: rgba(255,255,255,0.2); }
+    .form-input:focus { border-color: var(--gold); background: rgba(255,255,255,0.09); }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+    .form-submit {
+      width: 100%; margin-top: 6px;
+      padding: 14px;
+      background: var(--gold); color: var(--ink-soft);
+      border-radius: 10px;
+      font-family: var(--sans); font-size: 0.82rem;
+      font-weight: 800; letter-spacing: 0.06em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all var(--t-fast);
+      border: none;
+    }
+    .form-submit:hover { background: #d4b47a; transform: translateY(-1px); }
+    .form-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+    .form-note {
+      font-size: 0.72rem; color: rgba(255,255,255,0.25);
+      text-align: center; margin-top: 14px; line-height: 1.5;
+    }
+
+    .form-success { text-align: center; padding: 24px 0; }
+    .form-success-icon {
+      width: 48px; height: 48px;
+      background: rgba(26,122,74,0.2); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 14px; font-size: 1.3rem; color: #4ade80;
+    }
+    .form-success-title { font-size: 1.05rem; font-weight: 800; color: var(--paper); margin-bottom: 8px; }
+    .form-success-body { font-size: 0.85rem; color: rgba(255,255,255,0.4); line-height: 1.6; }
+    .form-error-msg { font-size: 0.75rem; color: #f87171; margin-top: 10px; text-align: center; display: none; }
+
+    /* ── What to expect ──────────────────────────────────────── */
+    .expect-section {
+      background: var(--paper);
+      padding: 100px 48px;
+      border-top: 1px solid var(--border);
+    }
+    .expect-inner { max-width: 1100px; margin: 0 auto; }
+    .expect-eyebrow {
+      font-size: 0.7rem; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.14em;
+      color: var(--gold-deep); margin-bottom: 16px;
+    }
+    .expect-inner h2 {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 800; letter-spacing: -0.04em;
+      color: var(--ink); margin-bottom: 60px;
+      max-width: 500px; line-height: 1.05;
+    }
+    .expect-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .expect-card {
+      background: var(--paper);
+      padding: 36px 28px;
+      transition: background var(--t-base);
+    }
+    .expect-card:hover { background: var(--canvas); }
+    .expect-num {
+      font-family: var(--serif);
+      font-size: 2.2rem; color: var(--gold);
+      line-height: 1; margin-bottom: 16px;
+    }
+    .expect-title { font-size: 1rem; font-weight: 800; color: var(--ink); margin-bottom: 8px; }
+    .expect-body { font-size: 0.85rem; color: rgba(10,10,10,0.62); line-height: 1.65; }
+
+    /* ── Footer ──────────────────────────────────────────────── */
+    footer {
+      background: var(--ink-soft);
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding: 40px 48px;
+    }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .footer-brand { display: flex; align-items: center; gap: 8px; }
+    .footer-logomark { width: 28px; height: 28px; border-radius: 6px; overflow: hidden; }
+    .footer-logomark img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .footer-name { font-family: var(--serif); font-size: 1rem; color: var(--paper); }
+    .footer-links { display: flex; gap: 28px; }
+    .footer-links a { font-size: 0.78rem; color: rgba(255,255,255,0.3); transition: color var(--t-fast); }
+    .footer-links a:hover { color: var(--paper); }
+    .footer-copy { font-size: 0.72rem; color: rgba(255,255,255,0.18); }
+
+    /* ── Responsive ──────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; gap: 48px; min-height: auto; padding-top: 100px; }
+      .hero-body { max-width: 100%; }
+      .expect-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .nav { padding: 0 24px; }
+      .hero { padding: 100px 24px 60px; }
+      .expect-section { padding: 72px 24px; }
+      .waitlist-card { padding: 36px 24px; }
+      .form-row { grid-template-columns: 1fr; }
+      footer { padding: 32px 24px; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Nav ───────────────────────────────────────────────── -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a class="nav-back" href="index.html">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M11.5 7h-9M6.5 3L2.5 7l4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Back
+      </a>
+      <a class="nav-logo" href="index.html">
+        <div class="nav-logomark"><img src="logo.png" alt="SkillGap logo"></div>
+        <span class="nav-wordmark">SkillGap</span>
+      </a>
+      <span class="nav-badge">Coming Soon</span>
+    </div>
+  </nav>
+
+  <!-- ── Hero + Waitlist form ──────────────────────────────── -->
+  <section class="hero">
+    <div class="hero-left">
+      <div class="hero-eyebrow">
+        <span class="hero-eyebrow-dot"></span>
+        SkillGap Platform · Early Access
+      </div>
+      <h1 class="hero-title">Gap analysis<br>for your class.<br>No IT required.</h1>
+      <p class="hero-body">Upload your bubble sheet scan export or answer CSV, review the results, and get per-student gap reports with AI feedback — in seconds. Works with any subject, any exam format.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-info">
+            <div class="step-title">Upload your answer data</div>
+            <div class="step-body">CSV from your bubble sheet scanner, or enter answers directly. Any subject, any question format.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-info">
+            <div class="step-title">Review and correct</div>
+            <div class="step-body">Scanning errors happen. Review every student's answers in a clean grid and fix anything before analysis runs.</div>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-info">
+            <div class="step-title">Download gap reports</div>
+            <div class="step-body">Per-student PDF reports with skill index, performance band, and AI feedback. Class-level heatmap included.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Waitlist form -->
+    <div class="waitlist-card">
+      <div id="waitlist-form-wrap">
+        <div class="card-eyebrow">Early Access Waitlist</div>
+        <h2 class="card-title">Be the first<br>to run it.</h2>
+        <p class="card-sub">We're building the platform now. Join the waitlist and we'll notify you the moment it's ready — early access users get priority onboarding.</p>
+
+        <form id="waitlist-form" novalidate>
+          <input type="text" name="_trap" style="display:none" tabindex="-1" autocomplete="off">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label" for="wl-name">Your name</label>
+              <input class="form-input" id="wl-name" name="from_name" type="text" placeholder="Ana Reyes" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="wl-email">Work email</label>
+              <input class="form-input" id="wl-email" name="from_email" type="email" placeholder="ana@university.edu" required>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="wl-institution">Institution</label>
+            <input class="form-input" id="wl-institution" name="from_institution" type="text" placeholder="University / School name">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="wl-subject">Subject you teach</label>
+            <input class="form-input" id="wl-subject" name="subject" type="text" placeholder="e.g. Biology, Accounting, Java Programming">
+          </div>
+          <button class="form-submit" type="submit" id="wl-submit">Join the Waitlist</button>
+          <p class="form-error-msg" id="wl-error"></p>
+        </form>
+        <p class="form-note">No spam. One email when the platform is ready.</p>
+      </div>
+
+      <div class="form-success" id="waitlist-success" style="display:none;">
+        <div class="form-success-icon">✓</div>
+        <div class="form-success-title">You're on the list.</div>
+        <p class="form-success-body">We'll email you the moment early access opens. Thanks for being here early — it means a lot.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── What to expect ────────────────────────────────────── -->
+  <section class="expect-section">
+    <div class="expect-inner">
+      <div class="expect-eyebrow">What You Get</div>
+      <h2>Everything a teacher needs.<br>Nothing they don't.</h2>
+      <div class="expect-grid">
+        <div class="expect-card">
+          <div class="expect-num">01</div>
+          <div class="expect-title">Skill Index per student</div>
+          <p class="expect-body">A composite score built from accuracy, speed, and consistency — not just a percentage. Tells you how deeply a student understands the material.</p>
+        </div>
+        <div class="expect-card">
+          <div class="expect-num">02</div>
+          <div class="expect-title">AI gap narrative</div>
+          <p class="expect-body">Each student gets a short, specific AI-written breakdown of what they got wrong and what to study next. Not generic. Named concepts, named gaps.</p>
+        </div>
+        <div class="expect-card">
+          <div class="expect-num">03</div>
+          <div class="expect-title">Class heatmap</div>
+          <p class="expect-body">See which questions the whole class got wrong. Spot the concept your lecture missed before you plan the next one. One view, full picture.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Footer ────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="footer-logomark"><img src="logo.png" alt="SkillGap logo"></div>
+        <span class="footer-name">SkillGap</span>
+      </div>
+      <div class="footer-links">
+        <a href="institutions.html">For Institutions</a>
+        <a href="institutions.html#pricing">Pricing</a>
+        <a href="compliance.html">Compliance</a>
+      </div>
+      <span class="footer-copy">© 2025 SkillGap</span>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById('waitlist-form')
+    const submitBtn = document.getElementById('wl-submit')
+    const errorMsg = document.getElementById('wl-error')
+    const successDiv = document.getElementById('waitlist-success')
+    const formWrap = document.getElementById('waitlist-form-wrap')
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault()
+      errorMsg.style.display = 'none'
+
+      const name = form.from_name.value.trim()
+      const email = form.from_email.value.trim()
+      const institution = form.from_institution.value.trim()
+      const subject = form.subject.value.trim()
+      const trap = form._trap.value
+
+      if (trap) return
+
+      if (!name || !email) {
+        errorMsg.textContent = 'Name and email are required.'
+        errorMsg.style.display = 'block'
+        return
+      }
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
+      if (!emailOk) {
+        errorMsg.textContent = 'Please enter a valid email address.'
+        errorMsg.style.display = 'block'
+        return
+      }
+
+      submitBtn.disabled = true
+      submitBtn.textContent = 'Joining…'
+
+      try {
+        const res = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            from_name: name,
+            from_email: email,
+            from_institution: institution || 'Not provided',
+            message: `WAITLIST SIGNUP\nSubject taught: ${subject || 'Not provided'}\nInstitution: ${institution || 'Not provided'}`,
+            _trap: trap,
+          }),
+        })
+
+        if (!res.ok) throw new Error()
+
+        formWrap.style.display = 'none'
+        successDiv.style.display = 'block'
+      } catch {
+        errorMsg.textContent = 'Something went wrong. Email us directly at hello@skillgap-studio.space'
+        errorMsg.style.display = 'block'
+        submitBtn.disabled = false
+        submitBtn.textContent = 'Join the Waitlist'
+      }
+    })
+  </script>
+</body>
+</html>
