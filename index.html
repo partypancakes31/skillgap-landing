@@ -3,31 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SkillGap | AI Assessment Intelligence for Institutions</title>
-  <meta name="description" content="SkillGap is the AI intelligence layer that turns every assessment into a diagnosis. Students find out exactly which skills they're missing. Faculty find out where the whole class is falling short. Automatically, after every exam.">
-  <link rel="canonical" href="https://skillgap-landing.vercel.app/">
+  <title>SkillGap | AI-Powered Skills Gap Analysis</title>
+  <meta name="description" content="SkillGap turns every assessment into a diagnosis. Use the online platform to analyze your class today, or explore institutional integration and custom builds.">
+  <link rel="canonical" href="https://skillgap-studio.space/">
   <link rel="icon" type="image/png" href="/logo.png">
   <link rel="apple-touch-icon" href="/logo.png">
   <meta name="theme-color" content="#1a1814">
-  <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="SkillGap">
-  <meta property="og:title" content="SkillGap | AI Assessment Intelligence for Institutions">
-  <meta property="og:description" content="The AI intelligence layer that turns every assessment into a diagnosis. Students get a roadmap. Faculty get class-level intelligence. Institutions get the data to improve.">
-  <meta property="og:url" content="https://skillgap-landing.vercel.app/">
-  <meta property="og:image" content="https://skillgap-landing.vercel.app/logo.png">
-  <!-- Twitter -->
+  <meta property="og:title" content="SkillGap | AI-Powered Skills Gap Analysis">
+  <meta property="og:description" content="Turn every assessment into a diagnosis. Upload your class data and get gap analysis back in seconds — or explore institutional-grade integration.">
+  <meta property="og:url" content="https://skillgap-studio.space/">
+  <meta property="og:image" content="https://skillgap-studio.space/logo.png">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="SkillGap | AI Assessment Intelligence for Institutions">
-  <meta name="twitter:description" content="The AI layer that turns every exam into a diagnosis. Students get direction. Faculty get intelligence. Institutions get results.">
-  <meta name="twitter:image" content="https://skillgap-landing.vercel.app/logo.png">
+  <meta name="twitter:title" content="SkillGap | AI-Powered Skills Gap Analysis">
+  <meta name="twitter:image" content="https://skillgap-studio.space/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    /* ================================================
-       TOKENS
-       ================================================ */
     :root {
       --ink:        #0a0a0a;
       --ink-soft:   #1a1814;
@@ -39,2357 +33,390 @@
       --gold:       #c9a96e;
       --gold-deep:  #8a6c35;
       --gold-pale:  rgba(201,169,110,0.12);
-      --success:    #1a7a4a;
-      --warning:    #d97706;
-      --error:      #b91c1c;
-      --success-bg: #edf7f1;
-      --warning-bg: #fef9ec;
-      --error-bg:   #fef2f2;
-      --blue:       #2563eb;
-
       --serif:  'DM Serif Display', Georgia, serif;
       --sans:   'Manrope', system-ui, -apple-system, sans-serif;
-
-      --ease:       cubic-bezier(0.22, 1, 0.36, 1);
-      --ease-back:  cubic-bezier(0.34, 1.56, 0.64, 1);
-      --t-fast:  150ms ease;
-      --t-base:  250ms ease;
-      --t-slow:  500ms var(--ease);
+      --ease:   cubic-bezier(0.22, 1, 0.36, 1);
+      --t-base: 250ms ease;
+      --t-slow: 500ms cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    /* ================================================
-       RESET
-       ================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; font-size: 16px; }
-    body { font-family: var(--sans); background: var(--paper); color: var(--ink); overflow-x: hidden; }
-    a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
-    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    html { font-size: 16px; height: 100%; }
+    body { font-family: var(--sans); height: 100%; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
 
-    /* ================================================
-       SCROLL REVEAL
-       ================================================ */
-    .reveal {
-      opacity: 0;
-      transform: translateY(32px);
-      transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    /* ── Top brand bar ──────────────────────────────────────── */
+    .brand-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 10;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
     }
-    .reveal.in { opacity: 1; transform: none; }
-    .d1 { transition-delay: 0.08s; }
-    .d2 { transition-delay: 0.16s; }
-    .d3 { transition-delay: 0.24s; }
-    .d4 { transition-delay: 0.32s; }
-    .d5 { transition-delay: 0.40s; }
-    .d6 { transition-delay: 0.48s; }
-
-    /* ================================================
-       NAV
-       ================================================ */
-    .nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      height: 68px;
-      display: flex; align-items: center;
-      padding: 0 48px;
-      transition: background var(--t-base), border-color var(--t-base), box-shadow var(--t-base);
-    }
-    .nav.scrolled {
-      background: rgba(10,10,10,0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .nav.light.scrolled {
+    .brand-bar-inner {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      pointer-events: auto;
       background: rgba(255,255,255,0.92);
-      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(0,0,0,0.08);
+      border-radius: 999px;
+      padding: 7px 18px 7px 7px;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.1);
     }
-    .nav-inner { max-width: 1280px; width: 100%; margin: 0 auto; display: flex; align-items: center; }
-    .nav-logo { display: flex; align-items: center; gap: 10px; margin-right: auto; }
-    .nav-logomark { width: 36px; height: 36px; border-radius: 8px; overflow: hidden; flex-shrink: 0; }
-    .nav-logomark img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .nav-wordmark { font-family: var(--serif); font-size: 1.25rem; color: var(--paper); letter-spacing: -0.02em; }
-    .nav.light .nav-wordmark { color: var(--ink); }
-    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; margin-right: 40px; }
-    .nav-links a { font-size: 0.82rem; font-weight: 600; letter-spacing: 0.02em; color: rgba(255,255,255,0.65); transition: color var(--t-fast); }
-    .nav.light .nav-links a { color: rgba(10,10,10,0.68); }
-    .nav-links a:hover { color: var(--paper); }
-    .nav.light .nav-links a:hover { color: var(--ink); }
-    .nav-btn { padding: 10px 22px; background: var(--gold); color: var(--ink-soft); border-radius: 999px; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; transition: all var(--t-fast); }
-    .nav-btn:hover { background: #d4b47a; transform: translateY(-1px); }
+    .brand-logomark {
+      width: 34px; height: 34px;
+      border-radius: 8px; overflow: hidden;
+      flex-shrink: 0;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    }
+    .brand-logomark img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .brand-wordmark {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+      transition: color var(--t-base);
+    }
 
-    /* ================================================
-       HERO
-       ================================================ */
-    .hero {
+    /* ── Gateway split ──────────────────────────────────────── */
+    .gateway {
+      display: flex;
       min-height: 100vh;
-      background: var(--ink-soft);
-      display: flex; align-items: center;
-      padding: 120px 48px 80px;
+    }
+
+    .gate-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 100px 72px 80px;
+      cursor: pointer;
+      transition: opacity 0.4s var(--ease), flex 0.6s var(--ease);
       position: relative;
       overflow: hidden;
     }
-    .hero::before {
+    .gate-panel:hover { flex: 1.08; }
+
+    .gate-panel--left  { background: var(--canvas); }
+    .gate-panel--right { background: var(--ink-soft); }
+
+    /* Dim the non-hovered side */
+    .gateway:has(.gate-panel--left:hover)  .gate-panel--right { opacity: 0.75; }
+    .gateway:has(.gate-panel--right:hover) .gate-panel--left  { opacity: 0.75; }
+
+    /* Subtle background texture */
+    .gate-panel--right::before {
       content: '';
       position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse at 80% 20%, rgba(201,169,110,0.14) 0%, transparent 55%),
-        radial-gradient(ellipse at 10% 90%, rgba(201,169,110,0.06) 0%, transparent 50%);
+        radial-gradient(ellipse at 85% 15%, rgba(201,169,110,0.10) 0%, transparent 55%),
+        radial-gradient(ellipse at 15% 85%, rgba(201,169,110,0.05) 0%, transparent 50%);
       pointer-events: none;
     }
-    /* Subtle dot grid */
-    .hero::after {
+    .gate-panel--left::before {
       content: '';
       position: absolute; inset: 0;
-      background-image: radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px);
-      background-size: 32px 32px;
+      background: radial-gradient(ellipse at 20% 80%, rgba(201,169,110,0.08) 0%, transparent 55%);
       pointer-events: none;
     }
-    .hero-inner {
-      max-width: 1280px; width: 100%; margin: 0 auto;
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 80px; align-items: center;
-      position: relative; z-index: 1;
+
+    /* ── Divider ────────────────────────────────────────────── */
+    .gate-divider {
+      width: 1px;
+      background: linear-gradient(to bottom,
+        transparent 0%,
+        rgba(201,169,110,0.18) 20%,
+        rgba(201,169,110,0.35) 50%,
+        rgba(201,169,110,0.18) 80%,
+        transparent 100%
+      );
+      position: relative;
+      flex-shrink: 0;
     }
-    .hero-eyebrow {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 6px 14px;
+    .gate-divider-pill {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--gold);
+      color: var(--ink-soft);
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 10px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    /* ── Panel content ──────────────────────────────────────── */
+    .gate-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 32px;
+      width: fit-content;
+    }
+    .gate-tag--light {
+      background: rgba(201,169,110,0.14);
+      border: 1px solid rgba(201,169,110,0.28);
+      color: var(--gold-deep);
+    }
+    .gate-tag--dark {
       background: rgba(201,169,110,0.12);
       border: 1px solid rgba(201,169,110,0.22);
-      border-radius: 999px;
-      font-size: 0.7rem; font-weight: 800;
-      text-transform: uppercase; letter-spacing: 0.12em;
-      color: var(--gold); margin-bottom: 28px;
+      color: var(--gold);
     }
-    .hero-eyebrow-pulse { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; animation: pulse 2s ease infinite; }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
+    .gate-tag-dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: currentColor;
+    }
 
-    .hero-title {
+    .gate-heading {
       font-family: var(--sans);
-      font-size: clamp(3rem, 5.5vw, 5.5rem);
+      font-size: clamp(2.4rem, 4vw, 3.8rem);
       font-weight: 800;
       line-height: 1.0;
       letter-spacing: -0.04em;
-      color: var(--paper);
-      margin-bottom: 28px;
+      margin-bottom: 20px;
     }
-    .hero-title .line { display: block; }
-    .hero-title .strike-line {
-      color: rgba(255,255,255,0.28);
-      display: inline;
-      white-space: nowrap;
-      background-image: linear-gradient(var(--gold), var(--gold));
-      background-repeat: no-repeat;
-      background-size: 100% 3px;
-      background-position: 0 52%;
+    .gate-panel--left  .gate-heading { color: var(--ink); }
+    .gate-panel--right .gate-heading { color: var(--paper); }
+
+    .gate-body {
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 40px;
+      max-width: 360px;
     }
-    .hero-title .clear-line { color: var(--paper); }
+    .gate-panel--left  .gate-body { color: rgba(10,10,10,0.62); }
+    .gate-panel--right .gate-body { color: rgba(255,255,255,0.5); }
 
-    .hero-body { font-size: 1.05rem; line-height: 1.7; color: rgba(255,255,255,0.55); max-width: 420px; margin-bottom: 40px; font-weight: 400; }
-    .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-
-    .btn-solid { padding: 14px 30px; background: var(--gold); color: var(--ink-soft); border-radius: 999px; font-size: 0.82rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; transition: all var(--t-fast); box-shadow: 0 4px 20px rgba(201,169,110,0.3); }
-    .btn-solid:hover { background: #d4b47a; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,169,110,0.42); }
-
-    .btn-outline { padding: 14px 24px; border: 1px solid rgba(255,255,255,0.18); border-radius: 999px; font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.65); display: flex; align-items: center; gap: 6px; transition: all var(--t-fast); }
-    .btn-outline:hover { border-color: rgba(255,255,255,0.4); color: var(--paper); }
-
-    /* Hero mockup */
-    .hero-visual { display: flex; justify-content: center; align-items: center; }
-    .mockup {
-      width: 100%; max-width: 460px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.09);
-      border-radius: 20px;
-      overflow: hidden;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.5), 0 8px 24px rgba(0,0,0,0.3);
-      transform: perspective(1000px) rotateY(-4deg) rotateX(2deg);
-      transition: transform 0.6s var(--ease);
-    }
-    .mockup:hover { transform: perspective(1000px) rotateY(-1deg) rotateX(0deg); }
-    .mockup-bar { height: 40px; background: rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.07); display: flex; align-items: center; padding: 0 16px; gap: 6px; }
-    .mock-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .mock-dot.r{background:#ff5f57} .mock-dot.y{background:#ffbd2e} .mock-dot.g{background:#28c840}
-    .mock-url { margin: 0 auto; padding: 3px 14px; background: rgba(255,255,255,0.06); border-radius: 999px; font-size: 11px; color: rgba(255,255,255,0.3); }
-    .mockup-body { padding: 20px; background: #111; display: flex; flex-direction: column; gap: 16px; }
-
-    /* Score card */
-    .mc-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; }
-    .mc-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 20px; }
-    .mc-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.3); margin-bottom: 4px; }
-    .mc-num { font-family: var(--serif); font-size: 3.5rem; line-height: 1; letter-spacing: -0.04em; color: var(--paper); }
-    .mc-badge { padding: 5px 12px; border-radius: 999px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; background: rgba(26,122,74,0.2); color: #4ade80; }
-    .mc-dims { display: flex; flex-direction: column; gap: 10px; }
-    .mc-dim { display: flex; align-items: center; gap: 10px; }
-    .mc-dim-name { font-size: 0.72rem; font-weight: 700; color: rgba(255,255,255,0.5); width: 68px; flex-shrink: 0; }
-    .mc-track { flex: 1; height: 5px; background: rgba(255,255,255,0.08); border-radius: 999px; overflow: hidden; }
-    .mc-fill { height: 100%; border-radius: 999px; }
-    .mc-fill.a { background: #4ade80; }
-    .mc-fill.s { background: #60a5fa; }
-    .mc-fill.st { background: var(--gold); }
-    .mc-wt { font-size: 0.65rem; color: rgba(255,255,255,0.25); width: 32px; text-align: right; }
-    .mc-score { font-size: 0.72rem; font-weight: 700; color: var(--paper); width: 22px; text-align: right; }
-
-    /* AI feedback card */
-    .mc-ai { background: rgba(201,169,110,0.08); border: 1px solid rgba(201,169,110,0.18); border-radius: 12px; padding: 16px; }
-    .mc-ai-head { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; }
-    .mc-ai-icon { width: 20px; height: 20px; background: rgba(201,169,110,0.2); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 11px; }
-    .mc-ai-label { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); }
-    .mc-ai-text { font-size: 0.75rem; line-height: 1.6; color: rgba(255,255,255,0.55); }
-
-    /* ================================================
-       PROMISE  (white, centered editorial)
-       ================================================ */
-    .promise { background: var(--paper); padding: 120px 48px; text-align: center; }
-    .promise-inner { max-width: 760px; margin: 0 auto; }
-    .promise-copy {
-      font-family: var(--serif);
-      font-size: clamp(1.6rem, 3vw, 2.6rem);
-      font-style: italic;
-      line-height: 1.35;
-      color: var(--ink);
-      letter-spacing: -0.02em;
-    }
-    .promise-copy strong { font-style: normal; font-family: var(--sans); font-weight: 800; color: var(--ink); }
-
-    /* ================================================
-       CSA BIG  (dark, large numeral)
-       ================================================ */
-    .csa-big-section { background: var(--ink); padding: 120px 48px; position: relative; overflow: hidden; }
-    .csa-big-section::before { content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 800px; height: 500px; background: radial-gradient(ellipse, rgba(201,169,110,0.1) 0%, transparent 65%); pointer-events: none; }
-    .csa-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
-    .csa-left {}
-    .csa-eyebrow { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold); margin-bottom: 24px; }
-    .csa-numeral { font-family: var(--sans); font-size: clamp(6rem, 14vw, 14rem); font-weight: 800; line-height: 0.9; letter-spacing: -0.06em; color: var(--paper); margin-bottom: 24px; }
-    .csa-numeral span { color: var(--gold); }
-    .csa-title { font-size: clamp(1.4rem, 2.5vw, 2.2rem); font-weight: 800; color: var(--paper); line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 20px; }
-    .csa-desc { font-size: 1rem; color: rgba(255,255,255,0.45); line-height: 1.7; max-width: 380px; }
-
-    .csa-dims { display: flex; flex-direction: column; gap: 0; }
-    .csa-dim {
-      padding: 28px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 24px;
-      align-items: center;
-    }
-    .csa-dim:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
-    .csa-dim-num { font-family: var(--sans); font-size: 2.25rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
-    .csa-dim-num.a { color: #4ade80; }
-    .csa-dim-num.s { color: #60a5fa; }
-    .csa-dim-num.st { color: var(--gold); }
-    .csa-dim-info {}
-    .csa-dim-name { font-size: 1rem; font-weight: 800; color: var(--paper); margin-bottom: 4px; letter-spacing: -0.01em; }
-    .csa-dim-desc { font-size: 0.82rem; color: rgba(255,255,255,0.38); line-height: 1.5; }
-    .csa-dim-wt { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.25); }
-
-    /* ================================================
-       FEATURES  (white, 4-col)
-       ================================================ */
-    .features { background: var(--paper); padding: 120px 48px; }
-    .features-inner { max-width: 1280px; margin: 0 auto; }
-    .features-header { margin-bottom: 72px; }
-    .features-header h2 { font-size: clamp(2rem, 4.5vw, 4rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; color: var(--ink); }
-    .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; background: var(--border); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; }
-    .feat {
-      background: var(--paper);
-      padding: 40px 32px;
-      transition: background var(--t-base);
-    }
-    .feat:hover { background: var(--canvas); }
-    .feat-icon { width: 44px; height: 44px; margin-bottom: 24px; }
-    .feat-icon svg { width: 100%; height: 100%; }
-    .feat-name { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 10px; }
-    .feat-body { font-size: 0.85rem; color: rgba(10,10,10,0.66); line-height: 1.6; }
-
-    /* ================================================
-       BUBBLES  (dark, floating feedback cards)
-       ================================================ */
-    .bubbles-section { background: var(--ink-soft); padding: 120px 48px; position: relative; overflow: hidden; }
-    .bubbles-header { max-width: 1280px; margin: 0 auto 80px; }
-    .bubbles-header h2 { font-size: clamp(2rem, 4.5vw, 4rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; color: var(--paper); max-width: 600px; }
-    .bubbles-header p { font-size: 1rem; color: rgba(255,255,255,0.4); margin-top: 16px; max-width: 440px; }
-
-    .bubbles-grid {
-      max-width: 1280px; margin: 0 auto;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    .bubble-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 16px;
-      padding: 28px;
-      transition: background var(--t-base), border-color var(--t-base), transform var(--t-slow);
-    }
-    .bubble-card:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.14); transform: translateY(-4px); }
-    .bubble-card { display: flex; flex-direction: column; }
-    .bubble-card.gold { background: linear-gradient(160deg, rgba(201,169,110,0.14), rgba(201,169,110,0.05)); border-color: rgba(201,169,110,0.28); }
-    .bubble-card.gold:hover { border-color: rgba(201,169,110,0.45); }
-    .bubble-eyebrow { font-size: 0.62rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.32); margin-bottom: 18px; }
-    .bubble-eyebrow.gold { color: var(--gold); }
-    .bubble-scoreline { display: flex; align-items: center; gap: 12px; margin: 4px 0 16px; }
-    .bubble-scoreline .bubble-score-num { font-size: 2rem; }
-    .bubble-scoreline .bubble-tag { margin-top: 0; }
-    .bubble-insight { font-size: 0.86rem; line-height: 1.62; color: rgba(255,255,255,0.6); margin-top: auto; }
-    .bubble-insight strong { color: var(--paper); font-weight: 700; }
-    .bubble-stat-big { font-family: var(--serif); font-size: 2.5rem; color: var(--gold); line-height: 1; margin: 2px 0 16px; }
-    .bubble-avatar.r { background: rgba(185,28,28,0.25); color: #f87171; }
-    .bubble-top { display: flex; align-items: center; gap: 10px; margin-bottom: 0; }
-    .bubble-avatar { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex-shrink: 0; }
-    .bubble-avatar.g { background: rgba(26,122,74,0.25); color: #4ade80; }
-    .bubble-avatar.w { background: rgba(217,119,6,0.25); color: #fbbf24; }
-    .bubble-avatar.e { background: rgba(37,99,235,0.25); color: #60a5fa; }
-    .bubble-avatar.ai { background: rgba(201,169,110,0.2); color: var(--gold); font-size: 14px; }
-    .bubble-meta { }
-    .bubble-name { font-size: 0.78rem; font-weight: 700; color: var(--paper); }
-    .bubble-role { font-size: 0.7rem; color: rgba(255,255,255,0.3); }
-    .bubble-text { font-size: 0.88rem; line-height: 1.65; color: rgba(255,255,255,0.55); }
-    .bubble-score { margin-top: 16px; display: flex; align-items: center; gap: 8px; }
-    .bubble-score-num { font-family: var(--sans); font-size: 1.4rem; font-weight: 800; letter-spacing: -0.04em; }
-    .bubble-score-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.3); }
-    .bubble-tag { display: inline-flex; padding: 3px 10px; border-radius: 999px; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 14px; }
-    .bubble-tag.p { background: rgba(26,122,74,0.15); color: #4ade80; }
-    .bubble-tag.d { background: rgba(217,119,6,0.15); color: #fbbf24; }
-    .bubble-tag.gap { background: rgba(185,28,28,0.15); color: #f87171; }
-    .bubble-ai-label { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 8px; }
-
-    /* ================================================
-       OFFERINGS  (gold block)
-       ================================================ */
-    .offerings { background: var(--gold); padding: 100px 48px; }
-    .offerings-inner { max-width: 1280px; margin: 0 auto; }
-    .offerings-top { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 64px; gap: 40px; }
-    .offerings-top h2 { font-size: clamp(2rem, 4.5vw, 4rem); font-weight: 800; line-height: 1.05; letter-spacing: -0.04em; color: var(--ink-soft); max-width: 480px; }
-    .offerings-top p { font-size: 1rem; color: rgba(26,24,20,0.6); max-width: 320px; line-height: 1.65; }
-    .offerings-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .offering {
-      background: rgba(255,255,255,0.18);
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 20px;
-      padding: 48px 40px;
-      transition: background var(--t-base);
+    .gate-steps {
       display: flex;
       flex-direction: column;
-    }
-    .offering:hover { background: rgba(255,255,255,0.25); }
-    .offering .btn-dark, .offering .btn-dark-outline { margin-top: auto; align-self: flex-start; }
-    .offering-flag { display: inline-flex; padding: 4px 12px; border-radius: 999px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; background: rgba(26,24,20,0.12); color: var(--ink-soft); margin-bottom: 28px; }
-    .offering-icon { font-size: 2.5rem; margin-bottom: 20px; }
-    .offering-title { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.03em; color: var(--ink-soft); margin-bottom: 12px; }
-    .offering-body { font-size: 0.9rem; color: rgba(26,24,20,0.6); line-height: 1.65; margin-bottom: 28px; }
-    .offering-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 36px; }
-    .offering-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: rgba(26,24,20,0.7); line-height: 1.5; }
-    .offering-check { width: 18px; height: 18px; background: rgba(26,24,20,0.12); border-radius: 4px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
-    .btn-dark { padding: 13px 26px; background: var(--ink-soft); color: var(--paper); border-radius: 999px; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; display: inline-block; transition: all var(--t-fast); }
-    .btn-dark:hover { background: #111; transform: translateY(-1px); }
-    .btn-dark-outline { padding: 13px 26px; border: 2px solid rgba(26,24,20,0.25); color: var(--ink-soft); border-radius: 999px; font-size: 0.78rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; display: inline-block; transition: all var(--t-fast); }
-    .btn-dark-outline:hover { border-color: var(--ink-soft); }
-
-    /* ================================================
-       PRICING  (credits)
-       ================================================ */
-    .pricing-section { background: var(--paper); padding: 100px 48px; border-top: 1px solid var(--border); }
-    .pricing-inner { max-width: 1280px; margin: 0 auto; }
-    .pricing-header { max-width: 600px; margin-bottom: 40px; }
-    .pricing-eyebrow { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold-deep); margin-bottom: 16px; }
-    .pricing-header h2 { font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.04em; color: var(--ink); margin-bottom: 14px; }
-    .pricing-header p { font-size: 1rem; color: rgba(10,10,10,0.66); line-height: 1.7; }
-
-    .model-selector { display: flex; gap: 8px; margin-bottom: 36px; flex-wrap: wrap; }
-    .model-tab { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 14px 20px; border-radius: 12px; border: 1px solid var(--border); background: var(--canvas); cursor: pointer; transition: all var(--t-fast); min-width: 140px; }
-    .model-tab:hover { border-color: rgba(10,10,10,0.2); }
-    .model-tab.active { background: var(--ink-soft); border-color: var(--ink-soft); }
-    .model-tab-top { display: flex; align-items: center; gap: 8px; }
-    .model-tab-tier { font-size: 0.82rem; font-weight: 800; color: var(--ink); }
-    .model-tab.active .model-tab-tier { color: var(--paper); }
-    .model-tab-rec { font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold-deep); background: rgba(201,169,110,0.15); padding: 2px 7px; border-radius: 4px; }
-    .model-tab.active .model-tab-rec { color: var(--gold); background: rgba(201,169,110,0.2); }
-    .model-tab-name { font-size: 0.68rem; color: var(--muted); font-weight: 500; }
-    .model-tab.active .model-tab-name { color: rgba(255,255,255,0.4); }
-
-    .pricing-panel { display: none; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 40px; }
-    .pricing-panel.active { display: grid; }
-    .price-card { background: var(--canvas); border: 1px solid var(--border); border-radius: 16px; padding: 28px 24px; position: relative; display: flex; flex-direction: column; }
-    .price-card.featured { background: var(--ink-soft); border-color: var(--ink-soft); }
-    .price-badge { position: absolute; top: -12px; left: 24px; background: var(--gold); color: var(--ink-soft); font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; padding: 4px 10px; border-radius: 20px; }
-    .price-card-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 16px; }
-    .price-card.featured .price-card-label { color: rgba(255,255,255,0.4); }
-    .price-amount { font-size: 2.6rem; font-weight: 800; letter-spacing: -0.04em; color: var(--ink); line-height: 1; margin-bottom: 4px; }
-    .price-card.featured .price-amount { color: var(--gold); }
-    .price-card.contact-card .price-amount { font-size: 1.9rem; }
-    .price-credits { font-size: 0.82rem; font-weight: 600; color: var(--muted); margin-bottom: 16px; }
-    .price-card.featured .price-credits { color: rgba(255,255,255,0.4); }
-    .price-per { font-size: 0.75rem; font-weight: 700; color: var(--ink); background: rgba(10,10,10,0.07); border-radius: 6px; padding: 4px 8px; display: inline-block; margin-bottom: 20px; }
-    .price-card.featured .price-per { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.75); }
-    .price-divider { height: 1px; background: var(--border); margin-bottom: 16px; }
-    .price-card.featured .price-divider { background: rgba(255,255,255,0.1); }
-    .price-include { font-size: 0.78rem; color: rgba(10,10,10,0.74); line-height: 1.6; flex: 1; }
-    .price-card.featured .price-include { color: rgba(255,255,255,0.4); }
-    .price-cta { display: inline-block; margin-top: 16px; font-size: 0.78rem; font-weight: 700; color: var(--gold-deep); text-decoration: underline; text-underline-offset: 3px; }
-    .pricing-footer { display: flex; gap: 24px; flex-wrap: wrap; padding-top: 32px; border-top: 1px solid var(--border); }
-    .pricing-note { font-size: 0.8rem; color: rgba(10,10,10,0.74); line-height: 1.65; flex: 1; min-width: 200px; }
-    .pricing-note strong { color: var(--ink); font-weight: 700; }
-    /* Per-student licensing layout */
-    .pricing-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; max-width: 980px; margin: 0 auto 36px; }
-    .pricing-cards .price-amount { margin-bottom: 18px; }
-    .price-model { font-size: 0.8rem; font-weight: 600; color: var(--muted); margin-bottom: 18px; }
-    .price-card.featured .price-model { color: rgba(255,255,255,0.45); }
-    .price-unit { font-size: 0.85rem; font-weight: 600; color: var(--muted); margin-left: 5px; letter-spacing: 0; }
-    .price-card.featured .price-unit { color: rgba(255,255,255,0.5); }
-    .pricing-start { max-width: 760px; margin: 0 auto 40px; text-align: center; background: var(--canvas); border: 1px solid var(--border); border-radius: 16px; padding: 28px 32px; }
-    .pricing-start-flow { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold-deep); margin-bottom: 16px; }
-    .pricing-start-flow span { background: rgba(201,169,110,0.12); padding: 5px 12px; border-radius: 20px; }
-    .pricing-start-note { font-size: 0.92rem; color: rgba(10,10,10,0.74); line-height: 1.7; }
-    .pricing-start-note s { color: var(--muted); }
-    .pricing-fulllink-wrap { text-align: center; margin-top: 32px; }
-    .pricing-fulllink { font-size: 0.85rem; font-weight: 800; color: var(--gold-deep); text-decoration: underline; text-underline-offset: 4px; }
-    .pricing-fulllink:hover { opacity: 0.75; }
-
-    /* ================================================
-       TIERS  (canvas, scoring + subjects)
-       ================================================ */
-    .tiers-section { background: var(--canvas); padding: 120px 48px; }
-    .tiers-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
-    .tiers-left h2 { font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.04em; color: var(--ink); margin-bottom: 20px; }
-    .tiers-left p { font-size: 1rem; color: rgba(10,10,10,0.66); line-height: 1.7; margin-bottom: 40px; }
-
-    .tier-list { display: flex; flex-direction: column; gap: 12px; }
-    .tier-row {
-      background: var(--paper);
-      border-radius: 14px;
-      padding: 20px 24px;
-      display: flex; align-items: center; gap: 20px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-      transition: box-shadow var(--t-base), transform var(--t-base);
-    }
-    .tier-row:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.1); transform: translateY(-2px); }
-    .tier-pip { width: 10px; height: 48px; border-radius: 999px; flex-shrink: 0; }
-    .tier-pip.h { background: var(--success); }
-    .tier-pip.m { background: var(--warning); }
-    .tier-pip.l { background: var(--error); }
-    .tier-info { flex: 1; }
-    .tier-name { font-size: 0.95rem; font-weight: 800; color: var(--ink); margin-bottom: 2px; }
-    .tier-range { font-size: 0.78rem; color: rgba(10,10,10,0.74); }
-    .tier-badge { padding: 4px 12px; border-radius: 999px; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; }
-    .tier-badge.h { background: var(--success-bg); color: var(--success); }
-    .tier-badge.m { background: var(--warning-bg); color: #92400e; }
-    .tier-badge.l { background: var(--error-bg); color: var(--error); }
-
-    .tiers-right {}
-    .subjects-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(10,10,10,0.35); margin-bottom: 20px; }
-    .subjects-wrap { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 48px; }
-    .subject-tag {
-      padding: 8px 18px;
-      background: var(--paper);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      font-size: 0.82rem; font-weight: 600; color: rgba(10,10,10,0.68);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-      transition: all var(--t-fast);
-    }
-    .subject-tag:hover { border-color: var(--gold); color: var(--ink); transform: translateY(-1px); }
-    .subject-tag.active { background: var(--ink-soft); color: var(--gold); border-color: transparent; font-weight: 700; }
-    .config-box { background: var(--ink-soft); border-radius: 16px; padding: 32px; }
-    .config-title { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.3); margin-bottom: 20px; }
-    .config-rows { display: flex; flex-direction: column; gap: 14px; }
-    .config-row { display: flex; align-items: center; justify-content: space-between; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.06); }
-    .config-row:last-child { border: none; padding: 0; }
-    .config-key { font-size: 0.82rem; color: rgba(255,255,255,0.35); }
-    .config-val { font-size: 0.82rem; font-weight: 700; color: var(--paper); }
-    .config-val.gold { color: var(--gold); }
-
-    /* ================================================
-       BOLD CTA  (dark, massive type)
-       ================================================ */
-    .big-cta { background: var(--ink); padding: 140px 48px; position: relative; overflow: hidden; }
-    .big-cta::before { content: ''; position: absolute; bottom: -200px; left: 50%; transform: translateX(-50%); width: 900px; height: 500px; background: radial-gradient(ellipse, rgba(201,169,110,0.12) 0%, transparent 65%); pointer-events: none; }
-    .big-cta-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr auto; gap: 80px; align-items: center; position: relative; z-index: 1; }
-    .big-cta h2 {
-      font-size: clamp(3rem, 7vw, 7rem);
-      font-weight: 800;
-      line-height: 0.95;
-      letter-spacing: -0.05em;
-      color: var(--paper);
-    }
-    .big-cta h2 em { font-style: italic; font-family: var(--serif); color: var(--gold); font-weight: 400; }
-    .big-cta-right { display: flex; flex-direction: column; gap: 16px; align-items: flex-start; min-width: 260px; }
-    .big-cta p { font-size: 1rem; color: rgba(255,255,255,0.4); line-height: 1.65; margin-bottom: 8px; }
-
-    /* ================================================
-       FOOTER
-       ================================================ */
-    footer {
-      background: var(--ink);
-      border-top: 1px solid rgba(255,255,255,0.07);
-      padding: 80px 48px 48px;
-    }
-    .footer-inner { max-width: 1280px; margin: 0 auto; }
-    .footer-top { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 60px; margin-bottom: 80px; }
-    .footer-brand {}
-    .footer-brand-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; }
-    .footer-logomark { width: 36px; height: 36px; border-radius: 8px; overflow: hidden; flex-shrink: 0; }
-    .footer-logomark img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .footer-brand-name { font-family: var(--serif); font-size: 1.2rem; color: var(--paper); }
-    .footer-tagline { font-size: 0.85rem; color: rgba(255,255,255,0.3); line-height: 1.65; max-width: 260px; }
-    .footer-col-title { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.25); margin-bottom: 20px; }
-    .footer-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
-    .footer-list a { font-size: 0.88rem; color: rgba(255,255,255,0.45); transition: color var(--t-fast); }
-    .footer-list a:hover { color: var(--paper); }
-    .footer-bottom { display: flex; align-items: flex-end; justify-content: space-between; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 40px; }
-    .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.2); }
-
-    /* Wordmark */
-    .footer-wordmark {
-      font-family: var(--sans);
-      font-size: clamp(4rem, 10vw, 9rem);
-      font-weight: 800;
-      letter-spacing: -0.06em;
-      color: rgba(255,255,255,0.06);
-      line-height: 1;
-      user-select: none;
-    }
-    .footer-wordmark span { color: var(--gold); opacity: 0.5; }
-
-    /* ================================================
-       INQUIRY FORM
-       ================================================ */
-    .inquiry { background: var(--canvas); padding: 120px 48px; }
-    .inquiry-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: start; }
-    .inquiry-eyebrow { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold-deep); margin-bottom: 20px; }
-    .inquiry-left h2 { font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 800; line-height: 1.1; letter-spacing: -0.04em; color: var(--ink); margin-bottom: 16px; }
-    .inquiry-left p { font-size: 1rem; color: rgba(10,10,10,0.66); line-height: 1.7; margin-bottom: 32px; }
-    .inquiry-note { display: flex; align-items: flex-start; gap: 12px; padding: 16px 20px; background: rgba(201,169,110,0.1); border: 1px solid rgba(201,169,110,0.2); border-radius: 12px; }
-    .inquiry-note-icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
-    .inquiry-note-text { font-size: 0.82rem; color: var(--gold-deep); line-height: 1.55; }
-    .inquiry-note-text strong { font-weight: 700; }
-    .inquiry-note-text a { text-decoration: underline; text-underline-offset: 3px; }
-    .inquiry-note-text a:hover { opacity: 0.75; }
-
-    .inquiry-card { background: var(--ink-soft); border-radius: 20px; padding: 40px; box-shadow: 0 16px 48px rgba(0,0,0,0.18); }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .form-group { display: flex; flex-direction: column; gap: 8px; margin-bottom: 16px; }
-    .form-group:last-child { margin-bottom: 0; }
-    .form-label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: rgba(255,255,255,0.35); }
-    .form-input, .form-textarea {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 10px;
-      padding: 13px 16px;
-      font-family: var(--sans);
-      font-size: 0.88rem;
-      color: var(--paper);
-      outline: none;
-      transition: border-color var(--t-fast), background var(--t-fast);
-      width: 100%;
-    }
-    .form-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,0.2); }
-    .form-input:focus, .form-textarea:focus { border-color: var(--gold); background: rgba(255,255,255,0.09); }
-    .form-textarea { resize: vertical; min-height: 120px; line-height: 1.6; }
-    .form-submit {
-      width: 100%;
-      margin-top: 8px;
-      padding: 15px;
-      background: var(--gold);
-      color: var(--ink-soft);
-      border-radius: 10px;
-      font-family: var(--sans);
-      font-size: 0.82rem;
-      font-weight: 800;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      cursor: pointer;
-      transition: all var(--t-fast);
-      border: none;
-    }
-    .form-submit:hover { background: #d4b47a; transform: translateY(-1px); }
-    .form-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-    .form-success { text-align: center; padding: 48px 0; }
-    .form-success-icon { width: 52px; height: 52px; background: rgba(26,122,74,0.2); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 1.4rem; color: #4ade80; }
-    .form-success-title { font-size: 1.1rem; font-weight: 800; color: var(--paper); margin-bottom: 8px; }
-    .form-success-body { font-size: 0.88rem; color: rgba(255,255,255,0.4); line-height: 1.6; }
-    .form-error-msg { font-size: 0.78rem; color: #f87171; margin-top: 12px; text-align: center; display: none; }
-
-    /* ================================================
-       DEMO SHOWCASE
-       ================================================ */
-    .demo-section { background: var(--ink); padding: 120px 48px; }
-    .demo-inner { max-width: 900px; margin: 0 auto; }
-    .demo-header { text-align: center; margin-bottom: 48px; }
-    .demo-eyebrow {
-      display: inline-block;
-      font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
-      color: var(--gold); border: 1px solid rgba(201,169,110,0.35);
-      border-radius: 999px; padding: 5px 14px; margin-bottom: 20px;
-    }
-    .demo-header h2 {
-      font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3rem);
-      color: #fff; line-height: 1.1; margin-bottom: 14px;
-    }
-    .demo-header p { font-size: 0.95rem; color: rgba(255,255,255,0.45); max-width: 480px; margin: 0 auto; line-height: 1.65; }
-
-    /* Tabs */
-    .demo-tabs { display: flex; justify-content: center; gap: 8px; margin-bottom: 36px; }
-    .demo-tab {
-      font-family: var(--font-body); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em;
-      padding: 9px 22px; border-radius: 999px; cursor: pointer; border: 1px solid rgba(255,255,255,0.12);
-      background: transparent; color: rgba(255,255,255,0.45); transition: all 200ms ease;
-    }
-    .demo-tab.active { background: var(--gold); color: var(--ink-soft); border-color: var(--gold); }
-    .demo-tab:hover:not(.active) { border-color: rgba(255,255,255,0.28); color: rgba(255,255,255,0.75); }
-
-    /* Mockup shell */
-    .demo-mockup {
-      width: 100%; max-width: 720px; margin: 0 auto;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.09);
-      border-radius: 20px; overflow: hidden;
-      box-shadow: 0 32px 80px rgba(0,0,0,0.55), 0 8px 24px rgba(0,0,0,0.3);
-    }
-    .demo-bar {
-      height: 40px; background: rgba(255,255,255,0.05);
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      display: flex; align-items: center; padding: 0 16px; gap: 6px;
-    }
-    .demo-bar .mock-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .demo-bar .mock-url {
-      margin: 0 auto; padding: 3px 14px;
-      background: rgba(255,255,255,0.06); border-radius: 999px;
-      font-size: 11px; color: rgba(255,255,255,0.3);
-    }
-
-    /* Screen container */
-    .demo-screens-wrap { position: relative; background: #111; min-height: 340px; }
-    .demo-screen {
-      position: absolute; inset: 0; padding: 28px;
-      opacity: 0; transform: translateY(10px);
-      transition: opacity 380ms ease, transform 380ms ease;
-      pointer-events: none;
-    }
-    .demo-screen.active {
-      opacity: 1; transform: translateY(0); pointer-events: auto;
-      position: relative;
-    }
-
-    /* Screen: assessment question */
-    .ds-prog-bar-wrap { margin-bottom: 20px; }
-    .ds-prog-meta { display: flex; justify-content: space-between; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 8px; }
-    .ds-prog-track { height: 3px; background: rgba(255,255,255,0.08); border-radius: 2px; }
-    .ds-prog-fill { height: 3px; background: var(--gold); border-radius: 2px; }
-    .ds-question { font-family: var(--font-display); font-size: 1.05rem; color: #fff; line-height: 1.45; margin-bottom: 22px; }
-    .ds-options { display: flex; flex-direction: column; gap: 9px; margin-bottom: 22px; }
-    .ds-option {
-      display: flex; align-items: center; gap: 10px;
-      padding: 10px 14px; border-radius: 8px;
-      border: 1px solid rgba(255,255,255,0.09);
-      font-size: 0.82rem; color: rgba(255,255,255,0.65); cursor: default;
-    }
-    .ds-option.selected { border-color: var(--gold); background: rgba(201,169,110,0.08); color: #fff; }
-    .ds-opt-key { font-size: 10px; font-weight: 800; letter-spacing: 0.08em; color: rgba(255,255,255,0.3); width: 16px; flex-shrink: 0; }
-    .ds-option.selected .ds-opt-key { color: var(--gold); }
-    .ds-next-btn {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-family: var(--font-body); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em;
-      background: var(--gold); color: var(--ink); padding: 9px 20px; border-radius: 999px; border: none; cursor: default;
-    }
-
-    /* Screen: skill index results */
-    .ds-result-head { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; }
-    .ds-result-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 4px; }
-    .ds-result-num { font-family: var(--font-display); font-size: 3rem; color: #fff; line-height: 1; }
-    .ds-result-badge { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 12px; border-radius: 999px; background: rgba(217,119,6,0.15); color: #d97706; border: 1px solid rgba(217,119,6,0.3); margin-top: 4px; }
-    .ds-dims { display: flex; flex-direction: column; gap: 12px; margin-bottom: 18px; }
-    .ds-dim { display: flex; align-items: center; gap: 12px; }
-    .ds-dim-name { font-size: 0.78rem; color: rgba(255,255,255,0.45); width: 64px; flex-shrink: 0; }
-    .ds-dim-track { flex: 1; height: 4px; background: rgba(255,255,255,0.08); border-radius: 2px; }
-    .ds-dim-fill { height: 4px; border-radius: 2px; }
-    .ds-dim-fill.a { background: #22c55e; }
-    .ds-dim-fill.s { background: #3b82f6; }
-    .ds-dim-fill.st { background: var(--gold); }
-    .ds-dim-score { font-size: 0.82rem; font-weight: 700; color: #fff; font-variant-numeric: tabular-nums; width: 24px; text-align: right; }
-    .ds-dim-wt { font-size: 10px; color: rgba(255,255,255,0.25); width: 36px; font-variant-numeric: tabular-nums; }
-    .ds-result-note { font-size: 0.78rem; color: rgba(255,255,255,0.35); line-height: 1.55; font-style: italic; }
-
-    /* Screen: AI feedback */
-    .ds-ai-head { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
-    .ds-ai-icon { width: 26px; height: 26px; background: rgba(201,169,110,0.15); border: 1px solid rgba(201,169,110,0.3); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--gold); }
-    .ds-ai-label { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.4); }
-    .ds-ai-body { font-family: var(--font-display); font-size: 0.9rem; color: rgba(255,255,255,0.8); line-height: 1.65; margin-bottom: 22px; font-style: italic; }
-    .ds-ai-body em { font-style: normal; color: var(--gold); }
-    .ds-cursor::after { content: '|'; animation: blink 1s step-end infinite; color: var(--gold); margin-left: 2px; }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-    .ds-roadmap-label { font-size: 10px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 10px; }
-    .ds-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-    .ds-chip { font-size: 0.75rem; font-weight: 600; padding: 5px 12px; border-radius: 999px; background: rgba(185,28,28,0.15); color: #fca5a5; border: 1px solid rgba(185,28,28,0.3); }
-
-    /* Screen: class dashboard */
-    .ds-dash-head { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 18px; }
-    .ds-stat-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 20px; }
-    .ds-stat { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 10px; padding: 14px 16px; }
-    .ds-stat-val { font-family: var(--font-display); font-size: 1.9rem; color: #fff; line-height: 1; margin-bottom: 4px; font-variant-numeric: tabular-nums; }
-    .ds-stat-val.g { color: #4ade80; }
-    .ds-stat-val.w { color: #fbbf24; }
-    .ds-stat-val.r { color: #f87171; }
-    .ds-stat-name { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.3); }
-    .ds-stat-pct { font-size: 0.75rem; color: rgba(255,255,255,0.25); margin-top: 2px; font-variant-numeric: tabular-nums; }
-    .ds-avg { display: flex; align-items: center; justify-content: space-between; background: rgba(201,169,110,0.07); border: 1px solid rgba(201,169,110,0.15); border-radius: 8px; padding: 12px 16px; }
-    .ds-avg-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
-    .ds-avg-val { font-family: var(--font-display); font-size: 1.5rem; color: var(--gold); font-variant-numeric: tabular-nums; }
-
-    /* Screen: heatmap */
-    .ds-heatmap-label { font-size: 10px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 18px; }
-    .ds-heat-rows { display: flex; flex-direction: column; gap: 13px; }
-    .ds-heat-row { display: flex; align-items: center; gap: 12px; }
-    .ds-heat-name { font-size: 0.78rem; color: rgba(255,255,255,0.55); width: 160px; flex-shrink: 0; }
-    .ds-heat-track { flex: 1; height: 6px; background: rgba(255,255,255,0.07); border-radius: 3px; }
-    .ds-heat-fill { height: 6px; border-radius: 3px; }
-    .ds-heat-pct { font-size: 0.78rem; font-weight: 700; color: #fff; width: 34px; text-align: right; font-variant-numeric: tabular-nums; }
-
-    /* Screen: roster */
-    .ds-roster-label { font-size: 10px; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 14px; }
-    .ds-table { width: 100%; border-collapse: collapse; }
-    .ds-table th { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.25); text-align: left; padding: 0 0 10px; }
-    .ds-table td { font-size: 0.8rem; color: rgba(255,255,255,0.65); padding: 9px 0; border-top: 1px solid rgba(255,255,255,0.05); font-variant-numeric: tabular-nums; }
-    .ds-table td:first-child { color: #fff; font-weight: 600; }
-    .ds-tier { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 0.07em; padding: 2px 8px; border-radius: 999px; }
-    .ds-tier.p { background: rgba(26,122,74,0.2); color: #4ade80; border: 1px solid rgba(26,122,74,0.3); }
-    .ds-tier.d { background: rgba(217,119,6,0.15); color: #fbbf24; border: 1px solid rgba(217,119,6,0.3); }
-    .ds-tier.g { background: rgba(185,28,28,0.15); color: #f87171; border: 1px solid rgba(185,28,28,0.3); }
-
-    /* Dots */
-    .demo-dots { display: flex; justify-content: center; gap: 7px; margin-top: 20px; }
-    .demo-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.15); transition: background 250ms ease, transform 250ms ease; cursor: pointer; }
-    .demo-dot.active { background: var(--gold); transform: scale(1.2); }
-
-    /* Demo CTA */
-    .demo-cta { text-align: center; margin-top: 40px; }
-    .demo-cta a { font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.4); text-decoration: none; transition: color 150ms ease; }
-    .demo-cta a:hover { color: var(--gold); }
-    .demo-cta a::after { content: ' →'; }
-
-    /* ================================================
-       RESPONSIVE
-       ================================================ */
-    /* ── Founder card ─────────────────────────────────────────── */
-    .founder-section {
-      background: var(--ink);
-      padding: 72px 40px;
-      display: flex;
-      justify-content: center;
-    }
-    .founder-card {
-      display: flex;
-      align-items: center;
-      gap: 40px;
-      background: var(--ink-soft);
-      border: 1px solid rgba(201,169,110,0.18);
-      border-radius: 18px;
-      padding: 36px 48px;
-      max-width: 660px;
-      width: 100%;
-      box-shadow: 0 4px 32px rgba(0,0,0,0.18), 0 1px 4px rgba(0,0,0,0.1);
-      position: relative;
-      overflow: hidden;
-    }
-    .founder-card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 50%; transform: translateX(-50%);
-      width: 50%; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(201,169,110,0.6), transparent);
-    }
-    .founder-logo-col {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       gap: 10px;
+      margin-bottom: 48px;
+    }
+    .gate-step {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .gate-panel--left  .gate-step { color: rgba(10,10,10,0.72); }
+    .gate-panel--right .gate-step { color: rgba(255,255,255,0.55); }
+    .gate-step-num {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem;
+      font-weight: 800;
       flex-shrink: 0;
     }
-    .founder-logo-col img {
-      width: 68px;
-      height: 68px;
-      border-radius: 14px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.18);
-    }
-    .founder-logo-label {
-      font-size: 8.5px;
-      font-weight: 800;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(232,227,218,0.35);
-    }
-    .founder-divider {
-      width: 1px;
-      height: 88px;
-      background: linear-gradient(to bottom, transparent, rgba(201,169,110,0.25), transparent);
-      flex-shrink: 0;
-    }
-    .founder-info { display: flex; flex-direction: column; gap: 0; }
-    .founder-name {
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: #e8e3da;
-      letter-spacing: -0.02em;
-      margin-bottom: 8px;
-    }
-    .founder-role {
-      display: inline-block;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--gold);
-      background: rgba(201,169,110,0.1);
-      border: 1px solid rgba(201,169,110,0.22);
-      border-radius: 999px;
-      padding: 3px 11px;
-      width: fit-content;
-      margin-bottom: 14px;
-    }
-    .founder-bio {
-      font-size: 0.82rem;
-      color: rgba(154,150,144,0.9);
-      line-height: 1.55;
-      margin-bottom: 14px;
-    }
-    .founder-link {
+    .gate-panel--left  .gate-step-num { background: var(--mid); color: var(--ink); }
+    .gate-panel--right .gate-step-num { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); }
+
+    .gate-cta {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      font-size: 0.78rem;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: all 0.2s ease;
+      position: relative;
+      z-index: 1;
+    }
+    .gate-cta svg { transition: transform 0.2s ease; }
+    .gate-cta:hover svg { transform: translateX(3px); }
+
+    .gate-cta--light {
+      background: var(--ink-soft);
+      color: var(--paper);
+    }
+    .gate-cta--light:hover { background: #111; transform: translateY(-1px); }
+
+    .gate-cta--gold {
+      background: var(--gold);
+      color: var(--ink-soft);
+      box-shadow: 0 4px 20px rgba(201,169,110,0.3);
+    }
+    .gate-cta--gold:hover { background: #d4b47a; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,169,110,0.42); }
+
+    .gate-cta-sub {
+      display: block;
+      font-size: 0.72rem;
       font-weight: 600;
-      color: var(--gold);
-      text-decoration: none;
-      transition: opacity 150ms ease;
+      margin-top: 12px;
+      letter-spacing: 0;
+      text-transform: none;
     }
-    .founder-link:hover { opacity: 0.7; }
-    .founder-link svg { flex-shrink: 0; }
+    .gate-panel--left  .gate-cta-sub { color: rgba(10,10,10,0.45); }
+    .gate-panel--right .gate-cta-sub { color: rgba(255,255,255,0.3); }
 
-    /* ================================================
-       ROI INVESTMENT SECTION
-       ================================================ */
-    .roi-section { background: var(--canvas); padding: 120px 48px; border-top: 1px solid var(--border); }
-    .roi-inner { max-width: 1100px; margin: 0 auto; }
-    .roi-eyebrow { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin-bottom: 16px; }
-    .roi-header { font-family: var(--serif); font-size: clamp(2.4rem, 5vw, 4.2rem); line-height: 1.05; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 20px; max-width: 640px; }
-    .roi-subtext { font-size: 1.05rem; color: var(--ink); opacity: 0.7; line-height: 1.7; max-width: 600px; margin-bottom: 64px; }
-    .roi-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-bottom: 48px; }
-    .roi-stat { border-left: 2px solid var(--gold); padding-left: 24px; }
-    .roi-stat-num { font-family: var(--serif); font-size: clamp(2.8rem, 5vw, 4rem); color: var(--gold-deep); line-height: 1; margin-bottom: 10px; }
-    .roi-stat-label { font-size: 0.9rem; color: var(--ink); opacity: 0.65; line-height: 1.55; }
-    .roi-note { font-size: 0.98rem; color: var(--ink); opacity: 0.7; line-height: 1.75; max-width: 700px; border-top: 1px solid var(--border); padding-top: 32px; margin-bottom: 20px; }
-    .roi-cta-link { font-size: 0.9rem; font-weight: 700; color: var(--gold-deep); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: opacity var(--t-fast); }
-    .roi-cta-link:hover { opacity: 0.7; }
-
-    /* ================================================
-       DATA TRUST STRIP
-       ================================================ */
-    .trust-strip { background: var(--canvas); padding: 80px 48px; border-top: 1px solid var(--border); }
-    .trust-strip-inner { max-width: 1280px; margin: 0 auto; }
-    .trust-eyebrow { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); margin-bottom: 40px; text-align: center; }
-    .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
-    .trust-item { display: flex; gap: 16px; align-items: flex-start; }
-    .trust-icon { width: 40px; height: 40px; background: var(--paper); border: 1px solid var(--border); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
-    .trust-icon svg { width: 20px; height: 20px; }
-    .trust-item-body strong { display: block; font-size: 0.92rem; font-weight: 800; color: var(--ink); margin-bottom: 6px; letter-spacing: -0.01em; }
-    .trust-item-body p { font-size: 0.82rem; color: rgba(10,10,10,0.66); line-height: 1.65; }
-
-    /* ================================================
-       COMPLIANCE SECTION
-       ================================================ */
-    .compliance-section { background: var(--ink-soft); padding: 100px 48px; }
-    .compliance-inner { max-width: 1280px; margin: 0 auto; }
-    .compliance-header { margin-bottom: 48px; max-width: 640px; }
-    .compliance-eyebrow { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold); margin-bottom: 16px; }
-    .compliance-header h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 800; color: var(--paper); letter-spacing: -0.03em; line-height: 1.1; }
-    .compliance-header p { font-size: 0.95rem; color: rgba(255,255,255,0.4); line-height: 1.7; margin-top: 12px; }
-    .compliance-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    .compliance-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 28px 32px; transition: background var(--t-base); }
-    .compliance-card:hover { background: rgba(255,255,255,0.07); }
-    .compliance-card-flag { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 10px; }
-    .compliance-card-title { font-size: 1rem; font-weight: 800; color: var(--paper); margin-bottom: 10px; letter-spacing: -0.02em; }
-    .compliance-card-body { font-size: 0.82rem; color: rgba(255,255,255,0.45); line-height: 1.7; }
-    .compliance-card-body strong { color: rgba(255,255,255,0.75); font-weight: 700; }
-
-    /* ================================================
-       HERO STAT BAR (1b)
-       ================================================ */
-    .hero-stats { display: flex; gap: 40px; margin-top: 38px; flex-wrap: wrap; }
-    .hero-stat { display: flex; flex-direction: column; gap: 5px; }
-    .hero-stat-num { font-family: var(--serif); font-size: 1.9rem; line-height: 1; color: var(--gold); }
-    .hero-stat-label { font-size: 0.76rem; color: rgba(255,255,255,0.5); line-height: 1.45; max-width: 135px; }
-
-    /* ================================================
-       LOGOS / "WORKS WITH" STRIP (1a)
-       ================================================ */
-    .logos-strip { background: var(--ink-soft); padding: 30px 48px; border-top: 1px solid rgba(255,255,255,0.06); }
-    .logos-strip-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; }
-    .logos-label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.38); }
-    .logos-list { display: flex; align-items: center; gap: 26px; flex-wrap: wrap; }
-    .logos-list span { font-size: 0.96rem; font-weight: 700; color: rgba(255,255,255,0.72); }
-    .logos-more { font-size: 0.85rem; font-weight: 600; color: var(--gold); }
-
-    /* ================================================
-       FACULTY ASSURANCE BLOCK (1c)
-       ================================================ */
-    .assure-section { background: var(--paper); padding: 110px 48px; border-top: 1px solid var(--border); }
-    .assure-inner { max-width: 980px; margin: 0 auto; text-align: center; }
-    .assure-eyebrow { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold-deep); margin-bottom: 16px; }
-    .assure-inner h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.12; color: var(--ink); margin-bottom: 20px; }
-    .assure-lead { font-size: 1.02rem; line-height: 1.75; color: rgba(10,10,10,0.72); max-width: 700px; margin: 0 auto; }
-    .assure-points { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; text-align: left; margin-top: 48px; }
-    .assure-point { background: var(--canvas); border: 1px solid var(--border); border-radius: 16px; padding: 26px; }
-    .assure-point-title { font-size: 0.96rem; font-weight: 800; color: var(--ink); margin-bottom: 8px; }
-    .assure-point-body { font-size: 0.85rem; line-height: 1.62; color: rgba(10,10,10,0.68); }
-
-    /* ================================================
-       FOUNDING PARTNER SECTION (1d)
-       ================================================ */
-    .founding-section { background: var(--ink-soft); padding: 110px 48px; position: relative; overflow: hidden; }
-    .founding-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 75% 20%, rgba(201,169,110,0.14) 0%, transparent 55%); pointer-events: none; }
-    .founding-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
-    .founding-eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: rgba(201,169,110,0.12); border: 1px solid rgba(201,169,110,0.22); border-radius: 999px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); margin-bottom: 24px; }
-    .founding-inner h2 { font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.08; color: var(--paper); margin-bottom: 18px; max-width: 740px; }
-    .founding-lead { font-size: 1.05rem; line-height: 1.7; color: rgba(255,255,255,0.55); max-width: 640px; margin-bottom: 48px; }
-    .founding-perks { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-bottom: 44px; }
-    .founding-perk { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 28px; transition: background var(--t-base); }
-    .founding-perk:hover { background: rgba(255,255,255,0.07); }
-    .founding-perk-num { font-family: var(--serif); font-size: 2.3rem; color: var(--gold); line-height: 1; margin-bottom: 14px; }
-    .founding-perk-title { font-size: 1rem; font-weight: 800; color: var(--paper); margin-bottom: 8px; }
-    .founding-perk-body { font-size: 0.85rem; line-height: 1.62; color: rgba(255,255,255,0.5); }
-    .founding-cta { display: inline-block; padding: 15px 34px; background: var(--gold); color: var(--ink-soft); border-radius: 999px; font-size: 0.82rem; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase; transition: all var(--t-fast); box-shadow: 0 4px 20px rgba(201,169,110,0.3); }
-    .founding-cta:hover { background: #d4b47a; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(201,169,110,0.42); }
-    .founding-note { font-size: 0.82rem; color: rgba(255,255,255,0.4); margin-top: 18px; }
-
-    /* ================================================
-       HOW IT WORKS TIMELINE (3a)
-       ================================================ */
-    .how-section { background: var(--canvas); padding: 110px 48px; border-top: 1px solid var(--border); }
-    .how-inner { max-width: 1100px; margin: 0 auto; }
-    .how-header { max-width: 660px; margin-bottom: 56px; }
-    .how-eyebrow { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold-deep); margin-bottom: 14px; }
-    .how-header h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: var(--ink); }
-    .how-header p { font-size: 0.98rem; line-height: 1.7; color: rgba(10,10,10,0.72); margin-top: 14px; }
-    .how-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
-    .how-step-num { font-family: var(--serif); font-size: 1.05rem; width: 38px; height: 38px; border-radius: 50%; background: var(--ink-soft); color: var(--gold); display: flex; align-items: center; justify-content: center; margin-bottom: 18px; }
-    .how-step-title { font-size: 1.02rem; font-weight: 800; color: var(--ink); margin-bottom: 8px; }
-    .how-step-body { font-size: 0.85rem; line-height: 1.6; color: rgba(10,10,10,0.68); }
-    .how-step-when { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold-deep); margin-top: 12px; }
-
-    /* ================================================
-       FAQ (3b)
-       ================================================ */
-    .faq-section { background: var(--paper); padding: 110px 48px; border-top: 1px solid var(--border); }
-    .faq-inner { max-width: 820px; margin: 0 auto; }
-    .faq-head { text-align: center; margin-bottom: 48px; }
-    .faq-eyebrow { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold-deep); margin-bottom: 14px; }
-    .faq-head h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800; letter-spacing: -0.03em; color: var(--ink); }
-    .faq-list-item { padding: 26px 0; border-bottom: 1px solid var(--border); }
-    .faq-list-item:first-child { border-top: 1px solid var(--border); }
-    .faq-q { font-size: 1.02rem; font-weight: 800; color: var(--ink); margin-bottom: 10px; }
-    .faq-a { font-size: 0.92rem; line-height: 1.7; color: rgba(10,10,10,0.72); }
-    .faq-a strong { color: var(--ink); font-weight: 700; }
-
-    /* ================================================
-       STAKEHOLDER VALUE BAND (4a)
-       ================================================ */
-    .stake-section { background: var(--paper); padding: 110px 48px; border-top: 1px solid var(--border); }
-    .stake-inner { max-width: 1100px; margin: 0 auto; }
-    .stake-header { max-width: 680px; margin-bottom: 52px; }
-    .stake-eyebrow { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold-deep); margin-bottom: 14px; }
-    .stake-header h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; color: var(--ink); }
-    .stake-header p { font-size: 0.98rem; line-height: 1.7; color: rgba(10,10,10,0.72); margin-top: 14px; }
-    .stake-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .stake-card { border: 1px solid var(--border); border-radius: 16px; padding: 30px; background: var(--canvas); }
-    .stake-role { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold-deep); margin-bottom: 14px; }
-    .stake-card h3 { font-size: 1.15rem; font-weight: 800; color: var(--ink); margin-bottom: 10px; letter-spacing: -0.01em; }
-    .stake-card p { font-size: 0.88rem; line-height: 1.65; color: rgba(10,10,10,0.72); }
-    .stake-pdf-wrap { text-align: center; margin-top: 44px; }
-    .stake-pdf { display: inline-block; font-size: 0.92rem; font-weight: 800; color: var(--gold-deep); text-decoration: underline; text-underline-offset: 4px; }
-    .stake-pdf:hover { opacity: 0.75; }
-    .stake-pdf-note { font-size: 0.82rem; color: rgba(10,10,10,0.66); margin-top: 8px; }
-
-    /* ================================================
-       INSTITUTION DRAWERS
-       ================================================ */
-    .drawer-list { max-width: 1280px; margin: 0 auto; }
-    .drawer { border-top: 1px solid rgba(255,255,255,0.09); }
-    .drawer:last-child { border-bottom: 1px solid rgba(255,255,255,0.09); }
-    .drawer-head {
-      width: 100%; display: flex; align-items: center; gap: 24px;
-      padding: 32px 0; background: none; border: none; cursor: pointer;
-      text-align: left; transition: opacity 150ms ease;
+    /* ── Bottom strip ───────────────────────────────────────── */
+    .bottom-strip {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      z-index: 10;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      border-top: 1px solid rgba(0,0,0,0.06);
+      background: rgba(245,241,234,0.9);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
     }
-    .drawer-head:hover { opacity: 0.75; }
-    .drawer-num {
-      font-family: var(--serif); font-size: 1rem; color: var(--gold);
-      flex-shrink: 0; width: 28px; line-height: 1;
+    .bottom-link {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: rgba(10,10,10,0.45);
+      transition: color 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
-    .drawer-title {
-      font-size: clamp(1.3rem, 2.5vw, 2rem); font-weight: 800;
-      color: var(--paper); letter-spacing: -0.03em; flex: 1;
-      transition: color 200ms ease;
-    }
-    .drawer.open .drawer-title { color: var(--gold); }
-    .drawer-icon {
-      font-size: 2rem; font-weight: 300; color: rgba(255,255,255,0.3);
-      flex-shrink: 0; transition: transform 350ms var(--ease), color 200ms ease;
-      line-height: 1; user-select: none;
-    }
-    .drawer.open .drawer-icon { transform: rotate(45deg); color: var(--gold); }
-    .drawer-body {
-      max-height: 0; overflow: hidden;
-      transition: max-height 550ms var(--ease);
-    }
-    .drawer.open .drawer-body { max-height: 700px; }
-    .drawer-body-inner {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 64px;
-      padding: 0 0 48px 52px;
-    }
-    .drawer-lead { font-size: 1rem; line-height: 1.8; color: rgba(255,255,255,0.5); }
-    .drawer-points { display: flex; flex-direction: column; gap: 20px; }
-    .drawer-point { display: flex; gap: 14px; align-items: flex-start; }
-    .drawer-point-dot {
-      width: 6px; height: 6px; background: var(--gold); border-radius: 50%;
-      flex-shrink: 0; margin-top: 8px;
-    }
-    .drawer-point-text { font-size: 0.88rem; color: rgba(255,255,255,0.45); line-height: 1.65; }
-    .drawer-point-text strong { color: var(--paper); font-weight: 700; }
-    .drawer-stat {
-      margin-top: 28px; padding: 20px 24px;
-      background: rgba(201,169,110,0.07); border: 1px solid rgba(201,169,110,0.16);
-      border-radius: 14px;
-    }
-    .drawer-stat-num {
-      font-family: var(--serif); font-size: 2.4rem; color: var(--gold);
-      line-height: 1; margin-bottom: 8px;
-    }
-    .drawer-stat-label { font-size: 0.82rem; color: rgba(255,255,255,0.38); line-height: 1.55; }
+    .bottom-link:hover { color: var(--ink); }
+    .bottom-sep { width: 3px; height: 3px; border-radius: 50%; background: rgba(10,10,10,0.2); }
 
-    @media (max-width: 1024px) {
-      .hero-inner { grid-template-columns: 1fr; }
-      .hero-visual { display: none; }
-      .csa-inner { grid-template-columns: 1fr; gap: 60px; }
-      .features-grid { grid-template-columns: repeat(2, 1fr); }
-      .bubbles-grid { grid-template-columns: 1fr 1fr; }
-      .offerings-grid { grid-template-columns: 1fr; }
-      .pricing-panel { grid-template-columns: 1fr 1fr; }
-      .pricing-panel.active { grid-template-columns: 1fr 1fr; }
-      .tiers-inner { grid-template-columns: 1fr; gap: 60px; }
-      .big-cta-inner { grid-template-columns: 1fr; gap: 40px; }
-      .inquiry-inner { grid-template-columns: 1fr; gap: 48px; }
-      .footer-top { grid-template-columns: 1fr 1fr; }
-      .trust-grid { grid-template-columns: 1fr; gap: 28px; }
-      .compliance-grid { grid-template-columns: 1fr; }
-      .how-steps { grid-template-columns: 1fr 1fr; gap: 28px; }
-      .founding-perks { grid-template-columns: 1fr; }
+    /* ── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .gateway { flex-direction: column; }
+      .gate-divider {
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(to right,
+          transparent 0%,
+          rgba(201,169,110,0.35) 50%,
+          transparent 100%
+        );
+      }
+      .gate-divider-pill {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .gate-panel { padding: 80px 32px 60px; flex: none !important; opacity: 1 !important; }
+      .gateway:has(.gate-panel--left:hover)  .gate-panel--right,
+      .gateway:has(.gate-panel--right:hover) .gate-panel--left { opacity: 1; }
+      .bottom-strip { position: relative; }
     }
-    @media (max-width: 640px) {
-      .nav { padding: 0 24px; }
-      .nav-links { display: none; }
-      .hero { padding: 100px 24px 60px; }
-      .promise { padding: 80px 24px; }
-      .csa-big-section, .features, .bubbles-section, .offerings, .pricing-section, .tiers-section, .big-cta, .inquiry, .roi-section, .assure-section, .founding-section, .how-section, .faq-section, .stake-section { padding: 80px 24px; }
-      .trust-strip, .compliance-section, .logos-strip { padding: 60px 24px; }
-      .hero-stats { gap: 24px; }
-      .assure-points, .founding-perks, .how-steps, .stake-grid { grid-template-columns: 1fr; }
-      .roi-stats { grid-template-columns: 1fr; gap: 28px; }
-      .pricing-panel.active { grid-template-columns: 1fr; }
-      .pricing-cards { grid-template-columns: 1fr; }
-      .pricing-footer { flex-direction: column; gap: 16px; }
-      .model-tab { min-width: unset; flex: 1; }
-      footer { padding: 60px 24px 40px; }
-      .features-grid { grid-template-columns: 1fr; }
-      .bubbles-grid { grid-template-columns: 1fr; }
-      .bubble-card.offset, .bubble-card.offset2 { margin-top: 0; }
-      .offerings-top { flex-direction: column; }
-      .big-cta-inner { grid-template-columns: 1fr; }
-      .form-row { grid-template-columns: 1fr; }
-      .inquiry-card { padding: 28px 20px; }
-      .footer-top { grid-template-columns: 1fr; }
-      .founder-card { flex-direction: column; text-align: center; padding: 32px 24px; gap: 24px; }
-      .founder-divider { width: 80px; height: 1px; }
-      .founder-role { margin: 0 auto; }
-      .drawer-body-inner { grid-template-columns: 1fr; gap: 28px; padding-left: 0; }
-      .drawer.open .drawer-body { max-height: 1200px; }
+    @media (max-width: 480px) {
+      .gate-panel { padding: 72px 24px 56px; }
+      .gate-heading { font-size: clamp(2rem, 8vw, 2.8rem); }
     }
   </style>
 </head>
 <body>
 
-  <!-- ══════════════════════════ NAV ══════════════════════════════════ -->
-  <nav class="nav" id="nav">
-    <div class="nav-inner">
-      <a class="nav-logo" href="#">
-        <div class="nav-logomark">
-          <img src="logo.png" alt="SkillGap logo">
-        </div>
-        <span class="nav-wordmark">SkillGap</span>
-      </a>
-      <ul class="nav-links">
-        <li><a href="#scoring">CSA Model</a></li>
-        <li><a href="#features">Platform</a></li>
-        <li><a href="#demo">Demo</a></li>
-        <li><a href="#offerings">Offerings</a></li>
-        <li><a href="#pricing">Pricing</a></li>
-        <li><a href="#institutions">Institutions</a></li>
-      </ul>
-      <a class="nav-btn" href="#cta">Get Started</a>
+  <!-- ── Brand bar ──────────────────────────────────────────── -->
+  <header class="brand-bar">
+    <div class="brand-bar-inner">
+      <div class="brand-logomark"><img src="logo.png" alt="SkillGap logo"></div>
+      <span class="brand-wordmark" style="color: var(--ink-soft);">SkillGap</span>
     </div>
-  </nav>
+  </header>
 
-  <!-- ══════════════════════════ HERO ═════════════════════════════════ -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-content">
-        <div class="hero-eyebrow">
-          <span class="hero-eyebrow-pulse"></span>
-          Post-Assessment AI Intelligence · Built for Institutions
+  <!-- ── Split gateway ─────────────────────────────────────── -->
+  <div class="gateway">
+
+    <!-- Path A: Online platform -->
+    <a class="gate-panel gate-panel--left" href="use.html">
+      <div class="gate-tag gate-tag--light">
+        <span class="gate-tag-dot"></span>
+        Online Platform
+      </div>
+      <h2 class="gate-heading">Use SkillGap<br>on your class.</h2>
+      <p class="gate-body">Upload your assessment data, review the results, and download gap reports — no IT setup, no installation, no waiting.</p>
+      <div class="gate-steps">
+        <div class="gate-step">
+          <span class="gate-step-num">1</span>
+          Upload your class answer sheet
         </div>
-        <h1 class="hero-title">
-          <span class="line strike-line">Blind Spots.</span>
-          <span class="line strike-line">Generic Grades.</span>
-          <span class="line clear-line">Real Direction.</span>
-        </h1>
-        <p class="hero-body">SkillGap is the AI intelligence layer that turns every assessment into a diagnosis. Students find out exactly which skills they're missing and what to do next. Faculty find out where the whole class is falling short, automatically, before the next class starts.</p>
-        <div class="hero-actions">
-          <a class="btn-solid" href="#cta">Get Started</a>
-          <a class="btn-outline" href="#scoring">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.1"/><polygon points="5.5,4.5 10,7 5.5,9.5" fill="currentColor"/></svg>
-            See the CSA Model
-          </a>
+        <div class="gate-step">
+          <span class="gate-step-num">2</span>
+          Review and correct any scanning errors
         </div>
-        <div class="hero-stats">
-          <div class="hero-stat">
-            <span class="hero-stat-num">600+</span>
-            <span class="hero-stat-label">faculty hours saved / year</span>
-          </div>
-          <div class="hero-stat">
-            <span class="hero-stat-num">Seconds</span>
-            <span class="hero-stat-label">to feedback, not weeks</span>
-          </div>
-          <div class="hero-stat">
-            <span class="hero-stat-num">$12k+</span>
-            <span class="hero-stat-label">tuition retained per student</span>
-          </div>
+        <div class="gate-step">
+          <span class="gate-step-num">3</span>
+          Download per-student gap reports
         </div>
       </div>
+      <span class="gate-cta gate-cta--light">
+        Join the Waitlist
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M7.5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="gate-cta-sub">Platform launching soon — be the first in.</span>
+    </a>
 
-      <div class="hero-visual">
-        <div class="mockup">
-          <div class="mockup-bar">
-            <span class="mock-dot r"></span>
-            <span class="mock-dot y"></span>
-            <span class="mock-dot g"></span>
-            <span class="mock-url">SkillGap · Assessment Complete</span>
-          </div>
-          <div class="mockup-body">
-            <div class="mc-card">
-              <div class="mc-head">
-                <div>
-                  <div class="mc-label">Skill Index</div>
-                  <div class="mc-num">78</div>
-                </div>
-                <span class="mc-badge">✓ Proficient</span>
-              </div>
-              <div class="mc-dims">
-                <div class="mc-dim">
-                  <span class="mc-dim-name">Accuracy</span>
-                  <div class="mc-track"><div class="mc-fill a" style="width:83%"></div></div>
-                  <span class="mc-score">83</span>
-                  <span class="mc-wt">×0.60</span>
-                </div>
-                <div class="mc-dim">
-                  <span class="mc-dim-name">Speed</span>
-                  <div class="mc-track"><div class="mc-fill s" style="width:68%"></div></div>
-                  <span class="mc-score">68</span>
-                  <span class="mc-wt">×0.20</span>
-                </div>
-                <div class="mc-dim">
-                  <span class="mc-dim-name">Stability</span>
-                  <div class="mc-track"><div class="mc-fill st" style="width:74%"></div></div>
-                  <span class="mc-score">74</span>
-                  <span class="mc-wt">×0.20</span>
-                </div>
-              </div>
-            </div>
-            <div class="mc-ai">
-              <div class="mc-ai-head">
-                <div class="mc-ai-icon">✦</div>
-                <span class="mc-ai-label">AI Feedback</span>
-              </div>
-              <p class="mc-ai-text">Strong and consistent early performance, so stability is solid. Collections Framework is your main gap. Prioritize Stream API and Map operations before your next review.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════ WORKS WITH ═══════════════════════════ -->
-  <section class="logos-strip">
-    <div class="logos-strip-inner reveal">
-      <span class="logos-label">Works with your stack</span>
-      <div class="logos-list">
-        <span>Moodle</span>
-        <span>Canvas</span>
-        <span>Google Classroom</span>
-        <span>Blackboard</span>
-      </div>
-      <span class="logos-more">+ any system via API</span>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════ PROMISE ══════════════════════════════ -->
-  <section class="promise">
-    <div class="promise-inner reveal">
-      <p class="promise-copy">
-        Your teachers are spending hundreds of hours a year writing feedback that students skim and forget. Your students are getting grades without knowing what to fix. This gap exists at every institution in the world, because until now <strong>no system solved it at scale</strong>. SkillGap does. Every student gets a <strong>clear path forward</strong>, every teacher gets their time back, and for the first time, <strong>both sides have something real to talk about</strong>.
-      </p>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════ CSA BIG ══════════════════════════════ -->
-  <section class="csa-big-section" id="scoring">
-    <div class="csa-inner">
-      <div class="csa-left">
-        <div class="csa-eyebrow reveal">Behind the Score</div>
-        <div class="csa-numeral reveal d1">3<span>.</span></div>
-        <h2 class="csa-title reveal d2">Signals that give<br>AI something<br>to work with.</h2>
-        <p class="csa-desc reveal d3">A grade tells you what happened. SkillGap reads three independent signals so the AI can tell you <em style="color:var(--gold);font-style:normal">why</em>, and exactly what to do next. No formula to memorize. Just insight your students can actually act on.</p>
-      </div>
-      <div class="csa-dims">
-        <div class="csa-dim reveal">
-          <div class="csa-dim-num a">01</div>
-          <div class="csa-dim-info">
-            <div class="csa-dim-name">Accuracy</div>
-            <div class="csa-dim-desc">Did they understand the material? It goes beyond right or wrong. Harder questions carry more weight, so the score reflects genuine depth of knowledge, not guessing patterns.</div>
-          </div>
-          <div class="csa-dim-wt">Knowledge</div>
-        </div>
-        <div class="csa-dim reveal d1">
-          <div class="csa-dim-num s">02</div>
-          <div class="csa-dim-info">
-            <div class="csa-dim-name">Speed</div>
-            <div class="csa-dim-desc">Can they apply it under pressure? Internalized knowledge is fast knowledge. Speed signals whether a student truly owns a concept or is still working through it consciously.</div>
-          </div>
-          <div class="csa-dim-wt">Application</div>
-        </div>
-        <div class="csa-dim reveal d2">
-          <div class="csa-dim-num st">03</div>
-          <div class="csa-dim-info">
-            <div class="csa-dim-name">Stability</div>
-            <div class="csa-dim-desc">Does it hold up start to finish? Consistent performance across the full assessment means reliable knowledge. A dip in the final third often signals conceptual gaps, and the AI knows the difference.</div>
-          </div>
-          <div class="csa-dim-wt">Reliability</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════ FEATURES ═════════════════════════════ -->
-  <section class="features" id="features">
-    <div class="features-inner">
-      <div class="features-header">
-        <h2 class="reveal">The same assessment.<br>A completely different outcome.</h2>
-      </div>
-      <div class="features-grid">
-        <div class="feat reveal">
-          <div class="feat-icon">
-            <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="44" height="44" rx="10" fill="#f5f1ea"/>
-              <path d="M14 22l6 6 10-12" stroke="#1a1814" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <div class="feat-name">Diagnosis, not just a score</div>
-          <div class="feat-body">Three signals (accuracy, speed, and stability) combine into a Skill Index that shows how deeply a student knows the material, not just whether they got the right answer.</div>
-        </div>
-        <div class="feat reveal d1">
-          <div class="feat-icon">
-            <svg viewBox="0 0 44 44" fill="none">
-              <rect width="44" height="44" rx="10" fill="#f5f1ea"/>
-              <circle cx="22" cy="22" r="7" stroke="#1a1814" stroke-width="2.2"/>
-              <path d="M22 11v3M22 30v3M11 22h3M30 22h3" stroke="#1a1814" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div class="feat-name">A roadmap after every exam</div>
-          <div class="feat-body">Every submission generates instant, personalized guidance on exactly which subtopics to prioritize and why. Students do not just see what they got wrong. They see what to do about it.</div>
-        </div>
-        <div class="feat reveal d2">
-          <div class="feat-icon">
-            <svg viewBox="0 0 44 44" fill="none">
-              <rect width="44" height="44" rx="10" fill="#f5f1ea"/>
-              <rect x="12" y="24" width="4" height="8" rx="1.5" fill="#1a1814"/>
-              <rect x="20" y="18" width="4" height="14" rx="1.5" fill="#1a1814" opacity="0.6"/>
-              <rect x="28" y="12" width="4" height="20" rx="1.5" fill="#1a1814" opacity="0.35"/>
-            </svg>
-          </div>
-          <div class="feat-name">The class picture faculty never had</div>
-          <div class="feat-body">Real-time dashboards reveal which topics the whole cohort missed, which students are quietly at risk, and where the curriculum itself may need adjusting. No manual analysis required.</div>
-        </div>
-        <div class="feat reveal d3">
-          <div class="feat-icon">
-            <svg viewBox="0 0 44 44" fill="none">
-              <rect width="44" height="44" rx="10" fill="#f5f1ea"/>
-              <rect x="12" y="12" width="8" height="8" rx="2" fill="#1a1814"/>
-              <rect x="24" y="12" width="8" height="8" rx="2" fill="#1a1814" opacity="0.5"/>
-              <rect x="12" y="24" width="8" height="8" rx="2" fill="#1a1814" opacity="0.3"/>
-              <rect x="24" y="24" width="8" height="8" rx="2" fill="#1a1814" opacity="0.7"/>
-            </svg>
-          </div>
-          <div class="feat-name">Any subject. Any institution.</div>
-          <div class="feat-body">The scoring engine and AI feedback layer are fully configurable for any discipline. Nursing, programming, law, engineering. Your subject, your rubric, your question bank.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════ DATA TRUST ══════════════════════════════ -->
-  <section class="trust-strip">
-    <div class="trust-strip-inner">
-      <div class="trust-eyebrow reveal">Data & Compliance</div>
-      <div class="trust-grid">
-        <div class="trust-item reveal">
-          <div class="trust-icon">
-            <svg viewBox="0 0 20 20" fill="none"><path d="M10 2L4 5v5c0 3.5 2.5 6.7 6 7.4 3.5-.7 6-3.9 6-7.4V5L10 2z" stroke="#1a1814" stroke-width="1.6" stroke-linejoin="round"/><polyline points="7,10 9,12 13,8" stroke="#1a1814" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="trust-item-body">
-            <strong>Your data doesn't leave your hands</strong>
-            <p>Student data is used to generate feedback and that's it. We don't hold onto it, profile it, or move it anywhere it shouldn't go. What's yours stays yours.</p>
-          </div>
-        </div>
-        <div class="trust-item reveal d1">
-          <div class="trust-icon">
-            <svg viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="14" height="14" rx="3" stroke="#1a1814" stroke-width="1.6"/><path d="M7 10h6M7 7h4M7 13h3" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round"/></svg>
-          </div>
-          <div class="trust-item-body">
-            <strong>Compliance is handled where you are</strong>
-            <p>Data regulations differ by country, so we work with whatever applies to your institution. Before anything is signed, we'll be upfront about what's relevant and flag anything worth a closer look.</p>
-          </div>
-        </div>
-        <div class="trust-item reveal d2">
-          <div class="trust-icon">
-            <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="#1a1814" stroke-width="1.6"/><path d="M10 6v4l3 2" stroke="#1a1814" stroke-width="1.6" stroke-linecap="round"/></svg>
-          </div>
-          <div class="trust-item-body">
-            <strong>No lock-in, ever</strong>
-            <p>No multi-year contracts: your license is yours to cancel anytime. Leave whenever and take all your data with you, and your own system keeps running. Only the SkillGap feedback layer is a service you license, so nothing is ever held hostage.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════ DEMO SHOWCASE ════════════════════════ -->
-  <section class="demo-section" id="demo">
-    <div class="demo-inner">
-      <div class="demo-header">
-        <div class="demo-eyebrow reveal">Sample Subject · Java Programming</div>
-        <h2 class="reveal d1">See what your students<br>and faculty actually get.</h2>
-        <p class="reveal d2">Java Programming is one example of how SkillGap's AI feedback layer works. The same model applies to any subject, any discipline, any learning module. This is what traditional assessments have been missing.</p>
-      </div>
-
-      <div class="demo-tabs reveal d2">
-        <button class="demo-tab active" data-tab="student">Student View</button>
-        <button class="demo-tab" data-tab="teacher">Teacher View</button>
-      </div>
-
-      <div class="demo-mockup reveal d3">
-        <div class="demo-bar">
-          <span class="mock-dot r"></span>
-          <span class="mock-dot y"></span>
-          <span class="mock-dot g"></span>
-          <span class="mock-url" id="demo-url">SkillGap · Assessment in Progress</span>
-        </div>
-        <div class="demo-screens-wrap">
-
-          <!-- ── STUDENT SCREENS ── -->
-          <div class="demo-screen active" data-tab="student" data-screen="0">
-            <div class="ds-prog-bar-wrap">
-              <div class="ds-prog-meta">
-                <span>Java Programming Assessment &nbsp;·&nbsp; Q8 of 20</span>
-                <span>24:32 remaining</span>
-              </div>
-              <div class="ds-prog-track"><div class="ds-prog-fill" style="width:40%"></div></div>
-            </div>
-            <div class="ds-question">Which Java collection guarantees insertion order while allowing duplicate elements?</div>
-            <div class="ds-options">
-              <div class="ds-option"><span class="ds-opt-key">A</span> HashSet</div>
-              <div class="ds-option"><span class="ds-opt-key">B</span> TreeSet</div>
-              <div class="ds-option selected"><span class="ds-opt-key">C</span> ArrayList</div>
-              <div class="ds-option"><span class="ds-opt-key">D</span> LinkedHashMap</div>
-            </div>
-            <button class="ds-next-btn">Next Question →</button>
-          </div>
-
-          <div class="demo-screen" data-tab="student" data-screen="1">
-            <div class="ds-result-head">
-              <div>
-                <div class="ds-result-label">Skill Index</div>
-                <div class="ds-result-num">72</div>
-              </div>
-              <span class="ds-result-badge">Developing</span>
-            </div>
-            <div class="ds-dims">
-              <div class="ds-dim">
-                <span class="ds-dim-name">Accuracy</span>
-                <div class="ds-dim-track"><div class="ds-dim-fill a" style="width:68%"></div></div>
-                <span class="ds-dim-score">68</span>
-                <span class="ds-dim-wt">×0.60</span>
-              </div>
-              <div class="ds-dim">
-                <span class="ds-dim-name">Speed</span>
-                <div class="ds-dim-track"><div class="ds-dim-fill s" style="width:81%"></div></div>
-                <span class="ds-dim-score">81</span>
-                <span class="ds-dim-wt">×0.20</span>
-              </div>
-              <div class="ds-dim">
-                <span class="ds-dim-name">Stability</span>
-                <div class="ds-dim-track"><div class="ds-dim-fill st" style="width:77%"></div></div>
-                <span class="ds-dim-score">77</span>
-                <span class="ds-dim-wt">×0.20</span>
-              </div>
-            </div>
-            <div class="ds-result-note">Your consistency improved, and speed is your strongest dimension. Focus on accuracy to move to Proficient.</div>
-          </div>
-
-          <div class="demo-screen" data-tab="student" data-screen="2">
-            <div class="ds-ai-head">
-              <div class="ds-ai-icon">✦</div>
-              <span class="ds-ai-label">AI Feedback</span>
-            </div>
-            <div class="ds-ai-body ds-cursor">Your performance dipped in the final third, likely fatigue or topic difficulty. Core OOP is solid. Priority gaps: <em>Collections Framework</em>, <em>Stream API</em>, <em>Exception Handling</em>.</div>
-            <div class="ds-roadmap-label">Study Roadmap</div>
-            <div class="ds-chips">
-              <span class="ds-chip">Collections Framework</span>
-              <span class="ds-chip">Stream API</span>
-              <span class="ds-chip">Exception Handling</span>
-            </div>
-          </div>
-
-          <!-- ── TEACHER SCREENS ── -->
-          <div class="demo-screen" data-tab="teacher" data-screen="0">
-            <div class="ds-dash-head">Java Programming &nbsp;·&nbsp; Batch 2026 &nbsp;·&nbsp; 34 Students</div>
-            <div class="ds-stat-row">
-              <div class="ds-stat">
-                <div class="ds-stat-val g">12</div>
-                <div class="ds-stat-name">Proficient</div>
-                <div class="ds-stat-pct">35% of class</div>
-              </div>
-              <div class="ds-stat">
-                <div class="ds-stat-val w">15</div>
-                <div class="ds-stat-name">Developing</div>
-                <div class="ds-stat-pct">44% of class</div>
-              </div>
-              <div class="ds-stat">
-                <div class="ds-stat-val r">7</div>
-                <div class="ds-stat-name">Skill Gap</div>
-                <div class="ds-stat-pct">21% of class</div>
-              </div>
-            </div>
-            <div class="ds-avg">
-              <span class="ds-avg-label">Class Avg · Skill Index</span>
-              <span class="ds-avg-val">61</span>
-            </div>
-          </div>
-
-          <div class="demo-screen" data-tab="teacher" data-screen="1">
-            <div class="ds-heatmap-label">Skill Gap Heatmap · Class Performance by Topic</div>
-            <div class="ds-heat-rows">
-              <div class="ds-heat-row">
-                <span class="ds-heat-name">OOP Principles</span>
-                <div class="ds-heat-track"><div class="ds-heat-fill" style="width:72%;background:#4ade80"></div></div>
-                <span class="ds-heat-pct">72%</span>
-              </div>
-              <div class="ds-heat-row">
-                <span class="ds-heat-name">Exception Handling</span>
-                <div class="ds-heat-track"><div class="ds-heat-fill" style="width:58%;background:#fbbf24"></div></div>
-                <span class="ds-heat-pct">58%</span>
-              </div>
-              <div class="ds-heat-row">
-                <span class="ds-heat-name">Collections Framework</span>
-                <div class="ds-heat-track"><div class="ds-heat-fill" style="width:45%;background:#f87171"></div></div>
-                <span class="ds-heat-pct">45%</span>
-              </div>
-              <div class="ds-heat-row">
-                <span class="ds-heat-name">Stream API</span>
-                <div class="ds-heat-track"><div class="ds-heat-fill" style="width:41%;background:#f87171"></div></div>
-                <span class="ds-heat-pct">41%</span>
-              </div>
-              <div class="ds-heat-row">
-                <span class="ds-heat-name">Concurrency</span>
-                <div class="ds-heat-track"><div class="ds-heat-fill" style="width:38%;background:#f87171"></div></div>
-                <span class="ds-heat-pct">38%</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="demo-screen" data-tab="teacher" data-screen="2">
-            <div class="ds-roster-label">Student Roster</div>
-            <table class="ds-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Skill Index</th>
-                  <th>Tier</th>
-                  <th>Top Gap</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>A. Reyes</td><td>84</td><td><span class="ds-tier p">Proficient</span></td><td>Concurrency</td></tr>
-                <tr><td>B. Santos</td><td>71</td><td><span class="ds-tier d">Developing</span></td><td>Stream API</td></tr>
-                <tr><td>C. Lim</td><td>63</td><td><span class="ds-tier d">Developing</span></td><td>Collections</td></tr>
-                <tr><td>D. Cruz</td><td>47</td><td><span class="ds-tier g">Skill Gap</span></td><td>Collections</td></tr>
-                <tr><td>E. Torres</td><td>91</td><td><span class="ds-tier p">Proficient</span></td><td>Concurrency</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-        </div><!-- end demo-screens-wrap -->
-      </div><!-- end demo-mockup -->
-
-      <div class="demo-dots reveal d3" id="demo-dots">
-        <span class="demo-dot active"></span>
-        <span class="demo-dot"></span>
-        <span class="demo-dot"></span>
-      </div>
-
-      <div class="demo-cta reveal d3">
-        <a href="https://sgsys.space" target="_blank" rel="noopener">Try the live Java Programming prototype</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════ BUBBLES ══════════════════════════════ -->
-  <section class="bubbles-section" id="institutions">
-    <div class="bubbles-header">
-      <h2 class="reveal">This is what happens<br>when every exam<br>means something.</h2>
-      <p class="reveal d1">Three outcomes every institution sees when SkillGap runs. Expand each to see what changes.</p>
+    <!-- Divider -->
+    <div class="gate-divider">
+      <span class="gate-divider-pill">or</span>
     </div>
 
-    <div class="drawer-list reveal">
+    <!-- Path B: Institutional -->
+    <a class="gate-panel gate-panel--right" href="institutions.html">
+      <div class="gate-tag gate-tag--dark">
+        <span class="gate-tag-dot"></span>
+        Institutional
+      </div>
+      <h2 class="gate-heading">SkillGap<br>for institutions.</h2>
+      <p class="gate-body">Custom integration into your LMS, white-label builds, or API access for high-volume deployments. Built around your systems, your subjects, your scale.</p>
+      <div class="gate-steps">
+        <div class="gate-step">
+          <span class="gate-step-num">1</span>
+          Audit your current stack
+        </div>
+        <div class="gate-step">
+          <span class="gate-step-num">2</span>
+          Integrate or build — scoped upfront
+        </div>
+        <div class="gate-step">
+          <span class="gate-step-num">3</span>
+          Pilot with one class, scale when ready
+        </div>
+      </div>
+      <span class="gate-cta gate-cta--gold">
+        Explore Options
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7h9M7.5 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="gate-cta-sub">Talk to us about pricing, integration, and custom builds.</span>
+    </a>
 
-      <div class="drawer open">
-        <button class="drawer-head" aria-expanded="true">
-          <span class="drawer-num">01</span>
-          <span class="drawer-title">Students who stay</span>
-          <span class="drawer-icon">+</span>
-        </button>
-        <div class="drawer-body">
-          <div class="drawer-body-inner">
-            <div>
-              <p class="drawer-lead">Every student who leaves an exam not knowing what to fix is a dropout risk in slow motion. SkillGap surfaces gap patterns before they become disengagement, giving your student success team something to act on while there is still time.</p>
-              <div class="drawer-stat">
-                <div class="drawer-stat-num">$12k+</div>
-                <div class="drawer-stat-label">average annual tuition at risk for every student who disengages and leaves. A 500-student school licenses SkillGap at the Standard tier for about $12,500 a year, roughly the value of one retained student.</div>
-              </div>
-            </div>
-            <div class="drawer-points">
-              <div class="drawer-point">
-                <div class="drawer-point-dot"></div>
-                <div class="drawer-point-text"><strong>Early warning before it is too late.</strong> Gap data that widens across consecutive assessments flags at-risk students weeks before the formal dropout process catches them.</div>
-              </div>
-              <div class="drawer-point">
-                <div class="drawer-point-dot"></div>
-                <div class="drawer-point-text"><strong>Direction at the critical moment.</strong> Students who understand their gaps and have a clear path forward re-engage rather than disengage. The roadmap matters as much as the diagnosis.</div>
-              </div>
-              <div class="drawer-point">
-                <div class="drawer-point-dot"></div>
-                <div class="drawer-point-text"><strong>Every level, not just the ones failing.</strong> Students at every performance tier get a personalized next step, whether they scored 44 or 91.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  </div>
 
-      <div class="drawer">
-        <button class="drawer-head" aria-expanded="false">
-          <span class="drawer-num">02</span>
-          <span class="drawer-title">A curriculum that improves itself</span>
-          <span class="drawer-icon">+</span>
-        </button>
-        <div class="drawer-body">
-          <div class="drawer-body-inner">
-            <div>
-              <p class="drawer-lead">When 65% of a cohort misses the same subtopic, that is not a student problem. It is a curriculum signal. SkillGap makes the difference visible so faculty can adjust while the semester is still running, not after it ends.</p>
-              <div class="drawer-stat">
-                <div class="drawer-stat-num">Semester 1</div>
-                <div class="drawer-stat-label">is all it takes to see which parts of your curriculum are working and which need rethinking. The data compounds every cycle after that.</div>
-              </div>
-            </div>
-            <div class="drawer-points">
-              <div class="drawer-point">
-                <div class="drawer-point-dot"></div>
-                <div class="drawer-point-text"><strong>Topic-level gap heatmaps.</strong> See which concepts the whole class missed, not just who failed. If 68% of students struggle with the same subtopic, that is a teaching signal, not 68 individual problems.</div>
-              </div>
-              <div class="drawer-point">
-                <div class="drawer-point-dot"></div>
-                <div class="drawer-point-text"><strong>Year-over-year cohort comparison.</strong> See whether changes to your curriculum are actually working by comparing the same topics across intake years.</div>
-              </div>
-              <div class="drawer-point">
-                <div class="drawer-point-dot"></div>
-                <div class="drawer-point-text"><strong>Assessment calibration data.</strong> Identify which question formats and difficulty configurations correlate with better learning outcomes and which produce noise.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="drawer">
-        <button class="drawer-head" aria-expanded="false">
-          <span class="drawer-num">03</span>
-          <span class="drawer-title">Evidence your accreditors actually want</span>
-          <span class="drawer-icon">+</span>
-        </button>
-        <div class="drawer-body">
-          <div class="drawer-body-inner">
-            <div>
-              <p class="drawer-lead">Accreditation bodies want documented, structured learning outcomes data. SkillGap generates it from the first assessment cycle, automatically, without any extra reporting work from faculty or administration.</p>
-              <div class="drawer-stat">
-                <div class="drawer-stat-num">Day 1</div>
-                <div class="drawer-stat-label">is when your institution starts accumulating the outcomes evidence accreditation bodies require. It builds in the background while your faculty does what they actually do.</div>
-              </div>
-            </div>
-            <div class="drawer-points">
-              <div class="drawer-point">
-                <div class="drawer-point-dot"></div>
-                <div class="drawer-point-text"><strong>Structured outcomes data, every cycle.</strong> Every assessment produces competency-level evidence tied to specific subtopics. No extra steps, no retrofitting at review time.</div>
-              </div>
-              <div class="drawer-point">
-                <div class="drawer-point-dot"></div>
-                <div class="drawer-point-text"><strong>Audit-ready from the start.</strong> Institutions approaching a review in the next 12 to 18 months can run a pilot now and walk in with a full semester of documented evidence already in hand.</div>
-              </div>
-              <div class="drawer-point">
-                <div class="drawer-point-dot"></div>
-                <div class="drawer-point-text"><strong>Board and strategic planning reports.</strong> Aggregate gap data across departments gives leadership a real picture of institutional learning health, not just pass rates.</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ══════════════════════════ FACULTY ASSURANCE ════════════════════ -->
-  <section class="assure-section">
-    <div class="assure-inner">
-      <div class="assure-eyebrow reveal">For your faculty</div>
-      <h2 class="reveal">SkillGap works for your teachers,<br>not instead of them.</h2>
-      <p class="assure-lead reveal d1">The AI handles the repetitive diagnostic work: spotting where each student fell short and why, and surfacing the curriculum signals the whole class is showing. Teachers come to every class knowing exactly where to focus, not guessing. The teaching, the judgment, and the relationship stay exactly where they belong, with your faculty. Every result is reviewable, and feedback is always labeled as machine-generated, never passed off as an instructor's.</p>
-      <div class="assure-points">
-        <div class="assure-point reveal">
-          <div class="assure-point-title">It assists, never replaces</div>
-          <div class="assure-point-body">Faculty keep full control over grades and final judgment. SkillGap does the legwork, not the teaching.</div>
-        </div>
-        <div class="assure-point reveal d1">
-          <div class="assure-point-title">Always reviewable</div>
-          <div class="assure-point-body">Every AI result can be checked and overridden. Nothing is hidden, and nothing is locked in automatically.</div>
-        </div>
-        <div class="assure-point reveal d2">
-          <div class="assure-point-title">Honest by design</div>
-          <div class="assure-point-body">AI feedback is clearly marked as generated by the assessment engine, never disguised as a person.</div>
-        </div>
-        <div class="assure-point reveal d3">
-          <div class="assure-point-title">Students gain direction, not dependency</div>
-          <div class="assure-point-body">SkillGap gives students a roadmap, not answers. The goal is autonomy: students who understand their own learning well enough to direct it themselves.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════ ROI ════════════════════════════════════ -->
-  <section class="roi-section">
-    <div class="roi-inner">
-      <div class="roi-eyebrow reveal">The institutional investment case.</div>
-      <h2 class="roi-header reveal d1">Protect the revenue<br>you've already earned.</h2>
-      <p class="roi-subtext reveal d2">Every student who disengages because they didn't know what to fix is a tuition year, sometimes three, walking out the door. At typical HEI rates, SkillGap breaks even the moment it helps retain a single student. Everything else is institutional return on top.</p>
-      <div class="roi-stats">
-        <div class="roi-stat reveal">
-          <div class="roi-stat-num">$12k+</div>
-          <div class="roi-stat-label">average annual tuition revenue at risk for every student who disengages and drops out. A 500-student school licenses SkillGap at the Standard tier for about $12,500 a year, the value of a single retained student.</div>
-        </div>
-        <div class="roi-stat reveal d1">
-          <div class="roi-stat-num">600+ hrs</div>
-          <div class="roi-stat-label">of senior faculty time freed from routine diagnostic feedback per year, redirected to the work that actually needs their expertise.</div>
-        </div>
-        <div class="roi-stat reveal d2">
-          <div class="roi-stat-num">Day 1</div>
-          <div class="roi-stat-label">when your institution starts generating audit-ready outcomes evidence for accreditation reviews, board reports, and strategic planning.</div>
-        </div>
-      </div>
-      <p class="roi-note reveal d3">Run the retention math: if SkillGap helps a 500-student school cut dropout by even 2%, that is roughly 10 students retained and over $120,000 in protected tuition, set against a $12,500 annual license. The retention buffer alone justifies the line item. Faculty efficiency and accreditation-ready outcomes data are institutional dividends on top.</p>
-      <a class="roi-cta-link reveal d4" href="#pricing">→ See how pricing works</a>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════ STAKEHOLDERS ═════════════════════════ -->
-  <section class="stake-section">
-    <div class="stake-inner">
-      <div class="stake-header reveal">
-        <div class="stake-eyebrow">For every decision-maker</div>
-        <h2>One platform, a clear answer for everyone at the table.</h2>
-        <p>Adopting SkillGap usually involves a few people. Here's what each of them gets.</p>
-      </div>
-      <div class="stake-grid">
-        <div class="stake-card reveal">
-          <div class="stake-role">Leadership &amp; Finance</div>
-          <h3>Revenue you keep</h3>
-          <p>Every student who disengages is tuition walking out the door. SkillGap helps you catch them early, and pays for itself the moment it retains one.</p>
-        </div>
-        <div class="stake-card reveal d1">
-          <div class="stake-role">IT &amp; Systems</div>
-          <h3>Keep the system you have</h3>
-          <p>We connect to the LMS you already run through its API and add our layer on top. No migration, no second system to maintain, no disruption to what already works.</p>
-        </div>
-        <div class="stake-card reveal d2">
-          <div class="stake-role">Faculty</div>
-          <h3>Hours back</h3>
-          <p>The AI takes repetitive diagnostic feedback off their plate, so your teachers spend their time on the work only they can do.</p>
-        </div>
-      </div>
-      <div class="stake-pdf-wrap reveal">
-        <a class="stake-pdf" href="/skillgap-overview.pdf" target="_blank" rel="noopener">↓ Download the one-page overview (PDF)</a>
-        <p class="stake-pdf-note">A summary your team can forward to anyone who needs it.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════ OFFERINGS ════════════════════════════ -->
-  <section class="offerings" id="offerings">
-    <div class="offerings-inner">
-      <div class="offerings-top">
-        <h2 class="reveal">Two paths.<br>One platform.</h2>
-        <p class="reveal d1">Whether you want to plug SkillGap into your existing infrastructure or get a fully custom-built deployment, we have an engagement model for you.</p>
-      </div>
-      <div class="offerings-grid">
-        <div class="offering reveal">
-          <div class="offering-flag">Option A</div>
-          <div class="offering-title">System Integration</div>
-          <p class="offering-body">Connect SkillGap to your existing LMS or institutional platform via API. We audit your system, build the adapter layer, and slot in, so your workflows stay exactly as they are.</p>
-          <div class="offering-list">
-            <div class="offering-item">
-              <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              REST API with full documentation and sandbox
-            </div>
-            <div class="offering-item">
-              <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              Moodle, Canvas, Blackboard, or any custom LMS
-            </div>
-            <div class="offering-item">
-              <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              SSO: students use existing credentials
-            </div>
-            <div class="offering-item">
-              <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              We adapt to your question bank and scoring; nothing gets torn out or replaced
-            </div>
-            <div class="offering-item">
-              <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              AI feedback on your assessments, with scores returned to your gradebook
-            </div>
-            <div class="offering-item">
-              <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              Per-student annual license, with a generous feedback allowance built in
-            </div>
-          </div>
-          <a class="btn-dark-outline" href="integration.html">Inquire About Integration</a>
-        </div>
-
-        <div class="offering reveal d1">
-          <div class="offering-flag">Option B · Recommended</div>
-          <div class="offering-title">Custom Build</div>
-          <p class="offering-body">We build a version of SkillGap tailored entirely to your institution: your subject, your question bank, your branding. Scoped and priced before a single line of code is written.</p>
-          <div class="offering-list">
-            <div class="offering-item">
-              <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              Subject taxonomy + question bank co-developed with your faculty
-            </div>
-            <div class="offering-item">
-              <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              CSA weights calibrated to your academic rubric
-            </div>
-            <div class="offering-item">
-              <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              Full white-label interface under your brand, powered by the SkillGap engine
-            </div>
-            <div class="offering-item">
-              <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              Onboarding, training, and post-launch support included
-            </div>
-            <div class="offering-item">
-              <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              Per-student annual license included, ready to scale at go-live
-            </div>
-          </div>
-          <a class="btn-dark" href="custom-build.html">Request a Custom Build</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════ HOW IT WORKS ═════════════════════════ -->
-  <section class="how-section" id="how">
-    <div class="how-inner">
-      <div class="how-header reveal">
-        <div class="how-eyebrow">How it works</div>
-        <h2>From first call to live in one assessment cycle.</h2>
-        <p>No long IT project. We map onto what you already have, prove it on a single class, then scale only when you're ready.</p>
-      </div>
-      <div class="how-steps">
-        <div class="how-step reveal">
-          <div class="how-step-num">1</div>
-          <div class="how-step-title">Audit</div>
-          <div class="how-step-body">We look at your current system and data and map exactly what SkillGap needs. No changes to your setup required.</div>
-          <div class="how-step-when">Week 1–2</div>
-        </div>
-        <div class="how-step reveal d1">
-          <div class="how-step-num">2</div>
-          <div class="how-step-title">Connect or build</div>
-          <div class="how-step-body">We integrate on top of your LMS, or build a tailored version from scratch. Scoped and priced before any work starts.</div>
-          <div class="how-step-when">Scoped upfront</div>
-        </div>
-        <div class="how-step reveal d2">
-          <div class="how-step-num">3</div>
-          <div class="how-step-title">Pilot</div>
-          <div class="how-step-body">Run one full assessment cycle with a single class. Your faculty and students experience it for real, at low risk.</div>
-          <div class="how-step-when">One cycle</div>
-        </div>
-        <div class="how-step reveal d3">
-          <div class="how-step-num">4</div>
-          <div class="how-step-title">Review and grow</div>
-          <div class="how-step-body">At the end of the pilot we deliver a full outcome report: gap analysis, time saved, student engagement data. You review the impact together and decide what comes next. Most institutions expand. None are pressured to.</div>
-          <div class="how-step-when">When you're ready</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════ PRICING ════════════════════════════════ -->
-  <section class="pricing-section" id="pricing">
-    <div class="pricing-inner">
-      <div class="pricing-header">
-        <div class="pricing-eyebrow reveal">PRICING</div>
-        <h2 class="reveal d1">One price per student,<br>per year. That's it.</h2>
-        <p class="reveal d2">No metering, no surprise bills. Pick the AI tier that fits, and every enrolled student is covered for the year with a generous feedback allowance built in.</p>
-      </div>
-
-      <!-- Per-student licensing -->
-      <div class="pricing-cards reveal">
-        <div class="price-card">
-          <div class="price-card-label">Budget</div>
-          <div class="price-model">DeepSeek V4 Flash</div>
-          <div class="price-amount">$12<span class="price-unit">/ student / yr</span></div>
-          <div class="price-divider"></div>
-          <div class="price-include">Cost-efficient AI that lets you cover every enrolled student affordably. Great for budget-conscious schools.</div>
-        </div>
-        <div class="price-card featured">
-          <div class="price-badge">Recommended</div>
-          <div class="price-card-label">Standard</div>
-          <div class="price-model">GPT-5.4 Nano · OpenAI</div>
-          <div class="price-amount">$25<span class="price-unit">/ student / yr</span></div>
-          <div class="price-divider"></div>
-          <div class="price-include">The sweet spot for most institutions: strong feedback quality, at a fraction of what one retained student is worth.</div>
-        </div>
-        <div class="price-card">
-          <div class="price-card-label">Premium</div>
-          <div class="price-model">GPT-5.5 · OpenAI</div>
-          <div class="price-amount">$45<span class="price-unit">/ student / yr</span></div>
-          <div class="price-divider"></div>
-          <div class="price-include">Flagship model, for institutions where AI quality is a faculty or accreditation priority.</div>
-        </div>
-      </div>
-
-      <!-- Getting started: assessment + founding promo -->
-      <div class="pricing-start reveal">
-        <div class="pricing-start-flow">
-          <span>Explore · free</span> → <span>Assessment</span> → <span>Build</span> → <span>Go live</span>
-        </div>
-        <p class="pricing-start-note">Getting started is a one-time <strong>Integration Assessment</strong> (a feasibility audit plus a fixed quote): <s>from $750</s>, <strong style="color:var(--gold-deep)">free for founding partners</strong> and credited toward your build if you proceed. No obligation.</p>
-      </div>
-
-      <div class="pricing-footer">
-        <p class="pricing-note reveal"><strong>No lock-in.</strong> Annual licensing with no multi-year contract; cancel anytime. Minimum engagement from about $1,500/year, and volume discounts apply for larger enrolments.</p>
-        <p class="pricing-note reveal d1"><strong>Bring your own API key (BYOK).</strong> Already have an OpenAI, Azure, Anthropic, or DeepSeek contract? Run the engine on your own key at a reduced platform rate. <a href="#inquiry" style="color:var(--gold-deep);text-underline-offset:3px;text-decoration:underline">Ask us about BYOK.</a></p>
-        <p class="pricing-note reveal d2"><strong>Generous allowance built in.</strong> Each student's license covers well beyond a typical year of assessments, so you never count tokens or hit a surprise bill.</p>
-      </div>
-      <div class="pricing-fulllink-wrap reveal">
-        <a class="pricing-fulllink" href="pricing.html">See full pricing &amp; terms →</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════ TIERS + SUBJECTS ══════════════════════ -->
-  <section class="tiers-section">
-    <div class="tiers-inner">
-      <div class="tiers-left">
-        <h2 class="reveal">Three tiers.<br>Clear direction.</h2>
-        <p class="reveal d1">The Skill Index maps to three performance tiers, each one triggering a different depth of AI feedback and study recommendation.</p>
-        <div class="tier-list">
-          <div class="tier-row reveal d1">
-            <div class="tier-pip h"></div>
-            <div class="tier-info">
-              <div class="tier-name">Proficient</div>
-              <div class="tier-range">Skill Index ≥ 75 · Solid command</div>
-            </div>
-            <span class="tier-badge h">Proficient</span>
-          </div>
-          <div class="tier-row reveal d2">
-            <div class="tier-pip m"></div>
-            <div class="tier-info">
-              <div class="tier-name">Developing</div>
-              <div class="tier-range">Skill Index 50–74 · Needs reinforcement</div>
-            </div>
-            <span class="tier-badge m">Developing</span>
-          </div>
-          <div class="tier-row reveal d3">
-            <div class="tier-pip l"></div>
-            <div class="tier-info">
-              <div class="tier-name">Skill Gap Detected</div>
-              <div class="tier-range">Skill Index &lt; 50 · Needs intervention</div>
-            </div>
-            <span class="tier-badge l">Skill Gap</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="tiers-right">
-        <div class="subjects-label reveal">Deploy for any subject</div>
-        <div class="subjects-wrap reveal d1">
-          <span class="subject-tag active">Java Programming</span>
-          <span class="subject-tag">Nursing Fundamentals</span>
-          <span class="subject-tag">Engineering Mechanics</span>
-          <span class="subject-tag">Accounting Principles</span>
-          <span class="subject-tag">Business Law</span>
-          <span class="subject-tag">Medical Terminology</span>
-          <span class="subject-tag">Data Science</span>
-          <span class="subject-tag">Architecture Theory</span>
-          <span class="subject-tag">+ Your Subject</span>
-        </div>
-        <div class="config-box reveal d2">
-          <div class="config-title">What gets configured per deployment</div>
-          <div class="config-rows">
-            <div class="config-row">
-              <span class="config-key">Subject / Domain</span>
-              <span class="config-val gold">Any field of study</span>
-            </div>
-            <div class="config-row">
-              <span class="config-key">Topic taxonomy</span>
-              <span class="config-val">Defined per deployment</span>
-            </div>
-            <div class="config-row">
-              <span class="config-key">Question bank</span>
-              <span class="config-val">Provided or co-built</span>
-            </div>
-            <div class="config-row">
-              <span class="config-key">CSA weights</span>
-              <span class="config-val">60/20/20 (adjustable)</span>
-            </div>
-            <div class="config-row">
-              <span class="config-key">Proficiency thresholds</span>
-              <span class="config-val gold">Calibrated to your rubric</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════ FAQ ══════════════════════════════════ -->
-  <section class="faq-section" id="faq">
-    <div class="faq-inner">
-      <div class="faq-head reveal">
-        <div class="faq-eyebrow">Questions</div>
-        <h2>The things institutions ask first.</h2>
-      </div>
-      <div class="faq-list">
-        <div class="faq-list-item reveal">
-          <div class="faq-q">We already have an LMS. Why doesn't it do this?</div>
-          <div class="faq-a">Because an LMS is built to organize and deliver learning, not to diagnose it. Canvas, Moodle, Blackboard, and every other platform store your assessment data but do not interpret it at the student level. No LMS has built this natively. SkillGap is the intelligence layer that sits on top of whatever you already have and turns that stored data into something students and faculty can actually act on. That is exactly the gap it fills.</div>
-        </div>
-        <div class="faq-list-item reveal">
-          <div class="faq-q">Do we have to replace our current system?</div>
-          <div class="faq-a">No. SkillGap layers on top of your existing LMS or assessment platform through its API. Your students, logins, and question bank stay where they are; we just add the scoring and AI feedback. If you have no system yet, we can build one for you instead.</div>
-        </div>
-        <div class="faq-list-item reveal">
-          <div class="faq-q">What if our system doesn't have everything SkillGap needs?</div>
-          <div class="faq-a">That's exactly what the upfront audit is for. SkillGap works from whatever data you already have: at minimum a student, a topic, and a score, which nearly every system stores. The more it can see (per-question answers, topic tags, timing), the more detailed the feedback gets, but it never simply fails because a field is missing. Anything genuinely absent we either capture through our own integration layer or scope into setup, and we'll show you exactly where you stand before you commit to anything.</div>
-        </div>
-        <div class="faq-list-item reveal">
-          <div class="faq-q">How long until we're up and running?</div>
-          <div class="faq-a">A pilot can be live within one assessment cycle. We start with an audit, connect or build, then run a single class end to end before any wider rollout. No multi-year IT project.</div>
-        </div>
-        <div class="faq-list-item reveal">
-          <div class="faq-q">Will this replace our teachers?</div>
-          <div class="faq-a"><strong>No.</strong> SkillGap does the repetitive diagnostic work, not the teaching. Faculty keep full control over grades and judgment, every AI result is reviewable, and feedback is always labeled as machine-generated.</div>
-        </div>
-        <div class="faq-list-item reveal">
-          <div class="faq-q">What subjects does it support?</div>
-          <div class="faq-a">Any subject. The three-factor scoring and AI feedback work across disciplines, from programming to nursing to business. Java Programming is just the example shown in our demo.</div>
-        </div>
-        <div class="faq-list-item reveal">
-          <div class="faq-q">Is our student data safe?</div>
-          <div class="faq-a">Yes. We only use the performance data needed to generate feedback, and we don't hold onto it. Compliance depends on your country, and we'll walk you through exactly what applies before anything is signed. <a href="compliance.html" style="color:var(--gold-deep);text-decoration:underline;text-underline-offset:3px;">See procurement &amp; compliance.</a></div>
-        </div>
-        <div class="faq-list-item reveal">
-          <div class="faq-q">What does it cost?</div>
-          <div class="faq-a">Simple annual licensing, priced per enrolled student (from $12/student/year), with a generous feedback allowance built in so there's nothing to meter. Getting started is a one-time Integration Assessment, which is free for founding partners and credited toward your build. <a href="#pricing" style="color:var(--gold-deep);text-decoration:underline;text-underline-offset:3px;">See pricing.</a></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════ FOUNDING PARTNERS ════════════════════ -->
-  <section class="founding-section" id="founding">
-    <div class="founding-inner">
-      <div class="founding-eyebrow reveal"><span class="hero-eyebrow-pulse"></span> Founding Partners · Limited</div>
-      <h2 class="reveal">Be one of the first institutions in the world to run post-assessment AI intelligence.</h2>
-      <p class="founding-lead reveal d1">No institution anywhere has standardized this yet. We're partnering with a small group of forward-looking institutions to be the first. Founding partners don't just get early access; they help define what becomes the new standard in assessment intelligence.</p>
-      <div class="founding-perks">
-        <div class="founding-perk reveal">
-          <div class="founding-perk-num">50%</div>
-          <div class="founding-perk-title">Off your pilot</div>
-          <div class="founding-perk-body">Run a full assessment cycle (one class, one subject) at half price. Prove the value before committing to anything bigger.</div>
-        </div>
-        <div class="founding-perk reveal d1">
-          <div class="founding-perk-num">A say</div>
-          <div class="founding-perk-title">In the roadmap</div>
-          <div class="founding-perk-body">Founding partners get a direct line into what we build next. Your needs help set the priorities for the whole platform.</div>
-        </div>
-        <div class="founding-perk reveal d2">
-          <div class="founding-perk-num">2 yrs</div>
-          <div class="founding-perk-title">Founding rate locked</div>
-          <div class="founding-perk-body">Convert from pilot to a full engagement and we'll hold your founding pricing for your first two years.</div>
-        </div>
-      </div>
-      <a class="founding-cta" href="#inquiry">Become a founding partner</a>
-      <p class="founding-note reveal">Limited spots while we keep onboarding hands-on. No obligation to continue after the pilot.</p>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════ BIG CTA ══════════════════════════════ -->
-  <section class="big-cta" id="cta">
-    <div class="big-cta-inner">
-      <h2 class="reveal">
-        Every student<br>
-        deserves more than<br>
-        <em>a grade.</em>
-      </h2>
-      <div class="big-cta-right reveal d2">
-        <p>Every student who leaves an exam not knowing what to fix is a missed chance to improve. SkillGap changes what happens after every assessment, for every student, at every level. If you are ready to change what assessment means at your institution, start here.</p>
-        <a class="btn-solid" href="custom-build.html">Request a Custom Build</a>
-        <a class="btn-outline" href="integration.html">Inquire About Integration</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════ INQUIRY FORM ════════════════════════ -->
-  <section class="inquiry" id="inquiry">
-    <div class="inquiry-inner">
-      <div class="inquiry-left">
-        <div class="inquiry-eyebrow reveal">Send an Inquiry</div>
-        <h2 class="reveal d1">Got questions?<br>Let's talk.</h2>
-        <p class="reveal d2">Fill in the form and we'll get back to you within 48 hours. We're happy to answer questions about integration, subject coverage, timelines, or pricing.</p>
-        <div class="inquiry-note reveal d3">
-          <span class="inquiry-note-icon">✦</span>
-          <span class="inquiry-note-text">
-            <strong>Requesting a custom build?</strong> Email us directly at
-            <a href="mailto:takaradazettai31@gmail.com?subject=SkillGap%20Custom%20Build%20Request">takaradazettai31@gmail.com</a> with your subject area, cohort size, and any requirements so we can scope it properly.
-          </span>
-        </div>
-      </div>
-
-      <div class="inquiry-card reveal d1">
-        <form id="inquiry-form">
-          <input type="text" name="_trap" id="_trap" value="" autocomplete="off" tabindex="-1" style="position:absolute;left:-9999px;opacity:0;height:0;width:0;" aria-hidden="true">
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" for="inq-name">Full Name</label>
-              <input class="form-input" type="text" id="inq-name" name="from_name" placeholder="Your full name" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="inq-inst">Institution</label>
-              <input class="form-input" type="text" id="inq-inst" name="from_institution" placeholder="e.g. University of Manila">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="inq-email">Email Address</label>
-            <input class="form-input" type="email" id="inq-email" name="from_email" placeholder="you@institution.edu" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="inq-msg">Message</label>
-            <textarea class="form-textarea" id="inq-msg" name="message" placeholder="Tell us about your use case, subject area, or any questions you have…" required></textarea>
-          </div>
-          <button class="form-submit" type="submit" id="form-btn">Send Inquiry</button>
-          <div class="form-error-msg" id="form-error">Something went wrong. Please try again or email us directly.</div>
-        </form>
-        <div id="form-success" style="display:none">
-          <div class="form-success">
-            <div class="form-success-icon">✓</div>
-            <div class="form-success-title">Message sent.</div>
-            <div class="form-success-body">We'll get back to you within 48 hours.</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div style="display:flex; justify-content:center; padding: 56px 48px 0;">
-      <div class="founder-card reveal">
-        <div class="founder-logo-col">
-          <img src="logo.png" alt="SkillGap">
-          <span class="founder-logo-label">SkillGap</span>
-        </div>
-        <div class="founder-divider"></div>
-        <div class="founder-info">
-          <div class="founder-name">Christian Jay Baquilid</div>
-          <div class="founder-role">Founder & CEO, SkillGap Labs</div>
-          <div class="founder-bio">I spent months researching why students everywhere get grades but never diagnoses. No institution had solved it. So I built the solution, from academic thesis to working product.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════ FOOTER ═══════════════════════════════ -->
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-top">
-        <div class="footer-brand">
-          <div class="footer-brand-logo">
-            <div class="footer-logomark">
-              <img src="logo.png" alt="SkillGap logo">
-            </div>
-            <span class="footer-brand-name">SkillGap</span>
-          </div>
-          <p class="footer-tagline">Turns every exam into a conversation worth having, for students who need direction and institutions that need results.</p>
-        </div>
-        <div>
-          <div class="footer-col-title">Platform</div>
-          <ul class="footer-list">
-            <li><a href="#scoring">CSA Model</a></li>
-            <li><a href="#features">Platform Features</a></li>
-            <li><a href="#demo">Demo</a></li>
-            <li><a href="#how">How It Works</a></li>
-            <li><a href="#offerings">Offerings</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-            <li><a href="#faq">FAQ</a></li>
-          </ul>
-        </div>
-        <div>
-          <div class="footer-col-title">Work With Us</div>
-          <ul class="footer-list">
-            <li><a href="#founding">Founding Partners</a></li>
-            <li><a href="mailto:takaradazettai31@gmail.com?subject=SkillGap%20Custom%20Build%20Request">Request a Custom Build</a></li>
-            <li><a href="mailto:takaradazettai31@gmail.com?subject=SkillGap%20Integration%20Inquiry">Integration Inquiry</a></li>
-            <li><a href="mailto:takaradazettai31@gmail.com">Contact Us</a></li>
-            <li><a href="/skillgap-overview.pdf" target="_blank" rel="noopener">Overview (PDF)</a></li>
-            <li><a href="pricing.html">Pricing &amp; Terms</a></li>
-            <li><a href="compliance.html">Procurement &amp; Compliance</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <span class="footer-copy">© 2026 SkillGap Labs · Christian Jay Baquilid</span>
-        <div class="footer-wordmark">Skill<span>Gap</span></div>
-      </div>
-    </div>
+  <!-- ── Bottom strip ──────────────────────────────────────── -->
+  <footer class="bottom-strip">
+    <a class="bottom-link" href="https://demo.skillgap-studio.space" target="_blank" rel="noopener">
+      <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="1.5" y="1.5" width="9" height="9" rx="2" stroke="currentColor" stroke-width="1.2"/><path d="M4 6h4M6 4v4" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+      View live demo
+    </a>
+    <span class="bottom-sep"></span>
+    <a class="bottom-link" href="institutions.html#pricing">Pricing</a>
+    <span class="bottom-sep"></span>
+    <a class="bottom-link" href="compliance.html">Compliance</a>
+    <span class="bottom-sep"></span>
+    <a class="bottom-link" href="institutions.html#contact">Contact</a>
   </footer>
 
-  <script>
-    // ── Scroll reveal ──────────────────────────────────────────
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-    // ── Pricing model tabs ─────────────────────────────────────
-    document.querySelectorAll('.model-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.model-tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.pricing-panel').forEach(p => p.classList.remove('active'));
-        tab.classList.add('active');
-        document.getElementById(tab.dataset.panel).classList.add('active');
-      });
-    });
-
-    // ── Nav state on scroll ────────────────────────────────────
-    const nav = document.getElementById('nav');
-    let lastSection = 'dark';
-    const lightSections = ['features', 'tiers-section'];
-
-    function updateNav() {
-      const scrolled = window.scrollY > 40;
-      nav.classList.toggle('scrolled', scrolled);
-
-      // Determine if we're over a light section
-      let isLight = false;
-      document.querySelectorAll('section, .promise, .features, .pricing-section, .tiers-section').forEach(sec => {
-        const rect = sec.getBoundingClientRect();
-        if (rect.top <= 68 && rect.bottom > 68) {
-          const bg = getComputedStyle(sec).backgroundColor;
-          // Light sections have high luminance
-          if (bg.includes('255, 255, 255') || bg.includes('245, 241') || bg.includes('237, 232')) {
-            isLight = true;
-          }
-        }
-      });
-      nav.classList.toggle('light', isLight);
-    }
-
-    window.addEventListener('scroll', updateNav, { passive: true });
-    updateNav();
-
-    // ── Counter animation ──────────────────────────────────────
-    function animateCount(el, target, duration = 1200) {
-      let start = null;
-      const step = (timestamp) => {
-        if (!start) start = timestamp;
-        const progress = Math.min((timestamp - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        el.textContent = Math.round(eased * target);
-        if (progress < 1) requestAnimationFrame(step);
-      };
-      requestAnimationFrame(step);
-    }
-
-    // Animate the CSA numeral when it comes into view
-    const csaNum = document.querySelector('.csa-numeral');
-    if (csaNum) {
-      const numObs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            csaNum.innerHTML = '<span id="count">0</span><span style="color:var(--gold)">.</span>';
-            animateCount(document.getElementById('count'), 3, 800);
-            numObs.unobserve(e.target);
-          }
-        });
-      }, { threshold: 0.5 });
-      numObs.observe(csaNum);
-    }
-
-    // ── Smooth parallax on hero bg ─────────────────────────────
-    const hero = document.querySelector('.hero');
-    if (hero) {
-      window.addEventListener('scroll', () => {
-        const y = window.scrollY;
-        if (y < window.innerHeight) {
-          hero.style.backgroundPositionY = `${y * 0.3}px`;
-        }
-      }, { passive: true });
-    }
-
-    // ── Demo showcase tab + auto-cycle ────────────────────────────
-    (function () {
-      let currentTab = 'student';
-      let currentIndex = 0;
-      let timer = null;
-      const INTERVAL = 3500;
-
-      const urlLabels = {
-        student: ['SkillGap · Assessment in Progress', 'SkillGap · Skill Index Results', 'SkillGap · AI Feedback & Roadmap'],
-        teacher:  ['SkillGap · Class Dashboard', 'SkillGap · Skill Gap Heatmap', 'SkillGap · Student Roster'],
-      };
-
-      function getScreens(tab) {
-        return Array.from(document.querySelectorAll(`.demo-screen[data-tab="${tab}"]`));
-      }
-      function getDots() { return Array.from(document.querySelectorAll('.demo-dot')); }
-
-      function showScreen(tab, index) {
-        document.querySelectorAll('.demo-screen').forEach(s => s.classList.remove('active'));
-        const screens = getScreens(tab);
-        if (screens[index]) screens[index].classList.add('active');
-        getDots().forEach((d, i) => d.classList.toggle('active', i === index));
-        const urlEl = document.getElementById('demo-url');
-        if (urlEl && urlLabels[tab]) urlEl.textContent = urlLabels[tab][index] || '';
-      }
-
-      function startCycle(tab) {
-        clearInterval(timer);
-        currentIndex = 0;
-        showScreen(tab, currentIndex);
-        timer = setInterval(() => {
-          currentIndex = (currentIndex + 1) % 3;
-          showScreen(tab, currentIndex);
-        }, INTERVAL);
-      }
-
-      document.querySelectorAll('.demo-tab').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.demo-tab').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          currentTab = btn.dataset.tab;
-          startCycle(currentTab);
-        });
-      });
-
-      getDots().forEach((dot, i) => {
-        dot.addEventListener('click', () => {
-          clearInterval(timer);
-          currentIndex = i;
-          showScreen(currentTab, currentIndex);
-          timer = setInterval(() => {
-            currentIndex = (currentIndex + 1) % 3;
-            showScreen(currentTab, currentIndex);
-          }, INTERVAL);
-        });
-      });
-
-      startCycle('student');
-    })();
-
-    // ── Institution drawers accordion ─────────────────────────
-    document.querySelectorAll('.drawer-head').forEach(head => {
-      head.addEventListener('click', () => {
-        const drawer = head.closest('.drawer');
-        const isOpen = drawer.classList.contains('open');
-        document.querySelectorAll('.drawer').forEach(d => {
-          d.classList.remove('open');
-          d.querySelector('.drawer-head').setAttribute('aria-expanded', 'false');
-        });
-        if (!isOpen) {
-          drawer.classList.add('open');
-          head.setAttribute('aria-expanded', 'true');
-        }
-      });
-    });
-
-    // ── Inquiry form ────────────────────────────────────────────
-    const inquiryForm = document.getElementById('inquiry-form');
-    if (inquiryForm) {
-      inquiryForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const btn = document.getElementById('form-btn');
-        const errEl = document.getElementById('form-error');
-        errEl.style.display = 'none';
-        btn.disabled = true;
-        btn.textContent = 'Sending…';
-        try {
-          const res = await fetch('/api/contact', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              from_name:        document.getElementById('inq-name').value.trim(),
-              from_email:       document.getElementById('inq-email').value.trim(),
-              from_institution: document.getElementById('inq-inst').value.trim(),
-              message:          document.getElementById('inq-msg').value.trim(),
-              _trap:            document.getElementById('_trap').value,
-            }),
-          });
-          if (!res.ok) throw new Error();
-          inquiryForm.style.display = 'none';
-          document.getElementById('form-success').style.display = 'block';
-        } catch {
-          errEl.style.display = 'block';
-          btn.disabled = false;
-          btn.textContent = 'Send Inquiry';
-        }
-      });
-    }
-  </script>
-  <!-- Vercel Web Analytics (enable in Vercel dashboard → Analytics) -->
-  <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
