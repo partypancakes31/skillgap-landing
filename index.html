@@ -370,8 +370,11 @@
       border-radius: 20px;
       padding: 48px 40px;
       transition: background var(--t-base);
+      display: flex;
+      flex-direction: column;
     }
     .offering:hover { background: rgba(255,255,255,0.25); }
+    .offering .btn-dark, .offering .btn-dark-outline { margin-top: auto; align-self: flex-start; }
     .offering-flag { display: inline-flex; padding: 4px 12px; border-radius: 999px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; background: rgba(26,24,20,0.12); color: var(--ink-soft); margin-bottom: 28px; }
     .offering-icon { font-size: 2.5rem; margin-bottom: 20px; }
     .offering-title { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.03em; color: var(--ink-soft); margin-bottom: 12px; }
