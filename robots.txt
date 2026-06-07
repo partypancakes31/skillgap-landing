@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://skillgap-studio.space/sitemap.xml
