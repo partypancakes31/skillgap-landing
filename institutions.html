@@ -120,7 +120,7 @@
       --paper:      #ffffff;
       --canvas:     #f5f1ea;
       --mid:        #ede8df;
-      --muted:      #9a9690;
+      --muted:      #6b6762;
       --border:     #e4e0d8;
       --gold:       #c9a96e;
       --gold-deep:  #8a6c35;
@@ -366,7 +366,7 @@
     .csa-dim-num.st { color: var(--gold); }
     .csa-dim-info {}
     .csa-dim-name { font-size: 1rem; font-weight: 800; color: var(--paper); margin-bottom: 4px; letter-spacing: -0.01em; }
-    .csa-dim-desc { font-size: 0.82rem; color: rgba(255,255,255,0.38); line-height: 1.5; }
+    .csa-dim-desc { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
     .csa-dim-wt { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.25); }
 
     /* ================================================
@@ -413,7 +413,7 @@
     .bubble-card { display: flex; flex-direction: column; }
     .bubble-card.gold { background: linear-gradient(160deg, rgba(201,169,110,0.14), rgba(201,169,110,0.05)); border-color: rgba(201,169,110,0.28); }
     .bubble-card.gold:hover { border-color: rgba(201,169,110,0.45); }
-    .bubble-eyebrow { font-size: 0.62rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.32); margin-bottom: 18px; }
+    .bubble-eyebrow { font-size: 0.62rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.5); margin-bottom: 18px; }
     .bubble-eyebrow.gold { color: var(--gold); }
     .bubble-scoreline { display: flex; align-items: center; gap: 12px; margin: 4px 0 16px; }
     .bubble-scoreline .bubble-score-num { font-size: 2rem; }
@@ -430,11 +430,11 @@
     .bubble-avatar.ai { background: rgba(201,169,110,0.2); color: var(--gold); font-size: 14px; }
     .bubble-meta { }
     .bubble-name { font-size: 0.78rem; font-weight: 700; color: var(--paper); }
-    .bubble-role { font-size: 0.7rem; color: rgba(255,255,255,0.3); }
+    .bubble-role { font-size: 0.7rem; color: rgba(255,255,255,0.5); }
     .bubble-text { font-size: 0.88rem; line-height: 1.65; color: rgba(255,255,255,0.55); }
     .bubble-score { margin-top: 16px; display: flex; align-items: center; gap: 8px; }
     .bubble-score-num { font-family: var(--sans); font-size: 1.4rem; font-weight: 800; letter-spacing: -0.04em; }
-    .bubble-score-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.3); }
+    .bubble-score-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.5); }
     .bubble-tag { display: inline-flex; padding: 3px 10px; border-radius: 999px; font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 14px; }
     .bubble-tag.p { background: rgba(26,122,74,0.15); color: #4ade80; }
     .bubble-tag.d { background: rgba(217,119,6,0.15); color: #fbbf24; }
@@ -1011,7 +1011,7 @@
        ================================================ */
     .logos-strip { background: var(--ink-soft); padding: 30px 48px; border-top: 1px solid rgba(255,255,255,0.06); }
     .logos-strip-inner { max-width: 1280px; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; }
-    .logos-label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.38); }
+    .logos-label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.55); }
     .logos-list { display: flex; align-items: center; gap: 26px; flex-wrap: wrap; }
     .logos-list span { font-size: 0.96rem; font-weight: 700; color: rgba(255,255,255,0.72); }
     .logos-more { font-size: 0.85rem; font-weight: 600; color: var(--gold); }
@@ -1151,7 +1151,7 @@
       font-family: var(--serif); font-size: 2.4rem; color: var(--gold);
       line-height: 1; margin-bottom: 8px;
     }
-    .drawer-stat-label { font-size: 0.82rem; color: rgba(255,255,255,0.38); line-height: 1.55; }
+    .drawer-stat-label { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.55; }
 
     @media (max-width: 1024px) {
       .hero-inner { grid-template-columns: 1fr; }
@@ -1225,6 +1225,7 @@
     </div>
   </nav>
 
+  <main>
   <!-- ══════════════════════════ HERO ═════════════════════════════════ -->
   <section class="hero">
     <div class="hero-inner">
@@ -2236,6 +2237,7 @@
     </div>
   </section>
 
+  </main>
   <!-- ══════════════════════════ FOOTER ═══════════════════════════════ -->
   <footer>
     <div class="footer-inner">
