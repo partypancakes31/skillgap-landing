@@ -362,44 +362,15 @@
       </div>
     </div>
 
-    <!-- Waitlist form -->
+    <!-- Platform CTA (live) -->
     <div class="waitlist-card">
-      <div id="waitlist-form-wrap">
-        <div class="card-eyebrow">Early Access Waitlist</div>
-        <h2 class="card-title">Be the first<br>to run it.</h2>
-        <p class="card-sub">We're building the platform now. Join the waitlist and we'll notify you the moment it's ready — early access users get priority onboarding.</p>
-
-        <form id="waitlist-form" novalidate>
-          <input type="text" name="_trap" style="display:none" tabindex="-1" autocomplete="off">
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" for="wl-name">Your name</label>
-              <input class="form-input" id="wl-name" name="from_name" type="text" placeholder="Ana Reyes" required>
-            </div>
-            <div class="form-group">
-              <label class="form-label" for="wl-email">Work email</label>
-              <input class="form-input" id="wl-email" name="from_email" type="email" placeholder="ana@university.edu" required>
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="wl-institution">Institution</label>
-            <input class="form-input" id="wl-institution" name="from_institution" type="text" placeholder="University / School name">
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="wl-subject">Subject you teach</label>
-            <input class="form-input" id="wl-subject" name="subject" type="text" placeholder="e.g. Biology, Accounting, Java Programming">
-          </div>
-          <button class="form-submit" type="submit" id="wl-submit">Join the Waitlist</button>
-          <p class="form-error-msg" id="wl-error"></p>
-        </form>
-        <p class="form-note">No spam. One email when the platform is ready.</p>
-      </div>
-
-      <div class="form-success" id="waitlist-success" style="display:none;">
-        <div class="form-success-icon">✓</div>
-        <div class="form-success-title">You're on the list.</div>
-        <p class="form-success-body">We'll email you the moment early access opens. Thanks for being here early — it means a lot.</p>
-      </div>
+      <div class="card-eyebrow">Now Live</div>
+      <h2 class="card-title">It's ready.<br>Open it now.</h2>
+      <p class="card-sub">Upload your exam CSV and get a full skill gap analysis — per student, per topic, with AI feedback — in under a minute. No IT setup. No installation. Free to use.</p>
+      <a href="https://skillgap-platform.vercel.app" target="_blank" rel="noopener" class="form-submit" style="display:block;text-align:center;text-decoration:none;margin-top:8px;">
+        Open Platform →
+      </a>
+      <p class="form-note">Works with any subject. Bring your own answer key CSV.</p>
     </div>
   </section>
 
@@ -445,64 +416,5 @@
     </div>
   </footer>
 
-  <script>
-    const form = document.getElementById('waitlist-form')
-    const submitBtn = document.getElementById('wl-submit')
-    const errorMsg = document.getElementById('wl-error')
-    const successDiv = document.getElementById('waitlist-success')
-    const formWrap = document.getElementById('waitlist-form-wrap')
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault()
-      errorMsg.style.display = 'none'
-
-      const name = form.from_name.value.trim()
-      const email = form.from_email.value.trim()
-      const institution = form.from_institution.value.trim()
-      const subject = form.subject.value.trim()
-      const trap = form._trap.value
-
-      if (trap) return
-
-      if (!name || !email) {
-        errorMsg.textContent = 'Name and email are required.'
-        errorMsg.style.display = 'block'
-        return
-      }
-      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-      if (!emailOk) {
-        errorMsg.textContent = 'Please enter a valid email address.'
-        errorMsg.style.display = 'block'
-        return
-      }
-
-      submitBtn.disabled = true
-      submitBtn.textContent = 'Joining…'
-
-      try {
-        const res = await fetch('/api/contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            from_name: name,
-            from_email: email,
-            from_institution: institution || 'Not provided',
-            message: `WAITLIST SIGNUP\nSubject taught: ${subject || 'Not provided'}\nInstitution: ${institution || 'Not provided'}`,
-            _trap: trap,
-          }),
-        })
-
-        if (!res.ok) throw new Error()
-
-        formWrap.style.display = 'none'
-        successDiv.style.display = 'block'
-      } catch {
-        errorMsg.textContent = 'Something went wrong. Email us directly at hello@skillgap-studio.space'
-        errorMsg.style.display = 'block'
-        submitBtn.disabled = false
-        submitBtn.textContent = 'Join the Waitlist'
-      }
-    })
-  </script>
 </body>
 </html>
