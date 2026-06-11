@@ -15,12 +15,12 @@
   <meta property="og:title" content="SkillGap | For Institutions">
   <meta property="og:description" content="Custom LMS integration, white-label builds, and API access. Built around your systems, your subjects, and your scale.">
   <meta property="og:url" content="https://skillgap-studio.space/institutions.html">
-  <meta property="og:image" content="https://skillgap-landing.vercel.app/logo.png">
+  <meta property="og:image" content="https://skillgap-studio.space/logo.png">
   <!-- Twitter -->
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="SkillGap | AI Assessment Intelligence for Institutions">
   <meta name="twitter:description" content="The AI layer that turns every exam into a diagnosis. Students get direction. Faculty get intelligence. Institutions get results.">
-  <meta name="twitter:image" content="https://skillgap-landing.vercel.app/logo.png">
+  <meta name="twitter:image" content="https://skillgap-studio.space/logo.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -63,7 +63,7 @@
             "name": "Do we have to replace our current LMS?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "No. SkillGap layers on top of your existing LMS or assessment platform through its API. Your students, logins, and question bank stay where they are — we just add the scoring and AI feedback layer."
+              "text": "No. SkillGap layers on top of your existing LMS or assessment platform through its API. Your students, logins, and question bank stay where they are; we just add the scoring and AI feedback layer."
             }
           },
           {
@@ -79,7 +79,7 @@
             "name": "What subjects does SkillGap support?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Any subject. The three-factor scoring engine and AI feedback layer work across disciplines — from programming and nursing to business and law. Java Programming is just the example shown in our demo."
+              "text": "Any subject. The three-factor scoring engine and AI feedback layer work across disciplines, from programming and nursing to business and law. Java Programming is just the example shown in our demo."
             }
           },
           {
@@ -279,6 +279,17 @@
 
     .btn-outline { padding: 14px 24px; border: 1px solid rgba(255,255,255,0.18); border-radius: 999px; font-size: 0.82rem; font-weight: 600; color: rgba(255,255,255,0.65); display: flex; align-items: center; gap: 6px; transition: all var(--t-fast); }
     .btn-outline:hover { border-color: rgba(255,255,255,0.4); color: var(--paper); }
+
+    .hero-try {
+      display: inline-flex; align-items: center; gap: 6px;
+      margin-top: 20px;
+      font-size: 0.82rem; font-weight: 600;
+      color: rgba(255,255,255,0.45);
+      transition: color var(--t-fast);
+    }
+    .hero-try span { color: var(--gold); transition: transform var(--t-fast); }
+    .hero-try:hover { color: rgba(255,255,255,0.8); }
+    .hero-try:hover span { transform: translateX(3px); }
 
     /* Hero mockup */
     .hero-visual { display: flex; justify-content: center; align-items: center; }
@@ -1242,24 +1253,25 @@
         </h1>
         <p class="hero-body">SkillGap is the AI intelligence layer that turns every assessment into a diagnosis. Students find out exactly which skills they're missing and what to do next. Faculty find out where the whole class is falling short, automatically, before the next class starts.</p>
         <div class="hero-actions">
-          <a class="btn-solid" href="#cta">Get Started</a>
-          <a class="btn-outline" href="#scoring">
+          <a class="btn-solid" href="#inquiry">Start a Pilot Conversation</a>
+          <a class="btn-outline" href="#demo">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.1"/><polygon points="5.5,4.5 10,7 5.5,9.5" fill="currentColor"/></svg>
-            See the CSA Model
+            See It In Action
           </a>
         </div>
+        <a class="hero-try" href="https://app.skillgap-studio.space" target="_blank" rel="noopener">Or let your teachers try the free platform today <span>→</span></a>
         <div class="hero-stats">
-          <div class="hero-stat">
-            <span class="hero-stat-num">600+</span>
-            <span class="hero-stat-label">faculty hours saved / year</span>
-          </div>
           <div class="hero-stat">
             <span class="hero-stat-num">Seconds</span>
             <span class="hero-stat-label">to feedback, not weeks</span>
           </div>
           <div class="hero-stat">
-            <span class="hero-stat-num">$12k+</span>
-            <span class="hero-stat-label">tuition retained per student</span>
+            <span class="hero-stat-num">Any LMS</span>
+            <span class="hero-stat-label">layers on via API, no migration</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-num">1 student</span>
+            <span class="hero-stat-label">retained covers a year of licensing</span>
           </div>
         </div>
       </div>
@@ -1834,7 +1846,7 @@
         <div class="stake-card reveal d2">
           <div class="stake-role">Faculty</div>
           <h3>Better conversations, not fewer</h3>
-          <p>Faculty come to every class knowing exactly where students are. Office hours shift from "I don't understand this subject" to "the system shows I'm struggling with X — can we go deeper?" The diagnostic guesswork is already done.</p>
+          <p>Faculty come to every class knowing exactly where students are. Office hours shift from "I don't understand this subject" to "the system shows I'm struggling with X, can we go deeper?" The diagnostic guesswork is already done.</p>
         </div>
       </div>
       <div class="stake-pdf-wrap reveal">
