@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>SkillGap Platform | Student Skill Gap Analysis for Teachers</title>
-  <meta name="description" content="Upload your class assessment data and every student gets a personalized skill gap report and study roadmap — in seconds. Works with any subject, any exam format. No IT setup required.">
+  <meta name="description" content="Upload your class assessment data and every student gets a personalized skill gap report and study roadmap in seconds. Free for teachers during early access. Any subject, any exam format. No IT setup required.">
   <link rel="canonical" href="https://skillgap-studio.space/use.html">
   <link rel="icon" type="image/png" href="/logo.png">
   <link rel="apple-touch-icon" href="/logo.png">
@@ -101,7 +101,7 @@
     @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(1.4)} }
 
     .hero-title {
-      font-size: clamp(2.6rem, 5vw, 4.2rem);
+      font-size: clamp(2.4rem, 4.3vw, 3.5rem);
       font-weight: 800;
       line-height: 1.0;
       letter-spacing: -0.04em;
@@ -176,30 +176,7 @@
       line-height: 1.6; margin-bottom: 28px;
     }
 
-    /* Form */
-    .form-group { display: flex; flex-direction: column; gap: 7px; margin-bottom: 14px; }
-    .form-label {
-      font-size: 0.68rem; font-weight: 800;
-      text-transform: uppercase; letter-spacing: 0.1em;
-      color: rgba(255,255,255,0.3);
-    }
-    .form-input {
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 10px;
-      padding: 12px 16px;
-      font-family: var(--sans);
-      font-size: 0.88rem;
-      color: var(--paper);
-      outline: none;
-      width: 100%;
-      transition: border-color var(--t-fast), background var(--t-fast);
-    }
-    .form-input::placeholder { color: rgba(255,255,255,0.2); }
-    .form-input:focus { border-color: var(--gold); background: rgba(255,255,255,0.09); }
-
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-
+    /* CTA button */
     .form-submit {
       width: 100%; margin-top: 6px;
       padding: 14px;
@@ -219,17 +196,6 @@
       font-size: 0.72rem; color: rgba(255,255,255,0.25);
       text-align: center; margin-top: 14px; line-height: 1.5;
     }
-
-    .form-success { text-align: center; padding: 24px 0; }
-    .form-success-icon {
-      width: 48px; height: 48px;
-      background: rgba(26,122,74,0.2); border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 14px; font-size: 1.3rem; color: #4ade80;
-    }
-    .form-success-title { font-size: 1.05rem; font-weight: 800; color: var(--paper); margin-bottom: 8px; }
-    .form-success-body { font-size: 0.85rem; color: rgba(255,255,255,0.4); line-height: 1.6; }
-    .form-error-msg { font-size: 0.75rem; color: #f87171; margin-top: 10px; text-align: center; display: none; }
 
     /* ── What to expect ──────────────────────────────────────── */
     .expect-section {
@@ -303,7 +269,6 @@
       .hero { padding: 100px 24px 60px; }
       .expect-section { padding: 72px 24px; }
       .waitlist-card { padding: 36px 24px; }
-      .form-row { grid-template-columns: 1fr; }
       footer { padding: 32px 24px; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
     }
@@ -322,7 +287,7 @@
         <div class="nav-logomark"><img src="logo-sm.png" alt="SkillGap logo"></div>
         <span class="nav-wordmark">SkillGap</span>
       </a>
-      <span class="nav-badge">Coming Soon</span>
+      <span class="nav-badge">Free · Live Now</span>
     </div>
   </nav>
 
@@ -332,10 +297,10 @@
     <div class="hero-left">
       <div class="hero-eyebrow">
         <span class="hero-eyebrow-dot"></span>
-        SkillGap Platform · Early Access
+        SkillGap Platform · Free Early Access
       </div>
-      <h1 class="hero-title">Gap analysis<br>for your class.<br>No IT required.</h1>
-      <p class="hero-body">Your students find out exactly which skills they're missing and what to study next. You see where the whole class struggled. Upload your answer data, and every student gets a personalized gap report — in seconds. Any subject, any format.</p>
+      <h1 class="hero-title">Upload the exam.<br>Get a study plan<br>for every student.</h1>
+      <p class="hero-body">Your students find out exactly which skills they're missing and what to study next, minutes after the exam instead of weeks later. You see where the whole class struggled before you plan the next lesson. Any subject, any exam format, and free while we're in early access.</p>
 
       <div class="steps">
         <div class="step">
@@ -364,13 +329,13 @@
 
     <!-- Platform CTA (live) -->
     <div class="waitlist-card">
-      <div class="card-eyebrow">Now Live</div>
-      <h2 class="card-title">It's ready.<br>Open it now.</h2>
-      <p class="card-sub">Upload your exam CSV and get a full skill gap analysis — per student, per topic, with AI feedback — in under a minute. No IT setup. No installation. Free to use.</p>
+      <div class="card-eyebrow">Now Live · Free</div>
+      <h2 class="card-title">Open the platform.<br>It's free.</h2>
+      <p class="card-sub">Upload your exam data and get a full skill gap analysis in under a minute: per student, per topic, with AI feedback. No IT setup. No installation. No credit card.</p>
       <a href="https://app.skillgap-studio.space" target="_blank" rel="noopener" class="form-submit" style="display:block;text-align:center;text-decoration:none;margin-top:8px;">
         Open Platform →
       </a>
-      <p class="form-note">Works with any subject. Bring your own answer key CSV.</p>
+      <p class="form-note">Works with any subject. Bring your exam CSV, or enter answers directly.</p>
     </div>
   </section>
 
@@ -383,7 +348,7 @@
         <div class="expect-card">
           <div class="expect-num">01</div>
           <div class="expect-title">Skill Index per student</div>
-          <p class="expect-body">A composite score built from accuracy, speed, and consistency — not just a percentage. Tells you how deeply a student understands the material. And tells the student the same thing about themselves.</p>
+          <p class="expect-body">A composite score built from accuracy, speed, and consistency, not just a percentage. It tells you how deeply a student understands the material. And it tells the student the same thing about themselves.</p>
         </div>
         <div class="expect-card">
           <div class="expect-num">02</div>
@@ -412,7 +377,7 @@
         <a href="institutions.html#pricing">Pricing</a>
         <a href="compliance.html">Compliance</a>
       </div>
-      <span class="footer-copy">© 2025 SkillGap</span>
+      <span class="footer-copy">© 2026 SkillGap Labs · Christian Jay Baquilid</span>
     </div>
   </footer>
 
