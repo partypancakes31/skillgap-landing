@@ -201,13 +201,14 @@
     .mc-badge { padding: 5px 12px; border-radius: 999px; font-size: 0.66rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; background: #edf7f1; color: #1a7a4a; }
     .mc-dims { display: flex; flex-direction: column; gap: 9px; }
     .mc-dim { display: flex; align-items: center; gap: 10px; }
-    .mc-dim-name { font-size: 0.7rem; font-weight: 700; color: rgba(10,10,10,0.55); width: 60px; flex-shrink: 0; }
+    .mc-dim-name { font-size: 0.7rem; font-weight: 700; color: rgba(10,10,10,0.55); width: 72px; flex-shrink: 0; }
     .mc-track { flex: 1; height: 5px; background: var(--mid); border-radius: 999px; overflow: hidden; }
     .mc-fill { height: 100%; border-radius: 999px; }
     .mc-fill.a { background: #2f9e63; }
     .mc-fill.s { background: #4a86d4; }
     .mc-fill.st { background: var(--gold); }
     .mc-score { font-size: 0.7rem; font-weight: 800; color: var(--ink); width: 20px; text-align: right; }
+    .mc-wt { font-size: 0.64rem; font-weight: 600; color: rgba(10,10,10,0.35); width: 32px; text-align: right; }
 
     .mc-ai {
       background: rgba(201,169,110,0.08);
@@ -454,7 +455,7 @@
         "applicationCategory": "EducationApplication",
         "operatingSystem": "Web",
         "url": "https://app.skillgap-studio.space",
-        "description": "AI assessment intelligence that identifies student skill gaps with three-factor precision. Students get a personalized gap report and study roadmap after every exam. Teachers get class-level curriculum intelligence automatically.",
+        "description": "AI assessment intelligence that identifies student skill gaps with measured, defensible precision. Students get a personalized gap report and study roadmap after every exam. Teachers get class-level curriculum intelligence automatically.",
         "offers": {
           "@type": "Offer",
           "price": "0",
@@ -492,7 +493,7 @@
         Live now · Free for teachers
       </div>
       <h1 class="hero-title">Grades say<br><em>how they did.</em><br>SkillGap shows<br><em>what to&nbsp;fix.</em></h1>
-      <p class="hero-body">SkillGap is the AI layer that turns every exam into a per-student skill diagnosis and study roadmap. Teachers see exactly where the whole class struggled. Any subject, any exam format. Results in seconds.</p>
+      <p class="hero-body">SkillGap turns every exam into a per-student skill diagnosis and study roadmap. The engine does the measuring; the AI turns it into clear, personal guidance. Teachers see exactly where the whole class struggled. Any subject, any exam format, results in seconds.</p>
       <div class="hero-actions">
         <a class="btn-gold" href="https://app.skillgap-studio.space" target="_blank" rel="noopener">
           Try it on your class
@@ -523,18 +524,15 @@
             <div class="mc-dims">
               <div class="mc-dim">
                 <span class="mc-dim-name">Accuracy</span>
-                <div class="mc-track"><div class="mc-fill a" style="width:83%"></div></div>
-                <span class="mc-score">83</span>
+                <div class="mc-track"><div class="mc-fill a" style="width:79%"></div></div>
+                <span class="mc-score">79</span>
+                <span class="mc-wt">×0.75</span>
               </div>
               <div class="mc-dim">
-                <span class="mc-dim-name">Speed</span>
-                <div class="mc-track"><div class="mc-fill s" style="width:68%"></div></div>
-                <span class="mc-score">68</span>
-              </div>
-              <div class="mc-dim">
-                <span class="mc-dim-name">Stability</span>
+                <span class="mc-dim-name">Consistency</span>
                 <div class="mc-track"><div class="mc-fill st" style="width:74%"></div></div>
                 <span class="mc-score">74</span>
+                <span class="mc-wt">×0.25</span>
               </div>
             </div>
           </div>
@@ -574,7 +572,7 @@
   <!-- ── Trust strip ───────────────────────────────────────── -->
   <section class="trust">
     <div class="trust-inner">
-      <div class="trust-item"><span class="trust-dot"></span>Three-signal scoring: accuracy, speed, stability</div>
+      <div class="trust-item"><span class="trust-dot"></span>Real measurement, not AI guesswork</div>
       <div class="trust-item"><span class="trust-dot"></span>Any subject, any exam format</div>
       <div class="trust-item"><span class="trust-dot"></span>Layers onto Moodle, Canvas &amp; any LMS via API</div>
     </div>
