@@ -138,8 +138,8 @@
     .step-title { font-size: 0.95rem; font-weight: 800; color: var(--ink); margin-bottom: 4px; }
     .step-body { font-size: 0.82rem; color: rgba(10,10,10,0.58); line-height: 1.55; }
 
-    /* ── Waitlist card ───────────────────────────────────────── */
-    .waitlist-card {
+    /* ── Platform card ───────────────────────────────────────── */
+    .platform-card {
       background: var(--ink-soft);
       border-radius: 24px;
       padding: 48px 40px;
@@ -147,13 +147,13 @@
       position: relative;
       overflow: hidden;
     }
-    .waitlist-card::before {
+    .platform-card::before {
       content: '';
       position: absolute; top: 0; left: 50%; transform: translateX(-50%);
       width: 60%; height: 1px;
       background: linear-gradient(90deg, transparent, rgba(201,169,110,0.6), transparent);
     }
-    .waitlist-card::after {
+    .platform-card::after {
       content: '';
       position: absolute;
       top: -100px; right: -80px;
@@ -268,7 +268,7 @@
       .nav { padding: 0 24px; }
       .hero { padding: 100px 24px 60px; }
       .expect-section { padding: 72px 24px; }
-      .waitlist-card { padding: 36px 24px; }
+      .platform-card { padding: 36px 24px; }
       footer { padding: 32px 24px; }
       .footer-inner { flex-direction: column; align-items: flex-start; }
     }
@@ -292,7 +292,7 @@
   </nav>
 
   <main>
-  <!-- ── Hero + Waitlist form ──────────────────────────────── -->
+  <!-- ── Hero + Platform form ──────────────────────────────── -->
   <section class="hero">
     <div class="hero-left">
       <div class="hero-eyebrow">
@@ -328,7 +328,7 @@
     </div>
 
     <!-- Platform CTA (live) -->
-    <div class="waitlist-card">
+    <div class="platform-card">
       <div class="card-eyebrow">Now Live · Free</div>
       <h2 class="card-title">Open the platform.<br>It's free.</h2>
       <p class="card-sub">Upload your exam data and get a full skill gap analysis in under a minute: per student, per topic, with AI feedback. No IT setup. No installation. No credit card.</p>
@@ -348,12 +348,12 @@
         <div class="expect-card">
           <div class="expect-num">01</div>
           <div class="expect-title">Skill Index per student</div>
-          <p class="expect-body">A composite score built from accuracy, speed, and consistency, not just a percentage. It tells you how deeply a student understands the material. And it tells the student the same thing about themselves.</p>
+          <p class="expect-body">A composite score built from accuracy and consistency, not just a percentage. It tells you how deeply a student understands the material. And it tells the student the same thing about themselves.</p>
         </div>
         <div class="expect-card">
           <div class="expect-num">02</div>
           <div class="expect-title">AI gap narrative</div>
-          <p class="expect-body">Each student gets a short, specific AI-written breakdown of what they got wrong and what to study next. Not generic. Named concepts, named gaps.</p>
+          <p class="expect-body">Each student gets a short, specific AI-written breakdown of what they got wrong and what to study next. Not generic. Named concepts, named gaps. Every line traces back to something the engine measured, not written to sound encouraging.</p>
         </div>
         <div class="expect-card">
           <div class="expect-num">03</div>

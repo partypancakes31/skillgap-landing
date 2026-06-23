@@ -47,7 +47,7 @@
         "applicationCategory": "EducationApplication",
         "operatingSystem": "Web",
         "url": "https://skillgap-studio.space",
-        "description": "AI assessment intelligence that identifies student skill gaps with three-factor precision. Students get a personalized gap report and study roadmap after every exam. Teachers get class-level curriculum intelligence automatically.",
+        "description": "AI assessment intelligence that identifies student skill gaps with measured, defensible precision. Students get a personalized gap report and study roadmap after every exam. Teachers get class-level curriculum intelligence automatically.",
         "offers": {
           "@type": "Offer",
           "price": "12",
@@ -79,7 +79,7 @@
             "name": "What subjects does SkillGap support?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Any subject. The three-factor scoring engine and AI feedback layer work across disciplines, from programming and nursing to business and law. Java Programming is just the example shown in our demo."
+              "text": "Any subject. The SkillGap engine and AI feedback layer work across disciplines, from programming and nursing to business and law. Java Programming is just the example shown in our demo."
             }
           },
           {
@@ -350,36 +350,40 @@
     .promise-copy strong { font-style: normal; font-family: var(--sans); font-weight: 800; color: var(--ink); }
 
     /* ================================================
-       CSA BIG  (dark, large numeral)
+       ENGINE  (dark)
        ================================================ */
     .csa-big-section { background: var(--ink); padding: 120px 48px; position: relative; overflow: hidden; }
     .csa-big-section::before { content: ''; position: absolute; top: -200px; left: 50%; transform: translateX(-50%); width: 800px; height: 500px; background: radial-gradient(ellipse, rgba(201,169,110,0.1) 0%, transparent 65%); pointer-events: none; }
-    .csa-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
-    .csa-left {}
-    .csa-eyebrow { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold); margin-bottom: 24px; }
-    .csa-numeral { font-family: var(--sans); font-size: clamp(6rem, 14vw, 14rem); font-weight: 800; line-height: 0.9; letter-spacing: -0.06em; color: var(--paper); margin-bottom: 24px; }
-    .csa-numeral span { color: var(--gold); }
-    .csa-title { font-size: clamp(1.4rem, 2.5vw, 2.2rem); font-weight: 800; color: var(--paper); line-height: 1.15; letter-spacing: -0.03em; margin-bottom: 20px; }
-    .csa-desc { font-size: 1rem; color: rgba(255,255,255,0.45); line-height: 1.7; max-width: 380px; }
-
-    .csa-dims { display: flex; flex-direction: column; gap: 0; }
-    .csa-dim {
-      padding: 28px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 24px;
-      align-items: center;
-    }
-    .csa-dim:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
-    .csa-dim-num { font-family: var(--sans); font-size: 2.25rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
-    .csa-dim-num.a { color: #4ade80; }
-    .csa-dim-num.s { color: #60a5fa; }
-    .csa-dim-num.st { color: var(--gold); }
-    .csa-dim-info {}
-    .csa-dim-name { font-size: 1rem; font-weight: 800; color: var(--paper); margin-bottom: 4px; letter-spacing: -0.01em; }
-    .csa-dim-desc { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.5; }
-    .csa-dim-wt { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.25); }
+    .eng-inner { max-width: 1100px; margin: 0 auto; position: relative; }
+    .eng-head { max-width: 700px; margin-bottom: 52px; }
+    .eng-eyebrow { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: var(--gold); margin-bottom: 20px; }
+    .eng-title { font-size: clamp(2rem, 4.5vw, 3.3rem); font-weight: 800; color: var(--paper); line-height: 1.08; letter-spacing: -0.03em; margin-bottom: 22px; }
+    .eng-sub { font-size: 1.05rem; color: rgba(255,255,255,0.55); line-height: 1.65; max-width: 620px; }
+    .eng-sub strong { color: var(--paper); font-weight: 700; }
+    .eng-label { font-size: 0.68rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.14em; color: rgba(255,255,255,0.35); margin-bottom: 18px; display: flex; align-items: center; gap: 14px; }
+    .eng-label::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.1); }
+    .eng-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 14px; margin-bottom: 40px; }
+    .eng-card { background: var(--ink-soft); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 20px 22px; }
+    .eng-card-name { font-size: 1.02rem; font-weight: 800; color: var(--paper); letter-spacing: -0.01em; margin-bottom: 6px; }
+    .eng-card-desc { font-size: 0.85rem; color: rgba(255,255,255,0.5); line-height: 1.5; }
+    .eng-card-tag { display: inline-block; font-family: monospace; font-size: 0.66rem; letter-spacing: 0.05em; color: rgba(255,255,255,0.4); margin-top: 12px; border: 1px solid rgba(255,255,255,0.13); border-radius: 6px; padding: 3px 8px; }
+    .eng-ai { background: rgba(201,169,110,0.06); border: 1px solid rgba(201,169,110,0.2); border-radius: 16px; padding: 28px 30px; }
+    .eng-ai-head { display: flex; align-items: center; gap: 11px; margin-bottom: 16px; }
+    .eng-ai-ic { width: 34px; height: 34px; border-radius: 9px; background: var(--gold-pale); color: var(--gold); display: flex; align-items: center; justify-content: center; flex: none; }
+    .eng-ai-ic svg { width: 18px; height: 18px; }
+    .eng-ai-label { font-size: 0.95rem; font-weight: 800; color: var(--paper); }
+    .eng-ai-label span { color: rgba(255,255,255,0.5); font-weight: 600; }
+    .eng-ai-quote { font-family: var(--serif); font-style: italic; font-size: 1.18rem; line-height: 1.55; color: rgba(255,255,255,0.88); margin-bottom: 18px; }
+    .eng-ai-quote em { font-style: normal; color: var(--gold); }
+    .eng-ai-road { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
+    .eng-ai-chip { display: flex; align-items: center; gap: 8px; font-size: 0.82rem; color: var(--paper); background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 22px; padding: 6px 14px; }
+    .eng-ai-chip b { color: var(--gold); font-weight: 800; }
+    .eng-ai-ground { font-size: 0.82rem; color: rgba(255,255,255,0.42); display: flex; align-items: center; gap: 9px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); }
+    .eng-ai-ground svg { width: 15px; height: 15px; color: var(--gold); flex: none; }
+    .eng-contrast { text-align: center; font-size: clamp(1.15rem, 2.2vw, 1.6rem); font-weight: 800; color: var(--paper); line-height: 1.32; letter-spacing: -0.02em; margin-top: 46px; }
+    .eng-contrast span { color: var(--gold); }
+    @media (max-width: 820px) { .eng-grid { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+    @media (max-width: 540px) { .eng-grid { grid-template-columns: 1fr; } }
 
     /* ================================================
        FEATURES  (white, 4-col)
@@ -713,6 +717,72 @@
        DEMO SHOWCASE
        ================================================ */
     .demo-section { background: var(--ink); padding: 120px 48px; }
+
+    /* ── Product gallery (replaces interactive demo) ── */
+    .gallery { max-width: 920px; margin: 0 auto; }
+    .gal-step { margin-top: 44px; }
+    .gal-step:first-child { margin-top: 0; }
+    .gal-step-label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.42); margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+    .gal-step-label em { color: var(--gold); font-style: normal; font-weight: 700; letter-spacing: 0.04em; }
+    .gal-step-num { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 50%; background: var(--gold-pale); color: var(--gold); font-size: 0.72rem; font-weight: 800; }
+    .gal-phone { width: 224px; margin: 0 auto; border: 2px solid rgba(255,255,255,0.16); border-radius: 28px; padding: 8px; background: #0d0b08; }
+    .gal-pscreen { position: relative; height: 320px; border-radius: 21px; overflow: hidden; background: #100e0a; display: flex; align-items: center; justify-content: center; }
+    .gal-sheet { width: 138px; background: #efe9dd; border-radius: 6px; padding: 12px 11px; transform: rotate(-3deg); }
+    .gal-sheet-h { font-size: 7px; letter-spacing: 0.1em; color: #6b5f49; font-weight: 700; margin-bottom: 9px; text-align: center; }
+    .gal-brow { display: flex; align-items: center; gap: 6px; margin-bottom: 7px; }
+    .gal-bq { font-size: 7px; color: #8a7d63; width: 10px; font-family: monospace; }
+    .gal-bub { width: 10px; height: 10px; border-radius: 50%; border: 1.3px solid #b3a589; }
+    .gal-bub.on { background: #1a1814; border-color: #1a1814; }
+    .gal-fid { position: absolute; width: 12px; height: 12px; background: #1a1814; }
+    .gal-corner { position: absolute; width: 28px; height: 28px; border: 2px solid var(--gold); }
+    .gal-c-tl { top: 16px; left: 16px; border-right: 0; border-bottom: 0; border-radius: 7px 0 0 0; }
+    .gal-c-tr { top: 16px; right: 16px; border-left: 0; border-bottom: 0; border-radius: 0 7px 0 0; }
+    .gal-c-bl { bottom: 62px; left: 16px; border-right: 0; border-top: 0; border-radius: 0 0 0 7px; }
+    .gal-c-br { bottom: 62px; right: 16px; border-left: 0; border-top: 0; border-radius: 0 0 7px 0; }
+    .gal-capbtn { position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--gold); }
+    .gal-capbtn::after { content: ''; position: absolute; inset: 4px; border-radius: 50%; background: var(--gold); }
+    .gal-pchip { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 10px; color: var(--gold); background: rgba(13,11,8,0.82); border: 1px solid rgba(201,169,110,0.3); border-radius: 20px; padding: 4px 11px; }
+    .gal-frame { background: #1f1b13; border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; overflow: hidden; max-width: 600px; }
+    .gal-bar { display: flex; align-items: center; gap: 7px; padding: 11px 14px; background: rgba(0,0,0,0.22); border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .gal-bardot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.18); }
+    .gal-bartitle { flex: 1; text-align: center; font-size: 11px; color: rgba(255,255,255,0.4); }
+    .gal-scr { padding: 18px 20px; }
+    .gal-stats { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.08); margin-bottom: 14px; }
+    .gal-stat { display: flex; flex-direction: column; padding: 0 14px; }
+    .gal-stat:first-child { padding-left: 0; }
+    .gal-stat-n { font-size: 1.3rem; font-weight: 800; color: var(--paper); }
+    .gal-stat-n.g { color: #6cc08b; } .gal-stat-n.a { color: #d8a657; } .gal-stat-n.r { color: #d98b7a; }
+    .gal-stat-l { font-size: 0.66rem; color: rgba(255,255,255,0.55); margin-top: 2px; }
+    .gal-sep { width: 1px; height: 26px; background: rgba(255,255,255,0.1); }
+    .gal-rel { display: flex; align-items: center; gap: 14px; padding: 12px 14px; background: #262116; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; margin-bottom: 13px; }
+    .gal-rel-n { font-size: 1.7rem; font-weight: 800; color: var(--gold); line-height: 1; }
+    .gal-rel-l { font-size: 0.8rem; font-weight: 700; color: var(--paper); }
+    .gal-rel-s { font-size: 0.72rem; color: rgba(255,255,255,0.55); margin-top: 2px; }
+    .gal-dh { font-size: 0.66rem; letter-spacing: 0.05em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
+    .gal-mis { display: flex; gap: 9px; align-items: baseline; padding: 5px 0; }
+    .gal-qn { font-family: monospace; font-size: 0.72rem; color: var(--gold); flex: none; }
+    .gal-mt { font-size: 0.8rem; line-height: 1.4; color: rgba(255,255,255,0.6); }
+    .gal-mt b { color: var(--paper); font-weight: 700; }
+    .gal-hero { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 14px; }
+    .gal-ex { font-size: 0.72rem; color: rgba(255,255,255,0.55); }
+    .gal-snm { font-size: 1.05rem; font-weight: 800; color: var(--paper); margin: 3px 0 6px; }
+    .gal-band { display: inline-block; font-size: 0.6rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #d8a657; border: 1px solid #d8a657; border-radius: 20px; padding: 2px 9px; }
+    .gal-circle { width: 62px; height: 62px; border-radius: 50%; border: 3px solid #d8a657; display: flex; flex-direction: column; align-items: center; justify-content: center; flex: none; }
+    .gal-circle-n { font-size: 1.4rem; font-weight: 800; color: var(--paper); line-height: 1; }
+    .gal-circle-l { font-size: 0.46rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(255,255,255,0.55); margin-top: 2px; }
+    .gal-aih { display: flex; align-items: center; gap: 8px; margin: 14px 0 10px; }
+    .gal-aiic { width: 24px; height: 24px; border-radius: 6px; background: var(--gold-pale); color: var(--gold); display: flex; align-items: center; justify-content: center; font-size: 12px; }
+    .gal-ait { font-size: 0.8rem; font-weight: 800; color: var(--paper); }
+    .gal-ait span { color: rgba(255,255,255,0.55); font-weight: 600; }
+    .gal-aic { background: #262116; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 11px 13px; margin-bottom: 8px; }
+    .gal-aic-l { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+    .gal-aic-x { font-size: 0.8rem; line-height: 1.5; color: rgba(255,255,255,0.82); }
+    @media (min-width: 760px) {
+      .gal-step { display: grid; grid-template-columns: 150px 1fr; gap: 28px; align-items: start; }
+      .gal-step-label { margin-bottom: 0; flex-direction: column; align-items: flex-start; gap: 9px; padding-top: 6px; }
+      .gal-phone { margin: 0; }
+      .gal-frame { max-width: none; }
+    }
     .demo-inner { max-width: 900px; margin: 0 auto; }
     .demo-header { text-align: center; margin-bottom: 48px; }
     .demo-eyebrow {
@@ -1226,7 +1296,7 @@
         <span class="nav-wordmark">SkillGap</span>
       </a>
       <ul class="nav-links">
-        <li><a href="#scoring">CSA Model</a></li>
+        <li><a href="#scoring">The engine</a></li>
         <li><a href="#features">Platform</a></li>
         <li><a href="#demo">Demo</a></li>
         <li><a href="#offerings">Offerings</a></li>
@@ -1296,21 +1366,15 @@
               <div class="mc-dims">
                 <div class="mc-dim">
                   <span class="mc-dim-name">Accuracy</span>
-                  <div class="mc-track"><div class="mc-fill a" style="width:83%"></div></div>
-                  <span class="mc-score">83</span>
-                  <span class="mc-wt">×0.60</span>
+                  <div class="mc-track"><div class="mc-fill a" style="width:79%"></div></div>
+                  <span class="mc-score">79</span>
+                  <span class="mc-wt">×0.75</span>
                 </div>
                 <div class="mc-dim">
-                  <span class="mc-dim-name">Speed</span>
-                  <div class="mc-track"><div class="mc-fill s" style="width:68%"></div></div>
-                  <span class="mc-score">68</span>
-                  <span class="mc-wt">×0.20</span>
-                </div>
-                <div class="mc-dim">
-                  <span class="mc-dim-name">Stability</span>
+                  <span class="mc-dim-name">Consistency</span>
                   <div class="mc-track"><div class="mc-fill st" style="width:74%"></div></div>
                   <span class="mc-score">74</span>
-                  <span class="mc-wt">×0.20</span>
+                  <span class="mc-wt">×0.25</span>
                 </div>
               </div>
             </div>
@@ -1350,41 +1414,60 @@
     </div>
   </section>
 
-  <!-- ══════════════════════════ CSA BIG ══════════════════════════════ -->
+  <!-- ══════════════════════════ ENGINE ════════════════════════════════ -->
   <section class="csa-big-section" id="scoring">
-    <div class="csa-inner">
-      <div class="csa-left">
-        <div class="csa-eyebrow reveal">Behind the Score</div>
-        <div class="csa-numeral reveal d1">3<span>.</span></div>
-        <h2 class="csa-title reveal d2">Signals that give<br>AI something<br>to work with.</h2>
-        <p class="csa-desc reveal d3">A grade tells you what happened. SkillGap reads three independent signals so the AI can tell you <em style="color:var(--gold);font-style:normal">why</em>, and exactly what to do next. No formula to memorize. Just insight your students can actually act on.</p>
+    <div class="eng-inner">
+      <div class="eng-head">
+        <div class="eng-eyebrow reveal">The SkillGap engine</div>
+        <h2 class="eng-title reveal d1">The engine finds it.<br>The AI makes it make sense.</h2>
+        <p class="eng-sub reveal d2">The SkillGap engine measures what each student actually knows: <strong>composite scoring plus real psychometrics</strong>, every number reproducible and defensible. Then the AI elevates that diagnosis into clear, personal feedback they'll act on.</p>
       </div>
-      <div class="csa-dims">
-        <div class="csa-dim reveal">
-          <div class="csa-dim-num a">01</div>
-          <div class="csa-dim-info">
-            <div class="csa-dim-name">Accuracy</div>
-            <div class="csa-dim-desc">Did they understand the material? It goes beyond right or wrong. Harder questions carry more weight, so the score reflects genuine depth of knowledge, not guessing patterns.</div>
-          </div>
-          <div class="csa-dim-wt">Knowledge</div>
+
+      <div class="eng-label reveal">The diagnosis · the engine</div>
+      <div class="eng-grid">
+        <div class="eng-card reveal">
+          <div class="eng-card-name">Skill Index</div>
+          <div class="eng-card-desc">Depth of understanding, not a raw score.</div>
         </div>
-        <div class="csa-dim reveal d1">
-          <div class="csa-dim-num s">02</div>
-          <div class="csa-dim-info">
-            <div class="csa-dim-name">Speed</div>
-            <div class="csa-dim-desc">Can they apply it under pressure? Internalized knowledge is fast knowledge. Speed signals whether a student truly owns a concept or is still working through it consciously.</div>
-          </div>
-          <div class="csa-dim-wt">Application</div>
+        <div class="eng-card reveal d1">
+          <div class="eng-card-name">Shared misconceptions</div>
+          <div class="eng-card-desc">Where the class converged on the same wrong answer.</div>
         </div>
-        <div class="csa-dim reveal d2">
-          <div class="csa-dim-num st">03</div>
-          <div class="csa-dim-info">
-            <div class="csa-dim-name">Stability</div>
-            <div class="csa-dim-desc">Does it hold up start to finish? Consistent performance across the full assessment means reliable knowledge. A dip in the final third often signals conceptual gaps, and the AI knows the difference.</div>
-          </div>
-          <div class="csa-dim-wt">Reliability</div>
+        <div class="eng-card reveal d2">
+          <div class="eng-card-name">Question quality</div>
+          <div class="eng-card-desc">Flags broken or mis-keyed items automatically.</div>
+          <span class="eng-card-tag">p-value · discrimination</span>
+        </div>
+        <div class="eng-card reveal">
+          <div class="eng-card-name">Reliability score</div>
+          <div class="eng-card-desc">How much you can trust the test itself.</div>
+          <span class="eng-card-tag">KR-20</span>
+        </div>
+        <div class="eng-card reveal d1">
+          <div class="eng-card-name">At-risk radar</div>
+          <div class="eng-card-desc">The quietly struggling, flagged by signal rather than a low grade.</div>
+        </div>
+        <div class="eng-card reveal d2">
+          <div class="eng-card-name">Study focus</div>
+          <div class="eng-card-desc">Each student's next priorities, ranked.</div>
         </div>
       </div>
+
+      <div class="eng-ai reveal">
+        <div class="eng-ai-head">
+          <div class="eng-ai-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.4a8.3 8.3 0 0 1-11.9 7.5L3.5 20.5l1.6-5.5A8.3 8.3 0 1 1 21 11.4z"/></svg></div>
+          <div class="eng-ai-label">The guidance <span>· AI, per student</span></div>
+        </div>
+        <p class="eng-ai-quote">A strong, consistent start. Your core OOP is solid. <em>Collections Framework</em> is your main gap. Prioritize <em>Stream API</em> and Map operations before your next review.</p>
+        <div class="eng-ai-road">
+          <span class="eng-ai-chip"><b>1</b> Collections Framework</span>
+          <span class="eng-ai-chip"><b>2</b> Stream API</span>
+          <span class="eng-ai-chip"><b>3</b> Map operations</span>
+        </div>
+        <p class="eng-ai-ground"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 14.5l5-5"/><path d="M11 6.5l1-1a3.5 3.5 0 0 1 5 5l-1 1"/><path d="M13 17.5l-1 1a3.5 3.5 0 0 1-5-5l1-1"/></svg>Every line traces back to something the engine measured.</p>
+      </div>
+
+      <p class="eng-contrast reveal">Most AI feedback is written to sound encouraging.<br><span>Ours is written to be right.</span></p>
     </div>
   </section>
 
@@ -1403,7 +1486,7 @@
             </svg>
           </div>
           <div class="feat-name">Diagnosis, not just a score</div>
-          <div class="feat-body">Three signals (accuracy, speed, and stability) combine into a Skill Index that shows how deeply a student knows the material, not just whether they got the right answer.</div>
+          <div class="feat-body">Accuracy and consistency combine into a Skill Index that shows how deeply a student knows the material, not just whether they got the right answer. It's backed by class-level psychometrics, not guesswork.</div>
         </div>
         <div class="feat reveal d1">
           <div class="feat-icon">
@@ -1485,178 +1568,77 @@
   <section class="demo-section" id="demo">
     <div class="demo-inner">
       <div class="demo-header">
-        <div class="demo-eyebrow reveal">Sample Subject · Java Programming</div>
-        <h2 class="reveal d1">See what your students<br>and faculty actually get.</h2>
-        <p class="reveal d2">Java Programming is one example of how SkillGap's AI feedback layer works. The same model applies to any subject, any discipline, any learning module. This is what traditional assessments have been missing.</p>
+        <div class="demo-eyebrow reveal">The platform · Java Programming</div>
+        <h2 class="reveal d1">See SkillGap in action.</h2>
+        <p class="reveal d2">Scan a paper exam with your phone, and the engine turns it into a class diagnosis and a personal plan for every student, in seconds. Java Programming is just the example shown here; it works for any subject.</p>
       </div>
 
-      <div class="demo-tabs reveal d2">
-        <button class="demo-tab active" data-tab="student">Student View</button>
-        <button class="demo-tab" data-tab="teacher">Teacher View</button>
-      </div>
+      <div class="gallery">
 
-      <div class="demo-mockup reveal d3">
-        <div class="demo-bar">
-          <span class="mock-dot r"></span>
-          <span class="mock-dot y"></span>
-          <span class="mock-dot g"></span>
-          <span class="mock-url" id="demo-url">SkillGap · Assessment in Progress</span>
+        <div class="gal-step reveal">
+          <div class="gal-step-label"><span class="gal-step-num">1</span> Capture <em>· phone scan, on-device</em></div>
+          <div class="gal-phone">
+            <div class="gal-pscreen">
+              <div class="gal-pchip">Reading bubbles · no upload</div>
+              <div class="gal-sheet">
+                <span class="gal-fid" style="top:5px;left:5px"></span><span class="gal-fid" style="top:5px;right:5px"></span><span class="gal-fid" style="bottom:5px;left:5px"></span>
+                <div class="gal-sheet-h">ANSWER SHEET · 50</div>
+                <div class="gal-brow"><span class="gal-bq">1</span><span class="gal-bub"></span><span class="gal-bub on"></span><span class="gal-bub"></span><span class="gal-bub"></span></div>
+                <div class="gal-brow"><span class="gal-bq">2</span><span class="gal-bub"></span><span class="gal-bub"></span><span class="gal-bub"></span><span class="gal-bub on"></span></div>
+                <div class="gal-brow"><span class="gal-bq">3</span><span class="gal-bub on"></span><span class="gal-bub"></span><span class="gal-bub"></span><span class="gal-bub"></span></div>
+                <div class="gal-brow"><span class="gal-bq">4</span><span class="gal-bub"></span><span class="gal-bub"></span><span class="gal-bub on"></span><span class="gal-bub"></span></div>
+                <div class="gal-brow"><span class="gal-bq">5</span><span class="gal-bub"></span><span class="gal-bub on"></span><span class="gal-bub"></span><span class="gal-bub"></span></div>
+              </div>
+              <span class="gal-corner gal-c-tl"></span><span class="gal-corner gal-c-tr"></span><span class="gal-corner gal-c-bl"></span><span class="gal-corner gal-c-br"></span>
+              <span class="gal-capbtn"></span>
+            </div>
+          </div>
         </div>
-        <div class="demo-screens-wrap">
 
-          <!-- ── STUDENT SCREENS ── -->
-          <div class="demo-screen active" data-tab="student" data-screen="0">
-            <div class="ds-prog-bar-wrap">
-              <div class="ds-prog-meta">
-                <span>Java Programming Assessment &nbsp;·&nbsp; Q8 of 20</span>
-                <span>24:32 remaining</span>
+        <div class="gal-step reveal d1">
+          <div class="gal-step-label"><span class="gal-step-num">2</span> Diagnose <em>· the engine</em></div>
+          <div class="gal-frame">
+            <div class="gal-bar"><span class="gal-bardot"></span><span class="gal-bardot"></span><span class="gal-bardot"></span><span class="gal-bartitle">SkillGap · Class Analysis</span></div>
+            <div class="gal-scr">
+              <div class="gal-stats">
+                <div class="gal-stat"><span class="gal-stat-n">61</span><span class="gal-stat-l">Avg Skill Index</span></div>
+                <div class="gal-sep"></div>
+                <div class="gal-stat"><span class="gal-stat-n g">9</span><span class="gal-stat-l">Proficient</span></div>
+                <div class="gal-stat"><span class="gal-stat-n a">18</span><span class="gal-stat-l">Developing</span></div>
+                <div class="gal-stat"><span class="gal-stat-n r">7</span><span class="gal-stat-l">Skill Gap</span></div>
               </div>
-              <div class="ds-prog-track"><div class="ds-prog-fill" style="width:40%"></div></div>
-            </div>
-            <div class="ds-question">Which Java collection guarantees insertion order while allowing duplicate elements?</div>
-            <div class="ds-options">
-              <div class="ds-option"><span class="ds-opt-key">A</span> HashSet</div>
-              <div class="ds-option"><span class="ds-opt-key">B</span> TreeSet</div>
-              <div class="ds-option selected"><span class="ds-opt-key">C</span> ArrayList</div>
-              <div class="ds-option"><span class="ds-opt-key">D</span> LinkedHashMap</div>
-            </div>
-            <button class="ds-next-btn">Next Question →</button>
-          </div>
-
-          <div class="demo-screen" data-tab="student" data-screen="1">
-            <div class="ds-result-head">
-              <div>
-                <div class="ds-result-label">Skill Index</div>
-                <div class="ds-result-num">72</div>
-              </div>
-              <span class="ds-result-badge">Developing</span>
-            </div>
-            <div class="ds-dims">
-              <div class="ds-dim">
-                <span class="ds-dim-name">Accuracy</span>
-                <div class="ds-dim-track"><div class="ds-dim-fill a" style="width:68%"></div></div>
-                <span class="ds-dim-score">68</span>
-                <span class="ds-dim-wt">×0.60</span>
-              </div>
-              <div class="ds-dim">
-                <span class="ds-dim-name">Speed</span>
-                <div class="ds-dim-track"><div class="ds-dim-fill s" style="width:81%"></div></div>
-                <span class="ds-dim-score">81</span>
-                <span class="ds-dim-wt">×0.20</span>
-              </div>
-              <div class="ds-dim">
-                <span class="ds-dim-name">Stability</span>
-                <div class="ds-dim-track"><div class="ds-dim-fill st" style="width:77%"></div></div>
-                <span class="ds-dim-score">77</span>
-                <span class="ds-dim-wt">×0.20</span>
-              </div>
-            </div>
-            <div class="ds-result-note">Your consistency improved, and speed is your strongest dimension. Focus on accuracy to move to Proficient.</div>
-          </div>
-
-          <div class="demo-screen" data-tab="student" data-screen="2">
-            <div class="ds-ai-head">
-              <div class="ds-ai-icon">✦</div>
-              <span class="ds-ai-label">AI Feedback</span>
-            </div>
-            <div class="ds-ai-body ds-cursor">Your performance dipped in the final third, likely fatigue or topic difficulty. Core OOP is solid. Priority gaps: <em>Collections Framework</em>, <em>Stream API</em>, <em>Exception Handling</em>.</div>
-            <div class="ds-roadmap-label">Study Roadmap</div>
-            <div class="ds-chips">
-              <span class="ds-chip">Collections Framework</span>
-              <span class="ds-chip">Stream API</span>
-              <span class="ds-chip">Exception Handling</span>
+              <div class="gal-rel"><div class="gal-rel-n">0.82</div><div><div class="gal-rel-l">Test reliability (KR-20)</div><div class="gal-rel-s">good: scores are internally consistent</div></div></div>
+              <div class="gal-dh">Shared misconceptions</div>
+              <div class="gal-mis"><span class="gal-qn">Q12</span><span class="gal-mt"><b>47%</b> of the class chose <b>B</b> (correct: D) · Collections</span></div>
+              <div class="gal-mis"><span class="gal-qn">Q15</span><span class="gal-mt"><b>41%</b> of the class chose <b>C</b> (correct: A) · Stream API</span></div>
             </div>
           </div>
+        </div>
 
-          <!-- ── TEACHER SCREENS ── -->
-          <div class="demo-screen" data-tab="teacher" data-screen="0">
-            <div class="ds-dash-head">Java Programming &nbsp;·&nbsp; Batch 2026 &nbsp;·&nbsp; 34 Students</div>
-            <div class="ds-stat-row">
-              <div class="ds-stat">
-                <div class="ds-stat-val g">12</div>
-                <div class="ds-stat-name">Proficient</div>
-                <div class="ds-stat-pct">35% of class</div>
+        <div class="gal-step reveal d2">
+          <div class="gal-step-label"><span class="gal-step-num">3</span> Guide <em>· the AI</em></div>
+          <div class="gal-frame">
+            <div class="gal-bar"><span class="gal-bardot"></span><span class="gal-bardot"></span><span class="gal-bardot"></span><span class="gal-bartitle">SkillGap · Skill Index Results</span></div>
+            <div class="gal-scr">
+              <div class="gal-hero">
+                <div><div class="gal-ex">Java Programming · Midterm</div><div class="gal-snm">Maria Santos</div><span class="gal-band">Developing</span></div>
+                <div class="gal-circle"><span class="gal-circle-n">72</span><span class="gal-circle-l">Skill Index</span></div>
               </div>
-              <div class="ds-stat">
-                <div class="ds-stat-val w">15</div>
-                <div class="ds-stat-name">Developing</div>
-                <div class="ds-stat-pct">44% of class</div>
+              <div class="gal-stats">
+                <div class="gal-stat"><span class="gal-stat-n a">73%</span><span class="gal-stat-l">Accuracy</span></div>
+                <div class="gal-sep"></div>
+                <div class="gal-stat"><span class="gal-stat-n g">69%</span><span class="gal-stat-l">Consistency</span></div>
+                <div class="gal-sep"></div>
+                <div class="gal-stat"><span class="gal-stat-n">29/40</span><span class="gal-stat-l">Correct</span></div>
               </div>
-              <div class="ds-stat">
-                <div class="ds-stat-val r">7</div>
-                <div class="ds-stat-name">Skill Gap</div>
-                <div class="ds-stat-pct">21% of class</div>
-              </div>
-            </div>
-            <div class="ds-avg">
-              <span class="ds-avg-label">Class Avg · Skill Index</span>
-              <span class="ds-avg-val">61</span>
+              <div class="gal-aih"><span class="gal-aiic">✦</span><span class="gal-ait">Personalized feedback <span>· AI</span></span></div>
+              <div class="gal-aic"><div class="gal-aic-l">Performance</div><div class="gal-aic-x">A strong, consistent start. Your core OOP is solid.</div></div>
+              <div class="gal-aic"><div class="gal-aic-l">Focus area</div><div class="gal-aic-x">You missed Q12 and Q15: Collections and Stream API are your main gaps.</div></div>
+              <div class="gal-aic"><div class="gal-aic-l">Action</div><div class="gal-aic-x">Review Map operations, then re-attempt the Stream API set.</div></div>
             </div>
           </div>
+        </div>
 
-          <div class="demo-screen" data-tab="teacher" data-screen="1">
-            <div class="ds-heatmap-label">Skill Gap Heatmap · Class Performance by Topic</div>
-            <div class="ds-heat-rows">
-              <div class="ds-heat-row">
-                <span class="ds-heat-name">OOP Principles</span>
-                <div class="ds-heat-track"><div class="ds-heat-fill" style="width:72%;background:#4ade80"></div></div>
-                <span class="ds-heat-pct">72%</span>
-              </div>
-              <div class="ds-heat-row">
-                <span class="ds-heat-name">Exception Handling</span>
-                <div class="ds-heat-track"><div class="ds-heat-fill" style="width:58%;background:#fbbf24"></div></div>
-                <span class="ds-heat-pct">58%</span>
-              </div>
-              <div class="ds-heat-row">
-                <span class="ds-heat-name">Collections Framework</span>
-                <div class="ds-heat-track"><div class="ds-heat-fill" style="width:45%;background:#f87171"></div></div>
-                <span class="ds-heat-pct">45%</span>
-              </div>
-              <div class="ds-heat-row">
-                <span class="ds-heat-name">Stream API</span>
-                <div class="ds-heat-track"><div class="ds-heat-fill" style="width:41%;background:#f87171"></div></div>
-                <span class="ds-heat-pct">41%</span>
-              </div>
-              <div class="ds-heat-row">
-                <span class="ds-heat-name">Concurrency</span>
-                <div class="ds-heat-track"><div class="ds-heat-fill" style="width:38%;background:#f87171"></div></div>
-                <span class="ds-heat-pct">38%</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="demo-screen" data-tab="teacher" data-screen="2">
-            <div class="ds-roster-label">Student Roster</div>
-            <table class="ds-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Skill Index</th>
-                  <th>Tier</th>
-                  <th>Top Gap</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td>A. Reyes</td><td>84</td><td><span class="ds-tier p">Proficient</span></td><td>Concurrency</td></tr>
-                <tr><td>B. Santos</td><td>71</td><td><span class="ds-tier d">Developing</span></td><td>Stream API</td></tr>
-                <tr><td>C. Lim</td><td>63</td><td><span class="ds-tier d">Developing</span></td><td>Collections</td></tr>
-                <tr><td>D. Cruz</td><td>47</td><td><span class="ds-tier g">Skill Gap</span></td><td>Collections</td></tr>
-                <tr><td>E. Torres</td><td>91</td><td><span class="ds-tier p">Proficient</span></td><td>Concurrency</td></tr>
-              </tbody>
-            </table>
-          </div>
-
-        </div><!-- end demo-screens-wrap -->
-      </div><!-- end demo-mockup -->
-
-      <div class="demo-dots reveal d3" id="demo-dots">
-        <span class="demo-dot active"></span>
-        <span class="demo-dot"></span>
-        <span class="demo-dot"></span>
-      </div>
-
-      <div class="demo-cta reveal d3">
-        <a href="https://sgsys.space" target="_blank" rel="noopener">Try the live Java Programming prototype</a>
       </div>
     </div>
   </section>
@@ -1777,19 +1759,19 @@
     <div class="assure-inner">
       <div class="assure-eyebrow reveal">For your faculty</div>
       <h2 class="reveal">SkillGap works for your teachers,<br>not instead of them.</h2>
-      <p class="assure-lead reveal d1">The AI handles the repetitive diagnostic work: spotting where each student fell short and why, and surfacing the curriculum signals the whole class is showing. Teachers come to every class knowing exactly where to focus, not guessing. The teaching, the judgment, and the relationship stay exactly where they belong, with your faculty. Every result is reviewable, and feedback is always labeled as machine-generated, never passed off as an instructor's.</p>
+      <p class="assure-lead reveal d1">The engine handles the repetitive diagnostic work: spotting where each student fell short and surfacing the curriculum signals the whole class is showing. The AI turns that into plain-language guidance each student can act on. Teachers come to every class knowing exactly where to focus, not guessing. The teaching, the judgment, and the relationship stay exactly where they belong, with your faculty. Every result is reviewable, and the AI's wording is always labeled as machine-generated, never passed off as an instructor's.</p>
       <div class="assure-points">
         <div class="assure-point reveal">
           <div class="assure-point-title">It assists, never replaces</div>
           <div class="assure-point-body">Faculty keep full control over grades and final judgment. SkillGap does the legwork, not the teaching.</div>
         </div>
         <div class="assure-point reveal d1">
-          <div class="assure-point-title">Always reviewable</div>
-          <div class="assure-point-body">Every AI result can be checked and overridden. Nothing is hidden, and nothing is locked in automatically.</div>
+          <div class="assure-point-title">Grounded, and reviewable</div>
+          <div class="assure-point-body">Every line of feedback traces back to a real question, topic, or score the engine measured. Nothing is invented, and every result can be checked or overridden.</div>
         </div>
         <div class="assure-point reveal d2">
-          <div class="assure-point-title">Honest by design</div>
-          <div class="assure-point-body">AI feedback is clearly marked as generated by the assessment engine, never disguised as a person.</div>
+          <div class="assure-point-title">Honest, not flattering</div>
+          <div class="assure-point-body">No empty praise: strong work is called strong, a real gap is named. AI wording is always labeled machine-generated, never disguised as a person.</div>
         </div>
         <div class="assure-point reveal d3">
           <div class="assure-point-title">Students gain direction, not dependency</div>
@@ -1908,7 +1890,7 @@
             </div>
             <div class="offering-item">
               <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-              CSA weights calibrated to your academic rubric
+              Scoring weights calibrated to your academic rubric
             </div>
             <div class="offering-item">
               <div class="offering-check"><svg width="10" height="10" viewBox="0 0 10 10" fill="none"><polyline points="1.5,5 4,7.5 8.5,2.5" stroke="#1a1814" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
@@ -1979,7 +1961,7 @@
       <div class="pricing-cards reveal">
         <div class="price-card">
           <div class="price-card-label">Budget</div>
-          <div class="price-model">DeepSeek V4 Flash</div>
+          <div class="price-model">Efficient AI</div>
           <div class="price-amount">$12<span class="price-unit">/ student / yr</span></div>
           <div class="price-divider"></div>
           <div class="price-include">Cost-efficient AI that lets you cover every enrolled student affordably. Great for budget-conscious schools.</div>
@@ -1987,14 +1969,14 @@
         <div class="price-card featured">
           <div class="price-badge">Recommended</div>
           <div class="price-card-label">Standard</div>
-          <div class="price-model">GPT-5.4 Nano · OpenAI</div>
+          <div class="price-model">Advanced AI</div>
           <div class="price-amount">$25<span class="price-unit">/ student / yr</span></div>
           <div class="price-divider"></div>
           <div class="price-include">The sweet spot for most institutions: strong feedback quality, at a fraction of what one retained student is worth.</div>
         </div>
         <div class="price-card">
           <div class="price-card-label">Premium</div>
-          <div class="price-model">GPT-5.5 · OpenAI</div>
+          <div class="price-model">Flagship AI</div>
           <div class="price-amount">$45<span class="price-unit">/ student / yr</span></div>
           <div class="price-divider"></div>
           <div class="price-include">Flagship model, for institutions where AI quality is a faculty or accreditation priority.</div>
@@ -2083,8 +2065,8 @@
               <span class="config-val">Provided or co-built</span>
             </div>
             <div class="config-row">
-              <span class="config-key">CSA weights</span>
-              <span class="config-val">60/20/20 (adjustable)</span>
+              <span class="config-key">Scoring weights</span>
+              <span class="config-val">75 / 25 (adjustable)</span>
             </div>
             <div class="config-row">
               <span class="config-key">Proficiency thresholds</span>
@@ -2126,7 +2108,7 @@
         </div>
         <div class="faq-list-item reveal">
           <div class="faq-q">What subjects does it support?</div>
-          <div class="faq-a">Any subject. The three-factor scoring and AI feedback work across disciplines, from programming to nursing to business. Java Programming is just the example shown in our demo.</div>
+          <div class="faq-a">Any subject. The SkillGap engine and AI feedback work across disciplines, from programming to nursing to business. Java Programming is just the example shown in our demo.</div>
         </div>
         <div class="faq-list-item reveal">
           <div class="faq-q">Is our student data safe?</div>
@@ -2245,6 +2227,7 @@
           <div class="founder-name">Christian Jay Baquilid</div>
           <div class="founder-role">Founder & CEO, SkillGap Labs</div>
           <div class="founder-bio">I spent months researching why students everywhere get grades but never diagnoses. No institution had solved it. So I built the solution, from academic thesis to working product.</div>
+          <a class="founder-link" href="https://sgsys.space" target="_blank" rel="noopener">Explore the original research study<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M7 7h10v10"/></svg></a>
         </div>
       </div>
     </div>
@@ -2267,7 +2250,7 @@
         <div>
           <div class="footer-col-title">Platform</div>
           <ul class="footer-list">
-            <li><a href="#scoring">CSA Model</a></li>
+            <li><a href="#scoring">The engine</a></li>
             <li><a href="#features">Platform Features</a></li>
             <li><a href="#demo">Demo</a></li>
             <li><a href="#how">How It Works</a></li>
@@ -2355,20 +2338,7 @@
       requestAnimationFrame(step);
     }
 
-    // Animate the CSA numeral when it comes into view
-    const csaNum = document.querySelector('.csa-numeral');
-    if (csaNum) {
-      const numObs = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            csaNum.innerHTML = '<span id="count">0</span><span style="color:var(--gold)">.</span>';
-            animateCount(document.getElementById('count'), 3, 800);
-            numObs.unobserve(e.target);
-          }
-        });
-      }, { threshold: 0.5 });
-      numObs.observe(csaNum);
-    }
+    // (engine numeral animation removed with the section redesign)
 
     // ── Smooth parallax on hero bg ─────────────────────────────
     const hero = document.querySelector('.hero');
@@ -2381,65 +2351,7 @@
       }, { passive: true });
     }
 
-    // ── Demo showcase tab + auto-cycle ────────────────────────────
-    (function () {
-      let currentTab = 'student';
-      let currentIndex = 0;
-      let timer = null;
-      const INTERVAL = 3500;
-
-      const urlLabels = {
-        student: ['SkillGap · Assessment in Progress', 'SkillGap · Skill Index Results', 'SkillGap · AI Feedback & Roadmap'],
-        teacher:  ['SkillGap · Class Dashboard', 'SkillGap · Skill Gap Heatmap', 'SkillGap · Student Roster'],
-      };
-
-      function getScreens(tab) {
-        return Array.from(document.querySelectorAll(`.demo-screen[data-tab="${tab}"]`));
-      }
-      function getDots() { return Array.from(document.querySelectorAll('.demo-dot')); }
-
-      function showScreen(tab, index) {
-        document.querySelectorAll('.demo-screen').forEach(s => s.classList.remove('active'));
-        const screens = getScreens(tab);
-        if (screens[index]) screens[index].classList.add('active');
-        getDots().forEach((d, i) => d.classList.toggle('active', i === index));
-        const urlEl = document.getElementById('demo-url');
-        if (urlEl && urlLabels[tab]) urlEl.textContent = urlLabels[tab][index] || '';
-      }
-
-      function startCycle(tab) {
-        clearInterval(timer);
-        currentIndex = 0;
-        showScreen(tab, currentIndex);
-        timer = setInterval(() => {
-          currentIndex = (currentIndex + 1) % 3;
-          showScreen(tab, currentIndex);
-        }, INTERVAL);
-      }
-
-      document.querySelectorAll('.demo-tab').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.demo-tab').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          currentTab = btn.dataset.tab;
-          startCycle(currentTab);
-        });
-      });
-
-      getDots().forEach((dot, i) => {
-        dot.addEventListener('click', () => {
-          clearInterval(timer);
-          currentIndex = i;
-          showScreen(currentTab, currentIndex);
-          timer = setInterval(() => {
-            currentIndex = (currentIndex + 1) % 3;
-            showScreen(currentTab, currentIndex);
-          }, INTERVAL);
-        });
-      });
-
-      startCycle('student');
-    })();
+    // ── Demo showcase: static gallery, no JS needed ──
 
     // ── Institution drawers accordion ─────────────────────────
     document.querySelectorAll('.drawer-head').forEach(head => {
