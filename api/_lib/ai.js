@@ -1,5 +1,5 @@
 /**
- * AI feedback utilities for the SkillGap analyze endpoint.
+ * AI feedback utilities for the GapLee analyze endpoint.
  * Calls DeepSeek directly using DEEPSEEK_API_KEY from server environment.
  * No browser env vars, no proxy — this runs server-side only.
  */
