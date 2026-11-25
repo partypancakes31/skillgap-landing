@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>GapLee IT Services | Websites &amp; Business Systems in Metro Manila</title>
+  <meta name="description" content="Fast, modern websites and inquiry systems for Philippine businesses. Free preview, fixed pricing, built in Taguig City.">
+  <link rel="canonical" href="https://www.gaplee.space/services/">
+  <link rel="icon" type="image/svg+xml" href="/logo.svg">
+  <link rel="apple-touch-icon" href="/logo.png">
+  <meta name="theme-color" content="#ffffff">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="GapLee IT Services">
+  <meta property="og:title" content="GapLee IT Services | Websites &amp; Business Systems in Metro Manila">
+  <meta property="og:description" content="Fast, modern websites and inquiry systems for Philippine businesses. Free preview, fixed pricing, built in Taguig City.">
+  <meta property="og:url" content="https://www.gaplee.space/services/">
+  <meta property="og:image" content="https://www.gaplee.space/logo.png">
+  <meta property="og:locale" content="en_PH">
+  <meta name="twitter:card" content="summary">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Newsreader:opsz,wght@6..72,200&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Newsreader:opsz,wght@6..72,200&display=swap"></noscript>
+  <script>document.documentElement.classList.add('js');</script>
+  <!--
+    Self-contained on purpose: tokens, fonts, logo and script all live in this file, and every
+    asset path is absolute (/services/...), so the page can later be served at
+    services.gaplee.space with a single rewrite of "/" to "/services/". Tokens: see DESIGN.md,
+    Direction B.
+  -->
+  <style>
+    :root {
+      /* Color */
+      --bg:        #ffffff;
+      --card:      #f3f3f1;
+      --ink:       #0a0a0a;
+      --muted:     #6b6b6b;
+      --line:      #e4e4e0;
+      --night:     #0a0a0a;
+      --on-night:  #ffffff;
+      --on-night-muted: rgba(255,255,255,0.6);
+      --gold:      #c9a96e;
+      --gold-deep: #8a6c35;
+      --success:   #1a7a4a;
+      --error:     #b91c1c;
+      --bar:       rgba(255,255,255,0.8);
+
+      /* Type */
+      --sans:  'Inter Tight', ui-sans-serif, system-ui, -apple-system, sans-serif;
+      --serif: 'Newsreader', ui-serif, Georgia, serif;
+      --fs-display: clamp(2.75rem, 11vw, 6.5rem);
+      --fs-h2:      clamp(2.5rem, 8vw, 4.5rem);
+      --fs-h3:      clamp(1.5rem, 4vw, 2rem);
+      --fs-numeral: clamp(3rem, 8vw, 4.5rem);
+      --fs-lead:    1.125rem;
+      --fs-body:    1rem;
+      --fs-label:   0.75rem;
+      --fs-button:  0.875rem;
+
+      /* Space */
+      --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px; --s-5: 24px; --s-6: 32px;
+      --s-7: 40px; --s-8: 48px; --s-9: 64px; --s-10: 96px; --s-11: 144px;
+      --gutter: var(--s-4);
+      --section: var(--s-10);
+      --max: 1280px;
+      --measure: 40rem;
+
+      /* Shape */
+      --r-field: 12px;
+      --r-panel: 28px;
+      --r-pill:  999px;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
+      --t-fast:   150ms;
+      --t-base:   300ms;
+      --t-reveal: 700ms;
+
+      --bar-h: 64px;
+    }
+    @media (min-width: 768px) { :root { --gutter: var(--s-6); } }
+    @media (min-width: 980px) { :root { --section: var(--s-11); --fs-lead: 1.25rem; } }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    [hidden] { display: none !important; }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: calc(var(--bar-h) + var(--s-4));
+      -webkit-text-size-adjust: 100%;
+      text-size-adjust: 100%;
+    }
+    body {
+      font-family: var(--sans);
+      font-size: var(--fs-body);
+      line-height: 1.6;
+      letter-spacing: -0.01em;
+      background: var(--bg);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+      overflow-x: clip;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; color: inherit; letter-spacing: inherit; }
+    ::selection { background: var(--ink); color: var(--bg); }
+
+    :focus-visible { outline: 2px solid var(--gold-deep); outline-offset: 3px; border-radius: var(--s-1); }
+    .night :focus-visible { outline-color: var(--gold); }
+
+    .skip {
+      position: absolute; left: var(--gutter); top: var(--s-2); z-index: 200;
+      padding: var(--s-3) var(--s-4); background: var(--ink); color: var(--bg);
+      border-radius: var(--r-pill); transform: translateY(-200%);
+    }
+    .skip:focus-visible { transform: none; }
+
+    .wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+
+    .thin { font-family: var(--serif); font-weight: 200; letter-spacing: -0.02em; }
+
+    .label {
+      font-size: var(--fs-label); line-height: 1.4; font-weight: 500;
+      text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted);
+    }
+    .night .label { color: var(--on-night-muted); }
+
+    h1, h2, h3 { font-weight: 500; text-wrap: balance; }
+    h2 { font-size: var(--fs-h2); line-height: 0.95; letter-spacing: -0.045em; margin-top: var(--s-4); }
+    h3 { font-size: var(--fs-h3); line-height: 1.1; letter-spacing: -0.03em; }
+    .lead { font-size: var(--fs-lead); line-height: 1.6; max-width: var(--measure); }
+    p { max-width: var(--measure); text-wrap: pretty; }
+
+    /* Text link with a hairline that fills in on hover */
+    .link-line {
+      position: relative;
+      display: inline-flex; align-items: center; gap: var(--s-2);
+      min-height: 44px;
+      font-weight: 500;
+    }
+    .link-line::before, .link-line::after {
+      content: ''; position: absolute; left: 0; right: 0; bottom: 10px; height: 1px;
+      background: var(--track, var(--line));
+    }
+    .link-line::after {
+      height: 1.5px; background: currentColor;
+      transform: scaleX(0); transform-origin: left;
+      transition: transform var(--t-base) var(--ease-out);
+    }
+    .night .link-line { --track: rgba(255,255,255,0.3); }
+    @media (hover: hover) { .link-line:hover::after { transform: scaleX(1); } }
+    .link-line:focus-visible::after { transform: scaleX(1); }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: var(--s-2);
+      min-height: 48px; padding: 0 var(--s-5);
+      border: 0; border-radius: var(--r-pill);
+      background: var(--ink); color: var(--bg);
+      font-size: var(--fs-button); font-weight: 500; letter-spacing: 0;
+      cursor: pointer; user-select: none; -webkit-user-select: none; touch-action: manipulation;
+      transition: transform var(--t-fast) var(--ease-out), opacity var(--t-fast) linear;
+    }
+    .btn svg { width: 16px; height: 16px; transition: transform var(--t-base) var(--ease-out); }
+    @media (hover: hover) { .btn:hover svg { transform: translateX(3px); } }
+    .btn:active { transform: scale(0.97); }
+    .btn[disabled] { opacity: 0.5; cursor: default; transform: none; }
+    .btn-light { background: var(--on-night); color: var(--ink); }
+    .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+    /* ── Top bar ─────────────────────────────────────────── */
+    .bar {
+      position: sticky; top: 0; z-index: 100;
+      height: var(--bar-h);
+      background: var(--bar);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      backdrop-filter: blur(16px) saturate(180%);
+      border-bottom: 1px solid transparent;
+      transition: border-color var(--t-base) linear;
+    }
+    .bar.is-scrolled { border-bottom-color: var(--line); }
+    .bar .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: var(--s-4); }
+    .brand { display: flex; align-items: center; gap: var(--s-3); min-height: 44px; font-weight: 500; letter-spacing: -0.02em; }
+    .brand svg { width: 36px; height: 36px; flex-shrink: 0; }
+    .bar .btn { min-height: 44px; padding: 0 var(--s-4); }
+
+    /* ── Hero ────────────────────────────────────────────── */
+    .hero { padding: var(--s-9) 0 0; }
+    .hero h1 {
+      font-size: var(--fs-display); line-height: 0.92; letter-spacing: -0.05em;
+      max-width: 12ch;
+    }
+    .hero h1 .thin { letter-spacing: -0.03em; }
+    .hero-grid { display: grid; gap: var(--s-8); margin-top: var(--s-7); }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-5); margin-top: var(--s-6); }
+    .facts { list-style: none; display: grid; align-content: end; }
+    .facts li { padding: var(--s-4) 0; border-top: 1px solid var(--line); }
+    .facts li:last-child { border-bottom: 1px solid var(--line); }
+    .facts strong { display: block; font-weight: 500; }
+    .facts span { color: var(--muted); }
+
+    /* ── Section head ────────────────────────────────────── */
+    section { padding: var(--section) 0; }
+    .head { margin-bottom: var(--s-8); }
+    .head .lead { margin-top: var(--s-5); }
+
+    /* ── Services ────────────────────────────────────────── */
+    .services { list-style: none; border-top: 1px solid var(--line); }
+    .service {
+      display: grid; gap: var(--s-3) var(--s-6);
+      padding: var(--s-6) 0; border-bottom: 1px solid var(--line);
+    }
+    .numeral { font-family: var(--serif); font-weight: 200; font-size: var(--fs-numeral); line-height: 1; letter-spacing: -0.02em; }
+    .service .numeral { color: var(--muted); }
+    .service p { color: var(--ink); }
+    .service .deliver { margin-top: var(--s-3); color: var(--muted); font-size: var(--fs-body); }
+
+    /* ── How it works (night) ────────────────────────────── */
+    .night { background: var(--night); color: var(--on-night); }
+    .steps { list-style: none; display: grid; gap: 0; border-top: 1px solid rgba(255,255,255,0.15); }
+    .step { display: grid; grid-template-columns: auto 1fr; gap: var(--s-1) var(--s-5); padding: var(--s-6) 0; border-bottom: 1px solid rgba(255,255,255,0.15); }
+    .step .numeral { color: var(--gold); grid-row: span 2; min-width: 1.4em; }
+    .step h3 { align-self: end; }
+    .step p { color: var(--on-night-muted); }
+    .step .opt { color: var(--on-night-muted); font-weight: 400; }
+    .terms { margin-top: var(--s-8); display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-5); }
+    .terms p { color: var(--on-night-muted); }
+
+    /* ── Proof ───────────────────────────────────────────── */
+    .panel { background: var(--card); border-radius: var(--r-panel); padding: var(--s-5); }
+    .proof { display: grid; gap: var(--s-6); align-items: end; }
+    .proof-head { grid-column: 1 / -1; }
+    .proof p { margin: 0; }
+    .proof .link-line { margin-top: var(--s-4); }
+    .proof figure { overflow: hidden; border-radius: var(--r-field); background: var(--bg); }
+    .proof img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: top left; }
+
+    /* ── About ───────────────────────────────────────────── */
+    .about { display: grid; gap: var(--s-8); }
+    .about p.lead { margin-top: var(--s-5); }
+    .details { display: grid; border-top: 1px solid var(--line); }
+    .details div { display: grid; gap: var(--s-1); padding: var(--s-4) 0; border-bottom: 1px solid var(--line); }
+    .details dt { color: var(--muted); }
+    .details dd { font-weight: 500; overflow-wrap: anywhere; }
+
+    /* ── Contact ─────────────────────────────────────────── */
+    .contact { display: grid; gap: var(--s-8); }
+    .contact-side p.lead { margin-top: var(--s-5); }
+    .contact-side .direct { margin-top: var(--s-5); color: var(--muted); }
+    .contact-side .direct a { color: var(--ink); }
+    form { display: grid; gap: var(--s-5); }
+    .row { display: grid; gap: var(--s-5); }
+    .field { display: grid; gap: var(--s-2); }
+    .field label, fieldset legend { font-size: var(--fs-label); line-height: 1.4; font-weight: 500; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
+    .field label .opt, legend .opt { text-transform: none; letter-spacing: 0; font-weight: 400; }
+    .input {
+      width: 100%; min-height: 48px;
+      padding: var(--s-3) var(--s-4);
+      background: var(--bg); border: 1px solid var(--line); border-radius: var(--r-field);
+      font-size: 1rem; line-height: 1.5;
+      transition: border-color var(--t-fast) linear;
+      -webkit-appearance: none; appearance: none;
+    }
+    textarea.input { min-height: 144px; resize: vertical; }
+    .input::placeholder { color: var(--muted); opacity: 1; }
+    .input:focus { outline: none; border-color: var(--ink); box-shadow: 0 0 0 3px rgba(138,108,53,0.35); }
+    .input[aria-invalid="true"] { border-color: var(--error); }
+    .err { color: var(--error); font-size: 0.875rem; min-height: 0; }
+    .err:empty { display: none; }
+
+    fieldset { border: 0; display: grid; gap: var(--s-3); }
+    .chips { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+    .chip { position: relative; }
+    .chip input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+    .chip span {
+      display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--s-4);
+      border: 1px solid var(--line); border-radius: var(--r-pill); background: var(--bg);
+      font-size: var(--fs-button); font-weight: 500;
+      transition: background-color var(--t-fast) linear, color var(--t-fast) linear, border-color var(--t-fast) linear, transform var(--t-fast) var(--ease-out);
+      user-select: none; -webkit-user-select: none;
+    }
+    .chip input:checked + span { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+    .chip input:active + span { transform: scale(0.97); }
+    .chip input:focus-visible + span { outline: 2px solid var(--gold-deep); outline-offset: 3px; }
+
+    .trap { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+    .form-foot { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-5); }
+    .form-foot .note { color: var(--muted); font-size: 0.875rem; }
+    .form-error { color: var(--error); }
+    .form-error a { text-decoration: underline; text-underline-offset: 3px; }
+    .sent h3 { margin-bottom: var(--s-3); }
+    .sent p + p { margin-top: var(--s-3); color: var(--muted); }
+    .sent .tick { width: 40px; height: 40px; border-radius: 50%; background: var(--success); color: var(--bg); display: grid; place-items: center; margin-bottom: var(--s-5); }
+    .sent .tick svg { width: 20px; height: 20px; }
+
+    /* ── Footer ──────────────────────────────────────────── */
+    footer { padding: var(--s-10) 0 calc(var(--s-6) + env(safe-area-inset-bottom)); }
+    .sign { font-size: var(--fs-display); line-height: 0.92; letter-spacing: -0.05em; font-weight: 500; max-width: 10ch; }
+    .foot { display: grid; gap: var(--s-5); margin-top: var(--s-9); padding-top: var(--s-5); border-top: 1px solid rgba(255,255,255,0.15); color: var(--on-night-muted); }
+    .foot a { color: var(--on-night); }
+    .foot-links { display: flex; flex-wrap: wrap; gap: 0 var(--s-5); }
+
+    /* ── Wider screens ───────────────────────────────────── */
+    @media (min-width: 768px) {
+      .panel { padding: var(--s-7); }
+      .row { grid-template-columns: 1fr 1fr; }
+      .service { grid-template-columns: 6rem 1fr; }
+      .service .body { grid-column: 2; }
+      .foot { grid-template-columns: 1fr auto; align-items: end; }
+    }
+    @media (min-width: 980px) {
+      .hero { padding-top: var(--s-10); }
+      .hero h1 { max-width: none; }
+      .hero-grid { grid-template-columns: 1fr minmax(260px, 30%); align-items: end; gap: var(--s-9); }
+      .head { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-6) var(--s-9); align-items: end; margin-bottom: var(--s-9); }
+      .head .lead { margin-top: 0; }
+      .service { grid-template-columns: 8rem 1fr 1fr; align-items: start; padding: var(--s-7) 0; }
+      .service .body { grid-column: auto; }
+      .steps { grid-template-columns: repeat(4, 1fr); border-top: 0; gap: var(--s-6); }
+      .step { grid-template-columns: 1fr; padding: var(--s-6) 0 0; border-bottom: 0; border-top: 1px solid rgba(255,255,255,0.15); }
+      .step .numeral { grid-row: auto; margin-bottom: var(--s-5); }
+      .proof { grid-template-columns: 4fr 8fr; gap: var(--s-8) var(--s-9); }
+      .panel.proof { padding: var(--s-8); }
+      .about { grid-template-columns: 1fr 1fr; gap: var(--s-9); align-items: start; }
+      .contact { grid-template-columns: 5fr 7fr; gap: var(--s-9); align-items: start; }
+      .contact-side { position: sticky; top: calc(var(--bar-h) + var(--s-6)); }
+    }
+
+    /* ── Motion: sections fade up once, only with JS and only if motion is welcome ── */
+    @media (prefers-reduced-motion: no-preference) {
+      .js [data-reveal] {
+        opacity: 0; transform: translateY(16px);
+        transition: opacity var(--t-reveal) var(--ease-out), transform var(--t-reveal) var(--ease-out);
+        transition-delay: calc(var(--i, 0) * 80ms);
+      }
+      .js [data-reveal].is-in { opacity: 1; transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .btn, .btn svg, .chip span, .link-line { transition: none; }
+      .btn:active, .chip input:active + span { transform: none; }
+    }
+    @media (prefers-reduced-transparency: reduce) {
+      .bar { background: var(--bg); -webkit-backdrop-filter: none; backdrop-filter: none; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "GapLee Information Technology Services",
+    "alternateName": "GapLee IT Services",
+    "url": "https://www.gaplee.space/services/",
+    "logo": "https://www.gaplee.space/logo.png",
+    "email": "gapleeco@gmail.com",
+    "founder": { "@type": "Person", "name": "Christian Jay Baquilid" },
+    "address": { "@type": "PostalAddress", "addressLocality": "Taguig City", "addressRegion": "Metro Manila", "addressCountry": "PH" },
+    "areaServed": "Metro Manila",
+    "description": "Websites, inquiry and booking systems, and custom tools for businesses in Metro Manila."
+  }
+  </script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="bar" id="bar">
+    <div class="wrap">
+      <a class="brand" href="/services/" aria-label="GapLee IT Services, home">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="15" fill="#1a1814"/><text x="32" y="44" text-anchor="middle" font-family="'DM Serif Display', Georgia, 'Times New Roman', serif" font-size="29"><tspan fill="#f5f1ea">G</tspan><tspan fill="#c9a96e">L</tspan></text></svg>
+        <span>GapLee IT Services</span>
+      </a>
+      <a class="btn" href="#contact">Contact</a>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <div class="hero">
+      <div class="wrap">
+        <h1>Your business, easier to <span class="thin">find.</span></h1>
+        <div class="hero-grid">
+          <div>
+            <p class="lead">GapLee IT Services builds fast, modern websites, inquiry and booking systems, and small business tools for companies in Metro Manila, from first draft to launch.</p>
+            <div class="hero-actions">
+              <a class="btn" href="#contact">Get a free preview
+                <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+              <a class="link-line" href="#how">See how it works</a>
+            </div>
+          </div>
+          <ul class="facts" aria-label="How we work, in short">
+            <li><strong>See it before you pay</strong><span>A free preview built with your brand.</span></li>
+            <li><strong>Fixed scope, fixed price</strong><span>50% down, 50% at launch.</span></li>
+            <li><strong>Based in Taguig City</strong><span>Working with businesses across Metro Manila.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Services -->
+    <section id="services" aria-labelledby="services-title">
+      <div class="wrap">
+        <div class="head">
+          <div data-reveal>
+            <p class="label">01 / Services</p>
+            <h2 id="services-title">What we <span class="thin">build</span></h2>
+          </div>
+          <p class="lead" data-reveal style="--i:1">Three kinds of work, all built to load fast on a phone and run on your own domain.</p>
+        </div>
+        <ol class="services">
+          <li class="service" data-reveal>
+            <span class="numeral" aria-hidden="true">1</span>
+            <h3>Business websites</h3>
+            <div class="body">
+              <p>Company and property sites, and landing pages. Mobile-first and deployed to your own domain.</p>
+              <p class="deliver">Company sites · Property listings · Landing pages</p>
+            </div>
+          </li>
+          <li class="service" data-reveal>
+            <span class="numeral" aria-hidden="true">2</span>
+            <h3>Inquiry &amp; booking systems</h3>
+            <div class="body">
+              <p>Forms that route leads straight to the right person, plus scheduling and simple dashboards.</p>
+              <p class="deliver">Lead routing · Scheduling · Dashboards</p>
+            </div>
+          </li>
+          <li class="service" data-reveal>
+            <span class="numeral" aria-hidden="true">3</span>
+            <h3>Custom tools &amp; automation</h3>
+            <div class="body">
+              <p>Internal tools that replace spreadsheets and manual follow-ups.</p>
+              <p class="deliver">Internal tools · Automated follow-ups · Records</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how" class="night" aria-labelledby="how-title">
+      <div class="wrap">
+        <div class="head">
+          <div data-reveal>
+            <p class="label">02 / How it works</p>
+            <h2 id="how-title">See it <span class="thin">before</span> you pay.</h2>
+          </div>
+          <p class="lead" data-reveal style="--i:1">You see a working concept first. The price is agreed before the build starts and doesn't change.</p>
+        </div>
+        <ol class="steps">
+          <li class="step" data-reveal>
+            <span class="numeral" aria-hidden="true">1</span>
+            <h3>Free preview</h3>
+            <p>We build a quick concept using your brand, so you can see it before paying anything.</p>
+          </li>
+          <li class="step" data-reveal style="--i:1">
+            <span class="numeral" aria-hidden="true">2</span>
+            <h3>Proposal</h3>
+            <p>Fixed scope and fixed price. 50% down, 50% at launch.</p>
+          </li>
+          <li class="step" data-reveal style="--i:2">
+            <span class="numeral" aria-hidden="true">3</span>
+            <h3>Build &amp; launch</h3>
+            <p>Two rounds of revisions, then we launch it on your domain.</p>
+          </li>
+          <li class="step" data-reveal style="--i:3">
+            <span class="numeral" aria-hidden="true">4</span>
+            <h3>Care plan <span class="opt">(optional)</span></h3>
+            <p>Monthly hosting and content updates, if you'd like us to look after it.</p>
+          </li>
+        </ol>
+        <div class="terms" data-reveal>
+          <a class="btn btn-light" href="#contact">Start with a free preview
+            <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      Work: omitted until there are real client projects to show (no case studies yet).
+      When ready, add a section here with real screenshots and the client's permission.
+    -->
+
+    <!-- Proof -->
+    <section id="proof" aria-labelledby="proof-title">
+      <div class="wrap">
+        <div class="panel proof" data-reveal>
+          <div class="proof-head">
+            <p class="label">03 / Our own product</p>
+            <h2 id="proof-title">Built by the team behind <span class="thin">GapLee</span></h2>
+          </div>
+          <div>
+            <p class="lead">We also build and run GapLee, an exam analysis platform for teachers and schools.</p>
+            <a class="link-line" href="https://www.gaplee.space/" target="_blank" rel="noopener">Visit gaplee.space
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true"><path d="M3.5 8.5l5-5M4.5 3.5h4v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span class="sr">(opens in a new tab)</span>
+            </a>
+          </div>
+          <figure>
+            <img src="/services/gaplee-home-960.webp" srcset="/services/gaplee-home-960.webp 960w, /services/gaplee-home.webp 1440w" sizes="(min-width: 980px) 56vw, 100vw" width="1440" height="900" loading="lazy" decoding="async" alt="The gaplee.space home page, with the headline 'Grades say how they did. GapLee shows what to fix.' beside a sample student skill report.">
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" aria-labelledby="about-title" style="padding-top: 0;">
+      <div class="wrap about">
+        <div data-reveal>
+          <p class="label">04 / About</p>
+          <h2 id="about-title">Who you'll be <span class="thin">working</span> with</h2>
+          <p class="lead">GapLee Information Technology Services is a DTI-registered IT services business based in Taguig City, founded by Christian Jay Baquilid.</p>
+        </div>
+        <dl class="details" data-reveal style="--i:1">
+          <div><dt>Business name</dt><dd>GapLee Information Technology Services</dd></div>
+          <div><dt>Registration</dt><dd>DTI-registered sole proprietorship</dd></div>
+          <div><dt>Based in</dt><dd>Taguig City, Metro Manila</dd></div>
+          <div><dt>Founder</dt><dd>Christian Jay Baquilid</dd></div>
+          <div><dt>Email</dt><dd><a class="link-line" href="mailto:gapleeco@gmail.com">gapleeco@gmail.com</a></dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" aria-labelledby="contact-title" style="padding-top: 0;">
+      <div class="wrap contact">
+        <div class="contact-side" data-reveal>
+          <p class="label">05 / Contact</p>
+          <h2 id="contact-title">Get a free <span class="thin">preview</span></h2>
+          <p class="lead">Tell us about your business and what you need. We'll reply by email with a few questions and a date for your preview.</p>
+          <p class="direct">Prefer email? Write to <a class="link-line" href="mailto:gapleeco@gmail.com">gapleeco@gmail.com</a></p>
+        </div>
+
+        <div class="panel" data-reveal style="--i:1">
+          <form id="inquiry" action="/api/contact" method="post" novalidate>
+            <div class="trap" aria-hidden="true">
+              <label for="f-trap">Leave this empty</label>
+              <input id="f-trap" name="_trap" type="text" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label for="f-name">Name</label>
+                <input class="input" id="f-name" name="from_name" type="text" autocomplete="name" required maxlength="120" aria-describedby="e-name">
+                <p class="err" id="e-name" aria-live="polite"></p>
+              </div>
+              <div class="field">
+                <label for="f-company">Company</label>
+                <input class="input" id="f-company" name="from_institution" type="text" autocomplete="organization" required maxlength="160" aria-describedby="e-company">
+                <p class="err" id="e-company" aria-live="polite"></p>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="field">
+                <label for="f-email">Email</label>
+                <input class="input" id="f-email" name="from_email" type="email" autocomplete="email" inputmode="email" required maxlength="200" aria-describedby="e-email">
+                <p class="err" id="e-email" aria-live="polite"></p>
+              </div>
+              <div class="field">
+                <label for="f-phone">Phone <span class="opt">(optional)</span></label>
+                <input class="input" id="f-phone" name="from_phone" type="tel" autocomplete="tel" inputmode="tel" maxlength="40">
+              </div>
+            </div>
+
+            <fieldset>
+              <legend>Type of project <span class="opt">(optional)</span></legend>
+              <div class="chips">
+                <label class="chip"><input type="radio" name="need" value="Business website"><span>Website</span></label>
+                <label class="chip"><input type="radio" name="need" value="Inquiry or booking system"><span>Inquiry or booking</span></label>
+                <label class="chip"><input type="radio" name="need" value="Custom tool or automation"><span>Custom tool</span></label>
+                <label class="chip"><input type="radio" name="need" value="Not sure yet"><span>Not sure yet</span></label>
+              </div>
+            </fieldset>
+
+            <div class="field">
+              <label for="f-msg">What do you need?</label>
+              <textarea class="input" id="f-msg" name="message" required maxlength="4000" rows="5" aria-describedby="e-msg"></textarea>
+              <p class="err" id="e-msg" aria-live="polite"></p>
+            </div>
+
+            <div class="form-foot">
+              <button class="btn" type="submit" id="f-submit">Send inquiry
+                <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <p class="note">No payment, no commitment.</p>
+            </div>
+            <p class="form-error" id="f-error" role="alert" hidden>Your message didn't send. Please try again, or email us at <a href="mailto:gapleeco@gmail.com?subject=Services%20inquiry">gapleeco@gmail.com</a>.</p>
+          </form>
+
+          <div class="sent" id="f-sent" hidden tabindex="-1">
+            <div class="tick" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none"><path d="M5 10.5l3.2 3L15 6.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            <h3>Thanks, we got your message.</h3>
+            <p>We'll reply to <strong id="f-sent-email"></strong> with next steps for your free preview.</p>
+            <p>If you don't see our reply, check your spam folder or write to gapleeco@gmail.com.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="night">
+    <div class="wrap">
+      <p class="sign" aria-hidden="true">GapLee IT <span class="thin">Services</span></p>
+      <div class="foot">
+        <p>GapLee Information Technology Services · Taguig City, Philippines</p>
+        <div class="foot-links">
+          <a class="link-line" href="mailto:gapleeco@gmail.com">gapleeco@gmail.com</a>
+          <a class="link-line" href="https://www.gaplee.space/">gaplee.space</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      // Top bar hairline once the page has scrolled
+      const bar = document.getElementById('bar');
+      const onScroll = () => bar.classList.toggle('is-scrolled', window.scrollY > 8);
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      // Reveal each block once as it enters
+      const items = document.querySelectorAll('[data-reveal]');
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
+          });
+        }, { rootMargin: '0px 0px -8% 0px' });
+        items.forEach((el) => io.observe(el));
+      } else {
+        items.forEach((el) => el.classList.add('is-in'));
+      }
+
+      // Inquiry form → existing /api/contact handler (EmailJS). Company goes in from_institution;
+      // phone and project type are added to the top of the message.
+      const form = document.getElementById('inquiry');
+      const btn = document.getElementById('f-submit');
+      const btnLabel = btn.firstChild.textContent;
+      const errBox = document.getElementById('f-error');
+      const fields = {
+        name:    { el: document.getElementById('f-name'),    out: document.getElementById('e-name'),    msg: 'Please enter your name.' },
+        company: { el: document.getElementById('f-company'), out: document.getElementById('e-company'), msg: 'Please enter your company name.' },
+        email:   { el: document.getElementById('f-email'),   out: document.getElementById('e-email'),   msg: 'Please enter a valid email address.' },
+        message: { el: document.getElementById('f-msg'),     out: document.getElementById('e-msg'),     msg: 'Please tell us a little about what you need.' },
+      };
+      const emailOk = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+      const check = (f) => {
+        const v = f.el.value.trim();
+        const ok = f === fields.email ? emailOk(v) : v.length > 0;
+        f.el.setAttribute('aria-invalid', ok ? 'false' : 'true');
+        f.out.textContent = ok ? '' : f.msg;
+        return ok;
+      };
+      Object.values(fields).forEach((f) => {
+        f.el.addEventListener('blur', () => { if (f.el.value.trim()) check(f); });
+        f.el.addEventListener('input', () => { if (f.el.getAttribute('aria-invalid') === 'true') check(f); });
+      });
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        errBox.hidden = true;
+        const results = Object.values(fields).map((f) => [f, check(f)]);
+        const firstBad = results.find(([, ok]) => !ok);
+        if (firstBad) { firstBad[0].el.focus(); return; }
+
+        const need = form.querySelector('input[name="need"]:checked');
+        const phone = document.getElementById('f-phone').value.trim();
+        const header = ['[Services inquiry]'];
+        if (need) header.push('Project type: ' + need.value);
+        if (phone) header.push('Phone: ' + phone);
+        const email = fields.email.el.value.trim();
+
+        btn.disabled = true;
+        btn.firstChild.textContent = 'Sending… ';
+        try {
+          const res = await fetch('/api/contact', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              from_name: fields.name.el.value.trim(),
+              from_email: email,
+              from_institution: fields.company.el.value.trim(),
+              message: header.join('\n') + '\n\n' + fields.message.el.value.trim(),
+              _trap: document.getElementById('f-trap').value,
+            }),
+          });
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          document.getElementById('f-sent-email').textContent = email;
+          form.hidden = true;
+          const sent = document.getElementById('f-sent');
+          sent.hidden = false;
+          sent.focus();
+        } catch (err) {
+          errBox.hidden = false;
+          btn.disabled = false;
+          btn.firstChild.textContent = btnLabel;
+        }
+      });
+    })();
+  </script>
+  <!-- Vercel Web Analytics, as on the other pages -->
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
