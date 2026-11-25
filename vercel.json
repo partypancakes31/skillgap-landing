@@ -1,4 +1,7 @@
 {
+  "redirects": [
+    { "source": "/services", "destination": "/services/", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",
