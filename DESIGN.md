@@ -1,6 +1,6 @@
 # DESIGN.md: GapLee (gaplee.space)
 
-Status: Locked (2026-11-25)
+Status: Locked (2026-11-25); `/services` amendment (Direction C) built 2026-11-26, awaiting Christian's lock
 House style: Apple (restraint, whitespace, clear hierarchy, few colors, calm motion)
 
 The site has two surfaces with two directions:
@@ -8,7 +8,8 @@ The site has two surfaces with two directions:
 | Surface | Direction | Status |
 |---|---|---|
 | Product pages (`index`, `institutions`, `pricing`, `use`, `compliance`, `custom-build`, `integration`) | **A. GapLee product** ("Ink, Canvas & Gold"), captured as-is | Recorded, not to be changed by the services work |
-| `/services` (later `services.gaplee.space`) | **B. GapLee Services** ("Monochrome editorial"), adapted from Christian's portfolio (`C:\dev\christian-baquilid`) | Locked 2026-11-25 |
+| `/services` (later `services.gaplee.space`) | **C. GapLee Services** ("Grid & rack"), an infrastructure-style layout in GapLee's ink, warm paper and gold | Built 2026-11-26, awaiting lock |
+| `/services` | ~~B. Monochrome editorial~~ (after Christian's portfolio) | Superseded 2026-11-26 |
 
 ---
 
@@ -17,123 +18,152 @@ The site has two surfaces with two directions:
 - What it is: the client-work page of GapLee Information Technology Services, a DTI-registered
   sole proprietorship in Taguig City. Sells business websites, inquiry and booking systems, and
   custom tools.
-- Who it's for: owners and staff of small and mid-size businesses in Metro Manila (for example a
-  real estate company). Most visit on a phone.
+- Who it's for: owners and staff of small and mid-size businesses (for example a real estate
+  company). The page doesn't name a city or region. Most visit on a phone.
 - The one thing a visitor must do: send an inquiry through the contact form ("Get a free
   preview").
-- Feel: precise, quiet, confident. It should read as a web studio, not an edtech product.
-- Content we have: the handoff copy, the GapLee logo (`/logo.svg`), the contact email
-  (gapleeco@gmail.com), and the live product at gaplee.space as proof of work.
+- Feel: precise, quiet, confident, engineered. It should read as a web studio, not an edtech
+  product, and it should be clear where to look and where the page leads.
+- Content we have: the handoff copy, the GapLee logo, the contact email (gapleeco@gmail.com),
+  and the live product at gaplee.space as proof of work.
 - Content still missing (Christian supplies later): case studies, client screenshots. The Work
   section stays omitted until then; nothing is invented to fill it.
 - Constraints: static HTML in the existing repo, no build step, no new packages. The page
-  carries its own inline CSS and fonts so it can move to a subdomain unchanged. Light only.
-  English. The repo is public.
+  carries its own inline CSS, fonts and script so it can move to a subdomain unchanged. Light
+  only. English. The repo is public.
 
 ## References
 
 | Reference | Take this | Not this |
 |---|---|---|
-| christian-baquilid portfolio (`C:\dev\christian-baquilid`, viewed locally 2026-11-25) | White page, near-black ink, `#6b6b6b` muted text, `#e4e4e0` hairlines; Inter Tight 500 headlines with very tight tracking and one thin Newsreader word; numbered sections; black full-bleed bands; 28px panels; pill buttons; hairline "link-line" text links | Loading screen, custom dot cursor, word-by-word title reveals, marquee band, resume framing |
-| Christian Builds (`C:\dev\portfolio`) | Same system; confirms it works for a business audience (index menu, prices, FAQ) | Mango highlight color, the stacked design-style gallery |
-| gaplee.space product pages | Logo (dark tile, cream "G", gold "L"), the gold `#c9a96e`, the `/api/contact` form wiring and honeypot | Cream canvas, DM Serif headings, product mockups and CTAs |
+| baseten.co (home, product, pricing, customers, careers, security and talk-to-us pages, viewed 2026-11-26) | Square everything; big regular-weight sans headlines; mono section tags in a black box; tinted panels on a faint square grid; a tab list floating over a panel with a detail card; sticky side list beside content; two-card terms like their pricing page; FAQ rows with square plus icons; form with mono uppercase labels; black footer with white column labels and a giant wordmark; stepped striped spacers between sections | Their 3D isometric art, product names, copy, green and pastel palette, client logo walls, testimonials and metrics |
+| gaplee.space product pages | Gold `#c9a96e`, warm paper tints, the `/api/contact` form wiring and honeypot | Cream canvas as page background, DM Serif headings, product CTAs |
+| lawsofux.com | Von Restorff (one gold highlight per block), goal-gradient (steps rail), Hick's (one primary action), Fitts (44px+ targets), WCAG 2.2.2 (nothing auto-moves beyond one-time hints) | |
 
-## Direction B: GapLee Services, monochrome editorial
+## Direction C: GapLee Services, grid & rack
 
-The page borrows Christian's portfolio system: white, ink and hairlines, big medium-weight
-headlines with tight tracking, and one thin serif word per headline for voice. Numbered
-sections and black full-bleed bands set the rhythm. GapLee's identity stays through the logo,
-the business name and legal line, and gold as the only accent, which appears on black and in the
-focus ring. Doing this separates client work from the edtech product without looking like a
-different company. Accepted trade-off: `/services` won't match the cream product pages, so the
-logo, name and footer line carry the family resemblance.
-Options considered: A as-is (rejected: reads as edtech), Christian Builds with mango (rejected:
-a second accent and a competing personal brand).
+A white page organised like a well-labelled rack: every section opens with a small black mono
+tag, content sits on warm tinted panels drawn on a faint 44px grid, and all corners are square.
+Headlines are large, regular weight and tightly tracked. Gold is the single accent and always
+means "this one": the highlighted fact, the selected tab, the active step.
+The black footer closes the page with a giant wordmark. GapLee's identity stays through the
+monochrome GL mark, the business name and legal line, and gold.
+
+Options considered: B monochrome editorial (shipped as drafts 2026-11-25/26, rejected by
+Christian: "plain", "no focus", then "too minimal" and "suffocating"), a three-section cut of B
+(rejected, reverted), Baseten's own green palette (rejected: imitates their brand).
 
 ## Tokens (`/services`)
 
-Source of truth in code: the `:root` block at the top of `services/index.html`.
+Source of truth in code: the `:root` block at the top of `services/index.html`. No hex or rgba
+values appear in the CSS outside that block.
 
 ### Color
 
 | Role | Token | Value | Use for |
 |---|---|---|---|
-| bg | `--bg` | `#ffffff` | page background |
-| surface | `--card` | `#f3f3f1` | panels, form fields' resting fill |
-| text | `--ink` | `#0a0a0a` | headings, body, primary buttons |
-| text-muted | `--muted` | `#6b6b6b` (5.3:1 on white, 4.8:1 on `--card`) | secondary text, labels |
-| border | `--line` | `#e4e4e0` | hairlines, field borders |
-| night | `--night` | `#0a0a0a` | full-bleed bands, footer |
-| on-night | `--on-night` | `#ffffff`; muted `rgba(255,255,255,0.6)` (7.3:1) | text on night |
-| accent | `--gold` | `#c9a96e` | **on night only** (8.9:1): step numerals, one word, links on hover |
-| accent-on-light | `--gold-deep` | `#8a6c35` (4.9:1 on white) | focus ring, nothing else on white |
-| positive / danger | `--success` `#1a7a4a` / `--error` `#b91c1c` | | form status only |
+| bg | `--bg` / `--white` | `#ffffff` | page, cards on tint, inputs |
+| text | `--ink` | `#0a0a0a` | headings, body, primary buttons, tags |
+| text-2 | `--ink-2` | `#2b2925` | paragraph text inside panels |
+| text-muted | `--muted` | `#67635d` (about 6:1 on white, 5.5:1 on tint) | secondary text, mono labels |
+| faint | `--faint` | `#c9c4bb` | decorative markers, statement words before they light up |
+| border | `--line` | `#e8e3d9` | hairlines, list rules |
+| panel | `--tint` / `--tint-2` | `#f6f3ee` / `#ede7dc` | panels, secondary buttons, hover |
+| grid | `--grid` | `rgba(10,10,10,.055)` | the 44px panel grid |
+| accent | `--gold` | `#c9a96e` | fills only, with ink on top: highlight cell, active markers, glyph pixels, rail |
+| accent-pale | `--gold-pale` | `#f3ead9` | the proof panel, hover cell |
+| accent-text | `--gold-deep` | `#8a6c35` (4.9:1 on white) | numerals in the contact promise, success tick |
+| night | `--night` | `#0a0a0a` | footer, dark bar |
+| on-night | `--white`, `--on-night-muted` `.64`, `--on-night-faint` `.55`, `--on-night-line` `.14` | | footer text and rules |
+| error | `--error` | `#b3261e` | form errors only |
+| depth | `--shadow-shot` | | product screenshots only |
+| scrim | `--scrim` | `rgba(10,10,10,.45)` | behind the plans sheet |
 
-Dark mode: none. The black bands are part of the design, as on the portfolio.
+Gold never appears as text on white. Dark mode: none (light only, as on the product pages).
 
 ### Type
 
-Families: `Inter Tight` (400, 500) for everything; `Newsreader` (200, opsz) only for one
-thin word inside large headlines. Loaded from Google Fonts with the site's preload/noscript
-pattern. No other fonts.
+Families: `Inter Tight` 400/500 for everything; `Geist Mono` 400 for tags, labels and meta.
+Loaded from Google Fonts with the preload/noscript pattern. No serif on this surface.
 
 | Token | Size / line height | Weight | Tracking | Use |
 |---|---|---|---|---|
-| display | `clamp(2.75rem, 11vw, 6.5rem)` / 0.92 | 500 | -0.05em | hero H1 only |
-| h2 | `clamp(2.5rem, 8vw, 4.5rem)` / 0.95 | 500 | -0.045em | section titles |
-| h3 | `clamp(1.5rem, 4vw, 2rem)` / 1.1 | 500 | -0.03em | service and step titles |
-| numeral | `clamp(3rem, 8vw, 4.5rem)` / 1 | Newsreader 200 | -0.02em | 01–04 numbers |
-| lead | 1.125rem (1.25rem ≥ 980px) / 1.6 | 400 | -0.01em | hero sub, section intros |
-| body | 1rem / 1.6 | 400 | -0.01em | paragraphs |
-| label | 0.75rem / 1.4 | 500, uppercase | 0.12em | eyebrows, field labels, meta |
-| button | 0.875rem | 500 | 0 | buttons (sentence case) |
-
-`.thin` = Newsreader 200, tracking -0.02em, one word per headline at most. Sentence case
-everywhere except labels.
+| h1 | `clamp(2.85rem, 9.4vw, 6.75rem)` / 0.98 | 400 | -0.045em | hero only |
+| display | `clamp(2.6rem, 6.4vw, 4.75rem)` / 1 | 400 | -0.045em | contact headline |
+| h2 | `clamp(2rem, 5vw, 3.5rem)` / 1.04 | 400 | -0.035em | section titles |
+| statement | `clamp(1.625rem, 3.7vw, 3rem)` / 1.16 | 400 | -0.03em | the one statement paragraph |
+| h3 | 1.375rem to 2rem / 1.2 | 400 | -0.02em to -0.03em | card, step and plan titles |
+| lead | 1.0625rem / 1.55 | 400 | -0.005em | intros |
+| body | 1rem / 1.5 | 400 | -0.005em | paragraphs |
+| mono | 11px / 1.3, uppercase | Geist Mono 400 | 0.08em | tags, labels, meta |
+| button | 15px (14px in the bar) | 500 | -0.005em | buttons, sentence case |
 
 ### Space, shape, depth
 
-- Spacing scale: 4, 8, 12, 16, 24, 32, 40, 48, 64, 96, 144. Gutters 16 (phone) / 32 (≥ 768px).
-  Section padding 96 (phone) / 144 (≥ 980px). Content max width 1280px; text columns max 40rem.
-- Radii: field 12px, panel 28px, pill 999px. Nothing else.
-- Depth: flat. Hairlines and the black bands do the separating. No shadows.
-- Translucency: the top bar only, `rgba(255,255,255,0.8)` with 16px blur, because content
-  scrolls under it.
+- Gutters `clamp(16px, 4vw, 40px)`; section padding `clamp(72px, 10vw, 136px)`; max width
+  1320px; panels and cards sit 6px apart (the "rack" gap). Grid cell 44px.
+- Radii: none. Every corner is square (the GL mark included).
+- Depth: flat panels. The only shadow is `--shadow-shot`, on real product screenshots.
+- Translucency: the top bar only (white 86% with blur), because content scrolls under it.
 
 ### Motion
 
-- Durations: fast 150ms (color), base 300ms (button press, link-line), reveal 700ms.
-- Easing: `--ease-out: cubic-bezier(0.2, 0.7, 0.2, 1)`.
-- What moves: sections fade up 16px once as they enter (only with JS on and no reduced
-  motion), the link-line underline grows on hover, buttons scale to 0.97 when pressed.
-- What never moves: the hero (visible at first paint), text inside headlines, form fields. No
-  loader, no custom cursor, no word reveals, no marquee, no replays.
-- Reduced motion: no reveals, no smooth scroll, no transforms.
+All motion is gated on `prefers-reduced-motion: no-preference` (the `.motion` class) and uses
+`transform`, `opacity` or `clip-path`. Easing `--ease: cubic-bezier(.2, .7, .2, 1)`.
+
+- Wayfinding: the bar's brand name rolls to the current section ("02 How it works"), in the
+  scroll direction. Without motion it still updates, instantly.
+- Section openings: tags wipe in and decode from mono noise (about 0.6s); headings rise out of a
+  mask line by line (1s, 90ms stagger); blocks fade up 16px once.
+- Scroll-linked: the statement paragraph darkens word by word (accepted trade-off: words not
+  yet reached sit at `--faint`; the whole paragraph is ink by the time it reaches mid-screen, and
+  always ink with reduced motion); striped spacers build step by
+  step; the Services and proof panels open from a slight inset; the steps rail fills.
+- Hints (one-time, finite): the hero "Scroll" drip runs 3 times; the other service tabs nudge
+  twice when first seen and stop on any interaction.
+- Pointer (mouse only): the grid cell under the cursor lights in gold-pale; glyph pixels shrink
+  on hover; the hero screenshot leans away from the cursor by a few pixels (lerp 0.12).
+- Scrolling: mouse-wheel input glides to its target (lerp 0.1, settles in about 0.6s).
+  Touch, keyboard, scrollbar and links stay native and interrupt a glide. In-page links scroll
+  smoothly.
+- FAQ answers slide open; the footer wordmark rises letter by letter.
+- The plans sheet slides up (`--ease-sheet: cubic-bezier(0.32, 0.72, 0, 1)`, 0.5s), the scrim
+  fades in, and its cards rise in after it with a 60ms stagger.
+- Never: loaders, custom cursors, auto-advancing carousels, looping animation, scroll-jacking on
+  touch, input blocked during motion.
+- Reduced motion: everything above is off except the section name, which swaps without moving.
 
 ### Breakpoints
 
-Mobile-first. Base styles target 375px; then `min-width: 768px` and `min-width: 980px`.
+Mobile-first. Base styles target 375px; then `min-width: 640px`, `720px` (bar email link) and
+`960px` (two-column layouts, floating tabs and card).
 
 ## Components (`/services`)
 
 | Component | Rule |
 |---|---|
-| Top bar | Logo tile + "GapLee IT Services" on the left, one "Contact" pill on the right. Sticky, translucent white, hairline bottom border after scroll. No product links. |
-| Button | Primary: ink pill, white label, 48px tall, optional arrow. Secondary: text link with link-line underline. Pressed: scale 0.97. Focus-visible: 2px `--gold-deep` ring, 3px offset (gold on night). Disabled: 0.5 opacity. Loading: "Sending…", disabled. One primary per section. |
-| Section head | Label (`01 / Services`) in muted, then h2 with at most one `.thin` word, then an optional lead paragraph. |
-| Service row | Not three identical cards: a numbered list split by hairlines. Number left, title and one paragraph right, deliverables as a short muted line. |
-| Steps | On a night band: 4 rows on phone, 4 columns from 980px. Gold Newsreader numeral, h3, one line. |
-| Panel | `--card` fill, 28px radius, 24px (phone) / 40px padding. Used for the "Built by the team" note and the form. |
-| Input | Label above (label token). White field, 1px `--line`, radius 12px, 16px font (no iOS zoom), min height 48px. Focus: ink border + gold-deep ring. Error: `--error` border, message below in `--error`. |
-| Footer | Night band. Legal line, email link, link back to gaplee.space. Muted text at 0.6 white. |
-| Form states | Idle; sending (button disabled, "Sending…"); success (the panel swaps to a thank-you naming the email they gave); error (message plus a mailto link to gapleeco@gmail.com). |
+| Top bar | Square black GL mark + rolling name/section, section nav from 960px, "Email us" from 720px, one black "Free preview" button. Sticky, translucent white, hairline after scroll; dark over the footer. |
+| Button | Square, 44px min (52px submit), label left and a small triangle right. Primary ink; secondary `--tint` (white on tinted cards). Hover darkens, triangle nudges 3px, press scales 0.985. Focus: 2px ink ring, 3px offset (gold on night). Disabled 0.6 opacity. |
+| Section tag | Black box, white mono uppercase, gold `::` prefix. Every section starts with one. |
+| Tinted panel | `--tint` on the 44px grid. Hero stage, services visual. |
+| Glyph | 5×5 square pixels from a pattern string (0 off, 1 ink, 2 gold). Large in Services, mini (4px) as card icons. |
+| Facts row | Four tinted cells under the hero; exactly one gold. Real terms only. |
+| Services | Tab list (ARIA tabs, arrow keys) floating top-left on the panel, detail card bottom-right with deliverables and one button. Stacks on phones. |
+| Steps | Sticky side list with a gold rail (from 960px) beside tinted step rows; mono step number and terms. |
+| Plans sheet | Native modal `<dialog>` at `#plans`, opened by any link to `#plans` (bar nav, after the steps, footer). Slides up from the bottom (`--ease-sheet`, 0.5s) over a `--scrim`, stopping below the bar on desktop and 12px from the top on phones; sticky header with the Plans tag and a Close button; Esc, Close or a click on the scrim dismisses it. Three plan cards (tint) with price, "Good for" checks and one button each, a gold-pale Care plan row, and an "Every plan includes" list. A plan's button closes the sheet, ticks that project type in the form and moves focus to Name. Page scroll is locked while open. |
+| FAQ | Rows split by hairlines, square black plus/minus icon, one open at a time. |
+| Input | Mono label above; white field on the tinted form panel, no radius, 46px min, 16px text; focus ink border; error border and message in `--error`. Radio options are square cells that invert to ink when chosen. |
+| Footer | Night. Three columns (Services, This page, Contact) with white mono label bars, a status line with a gold square, the giant "GapLee" wordmark, legal line. |
+| Form states | Idle; sending ("Sending…", disabled); success (tick draws in, names their email); error (message plus a mailto link). |
 
 ## Voice (`/services`)
 
 - Sounds like: a small, competent local studio. Plain, specific and short. Explains the process
   (free preview, fixed scope, 50/50) and doesn't lean on adjectives.
-- Use: "you" and "we", Metro Manila, concrete deliverables (website, inquiry form, booking,
-  dashboard), "free preview".
+- Use: "you" and "we", concrete deliverables (website, inquiry form, booking, dashboard), "free
+  preview".
+- Leave out: the city or region, the business registration, and any other detail that doesn't
+  help a visitor decide or act.
 - Banned words: elevate, seamless, unlock, supercharge, revolutionize, cutting-edge,
   game-changer, effortless, delve, robust, empower, leverage, "world-class", "solutions" on its
   own, "in today's fast-paced world".
@@ -173,15 +203,16 @@ Layout
 ### Project-specific bans (`/services`)
 
 - No edtech nav, product mockups, "Try it on your class" or "Open Platform" CTAs.
-- No loader, custom cursor, word-by-word reveals or marquee (portfolio effects left behind).
+- No copying of another company's art, copy, palette, logos or testimonials.
+- No rounded corners, pills or a second accent color.
 - Gold never appears as text on white.
-- No mango yellow or any second accent.
-- No hex, px or ms values outside the token block.
+- No color values outside the token block.
+- Browser chrome only around a real screenshot of our own product.
 
 ### Done checks
 
-- [ ] Only tokens from DESIGN.md are used (no stray hex, px or ms values).
-- [ ] Screenshots taken at 375 px and desktop width (light only, see Decision log), and looked at.
+- [ ] Only color tokens from the `:root` block are used.
+- [ ] Screenshots taken at 375 px and desktop width (light only), and looked at.
 - [ ] One clear primary action per screen; hierarchy reads in a 3-second squint test.
 - [ ] Real content throughout; nothing invented.
 - [ ] Contrast: body 4.5:1, large text and UI parts 3:1. Visible focus ring.
@@ -225,8 +256,8 @@ Captured from the inline `:root` blocks of the seven product pages and screensho
 ## Skills lineup
 
 Lead: `design-taste-frontend`, because `/services` is a public marketing page. Assists:
-`apple-design` (house style), `mobile-native` (phone-first visitors), `break-ui` (the form).
-Critique the finished page against this file with `impeccable`.
+`apple-design` (house style), `animate` (motion), `mobile-native` (phone-first visitors),
+`break-ui` (the form). Critique the finished page against this file with `impeccable`.
 
 ## Decision log
 
@@ -235,3 +266,31 @@ Critique the finished page against this file with `impeccable`.
   leave the product pages unchanged. Direction B drafted from `christian-baquilid` with GapLee's
   logo and gold as the single accent. Light only.
 - 2026-11-25: Christian approved and locked Direction B ("Lock and build").
+- 2026-11-26: Christian found the B page plain and unfocused and asked for the portfolio's
+  scrolling feel plus the Laws of UX. A pinned sideways timeline, scroll-linked band and
+  hairline links were added (draft 2). He then rejected pills, generic patterns and outlined
+  containers, found the hero empty and the page suffocating; a three-section draft was tried
+  and reverted to draft 2 at his request.
+- 2026-11-26: Christian asked to copy baseten.co's design and to go through its other pages for
+  layout variations. Direction C written: Baseten's layout system (square, mono tags, grid
+  panels, tabs over a panel, sticky side list, plan cards, FAQ rows, giant-wordmark footer) in
+  GapLee's own colors and copy, without Baseten's art, copy, palette, logos or testimonials.
+  About folded into the FAQ.
+- 2026-11-26: Christian asked for a minimalist two-tone logo on this page: square black mark,
+  white "GL" in Inter Tight, used in the bar and as `/services/favicon.svg`. `/logo.svg` and the
+  product pages keep the original mark.
+- 2026-11-26: Christian asked for more animation, hints and section-to-section transitions; the
+  motion list above was added. He approved it ("Feels right") and asked for scrolling with a
+  bit of resistance; mouse-wheel smoothing (lerp 0.1) was added, touch left native.
+- 2026-11-26: Christian cut unnecessary details: no DTI registration, no Taguig City, Metro
+  Manila or Philippines anywhere on the page (title, description and structured data included).
+  Also removed the repeated business-details table in the FAQ, the footer Business column, the
+  mono term labels on the steps (they repeated the step text) and the duplicate gaplee.space
+  label on the proof card. The footer now has three columns.
+- 2026-11-26: Christian cut the two plan cards under the steps ("Before you pay" / "When you go
+  ahead"); they repeated steps 1 to 3. The terms now appear in the facts row, the steps, the FAQ
+  and the contact promise list.
+- 2026-11-26: Christian asked for a plans view "like a pop up" so visitors can see what a plan
+  looks like. Added the plans sheet at `#plans` (three plans, Care plan, what every plan
+  includes). Prices read "Fixed quote, set after your free preview" until Christian supplies
+  numbers; no prices are invented.
