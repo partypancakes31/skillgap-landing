@@ -200,6 +200,30 @@
     .win-bar { display: flex; align-items: center; gap: 10px; height: 30px; padding: 0 12px; background: var(--white); border-bottom: 1px solid var(--line); }
     .win-bar i { width: 7px; height: 7px; background: var(--faint); }
     .win-bar span { margin-left: 8px; font: 400 11px/1 var(--mono); color: var(--muted); letter-spacing: .04em; }
+    /* Hero examples: two previews stacked in the window, one shown at a time */
+    .win-body { display: grid; }
+    .win-body > .mock { grid-area: 1 / 1; transition: opacity .35s ease; }
+    .win-body > .mock:not(.is-on) { opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility 0s linear .35s; }
+    .b-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 2.4em; margin-top: 2.8em; }
+    .b-rows { margin-top: .9em; }
+    .b-row { display: grid; grid-template-columns: auto 1fr auto; gap: .9em; align-items: center; padding: .85em 0; border-top: 1px solid var(--line); }
+    .b-row .m-t { margin-top: 0; }
+    .b-dot { width: .6em; height: .6em; background: var(--faint); }
+    .b-dot.new { background: var(--gold); }
+    .b-tag { font: 400 .75em/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; padding: .5em .65em; background: var(--tint); }
+    .b-tag.ok { background: var(--gold-pale); }
+    .b-tag.new { background: var(--ink); color: var(--white); }
+    .b-days { display: grid; grid-template-columns: repeat(5, 1fr); gap: .45em; margin: .9em 0 .55em; font: 400 .75em/1 var(--mono); letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+    .b-week { display: grid; grid-template-columns: repeat(5, 1fr); gap: .45em; }
+    .b-week span { aspect-ratio: 1.5; background: var(--tint); }
+    .b-week span.on { background: var(--gold); }
+    .b-week span.p { background: var(--gold-pale); }
+    .ex-switch { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+    .ex-switch button { min-height: 40px; padding: 0 12px; border: 0; border-radius: 0; background: var(--tint); font-size: 14px; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: background-color .2s ease, color .2s ease; }
+    .ex-switch button:hover { background: var(--tint-2); }
+    .ex-switch button[aria-pressed="true"] { background: var(--ink); color: var(--white); }
+    @media (pointer: coarse) { .ex-switch button { min-height: 44px; } }
+    @media (max-width: 959px) { .ex-switch button:not([aria-pressed="true"]) { background: var(--white); } }
     /* Example preview inside the hero window: a plain business homepage, drawn in HTML */
     .win { container-type: inline-size; }
     .mock { font-size: clamp(7px, 1.5cqw, 13px); line-height: 1.3; padding: 2.2em 2.6em 3em; background: var(--white); color: var(--ink); }
@@ -237,12 +261,12 @@
     .fact.hi span { color: var(--ink); }
 
     @media (min-width: 640px) {
-      .hero-visual { display: block; position: relative; }
-      .stage-card { position: absolute; left: 16px; bottom: 16px; width: 300px; background: var(--white); }
       .stage { aspect-ratio: 16 / 11; }
-      .win { left: 30%; top: 12%; width: 86%; }
+      .win { left: 8%; top: 12%; width: 96%; }
     }
     @media (min-width: 960px) {
+      .hero-visual { display: block; position: relative; }
+      .stage-card { position: absolute; left: 16px; bottom: 16px; width: 300px; background: var(--white); }
       .win { left: 34%; top: 11%; width: 84%; }
     }
     @media (min-width: 960px) {
@@ -679,9 +703,10 @@
             <div class="stage grid-bg" id="stage">
               <span class="hot" aria-hidden="true"></span>
               <span class="sq a" aria-hidden="true"></span><span class="sq b" aria-hidden="true"></span><span class="sq c" aria-hidden="true"></span>
-              <figure class="win" role="img" aria-label="Example of a free preview: a simple homepage for a property company, with a few listings and a Book a viewing button.">
+              <figure class="win">
                 <div class="win-bar" aria-hidden="true"><i></i> <i></i> <i></i><span>Free preview</span></div>
-                <div class="mock" aria-hidden="true">
+                <div class="win-body">
+                <div class="mock is-on" data-ex="site" role="img" aria-label="Example website preview: a simple homepage for a property company, with a few listings and a Book a viewing button.">
                   <div class="m-nav"><span class="m-logo"></span><b>Your Company</b> <span class="m-links"><i>Listings</i> <i>About</i> <i>Contact</i></span> <span class="m-btn">Inquire</span></div>
                   <div class="m-hero">
                     <div>
@@ -698,6 +723,26 @@
                     <div><div class="m-img c"></div><p class="m-t">Studio unit</p> <p class="m-s">Ready for viewing</p></div>
                   </div>
                 </div>
+                <div class="mock book" data-ex="book" role="img" aria-hidden="true" aria-label="Example booking system preview: today's inquiries marked new, replied or booked, beside a weekly schedule.">
+                  <div class="m-nav"><span class="m-logo"></span> <b>Your Company</b> <span class="m-links"><i>Inquiries</i> <i>Schedule</i> <i>Clients</i></span> <span class="m-btn">New booking</span></div>
+                  <div class="b-grid">
+                    <div>
+                      <p class="m-eyebrow">Inquiries today</p>
+                      <div class="b-rows">
+                        <div class="b-row"><span class="b-dot new"></span> <div><p class="m-t">Website form</p> <p class="m-s">Asked for a quote</p></div> <span class="b-tag new">New</span></div>
+                        <div class="b-row"><span class="b-dot"></span> <div><p class="m-t">Booking request</p> <p class="m-s">Friday, 10:00 AM</p></div> <span class="b-tag ok">Booked</span></div>
+                        <div class="b-row"><span class="b-dot"></span> <div><p class="m-t">Facebook message</p> <p class="m-s">Asked about opening hours</p></div> <span class="b-tag">Replied</span></div>
+                        <div class="b-row"><span class="b-dot"></span> <div><p class="m-t">Booking request</p> <p class="m-s">Monday, 2:00 PM</p></div> <span class="b-tag ok">Booked</span></div>
+                      </div>
+                    </div>
+                    <div>
+                      <p class="m-eyebrow">This week</p>
+                      <div class="b-days"><span>Mon</span> <span>Tue</span> <span>Wed</span> <span>Thu</span> <span>Fri</span></div>
+                      <div class="b-week"><span class="on"></span><span></span><span class="p"></span><span></span><span class="on"></span><span></span><span class="p"></span><span></span><span class="on"></span><span></span><span class="p"></span><span></span><span></span><span class="p"></span><span class="on"></span><span></span><span class="on"></span><span></span><span></span><span class="p"></span></div>
+                    </div>
+                  </div>
+                </div>
+                </div>
               </figure>
             </div>
             <div class="stage-card" data-reveal style="--i:4">
@@ -705,8 +750,12 @@
                 <span class="icon" aria-hidden="true"><span class="glyph mini" data-pattern="0000001110112110111000000"></span></span>
                 <h2>Free preview</h2>
               </div>
-              <p>We build a quick concept of your site with your brand, before you pay anything.</p>
-              <p class="mono">Pictured: an example preview</p>
+              <p>A clickable one-page concept with your brand, usually within 2 business days of getting your details. It costs nothing.</p>
+              <p class="mono">Pictured: example previews</p>
+              <div class="ex-switch" role="group" aria-label="Show an example">
+                <button type="button" aria-pressed="true" data-ex="site">Website</button>
+                <button type="button" aria-pressed="false" data-ex="book">Booking system</button>
+              </div>
             </div>
           </div>
         </div>
@@ -752,21 +801,21 @@
 
           <div class="svc-card" role="tabpanel" id="panel-0" aria-labelledby="tab-0">
             <div class="top"><span class="icon" aria-hidden="true"><span class="glyph mini" data-pattern="2222210001101111000111111"></span></span><h3>Business websites</h3></div>
-            <p>Company and property sites, and landing pages. Mobile-first and deployed to your own domain.</p>
+            <p>A site that tells customers what you do and how to reach you, and loads fast on a phone. Company sites, property listings and landing pages, on your own domain.</p>
             <p class="mono">What you get</p>
             <ul class="deliver"><li>Company sites</li> <li>Property listings</li> <li>Landing pages</li></ul>
             <a class="btn" href="#contact">Get a free preview <span class="tri" aria-hidden="true"></span></a>
           </div>
           <div class="svc-card" role="tabpanel" id="panel-1" aria-labelledby="tab-1" hidden>
             <div class="top"><span class="icon" aria-hidden="true"><span class="glyph mini" data-pattern="0101011111100011020111111"></span></span><h3>Inquiry &amp; booking systems</h3></div>
-            <p>Forms that route leads straight to the right person, plus scheduling and simple dashboards.</p>
+            <p>Stop losing inquiries in Messenger threads and spreadsheets. Each lead goes straight to the right person, and customers book a time without the back-and-forth.</p>
             <p class="mono">What you get</p>
             <ul class="deliver"><li>Lead routing</li> <li>Scheduling</li> <li>Dashboards</li></ul>
             <a class="btn" href="#contact">Get a free preview <span class="tri" aria-hidden="true"></span></a>
           </div>
           <div class="svc-card" role="tabpanel" id="panel-2" aria-labelledby="tab-2" hidden>
             <div class="top"><span class="icon" aria-hidden="true"><span class="glyph mini" data-pattern="1121100000121110000011121"></span></span><h3>Custom tools &amp; automation</h3></div>
-            <p>Internal tools that replace spreadsheets and manual follow-ups.</p>
+            <p>One simple tool in place of the spreadsheets and manual follow-ups your team juggles. It keeps the records and sends the reminders for you.</p>
             <p class="mono">What you get</p>
             <ul class="deliver"><li>Internal tools</li> <li>Automated follow-ups</li> <li>Records</li></ul>
             <a class="btn" href="#contact">Get a free preview <span class="tri" aria-hidden="true"></span></a>
@@ -797,7 +846,7 @@
             <li class="step" id="step-1" data-reveal>
               <div class="step-top"><span class="mono"><i aria-hidden="true"></i>Step 01</span></div>
               <h3>Free preview</h3>
-              <p>We build a quick concept using your brand, so you can see it before paying anything.</p>
+              <p>A clickable one-page concept with your brand, usually within 2 business days of getting your details. You see it before paying anything.</p>
             </li>
             <li class="step" id="step-2" data-reveal>
               <div class="step-top"><span class="mono"><i aria-hidden="true"></i>Step 02</span></div>
@@ -860,7 +909,7 @@
         <div class="faq-list" data-reveal style="--i:1">
           <details name="faq" open>
             <summary>What's in the free preview?<i aria-hidden="true"></i></summary>
-            <div class="ans"><p>A quick concept of your site, built with your brand, so you can see it before paying anything. There's no commitment if it isn't right for you.</p></div>
+            <div class="ans"><p>A clickable one-page homepage concept built with your brand, usually ready within 2 business days of getting your details. It's free, and there's no commitment if it isn't right for you.</p></div>
           </details>
           <details name="faq">
             <summary>How does payment work?<i aria-hidden="true"></i></summary>
@@ -1015,7 +1064,7 @@
           <article class="plan" style="--i:0">
             <div class="plan-top"><span class="icon" aria-hidden="true"><span class="glyph mini" data-pattern="2222210001101111000111111"></span></span></div>
             <h3>Business website</h3>
-            <p>Company and property sites, and landing pages. Mobile-first, on your own domain.</p>
+            <p>A site that tells customers what you do and how to reach you, and loads fast on a phone.</p>
             <div class="price"><span class="mono">Price</span> <b>Fixed quote</b> <span class="muted">Set after your free preview</span></div>
             <p class="mono">Good for</p>
             <ul class="checks"><li>Company sites</li> <li>Property listings</li> <li>Landing pages</li></ul>
@@ -1024,7 +1073,7 @@
           <article class="plan" style="--i:1">
             <div class="plan-top"><span class="icon" aria-hidden="true"><span class="glyph mini" data-pattern="0101011111100011020111111"></span></span></div>
             <h3>Inquiry &amp; booking system</h3>
-            <p>Forms that route leads straight to the right person, plus scheduling and simple dashboards.</p>
+            <p>Stop losing inquiries in Messenger threads and spreadsheets. Each lead goes straight to the right person, and customers book a time without the back-and-forth.</p>
             <div class="price"><span class="mono">Price</span> <b>Fixed quote</b> <span class="muted">Set after your free preview</span></div>
             <p class="mono">Good for</p>
             <ul class="checks"><li>Lead routing</li> <li>Scheduling</li> <li>Dashboards</li></ul>
@@ -1033,7 +1082,7 @@
           <article class="plan" style="--i:2">
             <div class="plan-top"><span class="icon" aria-hidden="true"><span class="glyph mini" data-pattern="1121100000121110000011121"></span></span></div>
             <h3>Custom tool &amp; automation</h3>
-            <p>Internal tools that replace spreadsheets and manual follow-ups.</p>
+            <p>One simple tool in place of the spreadsheets and manual follow-ups your team juggles. It keeps the records and sends the reminders for you.</p>
             <div class="price"><span class="mono">Price</span> <b>Fixed quote</b> <span class="muted">Set after your free preview</span></div>
             <p class="mono">Good for</p>
             <ul class="checks"><li>Internal tools</li> <li>Automated follow-ups</li> <li>Records</li></ul>
@@ -1261,6 +1310,18 @@
         addEventListener('hashchange', stop);
         addEventListener('resize', () => { target = Math.min(target, maxY()); });
       }
+
+      // Hero: switch between the example previews
+      const exButtons = [...document.querySelectorAll('.ex-switch button')];
+      const exMocks = [...document.querySelectorAll('.win-body .mock')];
+      exButtons.forEach((b) => b.addEventListener('click', () => {
+        exButtons.forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+        exMocks.forEach((m) => {
+          const on = m.dataset.ex === b.dataset.ex;
+          m.classList.toggle('is-on', on);
+          m.setAttribute('aria-hidden', String(!on));
+        });
+      }));
 
       // Services: the first time the tabs come into view, nudge the other two once
       const tablist = document.getElementById('svc-tabs');

@@ -152,7 +152,7 @@ Mobile-first. Base styles target 375px; then `min-width: 640px`, `720px` (bar em
 | Steps | Sticky side list with a gold rail (from 960px) beside tinted step rows; mono step number and terms. |
 | Plans sheet | Native modal `<dialog>` at `#plans`, opened by any link to `#plans` (bar nav, after the steps, footer). Slides up from the bottom (`--ease-sheet`, 0.5s) over a `--scrim`, stopping below the bar on desktop and 12px from the top on phones; sticky header with the Plans tag and a Close button; Esc, Close or a click on the scrim dismisses it. Three plan cards (tint) with price, "Good for" checks and one button each, a gold-pale Care plan row, and an "Every plan includes" list. A plan's button closes the sheet, ticks that project type in the form and moves focus to Name. Page scroll is locked while open. |
 | FAQ | Rows split by hairlines, square black plus/minus icon, one open at a time. |
-| Hero example | A plain property-company homepage drawn in HTML inside the hero window ("Your Company", listings, "Book a viewing"), marked `role="img"` with a descriptive label. No invented prices. Replace with a real client screenshot (Coral Way demo) when one is live. |
+| Hero example | Two examples drawn in HTML inside the hero window, switched by a two-button control in the Free preview card: a property-company homepage ("Your Company", listings, "Book a viewing") and a booking system (inquiries marked new, replied or booked, beside a weekly schedule). Each is `role="img"` with a descriptive label; the hidden one is `aria-hidden`. No invented prices or names. Replace with a real client screenshot (Coral Way demo) when one is live. |
 | Input | Mono label above; required fields marked with `*` and a "* Required" note; white field on the tinted form panel, no radius, 46px min, 16px text; focus ink border; error border and message in `--error`. Radio options are square cells that invert to ink when chosen. |
 | Footer | Night. Three columns (Services, This page, Contact) with white mono label bars, a status line with a gold square, the giant "GapLee" wordmark, legal line. |
 | Form states | Idle; sending ("Sending…", disabled); success (tick draws in, names their email); error (message plus a mailto link). |
@@ -304,3 +304,10 @@ Lead: `design-taste-frontend`, because `/services` is a public marketing page. A
   required form fields marked, and a privacy line by the submit button ("We'll only use your
   details to reply to your inquiry."); spaces added between adjacent text elements so the page
   reads cleanly as plain text ("See it before you pay", list items, prices).
+- 2026-11-28: From a second outside review (Gemini), with Christian's answers: the hero now
+  switches between a website example and a booking-system example so it speaks to small
+  businesses broadly, not only real estate; the three service descriptions are rewritten around
+  what the client gets; the free preview is described as "a clickable one-page concept with your
+  brand, usually within 2 business days of getting your details" (pending Christian's final
+  word). Kept on purpose: "Fixed quote" instead of starting prices, the Gmail address until a
+  domain address exists, and no city or region. The hero card sits below the window under 960px.
