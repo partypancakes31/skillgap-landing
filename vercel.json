@@ -1,5 +1,6 @@
 {
   "redirects": [
+    { "source": "/", "destination": "/services/", "statusCode": 302 },
     { "source": "/services", "destination": "/services/", "permanent": true },
     { "source": "/card", "destination": "/card/", "permanent": true }
   ],
