@@ -1,21 +1,21 @@
 # DESIGN.md: GapLee (gaplee.space)
 
-Status: Locked (2026-11-25); `/services` amendment (Direction C) built 2026-11-26, awaiting Christian's lock
+Status: Locked (2026-11-25); Direction C built 2026-11-26 and moved to the homepage `/` 2026-11-28, awaiting Christian's lock
 House style: Apple (restraint, whitespace, clear hierarchy, few colors, calm motion)
 
 The site has two surfaces with two directions:
 
 | Surface | Direction | Status |
 |---|---|---|
-| Product pages (`index`, `institutions`, `pricing`, `use`, `compliance`, `custom-build`, `integration`) | **A. GapLee product** ("Ink, Canvas & Gold"), captured as-is | Recorded, not to be changed by the services work |
-| `/services` (later `services.gaplee.space`) | **C. GapLee Services** ("Grid & rack"), an infrastructure-style layout in GapLee's ink, warm paper and gold | Built 2026-11-26, awaiting lock |
+| Homepage `/` (company site of GapLee Information Technology Services; was `/services/` until 2026-11-28) and `/card/` | **C. GapLee Services** ("Grid & rack"), an infrastructure-style layout in GapLee's ink, warm paper and gold | Built 2026-11-26, moved to `/` 2026-11-28, awaiting lock |
+| Teacher product pages (`index`, `institutions`, `pricing`, `use`, `compliance`, `custom-build`, `integration`) | **A. GapLee product** ("Ink, Canvas & Gold"), captured as-is | Parked 2026-11-28 in `_parked/product/` (not deployed); old URLs 301 to `/`. Relaunches later under a new product name |
 | `/services` | ~~B. Monochrome editorial~~ (after Christian's portfolio) | Superseded 2026-11-26 |
 
 ---
 
-## Brief (`/services`)
+## Brief (homepage `/`, formerly `/services`)
 
-- What it is: the client-work page of GapLee Information Technology Services, a DTI-registered
+- What it is: the homepage of GapLee Information Technology Services, a DTI-registered
   sole proprietorship in Taguig City. Sells business websites, inquiry and booking systems, and
   custom tools.
 - Who it's for: owners and staff of small and mid-size businesses (for example a real estate
@@ -25,8 +25,8 @@ The site has two surfaces with two directions:
   preview").
 - Feel: precise, quiet, confident, engineered. It should read as a web studio, not an edtech
   product, and it should be clear where to look and where the page leads.
-- Content we have: the handoff copy, the GapLee logo, the contact email (gapleeco@gmail.com),
-  and the live product at gaplee.space as proof of work.
+- Content we have: the handoff copy, the GapLee logo and the contact email (hello@gaplee.space).
+  The teacher product is parked, so it is no longer shown as proof of work.
 - Content still missing (Christian supplies later): case studies, client screenshots. The Work
   section stays omitted until then; nothing is invented to fill it.
 - Constraints: static HTML in the existing repo, no build step, no new packages. The page
@@ -54,9 +54,9 @@ Options considered: B monochrome editorial (shipped as drafts 2026-11-25/26, rej
 Christian: "plain", "no focus", then "too minimal" and "suffocating"), a three-section cut of B
 (rejected, reverted), Baseten's own green palette (rejected: imitates their brand).
 
-## Tokens (`/services`)
+## Tokens (Direction C)
 
-Source of truth in code: the `:root` block at the top of `services/index.html`. No hex or rgba
+Source of truth in code: the `:root` block at the top of `index.html` (the homepage; `/card/` copies it). No hex or rgba
 values appear in the CSS outside that block.
 
 ### Color
@@ -139,7 +139,7 @@ All motion is gated on `prefers-reduced-motion: no-preference` (the `.motion` cl
 Mobile-first. Base styles target 375px; then `min-width: 640px`, `720px` (bar email link),
 `960px` (two-column layouts, floating tabs) and `1200px` (the hero card floats over the window).
 
-## Components (`/services`)
+## Components (Direction C)
 
 | Component | Rule |
 |---|---|
@@ -158,7 +158,7 @@ Mobile-first. Base styles target 375px; then `min-width: 640px`, `720px` (bar em
 | Footer | Night. Three columns (Services, This page, Contact) with white mono label bars, a status line with a gold square, the giant "GapLee" wordmark, legal line. |
 | Form states | Idle; sending ("Sending…", disabled); success (tick draws in, names their email); error (message plus a mailto link). |
 
-## Voice (`/services`)
+## Voice (Direction C)
 
 - Sounds like: a small, competent local studio. Plain, specific and short. Explains the process
   (free preview, fixed scope, 50/50) and doesn't lean on adjectives.
@@ -203,7 +203,7 @@ Layout
 - Text set wider than ~75 characters per line.
 - Buttons with no pressed, focus or disabled state.
 
-### Project-specific bans (`/services`)
+### Project-specific bans (Direction C)
 
 - No edtech nav, product mockups, "Try it on your class" or "Open Platform" CTAs.
 - No copying of another company's art, copy, palette, logos or testimonials.
@@ -230,7 +230,7 @@ Layout
 
 ---
 
-## Direction A: GapLee product pages (recorded as-is)
+## Direction A: GapLee product pages (recorded as-is, parked 2026-11-28)
 
 Captured from the inline `:root` blocks of the seven product pages and screenshots of
 `index.html` and `institutions.html`. The services work changes only their footers.
@@ -342,3 +342,16 @@ Lead: `design-taste-frontend`, because `/services` is a public marketing page. A
   its price note reads "Billed monthly, cancel anytime". The teacher product is parked: `/`
   temporarily redirects (302) to `/services/` in `vercel.json` and the root is out of the
   sitemap, until the company homepage replaces it at `/`.
+- 2026-11-28: GapLee is now the business name of the web and IT services company, and the
+  teacher product is parked until it relaunches under a new name. Christian approved this URL
+  plan: the `/services/` page (Direction C, unchanged) becomes the homepage at `/`;
+  `/services`, `/services/` and anything under it 301 to `/`; the seven product pages and
+  `skillgap-overview.pdf` go offline and 301 to `/`; their files, the product logos and the
+  product screenshots are kept in `_parked/product/`, which `.vercelignore` keeps out of
+  deploys. The "Our own product" section (and its nav, footer and wayfinding entries) is removed
+  until a real client project, the Coral Way demo first, can take its place; the footer's
+  gaplee.space link went with it. The FAQ keeps the BIR-registered invoice line (Christian
+  confirmed it). Favicon, touch icon and share image moved from `/services/` to the root. The
+  temporary 302 from `/` to `/services/` is gone. Canonical, `og:url` and structured data point
+  to `https://www.gaplee.space/`; the sitemap lists only `/`. `/card/` and its vCard now link to
+  the homepage.
