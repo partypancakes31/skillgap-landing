@@ -19,7 +19,8 @@ The site has two surfaces with two directions:
   sole proprietorship in Taguig City. Sells business websites, inquiry and booking systems, and
   custom tools.
 - Who it's for: owners and staff of small and mid-size businesses (for example a real estate
-  company). The page doesn't name a city or region. Most visit on a phone.
+  company). Only the footer legal line and the structured data name the region (Metro Manila,
+  Philippines). Most visit on a phone.
 - The one thing a visitor must do: send an inquiry through the contact form ("Get a free
   preview").
 - Feel: precise, quiet, confident, engineered. It should read as a web studio, not an edtech
@@ -135,8 +136,8 @@ All motion is gated on `prefers-reduced-motion: no-preference` (the `.motion` cl
 
 ### Breakpoints
 
-Mobile-first. Base styles target 375px; then `min-width: 640px`, `720px` (bar email link) and
-`960px` (two-column layouts, floating tabs and card).
+Mobile-first. Base styles target 375px; then `min-width: 640px`, `720px` (bar email link),
+`960px` (two-column layouts, floating tabs) and `1200px` (the hero card floats over the window).
 
 ## Components (`/services`)
 
@@ -163,8 +164,9 @@ Mobile-first. Base styles target 375px; then `min-width: 640px`, `720px` (bar em
   (free preview, fixed scope, 50/50) and doesn't lean on adjectives.
 - Use: "you" and "we", concrete deliverables (website, inquiry form, booking, dashboard), "free
   preview".
-- Leave out: the city or region, the business registration, and any other detail that doesn't
-  help a visitor decide or act.
+- Leave out: the business registration, and any other detail that doesn't help a visitor
+  decide or act. The region appears only in the footer legal line and structured data. The one
+  exception is the payment FAQ's line about BIR-registered invoices, which corporate buyers need.
 - Banned words: elevate, seamless, unlock, supercharge, revolutionize, cutting-edge,
   game-changer, effortless, delve, robust, empower, leverage, "world-class", "solutions" on its
   own, "in today's fast-paced world".
@@ -319,3 +321,24 @@ Lead: `design-taste-frontend`, because `/services` is a public marketing page. A
   (a vCard at /card/christian-baquilid.vcf) and "Share this card", then phone, email and web
   rows. It is noindex, so it is shared by link rather than found by search. /card redirects to
   /card/ like /services.
+- 2026-11-28: Fixes from a third outside review (Gemini, of the live page), checked against the
+  code first. Hero window from 960px moved from `left 34%, width 84%` to `left 32%, width 66%`,
+  so the example's header (Listings, About, Contact, Inquire) and all five booking-grid columns
+  sit inside the stage. That alone left the Free preview card covering most of the window at
+  960-1199px, so the card now floats over the window's lower-left corner only from 1200px and
+  sits under the window below that (as on tablets); from 640px the window is `left 6%, width
+  88%` so it no longer runs off the right edge. Phones keep the window bleeding off the right.
+  Christian reversed the 2026-11-26 no-location rule for two places only: the footer legal line
+  reads "GapLee Information Technology Services · Metro Manila, Philippines" and the structured
+  data has `areaServed: Metro Manila, Philippines`. Sitemap priority: /services/ 1.0, root 0.8.
+  robots.txt was already correct; no `Disallow` for previews (they live off-site and carry
+  noindex).
+- 2026-11-28: Christian's answers on the rest of that review. Prices stay "Fixed quote" (the
+  suggested PHP 30,000 / 45,000 anchors were judged too low for corporate prospects; revisit once
+  the first client quote is set). The payment FAQ adds "you'll receive an official BIR-registered
+  invoice for each payment". Ownership is kept apart from hosting so no one reads it as free
+  hosting: "Every plan includes" says "You own your domain and the finished site once it's paid
+  in full"; the Care plan and its FAQ say you can cancel anytime and we hand over your files;
+  its price note reads "Billed monthly, cancel anytime". The teacher product is parked: `/`
+  temporarily redirects (302) to `/services/` in `vercel.json` and the root is out of the
+  sitemap, until the company homepage replaces it at `/`.
