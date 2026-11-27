@@ -117,7 +117,7 @@
     }
     .tag::before { content: '::'; color: var(--gold); letter-spacing: 0; }
     .who { display: grid; gap: 12px; }
-    h1 { font-weight: 400; font-size: clamp(2.25rem, 7.4vw, 3.5rem); line-height: 1.02; letter-spacing: -.04em; text-wrap: balance; }
+    h1 { font-weight: 400; font-size: clamp(2.5rem, 4.6vw, 4rem); line-height: 1.02; letter-spacing: -.04em; text-wrap: balance; }
     .role { color: var(--muted); }
     .lead { font-size: 1.0625rem; line-height: 1.55; color: var(--ink-2); max-width: 34ch; }
 
@@ -149,7 +149,7 @@
       -webkit-tap-highlight-color: transparent; transition: background-color .2s ease;
     }
     .rows .mono { color: var(--muted); }
-    .rows .val { font-size: 1.0625rem; color: var(--ink-2); overflow-wrap: anywhere; }
+    .rows .val { font-size: 1.125rem; color: var(--ink-2); overflow-wrap: anywhere; }
     .rows .tri { width: 0; height: 0; border-left: 6px solid var(--faint); border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; margin-right: 8px; transition: transform .2s var(--ease), border-color .2s ease; }
     @media (hover: hover) {
       .rows a:hover { background: var(--tint); }
@@ -157,6 +157,37 @@
     }
     .rows a:active { background: var(--tint-2); }
     .note { min-height: 1.3em; color: var(--gold-deep); }
+
+    /* QR tile: someone scans this screen to open the card on their own phone */
+    .qr { display: flex; align-items: center; gap: 18px; }
+    .qr svg { flex: none; width: 128px; height: 128px; border: 1px solid var(--line); }
+    .qr svg rect { fill: var(--white); }
+    .qr svg path { fill: var(--ink); }
+    .qr p + p { margin-top: 6px; color: var(--ink-2); font-size: .9375rem; line-height: 1.45; max-width: 24ch; }
+    .qr .mono { color: var(--muted); }
+
+    /* ── Phone: the card is the page. Edge-to-edge panel, bigger type, taller rows ── */
+    @media (max-width: 879px) {
+      .page { padding-top: 0; }
+      .layout { gap: 36px; }
+      .panel {
+        margin-inline: calc(-1 * max(var(--gut), env(safe-area-inset-left))) calc(-1 * max(var(--gut), env(safe-area-inset-right)));
+        padding: max(44px, calc(env(safe-area-inset-top) + 28px)) 20px 44px;
+      }
+      .cardbox { max-width: 540px; }
+      .info { gap: 36px; }
+      .mono, .tag { font-size: 12px; }
+      .who { gap: 14px; }
+      h1 { font-size: clamp(2.625rem, 11.5vw, 4rem); line-height: 1; }
+      .lead { font-size: 1.1875rem; }
+      .btn { min-height: 58px; padding: 0 20px; font-size: 17px; }
+      .rows a { grid-template-columns: 76px minmax(0, 1fr) auto; min-height: 68px; }
+      .rows .val { font-size: 1.25rem; }
+      .qr { flex-direction: column; gap: 20px; padding: 32px 20px; background: var(--tint); text-align: center; }
+      .qr svg { width: min(220px, 62vw); height: auto; aspect-ratio: 1; border: 0; }
+      .qr p + p { max-width: none; font-size: 1.0625rem; }
+      .foot { margin-top: 48px; }
+    }
 
     /* ── Footer ───────────────────────────────────────────────────────────── */
     .foot { width: 100%; max-width: 1120px; margin: 40px auto 0; display: flex; align-items: center; gap: 10px; color: var(--muted); }
@@ -202,6 +233,10 @@
             <li><a href="/services/"><span class="mono">Web</span> <span class="val">gaplee.space/services</span> <span class="tri" aria-hidden="true"></span></a></li>
           </ul>
           <p class="note mono" id="note" role="status" aria-live="polite"></p>
+        </div>
+        <div class="qr" style="--i:5">
+          <svg viewBox="0 0 37 37" shape-rendering="crispEdges" role="img" aria-label="QR code for gaplee.space/card"><rect width="37" height="37"/><path d="M4 4h7v1h-7zM15 4h1v1h-1zM23 4h2v1h-2zM26 4h7v1h-7zM4 5h1v1h-1zM10 5h1v1h-1zM12 5h1v1h-1zM18 5h1v1h-1zM20 5h1v1h-1zM22 5h1v1h-1zM26 5h1v1h-1zM32 5h1v1h-1zM4 6h1v1h-1zM6 6h3v1h-3zM10 6h1v1h-1zM12 6h2v1h-2zM18 6h2v1h-2zM22 6h2v1h-2zM26 6h1v1h-1zM28 6h3v1h-3zM32 6h1v1h-1zM4 7h1v1h-1zM6 7h3v1h-3zM10 7h1v1h-1zM13 7h1v1h-1zM16 7h2v1h-2zM19 7h1v1h-1zM21 7h2v1h-2zM24 7h1v1h-1zM26 7h1v1h-1zM28 7h3v1h-3zM32 7h1v1h-1zM4 8h1v1h-1zM6 8h3v1h-3zM10 8h1v1h-1zM14 8h2v1h-2zM17 8h2v1h-2zM20 8h2v1h-2zM23 8h1v1h-1zM26 8h1v1h-1zM28 8h3v1h-3zM32 8h1v1h-1zM4 9h1v1h-1zM10 9h1v1h-1zM14 9h2v1h-2zM17 9h1v1h-1zM20 9h2v1h-2zM23 9h2v1h-2zM26 9h1v1h-1zM32 9h1v1h-1zM4 10h7v1h-7zM12 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM24 10h1v1h-1zM26 10h7v1h-7zM13 11h1v1h-1zM17 11h3v1h-3zM21 11h1v1h-1zM23 11h1v1h-1zM5 12h3v1h-3zM9 12h2v1h-2zM14 12h2v1h-2zM17 12h7v1h-7zM30 12h2v1h-2zM6 13h1v1h-1zM9 13h1v1h-1zM12 13h1v1h-1zM15 13h2v1h-2zM18 13h2v1h-2zM21 13h9v1h-9zM32 13h1v1h-1zM8 14h3v1h-3zM13 14h1v1h-1zM18 14h2v1h-2zM22 14h1v1h-1zM26 14h1v1h-1zM29 14h3v1h-3zM4 15h2v1h-2zM7 15h3v1h-3zM11 15h1v1h-1zM13 15h2v1h-2zM19 15h1v1h-1zM29 15h1v1h-1zM32 15h1v1h-1zM4 16h2v1h-2zM7 16h1v1h-1zM10 16h2v1h-2zM13 16h6v1h-6zM20 16h2v1h-2zM24 16h2v1h-2zM27 16h1v1h-1zM30 16h3v1h-3zM6 17h2v1h-2zM9 17h1v1h-1zM11 17h1v1h-1zM13 17h2v1h-2zM18 17h4v1h-4zM23 17h1v1h-1zM26 17h2v1h-2zM29 17h2v1h-2zM32 17h1v1h-1zM4 18h1v1h-1zM6 18h1v1h-1zM8 18h1v1h-1zM10 18h3v1h-3zM14 18h1v1h-1zM18 18h2v1h-2zM22 18h3v1h-3zM26 18h4v1h-4zM31 18h2v1h-2zM6 19h2v1h-2zM9 19h1v1h-1zM11 19h1v1h-1zM14 19h1v1h-1zM16 19h1v1h-1zM20 19h1v1h-1zM22 19h3v1h-3zM26 19h1v1h-1zM28 19h2v1h-2zM5 20h4v1h-4zM10 20h7v1h-7zM19 20h2v1h-2zM24 20h2v1h-2zM27 20h3v1h-3zM31 20h1v1h-1zM7 21h1v1h-1zM12 21h7v1h-7zM20 21h1v1h-1zM24 21h1v1h-1zM27 21h1v1h-1zM30 21h1v1h-1zM4 22h1v1h-1zM7 22h1v1h-1zM10 22h4v1h-4zM15 22h1v1h-1zM18 22h4v1h-4zM24 22h1v1h-1zM26 22h1v1h-1zM28 22h1v1h-1zM30 22h1v1h-1zM6 23h2v1h-2zM9 23h1v1h-1zM14 23h1v1h-1zM16 23h2v1h-2zM21 23h3v1h-3zM25 23h3v1h-3zM29 23h2v1h-2zM32 23h1v1h-1zM5 24h1v1h-1zM10 24h2v1h-2zM14 24h1v1h-1zM17 24h2v1h-2zM20 24h3v1h-3zM24 24h5v1h-5zM30 24h2v1h-2zM12 25h1v1h-1zM16 25h1v1h-1zM18 25h1v1h-1zM20 25h5v1h-5zM28 25h2v1h-2zM31 25h2v1h-2zM4 26h7v1h-7zM13 26h1v1h-1zM16 26h1v1h-1zM22 26h3v1h-3zM26 26h1v1h-1zM28 26h1v1h-1zM30 26h2v1h-2zM4 27h1v1h-1zM10 27h1v1h-1zM12 27h1v1h-1zM15 27h1v1h-1zM18 27h1v1h-1zM20 27h1v1h-1zM22 27h1v1h-1zM24 27h1v1h-1zM28 27h1v1h-1zM32 27h1v1h-1zM4 28h1v1h-1zM6 28h3v1h-3zM10 28h1v1h-1zM13 28h1v1h-1zM15 28h3v1h-3zM19 28h1v1h-1zM22 28h1v1h-1zM24 28h7v1h-7zM32 28h1v1h-1zM4 29h1v1h-1zM6 29h3v1h-3zM10 29h1v1h-1zM12 29h1v1h-1zM16 29h1v1h-1zM18 29h1v1h-1zM20 29h2v1h-2zM23 29h1v1h-1zM28 29h1v1h-1zM30 29h2v1h-2zM4 30h1v1h-1zM6 30h3v1h-3zM10 30h1v1h-1zM12 30h2v1h-2zM16 30h1v1h-1zM19 30h2v1h-2zM24 30h1v1h-1zM27 30h1v1h-1zM30 30h1v1h-1zM32 30h1v1h-1zM4 31h1v1h-1zM10 31h1v1h-1zM12 31h1v1h-1zM14 31h1v1h-1zM16 31h3v1h-3zM20 31h1v1h-1zM24 31h1v1h-1zM28 31h2v1h-2zM31 31h1v1h-1zM4 32h7v1h-7zM13 32h2v1h-2zM17 32h1v1h-1zM19 32h2v1h-2zM22 32h1v1h-1zM24 32h2v1h-2zM27 32h1v1h-1zM29 32h1v1h-1zM31 32h1v1h-1z"/></svg>
+          <div><p class="mono">Scan to open this card</p> <p>Show this code to share the card in person.</p></div>
         </div>
       </section>
     </div>
