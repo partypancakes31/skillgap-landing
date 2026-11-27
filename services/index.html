@@ -200,6 +200,27 @@
     .win-bar { display: flex; align-items: center; gap: 10px; height: 30px; padding: 0 12px; background: var(--white); border-bottom: 1px solid var(--line); }
     .win-bar i { width: 7px; height: 7px; background: var(--faint); }
     .win-bar span { margin-left: 8px; font: 400 11px/1 var(--mono); color: var(--muted); letter-spacing: .04em; }
+    /* Example preview inside the hero window: a plain business homepage, drawn in HTML */
+    .win { container-type: inline-size; }
+    .mock { font-size: clamp(7px, 1.5cqw, 13px); line-height: 1.3; padding: 2.2em 2.6em 3em; background: var(--white); color: var(--ink); }
+    .m-nav { display: flex; align-items: center; gap: 1em; }
+    .m-logo { width: 1.7em; height: 1.7em; background: var(--ink); }
+    .m-nav b { font-weight: 500; }
+    .m-links { display: flex; gap: 1.6em; margin-left: auto; color: var(--muted); }
+    .m-links i { font-style: normal; }
+    .m-btn { display: inline-block; padding: .75em 1.1em; background: var(--tint); font-weight: 500; }
+    .m-btn.dark { background: var(--ink); color: var(--white); }
+    .m-hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 2.2em; align-items: center; margin-top: 3.2em; }
+    .m-eyebrow { font: 400 .8em/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+    .m-h { font-size: 2.8em; line-height: 1; letter-spacing: -.045em; margin-top: .45em; }
+    .m-p { color: var(--muted); margin: 1em 0 1.6em; max-width: 26em; }
+    .m-photo { aspect-ratio: 4 / 3; background: linear-gradient(160deg, var(--gold-pale), var(--tint-2)); }
+    .m-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.1em; margin-top: 2.6em; }
+    .m-img { aspect-ratio: 4 / 3; background: var(--tint); }
+    .m-img.b { background: var(--tint-2); }
+    .m-img.c { background: var(--gold-pale); }
+    .m-t { font-weight: 500; margin-top: .8em; }
+    .m-s { color: var(--muted); font-size: .9em; margin-top: .2em; }
     .stage-card { background: var(--tint); padding: 20px; display: grid; gap: 10px; }
     .stage-card .top { display: flex; align-items: center; gap: 10px; }
     .stage-card .icon { width: 30px; height: 30px; display: grid; place-items: center; background: var(--ink); }
@@ -220,6 +241,9 @@
       .stage-card { position: absolute; left: 16px; bottom: 16px; width: 300px; background: var(--white); }
       .stage { aspect-ratio: 16 / 11; }
       .win { left: 30%; top: 12%; width: 86%; }
+    }
+    @media (min-width: 960px) {
+      .win { left: 34%; top: 11%; width: 84%; }
     }
     @media (min-width: 960px) {
       .hero-grid { grid-template-columns: minmax(260px, 300px) 1fr; gap: clamp(24px, 4vw, 56px); }
@@ -383,6 +407,8 @@
     .submit { width: 100%; min-height: 52px; }
     .submit:disabled { opacity: .6; cursor: progress; }
     .form-note { font-size: 13px; color: var(--muted); }
+    .req { color: var(--ink); }
+    .form-req { font: 400 11px/1.2 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
     .form-error { font-size: 14px; color: var(--error); }
     .form-error a { box-shadow: inset 0 -1px 0 currentColor; }
     .trap { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
@@ -609,7 +635,7 @@
         <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" fill="#0a0a0a"/><text x="32" y="43" text-anchor="middle" fill="#ffffff" font-family="'Inter Tight', system-ui, -apple-system, 'Segoe UI', sans-serif" font-weight="500" font-size="28" letter-spacing="-1.4">GL</text></svg>
         <span class="brand-roll">
           <span class="name">GapLee IT Services</span>
-          <span class="now" id="now" aria-hidden="true"><span class="mono" id="now-n"></span><span id="now-t"></span></span>
+          <span class="now" id="now" aria-hidden="true"><span class="mono" id="now-n"></span> <span id="now-t"></span></span>
         </span>
       </a>
       <nav aria-label="Sections">
@@ -617,7 +643,7 @@
           <li><a href="#services">Services</a></li>
           <li><a href="#how">How it works</a></li>
           <li><a href="#plans">Plans</a></li>
-          <li><a href="#proof">Our work</a></li>
+          <li><a href="#proof">Our product</a></li>
           <li><a href="#faq">Questions</a></li>
         </ul>
       </nav>
@@ -653,9 +679,25 @@
             <div class="stage grid-bg" id="stage">
               <span class="hot" aria-hidden="true"></span>
               <span class="sq a" aria-hidden="true"></span><span class="sq b" aria-hidden="true"></span><span class="sq c" aria-hidden="true"></span>
-              <figure class="win">
-                <div class="win-bar" aria-hidden="true"><i></i><i></i><i></i><span>gaplee.space</span></div>
-                <img src="/services/gaplee-home-960.webp" srcset="/services/gaplee-home-960.webp 960w, /services/gaplee-home.webp 1440w" sizes="(min-width: 960px) 62vw, 100vw" width="1440" height="900" decoding="async" fetchpriority="high" alt="The gaplee.space home page, our own product, with the headline 'Grades say how they did. GapLee shows what to fix.'">
+              <figure class="win" role="img" aria-label="Example of a free preview: a simple homepage for a property company, with a few listings and a Book a viewing button.">
+                <div class="win-bar" aria-hidden="true"><i></i> <i></i> <i></i><span>Free preview</span></div>
+                <div class="mock" aria-hidden="true">
+                  <div class="m-nav"><span class="m-logo"></span><b>Your Company</b> <span class="m-links"><i>Listings</i> <i>About</i> <i>Contact</i></span> <span class="m-btn">Inquire</span></div>
+                  <div class="m-hero">
+                    <div>
+                      <p class="m-eyebrow">Property listings</p>
+                      <p class="m-h">Homes worth visiting, listed clearly.</p>
+                      <p class="m-p">Browse what's available and book a viewing in a minute.</p>
+                      <span class="m-btn dark">Book a viewing</span>
+                    </div>
+                    <div class="m-photo"></div>
+                  </div>
+                  <div class="m-cards">
+                    <div><div class="m-img"></div><p class="m-t">2-bedroom condo</p> <p class="m-s">Ready for viewing</p></div>
+                    <div><div class="m-img b"></div><p class="m-t">Townhouse</p> <p class="m-s">Ready for viewing</p></div>
+                    <div><div class="m-img c"></div><p class="m-t">Studio unit</p> <p class="m-s">Ready for viewing</p></div>
+                  </div>
+                </div>
               </figure>
             </div>
             <div class="stage-card" data-reveal style="--i:4">
@@ -664,16 +706,16 @@
                 <h2>Free preview</h2>
               </div>
               <p>We build a quick concept of your site with your brand, before you pay anything.</p>
-              <p class="mono">Pictured: our own product</p>
+              <p class="mono">Pictured: an example preview</p>
             </div>
           </div>
         </div>
 
         <ul class="facts" aria-label="Our terms">
-          <li class="fact hi" data-reveal style="--i:0"><b>Free</b><span>Preview before you pay</span></li>
-          <li class="fact" data-reveal style="--i:1"><b>Fixed</b><span>Price agreed up front</span></li>
-          <li class="fact" data-reveal style="--i:2"><b>50/50</b><span>Half to start, half at launch</span></li>
-          <li class="fact" data-reveal style="--i:3"><b>2</b><span>Rounds of revisions included</span></li>
+          <li class="fact hi" data-reveal style="--i:0"><b>Free</b> <span>Preview before you pay</span></li>
+          <li class="fact" data-reveal style="--i:1"><b>Fixed</b> <span>Price agreed up front</span></li>
+          <li class="fact" data-reveal style="--i:2"><b>50/50</b> <span>Half to start, half at launch</span></li>
+          <li class="fact" data-reveal style="--i:3"><b>2</b> <span>Rounds of revisions included</span></li>
         </ul>
       </div>
     </section>
@@ -712,21 +754,21 @@
             <div class="top"><span class="icon" aria-hidden="true"><span class="glyph mini" data-pattern="2222210001101111000111111"></span></span><h3>Business websites</h3></div>
             <p>Company and property sites, and landing pages. Mobile-first and deployed to your own domain.</p>
             <p class="mono">What you get</p>
-            <ul class="deliver"><li>Company sites</li><li>Property listings</li><li>Landing pages</li></ul>
+            <ul class="deliver"><li>Company sites</li> <li>Property listings</li> <li>Landing pages</li></ul>
             <a class="btn" href="#contact">Get a free preview <span class="tri" aria-hidden="true"></span></a>
           </div>
           <div class="svc-card" role="tabpanel" id="panel-1" aria-labelledby="tab-1" hidden>
             <div class="top"><span class="icon" aria-hidden="true"><span class="glyph mini" data-pattern="0101011111100011020111111"></span></span><h3>Inquiry &amp; booking systems</h3></div>
             <p>Forms that route leads straight to the right person, plus scheduling and simple dashboards.</p>
             <p class="mono">What you get</p>
-            <ul class="deliver"><li>Lead routing</li><li>Scheduling</li><li>Dashboards</li></ul>
+            <ul class="deliver"><li>Lead routing</li> <li>Scheduling</li> <li>Dashboards</li></ul>
             <a class="btn" href="#contact">Get a free preview <span class="tri" aria-hidden="true"></span></a>
           </div>
           <div class="svc-card" role="tabpanel" id="panel-2" aria-labelledby="tab-2" hidden>
             <div class="top"><span class="icon" aria-hidden="true"><span class="glyph mini" data-pattern="1121100000121110000011121"></span></span><h3>Custom tools &amp; automation</h3></div>
             <p>Internal tools that replace spreadsheets and manual follow-ups.</p>
             <p class="mono">What you get</p>
-            <ul class="deliver"><li>Internal tools</li><li>Automated follow-ups</li><li>Records</li></ul>
+            <ul class="deliver"><li>Internal tools</li> <li>Automated follow-ups</li> <li>Records</li></ul>
             <a class="btn" href="#contact">Get a free preview <span class="tri" aria-hidden="true"></span></a>
           </div>
         </div>
@@ -748,7 +790,7 @@
         </aside>
 
         <div class="how-main">
-          <h2 class="h2 lined" id="how-title" data-reveal><span>See it before</span><span>you pay.</span></h2>
+          <h2 class="h2 lined" id="how-title" data-reveal><span>See it before</span> <span>you pay.</span></h2>
           <p class="lead muted" data-reveal style="--i:1">You see a working concept first. The price is agreed before the build starts and doesn't change.</p>
 
           <ol class="steps" id="steps">
@@ -792,11 +834,11 @@
       <div class="wrap">
         <div class="sec-head">
           <p class="tag" data-reveal>Our own product</p>
-          <h2 class="h2" id="proof-title" data-reveal style="--i:1">Built by the team<br>behind GapLee.</h2>
+          <h2 class="h2" id="proof-title" data-reveal style="--i:1">Built by the team <br>behind GapLee.</h2>
         </div>
         <div class="case">
           <figure class="case-shot">
-            <img src="/services/gaplee-home-960.webp" srcset="/services/gaplee-home-960.webp 960w, /services/gaplee-home.webp 1440w" sizes="(min-width: 960px) 56vw, 100vw" width="1440" height="900" loading="lazy" decoding="async" alt="The gaplee.space home page, with a sample student skill report beside the headline.">
+            <img src="/services/gaplee-home-960.webp" srcset="/services/gaplee-home-960.webp 960w, /services/gaplee-home.webp 1440w" sizes="(min-width: 960px) 56vw, 100vw" width="1440" height="900" loading="lazy" decoding="async" alt="Screenshot of gaplee.space, the platform our team builds and runs.">
           </figure>
           <div class="case-body" data-reveal style="--i:1">
             <p class="big">We also build and run GapLee, an exam analysis platform for teachers and schools.</p>
@@ -850,15 +892,16 @@
           <h2 class="display" id="contact-title" data-reveal style="--i:1">Get your free preview.</h2>
           <p class="lead" data-reveal style="--i:2">Tell us about your business and what you need. We'll reply by email with a few questions and a date for your preview.</p>
           <ol class="promise" data-reveal style="--i:3">
-            <li><span class="mono" aria-hidden="true">01</span>No payment, no commitment</li>
-            <li><span class="mono" aria-hidden="true">02</span>A fixed price before any build starts</li>
-            <li><span class="mono" aria-hidden="true">03</span>Your site, on your own domain</li>
+            <li><span class="mono" aria-hidden="true">01</span> No payment, no commitment</li>
+            <li><span class="mono" aria-hidden="true">02</span> A fixed price before any build starts</li>
+            <li><span class="mono" aria-hidden="true">03</span> Your site, on your own domain</li>
           </ol>
           <p class="direct" data-reveal style="--i:4">Prefer email? Write to <a href="mailto:gapleeco@gmail.com">gapleeco@gmail.com</a></p>
         </div>
 
         <div class="form-wrap" data-reveal style="--i:2">
           <form id="inquiry" action="/api/contact" method="post" novalidate>
+            <p class="form-req" aria-hidden="true"><span class="req">*</span> Required</p>
             <div class="trap" aria-hidden="true">
               <label for="f-trap">Leave this empty</label>
               <input id="f-trap" name="_trap" type="text" tabindex="-1" autocomplete="off">
@@ -866,12 +909,12 @@
 
             <div class="row">
               <div class="field">
-                <label for="f-name">Name</label>
+                <label for="f-name">Name <span class="req" aria-hidden="true">*</span></label>
                 <input class="input" id="f-name" name="from_name" type="text" autocomplete="name" required maxlength="120" aria-describedby="e-name">
                 <p class="err" id="e-name" aria-live="polite"></p>
               </div>
               <div class="field">
-                <label for="f-company">Company</label>
+                <label for="f-company">Company <span class="req" aria-hidden="true">*</span></label>
                 <input class="input" id="f-company" name="from_institution" type="text" autocomplete="organization" required maxlength="160" aria-describedby="e-company">
                 <p class="err" id="e-company" aria-live="polite"></p>
               </div>
@@ -879,7 +922,7 @@
 
             <div class="row">
               <div class="field">
-                <label for="f-email">Email</label>
+                <label for="f-email">Email <span class="req" aria-hidden="true">*</span></label>
                 <input class="input" id="f-email" name="from_email" type="email" autocomplete="email" inputmode="email" required maxlength="200" aria-describedby="e-email">
                 <p class="err" id="e-email" aria-live="polite"></p>
               </div>
@@ -900,13 +943,13 @@
             </fieldset>
 
             <div class="field">
-              <label for="f-msg">What do you need?</label>
+              <label for="f-msg">What do you need? <span class="req" aria-hidden="true">*</span></label>
               <textarea class="input" id="f-msg" name="message" required maxlength="4000" rows="4" aria-describedby="e-msg"></textarea>
               <p class="err" id="e-msg" aria-live="polite"></p>
             </div>
 
             <button class="btn submit" type="submit" id="f-submit"><span id="f-submit-label">Send inquiry</span><span class="tri" aria-hidden="true"></span></button>
-            <p class="form-note">No payment, no commitment. We reply by email.</p>
+            <p class="form-note">No payment, no commitment. We'll only use your details to reply to your inquiry.</p>
             <p class="form-error" id="f-error" role="alert" hidden>Your message didn't send. Please try again, or email us at <a href="mailto:gapleeco@gmail.com?subject=Services%20inquiry">gapleeco@gmail.com</a>.</p>
           </form>
 
@@ -926,15 +969,15 @@
       <div class="foot-cols">
         <div class="foot-col">
           <h2>Services</h2>
-          <ul><li><a href="#services">Business websites</a></li><li><a href="#services">Inquiry &amp; booking systems</a></li><li><a href="#services">Custom tools &amp; automation</a></li></ul>
+          <ul><li><a href="#services">Business websites</a></li> <li><a href="#services">Inquiry &amp; booking systems</a></li> <li><a href="#services">Custom tools &amp; automation</a></li></ul>
         </div>
         <div class="foot-col">
           <h2>This page</h2>
-          <ul><li><a href="#how">How it works</a></li><li><a href="#plans">Plans</a></li><li><a href="#proof">Our work</a></li><li><a href="#faq">Questions</a></li><li><a href="#contact">Free preview</a></li></ul>
+          <ul><li><a href="#how">How it works</a></li> <li><a href="#plans">Plans</a></li> <li><a href="#proof">Our product</a></li> <li><a href="#faq">Questions</a></li> <li><a href="#contact">Free preview</a></li></ul>
         </div>
         <div class="foot-col">
           <h2>Contact</h2>
-          <ul><li><a href="mailto:gapleeco@gmail.com">gapleeco@gmail.com</a></li><li><a href="https://www.gaplee.space/">gaplee.space</a></li></ul>
+          <ul><li><a href="mailto:gapleeco@gmail.com">gapleeco@gmail.com</a></li> <li><a href="https://www.gaplee.space/">gaplee.space</a></li></ul>
         </div>
       </div>
 
@@ -973,27 +1016,27 @@
             <div class="plan-top"><span class="icon" aria-hidden="true"><span class="glyph mini" data-pattern="2222210001101111000111111"></span></span></div>
             <h3>Business website</h3>
             <p>Company and property sites, and landing pages. Mobile-first, on your own domain.</p>
-            <div class="price"><span class="mono">Price</span><b>Fixed quote</b><span class="muted">Set after your free preview</span></div>
+            <div class="price"><span class="mono">Price</span> <b>Fixed quote</b> <span class="muted">Set after your free preview</span></div>
             <p class="mono">Good for</p>
-            <ul class="checks"><li>Company sites</li><li>Property listings</li><li>Landing pages</li></ul>
+            <ul class="checks"><li>Company sites</li> <li>Property listings</li> <li>Landing pages</li></ul>
             <a class="btn" href="#contact" data-need="Business website">Start with a free preview <span class="tri" aria-hidden="true"></span></a>
           </article>
           <article class="plan" style="--i:1">
             <div class="plan-top"><span class="icon" aria-hidden="true"><span class="glyph mini" data-pattern="0101011111100011020111111"></span></span></div>
             <h3>Inquiry &amp; booking system</h3>
             <p>Forms that route leads straight to the right person, plus scheduling and simple dashboards.</p>
-            <div class="price"><span class="mono">Price</span><b>Fixed quote</b><span class="muted">Set after your free preview</span></div>
+            <div class="price"><span class="mono">Price</span> <b>Fixed quote</b> <span class="muted">Set after your free preview</span></div>
             <p class="mono">Good for</p>
-            <ul class="checks"><li>Lead routing</li><li>Scheduling</li><li>Dashboards</li></ul>
+            <ul class="checks"><li>Lead routing</li> <li>Scheduling</li> <li>Dashboards</li></ul>
             <a class="btn" href="#contact" data-need="Inquiry or booking system">Start with a free preview <span class="tri" aria-hidden="true"></span></a>
           </article>
           <article class="plan" style="--i:2">
             <div class="plan-top"><span class="icon" aria-hidden="true"><span class="glyph mini" data-pattern="1121100000121110000011121"></span></span></div>
             <h3>Custom tool &amp; automation</h3>
             <p>Internal tools that replace spreadsheets and manual follow-ups.</p>
-            <div class="price"><span class="mono">Price</span><b>Fixed quote</b><span class="muted">Set after your free preview</span></div>
+            <div class="price"><span class="mono">Price</span> <b>Fixed quote</b> <span class="muted">Set after your free preview</span></div>
             <p class="mono">Good for</p>
-            <ul class="checks"><li>Internal tools</li><li>Automated follow-ups</li><li>Records</li></ul>
+            <ul class="checks"><li>Internal tools</li> <li>Automated follow-ups</li> <li>Records</li></ul>
             <a class="btn" href="#contact" data-need="Custom tool or automation">Start with a free preview <span class="tri" aria-hidden="true"></span></a>
           </article>
         </div>
@@ -1004,8 +1047,8 @@
             <h3>Care plan</h3>
             <p>Monthly hosting and content updates, if you'd like us to look after it.</p>
           </div>
-          <div class="price"><span class="mono">Price</span><b>Monthly</b><span class="muted">Optional, after launch</span></div>
-          <ul class="checks"><li>Hosting</li><li>Content updates</li></ul>
+          <div class="price"><span class="mono">Price</span> <b>Quoted per project</b> <span class="muted">Billed monthly, optional</span></div>
+          <ul class="checks"><li>Hosting</li> <li>Content updates</li></ul>
         </div>
 
         <div class="includes" style="--i:4">
@@ -1096,7 +1139,7 @@
       const now = document.getElementById('now');
       const nowN = document.getElementById('now-n');
       const nowT = document.getElementById('now-t');
-      const chapters = [['services', 'Services'], ['how', 'How it works'], ['proof', 'Our work'], ['faq', 'Questions'], ['contact', 'Contact']]
+      const chapters = [['services', 'Services'], ['how', 'How it works'], ['proof', 'Our product'], ['faq', 'Questions'], ['contact', 'Contact']]
         .map(([id, label], k) => ({ el: document.getElementById(id), n: String(k + 1).padStart(2, '0'), label }));
       const foot = document.querySelector('.foot');
       let current = -1;
