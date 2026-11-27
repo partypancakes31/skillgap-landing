@@ -8,15 +8,18 @@
   <meta name="robots" content="noindex">
   <link rel="canonical" href="https://www.gaplee.space/card/">
   <link rel="icon" type="image/svg+xml" href="/services/favicon.svg">
-  <link rel="apple-touch-icon" href="/logo.png">
+  <link rel="apple-touch-icon" href="/card/icon-180.png">
   <meta name="theme-color" content="#ffffff">
   <meta property="og:type" content="profile">
   <meta property="og:site_name" content="GapLee IT Services">
   <meta property="og:title" content="Christian Jay Baquilid | GapLee IT Services">
   <meta property="og:description" content="Founder of GapLee IT Services. Websites, inquiry and booking systems, and small business tools.">
   <meta property="og:url" content="https://www.gaplee.space/card/">
-  <meta property="og:image" content="https://www.gaplee.space/logo.png">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="https://www.gaplee.space/card/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="GapLee, Information Technology Services">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Geist+Mono:wght@400&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -35,6 +38,7 @@
       --ink:       #0a0a0a;
       --ink-2:     #2b2925;
       --muted:     #67635d;
+      --label:     #4d4943;
       --faint:     #c9c4bb;
       --line:      #e8e3d9;
       --tint:      #f6f3ee;
@@ -110,6 +114,7 @@
 
     /* ── Details ──────────────────────────────────────────────────────────── */
     .info { display: grid; gap: 28px; align-content: start; }
+    @media (min-width: 880px) { .info { gap: 22px; } }
     .tag {
       display: inline-flex; align-items: center; gap: 8px; justify-self: start;
       background: var(--ink); color: var(--white); padding: 6px 9px 5px;
@@ -158,6 +163,20 @@
     .rows a:active { background: var(--tint-2); }
     .note { min-height: 1.3em; color: var(--gold-deep); }
 
+    /* Chat row: two app buttons instead of one link */
+    .rows .chat {
+      display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 12px; align-items: center;
+      min-height: 56px; padding: 6px 4px; border-bottom: 1px solid var(--line);
+    }
+    .rows .apps { display: flex; flex-wrap: wrap; gap: 6px; }
+    .rows .apps a {
+      display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 14px;
+      border: 0; background: var(--tint); color: var(--ink-2); font-size: 1rem;
+    }
+    .rows .apps a .tri { margin-right: 0; }
+    @media (hover: hover) { .rows .apps a:hover { background: var(--tint-2); } }
+    .rows .apps a:active { background: var(--tint-2); }
+
     /* QR tile: someone scans this screen to open the card on their own phone */
     .qr { display: flex; align-items: center; gap: 18px; }
     .qr svg { flex: none; width: 128px; height: 128px; border: 1px solid var(--line); }
@@ -165,6 +184,27 @@
     .qr svg path { fill: var(--ink); }
     .qr p + p { margin-top: 6px; color: var(--ink-2); font-size: .9375rem; line-height: 1.45; max-width: 24ch; }
     .qr .mono { color: var(--muted); }
+    .btn.light { background: var(--white); color: var(--ink); }
+    @media (hover: hover) { .btn.light:hover { background: var(--tint-2); } }
+    .qr-open { display: none; }
+
+    /* Full-screen QR: white page, code as large as the screen allows */
+    .qr-sheet {
+      width: 100%; height: 100%; max-width: none; max-height: none; margin: 0; border: 0;
+      padding: max(24px, env(safe-area-inset-top)) 24px max(24px, env(safe-area-inset-bottom));
+      background: var(--white); color: var(--ink);
+    }
+    .qr-sheet[open] { display: grid; place-items: center; }
+    .qr-sheet::backdrop { background: var(--white); }
+    .qr-sheet-in { display: grid; justify-items: center; gap: 20px; width: 100%; max-width: 520px; text-align: center; }
+    .qr-sheet .mono { font-size: 12px; color: var(--label); }
+    .qr-sheet svg { width: min(86vw, 62svh, 480px); height: auto; aspect-ratio: 1; }
+    .qr-sheet .url { font-size: 1.25rem; color: var(--ink-2); }
+    .qr-sheet .btn { width: 100%; max-width: 360px; }
+    html.sheet-open { overflow: hidden; }
+    html.motion .qr-sheet { transition: opacity .25s ease, transform .4s var(--ease-sheet), overlay .4s allow-discrete, display .4s allow-discrete; }
+    html.motion .qr-sheet:not([open]) { opacity: 0; transform: scale(.97); }
+    @starting-style { html.motion .qr-sheet[open] { opacity: 0; transform: scale(.97); } }
 
     /* ── Phone: the card is the page. Edge-to-edge panel, bigger type, taller rows ── */
     @media (max-width: 879px) {
@@ -186,12 +226,34 @@
       .qr { flex-direction: column; gap: 20px; padding: 32px 20px; background: var(--tint); text-align: center; }
       .qr svg { width: min(220px, 62vw); height: auto; aspect-ratio: 1; border: 0; }
       .qr p + p { max-width: none; font-size: 1.0625rem; }
+      .qr-open { display: flex; width: 100%; max-width: 360px; }
+      .rows .chat { grid-template-columns: 76px minmax(0, 1fr); min-height: 68px; }
+      .role, .rows .mono, .qr .mono, .foot .mono { color: var(--label); }
       .foot { margin-top: 48px; }
+    }
+
+    /* ── Small phones: one column, top-aligned. Who and Save contact first, then a smaller card ── */
+    @media (max-width: 639px) {
+      .page { padding-top: max(28px, calc(env(safe-area-inset-top) + 16px)); }
+      .layout { gap: 28px; }
+      .info { display: contents; }
+      .tag { order: 0; margin-bottom: -12px; }
+      .who { order: 1; gap: 10px; }
+      .actions { order: 2; grid-template-columns: 1fr; }
+      .panel { order: 3; margin-inline: 0; padding: 28px 20px; }
+      .cardbox { max-width: 248px; }
+      .lead { order: 4; }
+      .contact { order: 5; }
+      .qr { order: 6; }
+      h1 { font-size: clamp(2.5rem, 11vw, 3.25rem); }
+      .rows a, .rows .chat { min-height: 64px; }
+      .foot { margin-top: 40px; }
     }
 
     /* ── Footer ───────────────────────────────────────────────────────────── */
     .foot { width: 100%; max-width: 1120px; margin: 40px auto 0; display: flex; align-items: center; gap: 10px; color: var(--muted); }
     .foot a { display: flex; align-items: center; gap: 10px; min-height: 44px; }
+    @media (min-width: 880px) { .foot { margin-top: 28px; } }
 
     /* ── Motion: the card settles onto the panel, details follow ────────────── */
     @keyframes settle { from { opacity: 0; transform: translateY(18px) rotateX(10deg) rotateZ(-1.5deg); } }
@@ -204,6 +266,7 @@
   </style>
 </head>
 <body>
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true"><symbol id="qr-code" viewBox="0 0 37 37"><rect width="37" height="37" style="fill: var(--white)"/><path style="fill: var(--ink)" d="M4 4h7v1h-7zM15 4h1v1h-1zM23 4h2v1h-2zM26 4h7v1h-7zM4 5h1v1h-1zM10 5h1v1h-1zM12 5h1v1h-1zM18 5h1v1h-1zM20 5h1v1h-1zM22 5h1v1h-1zM26 5h1v1h-1zM32 5h1v1h-1zM4 6h1v1h-1zM6 6h3v1h-3zM10 6h1v1h-1zM12 6h2v1h-2zM18 6h2v1h-2zM22 6h2v1h-2zM26 6h1v1h-1zM28 6h3v1h-3zM32 6h1v1h-1zM4 7h1v1h-1zM6 7h3v1h-3zM10 7h1v1h-1zM13 7h1v1h-1zM16 7h2v1h-2zM19 7h1v1h-1zM21 7h2v1h-2zM24 7h1v1h-1zM26 7h1v1h-1zM28 7h3v1h-3zM32 7h1v1h-1zM4 8h1v1h-1zM6 8h3v1h-3zM10 8h1v1h-1zM14 8h2v1h-2zM17 8h2v1h-2zM20 8h2v1h-2zM23 8h1v1h-1zM26 8h1v1h-1zM28 8h3v1h-3zM32 8h1v1h-1zM4 9h1v1h-1zM10 9h1v1h-1zM14 9h2v1h-2zM17 9h1v1h-1zM20 9h2v1h-2zM23 9h2v1h-2zM26 9h1v1h-1zM32 9h1v1h-1zM4 10h7v1h-7zM12 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM24 10h1v1h-1zM26 10h7v1h-7zM13 11h1v1h-1zM17 11h3v1h-3zM21 11h1v1h-1zM23 11h1v1h-1zM5 12h3v1h-3zM9 12h2v1h-2zM14 12h2v1h-2zM17 12h7v1h-7zM30 12h2v1h-2zM6 13h1v1h-1zM9 13h1v1h-1zM12 13h1v1h-1zM15 13h2v1h-2zM18 13h2v1h-2zM21 13h9v1h-9zM32 13h1v1h-1zM8 14h3v1h-3zM13 14h1v1h-1zM18 14h2v1h-2zM22 14h1v1h-1zM26 14h1v1h-1zM29 14h3v1h-3zM4 15h2v1h-2zM7 15h3v1h-3zM11 15h1v1h-1zM13 15h2v1h-2zM19 15h1v1h-1zM29 15h1v1h-1zM32 15h1v1h-1zM4 16h2v1h-2zM7 16h1v1h-1zM10 16h2v1h-2zM13 16h6v1h-6zM20 16h2v1h-2zM24 16h2v1h-2zM27 16h1v1h-1zM30 16h3v1h-3zM6 17h2v1h-2zM9 17h1v1h-1zM11 17h1v1h-1zM13 17h2v1h-2zM18 17h4v1h-4zM23 17h1v1h-1zM26 17h2v1h-2zM29 17h2v1h-2zM32 17h1v1h-1zM4 18h1v1h-1zM6 18h1v1h-1zM8 18h1v1h-1zM10 18h3v1h-3zM14 18h1v1h-1zM18 18h2v1h-2zM22 18h3v1h-3zM26 18h4v1h-4zM31 18h2v1h-2zM6 19h2v1h-2zM9 19h1v1h-1zM11 19h1v1h-1zM14 19h1v1h-1zM16 19h1v1h-1zM20 19h1v1h-1zM22 19h3v1h-3zM26 19h1v1h-1zM28 19h2v1h-2zM5 20h4v1h-4zM10 20h7v1h-7zM19 20h2v1h-2zM24 20h2v1h-2zM27 20h3v1h-3zM31 20h1v1h-1zM7 21h1v1h-1zM12 21h7v1h-7zM20 21h1v1h-1zM24 21h1v1h-1zM27 21h1v1h-1zM30 21h1v1h-1zM4 22h1v1h-1zM7 22h1v1h-1zM10 22h4v1h-4zM15 22h1v1h-1zM18 22h4v1h-4zM24 22h1v1h-1zM26 22h1v1h-1zM28 22h1v1h-1zM30 22h1v1h-1zM6 23h2v1h-2zM9 23h1v1h-1zM14 23h1v1h-1zM16 23h2v1h-2zM21 23h3v1h-3zM25 23h3v1h-3zM29 23h2v1h-2zM32 23h1v1h-1zM5 24h1v1h-1zM10 24h2v1h-2zM14 24h1v1h-1zM17 24h2v1h-2zM20 24h3v1h-3zM24 24h5v1h-5zM30 24h2v1h-2zM12 25h1v1h-1zM16 25h1v1h-1zM18 25h1v1h-1zM20 25h5v1h-5zM28 25h2v1h-2zM31 25h2v1h-2zM4 26h7v1h-7zM13 26h1v1h-1zM16 26h1v1h-1zM22 26h3v1h-3zM26 26h1v1h-1zM28 26h1v1h-1zM30 26h2v1h-2zM4 27h1v1h-1zM10 27h1v1h-1zM12 27h1v1h-1zM15 27h1v1h-1zM18 27h1v1h-1zM20 27h1v1h-1zM22 27h1v1h-1zM24 27h1v1h-1zM28 27h1v1h-1zM32 27h1v1h-1zM4 28h1v1h-1zM6 28h3v1h-3zM10 28h1v1h-1zM13 28h1v1h-1zM15 28h3v1h-3zM19 28h1v1h-1zM22 28h1v1h-1zM24 28h7v1h-7zM32 28h1v1h-1zM4 29h1v1h-1zM6 29h3v1h-3zM10 29h1v1h-1zM12 29h1v1h-1zM16 29h1v1h-1zM18 29h1v1h-1zM20 29h2v1h-2zM23 29h1v1h-1zM28 29h1v1h-1zM30 29h2v1h-2zM4 30h1v1h-1zM6 30h3v1h-3zM10 30h1v1h-1zM12 30h2v1h-2zM16 30h1v1h-1zM19 30h2v1h-2zM24 30h1v1h-1zM27 30h1v1h-1zM30 30h1v1h-1zM32 30h1v1h-1zM4 31h1v1h-1zM10 31h1v1h-1zM12 31h1v1h-1zM14 31h1v1h-1zM16 31h3v1h-3zM20 31h1v1h-1zM24 31h1v1h-1zM28 31h2v1h-2zM31 31h1v1h-1zM4 32h7v1h-7zM13 32h2v1h-2zM17 32h1v1h-1zM19 32h2v1h-2zM22 32h1v1h-1zM24 32h2v1h-2zM27 32h1v1h-1zM29 32h1v1h-1zM31 32h1v1h-1z"/></symbol></svg>
   <main class="page">
     <div class="layout">
       <div class="panel" id="panel">
@@ -226,17 +289,19 @@
           <a class="btn" href="/card/christian-baquilid.vcf" download="christian-baquilid.vcf">Save contact <span class="tri" aria-hidden="true"></span></a>
           <button class="btn alt" type="button" id="share">Share this card <span class="tri" aria-hidden="true"></span></button>
         </div>
-        <div style="--i:4">
+        <div class="contact" style="--i:4">
           <ul class="rows">
             <li><a href="tel:+639457108765"><span class="mono">Phone</span> <span class="val">+63 945 710 8765</span> <span class="tri" aria-hidden="true"></span></a></li>
+            <li class="chat"><span class="mono">Chat</span> <span class="apps"><a href="https://wa.me/639457108765">WhatsApp <span class="tri" aria-hidden="true"></span></a> <a href="viber://chat?number=%2B639457108765">Viber <span class="tri" aria-hidden="true"></span></a></span></li>
             <li><a href="mailto:hello@gaplee.space"><span class="mono">Email</span> <span class="val">hello@gaplee.space</span> <span class="tri" aria-hidden="true"></span></a></li>
             <li><a href="/services/"><span class="mono">Web</span> <span class="val">gaplee.space/services</span> <span class="tri" aria-hidden="true"></span></a></li>
           </ul>
           <p class="note mono" id="note" role="status" aria-live="polite"></p>
         </div>
         <div class="qr" style="--i:5">
-          <svg viewBox="0 0 37 37" shape-rendering="crispEdges" role="img" aria-label="QR code for gaplee.space/card"><rect width="37" height="37"/><path d="M4 4h7v1h-7zM15 4h1v1h-1zM23 4h2v1h-2zM26 4h7v1h-7zM4 5h1v1h-1zM10 5h1v1h-1zM12 5h1v1h-1zM18 5h1v1h-1zM20 5h1v1h-1zM22 5h1v1h-1zM26 5h1v1h-1zM32 5h1v1h-1zM4 6h1v1h-1zM6 6h3v1h-3zM10 6h1v1h-1zM12 6h2v1h-2zM18 6h2v1h-2zM22 6h2v1h-2zM26 6h1v1h-1zM28 6h3v1h-3zM32 6h1v1h-1zM4 7h1v1h-1zM6 7h3v1h-3zM10 7h1v1h-1zM13 7h1v1h-1zM16 7h2v1h-2zM19 7h1v1h-1zM21 7h2v1h-2zM24 7h1v1h-1zM26 7h1v1h-1zM28 7h3v1h-3zM32 7h1v1h-1zM4 8h1v1h-1zM6 8h3v1h-3zM10 8h1v1h-1zM14 8h2v1h-2zM17 8h2v1h-2zM20 8h2v1h-2zM23 8h1v1h-1zM26 8h1v1h-1zM28 8h3v1h-3zM32 8h1v1h-1zM4 9h1v1h-1zM10 9h1v1h-1zM14 9h2v1h-2zM17 9h1v1h-1zM20 9h2v1h-2zM23 9h2v1h-2zM26 9h1v1h-1zM32 9h1v1h-1zM4 10h7v1h-7zM12 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM24 10h1v1h-1zM26 10h7v1h-7zM13 11h1v1h-1zM17 11h3v1h-3zM21 11h1v1h-1zM23 11h1v1h-1zM5 12h3v1h-3zM9 12h2v1h-2zM14 12h2v1h-2zM17 12h7v1h-7zM30 12h2v1h-2zM6 13h1v1h-1zM9 13h1v1h-1zM12 13h1v1h-1zM15 13h2v1h-2zM18 13h2v1h-2zM21 13h9v1h-9zM32 13h1v1h-1zM8 14h3v1h-3zM13 14h1v1h-1zM18 14h2v1h-2zM22 14h1v1h-1zM26 14h1v1h-1zM29 14h3v1h-3zM4 15h2v1h-2zM7 15h3v1h-3zM11 15h1v1h-1zM13 15h2v1h-2zM19 15h1v1h-1zM29 15h1v1h-1zM32 15h1v1h-1zM4 16h2v1h-2zM7 16h1v1h-1zM10 16h2v1h-2zM13 16h6v1h-6zM20 16h2v1h-2zM24 16h2v1h-2zM27 16h1v1h-1zM30 16h3v1h-3zM6 17h2v1h-2zM9 17h1v1h-1zM11 17h1v1h-1zM13 17h2v1h-2zM18 17h4v1h-4zM23 17h1v1h-1zM26 17h2v1h-2zM29 17h2v1h-2zM32 17h1v1h-1zM4 18h1v1h-1zM6 18h1v1h-1zM8 18h1v1h-1zM10 18h3v1h-3zM14 18h1v1h-1zM18 18h2v1h-2zM22 18h3v1h-3zM26 18h4v1h-4zM31 18h2v1h-2zM6 19h2v1h-2zM9 19h1v1h-1zM11 19h1v1h-1zM14 19h1v1h-1zM16 19h1v1h-1zM20 19h1v1h-1zM22 19h3v1h-3zM26 19h1v1h-1zM28 19h2v1h-2zM5 20h4v1h-4zM10 20h7v1h-7zM19 20h2v1h-2zM24 20h2v1h-2zM27 20h3v1h-3zM31 20h1v1h-1zM7 21h1v1h-1zM12 21h7v1h-7zM20 21h1v1h-1zM24 21h1v1h-1zM27 21h1v1h-1zM30 21h1v1h-1zM4 22h1v1h-1zM7 22h1v1h-1zM10 22h4v1h-4zM15 22h1v1h-1zM18 22h4v1h-4zM24 22h1v1h-1zM26 22h1v1h-1zM28 22h1v1h-1zM30 22h1v1h-1zM6 23h2v1h-2zM9 23h1v1h-1zM14 23h1v1h-1zM16 23h2v1h-2zM21 23h3v1h-3zM25 23h3v1h-3zM29 23h2v1h-2zM32 23h1v1h-1zM5 24h1v1h-1zM10 24h2v1h-2zM14 24h1v1h-1zM17 24h2v1h-2zM20 24h3v1h-3zM24 24h5v1h-5zM30 24h2v1h-2zM12 25h1v1h-1zM16 25h1v1h-1zM18 25h1v1h-1zM20 25h5v1h-5zM28 25h2v1h-2zM31 25h2v1h-2zM4 26h7v1h-7zM13 26h1v1h-1zM16 26h1v1h-1zM22 26h3v1h-3zM26 26h1v1h-1zM28 26h1v1h-1zM30 26h2v1h-2zM4 27h1v1h-1zM10 27h1v1h-1zM12 27h1v1h-1zM15 27h1v1h-1zM18 27h1v1h-1zM20 27h1v1h-1zM22 27h1v1h-1zM24 27h1v1h-1zM28 27h1v1h-1zM32 27h1v1h-1zM4 28h1v1h-1zM6 28h3v1h-3zM10 28h1v1h-1zM13 28h1v1h-1zM15 28h3v1h-3zM19 28h1v1h-1zM22 28h1v1h-1zM24 28h7v1h-7zM32 28h1v1h-1zM4 29h1v1h-1zM6 29h3v1h-3zM10 29h1v1h-1zM12 29h1v1h-1zM16 29h1v1h-1zM18 29h1v1h-1zM20 29h2v1h-2zM23 29h1v1h-1zM28 29h1v1h-1zM30 29h2v1h-2zM4 30h1v1h-1zM6 30h3v1h-3zM10 30h1v1h-1zM12 30h2v1h-2zM16 30h1v1h-1zM19 30h2v1h-2zM24 30h1v1h-1zM27 30h1v1h-1zM30 30h1v1h-1zM32 30h1v1h-1zM4 31h1v1h-1zM10 31h1v1h-1zM12 31h1v1h-1zM14 31h1v1h-1zM16 31h3v1h-3zM20 31h1v1h-1zM24 31h1v1h-1zM28 31h2v1h-2zM31 31h1v1h-1zM4 32h7v1h-7zM13 32h2v1h-2zM17 32h1v1h-1zM19 32h2v1h-2zM22 32h1v1h-1zM24 32h2v1h-2zM27 32h1v1h-1zM29 32h1v1h-1zM31 32h1v1h-1z"/></svg>
+          <svg viewBox="0 0 37 37" shape-rendering="crispEdges" role="img" aria-label="QR code for gaplee.space/card"><use href="#qr-code"/></svg>
           <div><p class="mono">Scan to open this card</p> <p>Show this code to share the card in person.</p></div>
+          <button class="btn light qr-open" type="button" id="qr-open" aria-haspopup="dialog">Show QR full screen <span class="tri" aria-hidden="true"></span></button>
         </div>
       </section>
     </div>
@@ -248,6 +313,15 @@
       </a>
     </footer>
   </main>
+
+  <dialog class="qr-sheet" id="qr-full" aria-labelledby="qr-full-t">
+    <div class="qr-sheet-in">
+      <p class="mono" id="qr-full-t">Scan to open Christian's card</p>
+      <svg viewBox="0 0 37 37" shape-rendering="crispEdges" role="img" aria-label="QR code for gaplee.space/card"><use href="#qr-code"/></svg>
+      <p class="url">gaplee.space/card</p>
+      <button class="btn" type="button" id="qr-close">Close <span class="tri" aria-hidden="true"></span></button>
+    </div>
+  </dialog>
 
   <script>
     (() => {
@@ -265,6 +339,15 @@
         try { await navigator.clipboard.writeText(url); say('Link copied'); }
         catch (e) { say('Copy this link: gaplee.space/card'); }
       });
+
+      // Full-screen QR: open from the tile, close with the button, Esc, or the back gesture
+      const sheet = document.getElementById('qr-full');
+      document.getElementById('qr-open').addEventListener('click', () => {
+        document.documentElement.classList.add('sheet-open');
+        sheet.showModal();
+      });
+      document.getElementById('qr-close').addEventListener('click', () => sheet.close());
+      sheet.addEventListener('close', () => document.documentElement.classList.remove('sheet-open'));
 
       // The card leans a few degrees toward the pointer, then settles back. Fine pointers only.
       const panel = document.getElementById('panel');
