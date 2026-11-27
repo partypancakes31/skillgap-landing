@@ -311,3 +311,11 @@ Lead: `design-taste-frontend`, because `/services` is a public marketing page. A
   brand, usually within 2 business days of getting your details" (pending Christian's final
   word). Kept on purpose: "Fixed quote" instead of starting prices, the Gmail address until a
   domain address exists, and no city or region. The hero card sits below the window under 960px.
+- 2026-11-28: /services contact address changed from the Gmail address to hello@gaplee.space
+  (Cloudflare Email Routing forwards it). Christian asked for a business card and a digital
+  card. The printed card (3.5 x 2 in, 0.125 in bleed) is a black front with the GapLee wordmark
+  and a white back with name, Founder, email, web and phone. The digital card is a new page at
+  /card/ in Direction C: the card front on a tinted grid panel, name and role, "Save contact"
+  (a vCard at /card/christian-baquilid.vcf) and "Share this card", then phone, email and web
+  rows. It is noindex, so it is shared by link rather than found by search. /card redirects to
+  /card/ like /services.

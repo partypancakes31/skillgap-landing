@@ -1,6 +1,7 @@
 {
   "redirects": [
-    { "source": "/services", "destination": "/services/", "permanent": true }
+    { "source": "/services", "destination": "/services/", "permanent": true },
+    { "source": "/card", "destination": "/card/", "permanent": true }
   ],
   "headers": [
     {
