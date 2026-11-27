@@ -1,6 +1,17 @@
 {
   "redirects": [
-    { "source": "/services", "destination": "/services/", "permanent": true },
+    { "source": "/index.html", "destination": "/", "statusCode": 301 },
+    { "source": "/services", "destination": "/", "statusCode": 301 },
+    { "source": "/services/", "destination": "/", "statusCode": 301 },
+    { "source": "/services/index.html", "destination": "/", "statusCode": 301 },
+    { "source": "/services/:path*", "destination": "/", "statusCode": 301 },
+    { "source": "/institutions.html", "destination": "/", "statusCode": 301 },
+    { "source": "/use.html", "destination": "/", "statusCode": 301 },
+    { "source": "/pricing.html", "destination": "/", "statusCode": 301 },
+    { "source": "/compliance.html", "destination": "/", "statusCode": 301 },
+    { "source": "/integration.html", "destination": "/", "statusCode": 301 },
+    { "source": "/custom-build.html", "destination": "/", "statusCode": 301 },
+    { "source": "/skillgap-overview.pdf", "destination": "/", "statusCode": 301 },
     { "source": "/card", "destination": "/card/", "permanent": true }
   ],
   "headers": [
