@@ -366,3 +366,9 @@ Lead: `design-taste-frontend`, because `/services` is a public marketing page. A
   "Go to the homepage" and an email button, a 5x5 glyph of a page with one gold square missing
   labelled "Error 404 · Not found", and a one-line night footer. Static, no motion, noindex.
   Without it Pages would answer every unknown URL with the homepage and a 200.
+- 2026-11-28: Cutover done. `www.gaplee.space` and `gaplee.space` are custom domains on the Pages
+  project; a Cloudflare Redirect Rule sends `gaplee.space/*` to `https://www.gaplee.space/` (301,
+  path and query kept). The Vercel project is paused with its domains removed and Git
+  disconnected; the domain registration stays at Vercel. `vercel.json`, `.vercelignore` and the
+  old `api/contact.js` are removed; the product's `api/analyze.js` and `api/_lib/` moved to
+  `_parked/product/api/` with the rest of the parked product.
