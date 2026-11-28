@@ -13,7 +13,7 @@ Static HTML, no build step. Hosted on Cloudflare Pages.
 | `functions/api/contact.js` | `POST /api/contact`, sends the inquiry form through EmailJS | Runs as a Pages Function |
 | `wrangler.toml` | Pages project name and output folder | Config |
 | `DESIGN.md` | Design direction, tokens and decision log | No |
-| `_parked/` | The parked teacher product pages | No |
+| `_parked/` | The parked teacher product: its pages, and its old Vercel API functions in `_parked/product/api/` (not wired up on Pages) | No |
 
 ## Deploy
 

@@ -1,6 +1,6 @@
 # Cloudflare Pages project for gaplee.space.
 # Only site/ is published. functions/ holds the /api/contact handler.
-# DESIGN.md, _parked/, api/ (old Vercel functions) and the rest of the repo stay unpublished.
+# DESIGN.md, _parked/ and the rest of the repo stay unpublished.
 name = "gaplee-site"
 pages_build_output_dir = "./site"
 compatibility_date = "2025-09-01"

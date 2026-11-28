@@ -1,5 +1,3 @@
-.vercel
-
 # internal commercial / planning docs: local-only, never pushed to public repo
 docs/
 .dev.vars
