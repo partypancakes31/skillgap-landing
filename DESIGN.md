@@ -355,3 +355,14 @@ Lead: `design-taste-frontend`, because `/services` is a public marketing page. A
   temporary 302 from `/` to `/services/` is gone. Canonical, `og:url` and structured data point
   to `https://www.gaplee.space/`; the sitemap lists only `/`. `/card/` and its vCard now link to
   the homepage.
+- 2026-11-28: Hosting moves from Vercel to Cloudflare Pages (Vercel's free plan doesn't allow
+  commercial use). The public files now live in `site/`, the only folder Pages publishes, so
+  DESIGN.md, `_parked/` and the old `api/` folder are no longer served (Vercel was serving
+  `/DESIGN.md`). Redirects and security headers moved from `vercel.json` to `site/_redirects`
+  and `site/_headers`, unchanged. The inquiry form's `/api/contact` handler is now a Pages
+  Function in `functions/api/contact.js`. The Vercel Web Analytics tag is removed from `/` and
+  `/card/` (Cloudflare Web Analytics can be switched on in the Pages project instead). New
+  `site/404.html` in Direction C: the bar, one tinted grid panel with "This page isn't here.",
+  "Go to the homepage" and an email button, a 5x5 glyph of a page with one gold square missing
+  labelled "Error 404 · Not found", and a one-line night footer. Static, no motion, noindex.
+  Without it Pages would answer every unknown URL with the homepage and a 200.

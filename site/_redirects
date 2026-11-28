@@ -1,0 +1,15 @@
+# Cloudflare Pages redirects for gaplee.space (ported from vercel.json, 2026-11-28).
+# The old /services/ page is now the homepage, and the parked product pages go home too.
+
+/index.html              /       301
+/services                /       301
+/services/               /       301
+/services/*              /       301
+/institutions.html       /       301
+/use.html                /       301
+/pricing.html            /       301
+/compliance.html         /       301
+/integration.html        /       301
+/custom-build.html       /       301
+/skillgap-overview.pdf   /       301
+/card                    /card/  308

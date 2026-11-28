@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Page not found | GapLee IT Services</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="apple-touch-icon" href="/icon-180.png">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Geist+Mono:wght@400&display=swap">
+  <!--
+    404 page for gaplee.space (Cloudflare Pages serves it with status 404 for any unknown path).
+    Direction C in DESIGN.md; tokens copied from the :root block of /index.html.
+  -->
+  <style>
+    :root {
+      --bg:        #ffffff;
+      --ink:       #0a0a0a;
+      --ink-2:     #2b2925;
+      --muted:     #67635d;
+      --line:      #e8e3d9;
+      --tint:      #f6f3ee;
+      --tint-2:    #ede7dc;
+      --gold:      #c9a96e;
+      --night:     #0a0a0a;
+      --white:     #ffffff;
+      --ink-hover: #2a2722;
+      --grid:      rgba(10, 10, 10, .055);
+      --pixel-off: rgba(10, 10, 10, .045);
+      --on-night-muted: rgba(255, 255, 255, .64);
+      --on-night-faint: rgba(255, 255, 255, .55);
+      --on-night-line:  rgba(255, 255, 255, .14);
+
+      --sans: 'Inter Tight', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      --mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+      --max:   1320px;
+      --gut:   clamp(16px, 4vw, 40px);
+      --bar-h: 60px;
+      --cell:  44px;
+      --ease:  cubic-bezier(.2, .7, .2, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0; min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column;
+      background: var(--bg); color: var(--ink);
+      font: 400 16px/1.5 var(--sans); letter-spacing: -.005em;
+      -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility;
+    }
+    svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    h1, p { margin: 0; }
+    :focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+    ::selection { background: var(--gold); color: var(--ink); }
+
+    .wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--gut); }
+
+    /* Bar */
+    .bar { height: var(--bar-h); background: var(--bg); box-shadow: 0 1px 0 var(--line); }
+    .bar .wrap { height: 100%; display: flex; align-items: center; gap: 24px; }
+    .brand { display: flex; align-items: center; gap: 10px; min-height: 44px; font-weight: 500; font-size: 15px; letter-spacing: -.015em; white-space: nowrap; }
+    .brand svg { width: 28px; height: 28px; }
+    .bar-end { margin-left: auto; display: flex; align-items: center; gap: 20px; }
+    .bar-end .mail { display: none; font-size: 14px; color: var(--ink-2); }
+    .bar-end .mail:hover { color: var(--ink); }
+    @media (min-width: 640px) { .bar-end .mail { display: inline; } }
+
+    /* Buttons: square, label left, a small triangle right */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: space-between; gap: 28px;
+      min-height: 44px; min-width: 228px; padding: 0 14px 0 16px;
+      background: var(--ink); color: var(--white); border-radius: 0;
+      font: 500 15px/1 var(--sans); letter-spacing: -.005em; white-space: nowrap;
+      -webkit-tap-highlight-color: transparent; transition: background-color .2s ease;
+    }
+    .btn .tri { width: 0; height: 0; flex: none; border-left: 6px solid currentColor; border-top: 4.5px solid transparent; border-bottom: 4.5px solid transparent; }
+    .btn:hover { background: var(--ink-hover); }
+    .btn:active { transform: scale(.98); }
+    .btn.alt { background: var(--white); color: var(--ink); }
+    .btn.alt:hover { background: var(--tint-2); }
+    .bar .btn { min-width: 0; min-height: 36px; gap: 14px; padding: 0 12px 0 14px; font-size: 14px; }
+
+    /* Section tag: a small black box in mono, like a label on a rack */
+    .tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--ink); color: var(--white); padding: 6px 9px 5px;
+      font: 400 11px/1 var(--mono); letter-spacing: .1em; text-transform: uppercase;
+    }
+    .tag::before { content: '::'; color: var(--gold); letter-spacing: 0; }
+
+    /* Main: one tinted panel on the faint square grid */
+    main { flex: 1; display: flex; }
+    .panel {
+      flex: 1; display: flex; align-items: center;
+      background-color: var(--tint);
+      background-image: linear-gradient(var(--grid) 1px, transparent 1px), linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: var(--cell) var(--cell);
+      background-position: -1px -1px;
+      padding: clamp(56px, 9vw, 120px) 0;
+    }
+    .panel .wrap { display: grid; gap: clamp(40px, 6vw, 72px); align-items: center; }
+    .copy { display: grid; gap: 24px; justify-items: start; }
+    h1 { font-weight: 400; font-size: clamp(2.5rem, 7.4vw, 5.25rem); line-height: 1; letter-spacing: -.045em; max-width: 12ch; text-wrap: balance; }
+    .lead { font-size: 1.0625rem; line-height: 1.55; color: var(--ink-2); max-width: 40ch; }
+    .ctas { display: grid; gap: 8px; margin-top: 8px; }
+    @media (min-width: 640px) { .ctas { display: flex; flex-wrap: wrap; } }
+
+    /* Pixel glyph: a page with one square missing (gold) */
+    .glyph { display: grid; grid-template-columns: repeat(5, var(--px)); gap: var(--gap); --px: clamp(22px, 6vw, 62px); --gap: clamp(3px, .6vw, 5px); }
+    .glyph span { width: var(--px); height: var(--px); background: var(--pixel-off); }
+    .glyph span[data-v="1"] { background: var(--ink); }
+    .glyph span[data-v="2"] { background: var(--gold); }
+
+    .mark { display: grid; gap: 16px; justify-items: start; }
+
+    @media (min-width: 960px) {
+      .panel .wrap { grid-template-columns: minmax(0, 1fr) auto; }
+      .mark { margin-right: clamp(0px, 4vw, 64px); }
+    }
+
+    /* Footer */
+    .foot { background: var(--night); color: var(--white); padding: 20px 0; }
+    .foot ::selection { color: var(--ink); }
+    .foot :focus-visible { outline-color: var(--gold); }
+    .foot .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px 24px; font-size: 12px; color: var(--on-night-faint); }
+    .foot a { color: var(--white); display: inline-flex; align-items: center; min-height: 44px; margin: -12px 0; }
+    .foot a:hover { color: var(--gold); }
+  </style>
+</head>
+<body>
+  <header class="bar">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label="GapLee IT Services, home">
+        <svg viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" fill="#0a0a0a"/><text x="32" y="43" text-anchor="middle" fill="#ffffff" font-family="'Inter Tight', system-ui, -apple-system, 'Segoe UI', sans-serif" font-weight="500" font-size="28" letter-spacing="-1.4">GL</text></svg>
+        <span>GapLee IT Services</span>
+      </a>
+      <div class="bar-end">
+        <a class="mail" href="mailto:hello@gaplee.space">Email us</a>
+        <a class="btn" href="/#contact">Free preview <span class="tri" aria-hidden="true"></span></a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="panel" aria-labelledby="title">
+      <div class="wrap">
+        <div class="copy">
+          <h1 id="title">This page isn't here.</h1>
+          <p class="lead">The link may be old, or the page has moved. Our services, plans and free preview are all on the homepage.</p>
+          <div class="ctas">
+            <a class="btn" href="/">Go to the homepage <span class="tri" aria-hidden="true"></span></a>
+            <a class="btn alt" href="mailto:hello@gaplee.space">Email hello@gaplee.space <span class="tri" aria-hidden="true"></span></a>
+          </div>
+        </div>
+        <div class="mark">
+        <div class="glyph" aria-hidden="true">
+          <span data-v="1"></span><span data-v="1"></span><span data-v="1"></span><span data-v="1"></span><span></span>
+          <span data-v="1"></span><span></span><span></span><span data-v="1"></span><span data-v="1"></span>
+          <span data-v="1"></span><span></span><span data-v="2"></span><span></span><span data-v="1"></span>
+          <span data-v="1"></span><span></span><span></span><span></span><span data-v="1"></span>
+          <span data-v="1"></span><span data-v="1"></span><span data-v="1"></span><span data-v="1"></span><span data-v="1"></span>
+        </div>
+        <p class="tag">Error 404 · Not found</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <p>GapLee Information Technology Services · Metro Manila, Philippines</p>
+      <p><a href="/">gaplee.space</a></p>
+    </div>
+  </footer>
+</body>
+</html>

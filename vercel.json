@@ -1,4 +1,5 @@
 {
+  "outputDirectory": "site",
   "redirects": [
     { "source": "/index.html", "destination": "/", "statusCode": 301 },
     { "source": "/services", "destination": "/", "statusCode": 301 },
